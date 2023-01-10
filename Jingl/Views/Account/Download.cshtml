@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "Download";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="box-white">
+    <div class="header-menu p-t-25">
+        <ul class="nav">
+            <li class="nav-item text-center pull-left">
+                <a class="nav-link " asp-controller="Account" asp-action="WorkSpace">
+                    <div class="icon-img mb4">
+                        <img class="icon-menu" src="/template/img/ic-back-blue.png" alt="" />
+                    </div>
+                </a>
+            </li>
+            <li class="nav-item justify-content-center mr-center">
+                <h5 class="nav-link -ml54">My Video</h5>
+            </li>
+        </ul>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="download-head mt30">
+                    <img src="~/template/img/ic-edit.png" class="media-object rounded-corner" alt="Alternate Text" />
+                    <div class="download-name">
+                        <p>lorem ipsum</p>
+                        <span class="fa fa-star fa-star-talent checked"></span>
+                        <span class="fa fa-star fa-star-talent checked"></span>
+                        <span class="fa fa-star fa-star-talent checked"></span>
+                        <span class="fa fa-star fa-star-talent checked"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="embed-responsive embed-responsive-4by3 card-img-top download-card mt30 mb30">
+                    <iframe class="pb-video-frame" src="https://www.youtube.com/embed/K68UrdUOr2Y?list=RDzuAcaBkcYGE?ecver=1" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <a class="btn btn-blue ">Download</a>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,463 @@
+﻿@model Jingl.General.Model.User.ViewModel.HomeViewModel
+@{
+    ViewData["Title"] = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@inject CookieManager.ICookie _httpCookie
+
+@await Html.PartialAsync("~/Views/Shared/_headertop.cshtml")
+@await Html.PartialAsync("~/Views/Shared/_header.cshtml")
+
+<div id="box-index" style="margin-top: 13%">
+    <div class="container text-center"  style="padding-left:0px;padding-right:0px">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="https://fameostoragesa.blob.core.windows.net/photos/HomeBanner.jpg" class="bannerVideo d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://fameostoragesa.blob.core.windows.net/photos/HomeBanner2.jpg" class="bannerVideo d-block w-100" alt="...">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="container" style="background: #ff0a6e; padding: 25px 25px 0 25px; margin-top: -5px;">
+        <div class="row mt20 p-b-20  align-items-center">
+            <div class="col-12 text-center">
+                <h3 class="text-white font-weight-normal">FEATURED IDOLS</h3>
+            </div>
+            @{
+
+                int y = 0;
+                int z = 0;
+                int k = 0;
+                int maxloop = 8;
+                var talentFeatured = Model.ListTalentCategoryModel.Where(a => a.CategoryId == 25).ToList();
+                foreach (var talent in talentFeatured)
+                {
+                    @*if (z >= maxloop)
+                    {
+                        break;
+                    }*@
+
+                    <div class="col-6 col-lg-6 align-self-center">
+                        <div class="exploredetail">
+                            <div class="video">
+                                <div class="card-explore-top" >
+                                    @*<p>@Model.ListAllVideo.Where(i=>i.TalentId == talent.Id && i.BookCategory ==0).FirstOrDefault().Link</p>*@
+                                    <input type="hidden" class="FileVideoId" id="FileVideoId_@z" value="@talent.FileId" />
+                                    <input type="hidden" class="LinkVideo" id="LinkVideo_@z" value="@talent.Link" />
+                                    <input type="hidden" class="LinkPhoto" id="LinkPhoto_@z" value="@talent.LinkImg" />
+                                    <input type="hidden" class="LinkName" id="LinkName_@z" value="@talent.TalentNm" />
+                                    <input type="hidden" class="ViewCount" id="ViewCount_@z" value="@talent.ViewsCount" />
+                                    <input type="hidden" class="TalentId" id="TalentId_@z" value="@talent.TalentId" />
+									<a href="@Url.Action("TalentDetail", "Talent", new {TalentId = talent.TalentId,@class="text-center"})">
+										<img src="@talent.LinkImg" alt="Alternate Text" width="100%" height="100%" class="thmnail lazyload" />
+									</a>	
+                                    @*<a href="#" class="explore-button " data-toggle="modal" id="exploreLink">
+                                        <img src="~/template/img/play.svg" class="lazyload" alt="Alternate Text" />
+                                    </a>*@
+                                    <div class="bg-light mt-4 text-center">
+                                        <a href="@Url.Action("TalentDetail", "Talent", new {TalentId = talent.TalentId,@class="text-center"})">
+                                            <div class="text-talent">
+                                                <h4>@talent.TalentNm</h4>
+                                                <span class="span-talent">
+                                                    <span class="profesi">@talent.Profesion</span>
+                                                </span>
+                                            </div>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    z++;
+
+                }
+            }
+
+        </div>
+    </div>
+                                                                         
+    <div class="container" style="padding-top: 60px;">
+        @{
+            foreach (var data in ViewBag.Categories)
+            {
+                int z1 = 0;
+                //int maxloop1 = 6;
+                var talent = Model.ListTalentCategoryModel.Where(a => a.CategoryId == data.Id).ToList();
+                if (talent.Count > 0)
+                {
+                    <div class="row p-b-20">
+                        <div class="col-12">
+                            <div class="category-index">
+                                <h3>@data.CategoryNm</h3>
+                                @*<a href="@Url.Action("OurTalent", "Talent", new {CategoryId = @data.Id})">Lihat Semua</a>*@
+                                @*<a href="@Url.Action("OurTalent","Talent")">See All</a>*@
+                                @*<input type="hidden" class="CategoryContent" id="CategoryContent_@z1" value="@data.Id" />*@
+                            </div>
+                        </div>
+                        @{
+
+                            <div class="col-12">
+                                <div class="owl-carousel owl-actors owl-theme">
+                                    @{
+                                        foreach (var t in talent)
+                                        {
+                                            @*if (z1 >= maxloop)
+                                            {
+                                                break;
+                                            }*@
+											
+                                            if (t != null)
+                                            {
+
+                                                <div class="item">
+                                                    <div class="exploredetail m-t-10 m-b-40">
+
+                                                        <div class="video">
+                                                            <div class="card-explore-top" >
+                                                                <input type="hidden" class="FileVideoId" id="FileVideoId_@z" value="@t.FileId" />
+                                                                <input type="hidden" class="LinkVideo" id="LinkVideo_@z" value="@t.Link" />
+                                                                <input type="hidden" class="LinkPhoto" id="LinkPhoto_@z" value="@t.LinkImg" />
+                                                                <input type="hidden" class="LinkName" id="LinkName_@z" value="@t.TalentNm" />
+                                                                <input type="hidden" class="ViewCount" id="ViewCount_@z" value="@t.ViewsCount" />
+                                                                <input type="hidden" class="TalentId" id="TalentId_@z" value="@t.TalentId" />
+                                                                <a href="@Url.Action("TalentDetail", "Talent", new {TalentId = @t.TalentId,@class="text-center"})">
+																	<img src="@t.LinkImg" alt="Alternate Text" width="100%" height="100%" class="thmnail lazyload" />
+                                                                </a>
+																@*<a href="#" class="explore-button" data-toggle="modal" id="exploreLinkCat">
+                                                                    <img src="~/template/img/play.svg" alt="Alternate Text" />
+                                                                </a>*@
+                                                                <div class="bg-light  mt-4 text-center">
+                                                                    <a href="@Url.Action("TalentDetail", "Talent", new {TalentId = @t.TalentId,@class="text-center"})">
+                                                                        <div class="text-talent text-center">
+                                                                            <h4 class="text-dark text-center">@t.TalentNm</h4>
+                                                                            <span class="span-talent text-center">
+                                                                                <span class="profesi">@t.Profesion</span>
+                                                                            </span>
+                                                                        </div>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                z++;
+                                                z1++;
+
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            }
+        }
+
+    </div>
+</div>
+
+@section scripts
+    {
+    <script type="text/javascript">
+        function preventBack(cookie) { window.history.forward(); }
+        $(document).ready(function () {
+
+            history.pushState(null, null, location.href);
+            window.onpopstate = function () {
+                history.go(1);
+
+            };
+
+            $(".explore-button").click(function (e) {
+
+                e.preventDefault();
+                
+                var div_id = $(this).parent().parent().parent().find('.LinkVideo').attr('id');;
+                var div_profil = $(this).parent().parent().parent().find('.LinkPhoto').attr('id');
+                var div_namatalent = $(this).parent().parent().parent().find('.LinkName').attr('id');
+                var div_FileVideoid = $(this).parent().parent().parent().find('.FileVideoId').attr('id');
+                var div_ViewCountid = $(this).parent().parent().parent().find('.ViewCount').attr('id');
+                var div_Talentid = $(this).parent().parent().parent().find('.TalentId').attr('id');
+
+             
+                var $source = $('#videoplayer');
+                var $profil = $('#modalImg');
+
+                var sources = $("#" + div_id + "").val();
+                var profil = $("#" + div_profil + "").val();
+                var nametalent = $("#" + div_namatalent + "").val();
+                var VideoId = $("#" + div_FileVideoid + "").val();
+                var ViewCount = $("#" + div_ViewCountid + "").val();
+                var TalentId = $("#" + div_Talentid + "").val();
+
+                var jsonRequest = {
+                    UserId: 0,
+                    FileId: VideoId
+                };
+              
+                var UrlInsert = "@Url.Action("InputFileWatched", "Files")";
+                if (VideoId != 0) {
+                    $("#VideoModal").modal('show');
+                    $.ajax({
+                        url: UrlInsert,
+
+                        type: "POST",
+                 
+                        data: { model: jsonRequest },
+                       
+                        beforeSend: function () {
+                
+                            $(".loadingSign").show();
+                        },
+                        complete: function () {
+                            $(".loadingSign").hide();
+                        },
+                        success: function (data) {
+
+
+
+                        },
+                        error: function (jqXHR, textStatus, errorMessage) {
+                            console.log(errorMessage);
+                        }
+                    });
+
+                    $source[0].src = sources;
+                    $profil[0].src = profil;
+
+                    var Namatalent = nametalent;
+                    $("#views").text(ViewCount);
+                    $("#modalName").text(Namatalent);
+                    if (TalentId != 0) {
+                        $("#TalentLink").attr('href', '../Talent/TalentDetail?TalentId=' + TalentId);
+
+                    }
+                    $source[0].play();
+                    $(".modalClose").click(function (e) {
+                        $source[0].pause();
+                        history.back();
+                    });
+
+                    $(".modal").on("shown.bs.modal", function () { // any time a modal is shown
+                        var urlReplace = "#" + $(this).attr('id'); // make the hash the id of the modal shown
+                        history.pushState(null, null, urlReplace); // push state that hash into the url
+                    });
+
+                    // If a pushstate has previously happened and the back button is clicked, hide any modals.
+                    $(window).on('popstate', function () {
+                        $(".modal").modal('hide');
+                        $source[0].pause();
+                    });
+                }
+                else {
+                    swal(nametalent + " belum upload videonya, sabar ya");
+                }
+
+            });
+
+
+
+                 $(".Talentexplore-button").click(function (e) {
+
+                e.preventDefault();
+                $("#VideoModal").modal('show');
+                var div_id = $(this).parent().parent().parent().find('.TrendingLinkVideo').attr('id');;
+                     var div_profil = $(this).parent().parent().parent().find('.TrendingLinkPhoto').attr('id');
+                     var div_namatalent = $(this).parent().parent().parent().find('.TrendingLinkName').attr('id');
+                     var div_FileVideoid = $(this).parent().parent().parent().find('.TrendingFileVideoId').attr('id');
+                     var div_ViewCountid = $(this).parent().parent().parent().find('.TrendingViewCount').attr('id');
+                     var div_Talentid = $(this).parent().parent().parent().find('.TrendingTalentId').attr('id');
+       
+                var $source = $('#videoplayer');
+                var $profil = $('#modalImg');
+
+                var sources = $("#" + div_id + "").val();
+                var profil = $("#" + div_profil + "").val();
+                var nametalent = $("#" + div_namatalent + "").val();
+                     var VideoId = $("#" + div_FileVideoid + "").val();
+                     var ViewCount = $("#" + div_ViewCountid + "").val();
+                     var TalentId = $("#" + div_Talentid + "").val();
+                var jsonRequest = {
+                    UserId: 0,
+                    FileId: VideoId
+                };
+
+                var UrlInsert = "@Url.Action("InputFileWatched", "Files")";
+
+                $.ajax({
+                    url: UrlInsert,
+           
+                    type: "POST",
+                
+                    data: { model: jsonRequest },
+              
+                    beforeSend: function () {
+                  
+                        $(".loadingSign").show();
+                    },
+                    complete: function () {
+                        $(".loadingSign").hide();
+                    },
+                    success: function (data) {
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+
+                $source[0].src = sources;
+                $profil[0].src = profil;
+
+                var Namatalent = nametalent;
+
+                     $("#views").text(ViewCount);
+                     $("#modalName").text(Namatalent);
+                     if (TalentId != 0) {
+                         $("#TalentLink").attr('href', '../Talent/TalentDetail?TalentId=' + TalentId);
+
+                     }
+
+  
+                $source[0].play();
+        
+                     $(".modalClose").click(function (e) {
+                        $source[0].pause();
+              
+                         window.location.href = "@Url.Action("TalentDetail", "Talent")?TalentId=" + TalentId;
+                    });
+
+                     $(".modal").on("shown.bs.modal", function () { // any time a modal is shown
+                         var urlReplace = "#" + $(this).attr('id'); // make the hash the id of the modal shown
+                         history.pushState(null, null, urlReplace); // push state that hash into the url
+                     });
+
+                     // If a pushstate has previously happened and the back button is clicked, hide any modals.
+                     $(window).on('popstate', function () {
+                         $(".modal").modal('hide');
+                         $source[0].pause();
+                     });
+
+            });
+
+
+
+           
+            $('.owl-index').owlCarousel({
+                stagePadding: 50,
+				center: true,
+                loop: true,
+                margin: 10,
+                nav: false,
+                autoplay: true,
+                autoplayTimeout: 4000,
+                autoplayHoverPause: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    }
+                }
+            })
+
+
+            $('.owl-actors').owlCarousel({
+                margin: 10,
+				autoWidth: true,
+                nav: false,
+                dots: false,
+                loop: false,
+                responsive: {
+                    0: {
+                        items: 2
+                    },
+                    600: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 5
+                    }
+                }
+            })
+
+
+
+        });
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            if ("@_httpCookie.Get("UserId")" == "") {
+
+                if (getCookie("Visit") != "1") {
+                    $('#loginModal').modal('show');
+
+                    //Set Cookie
+                    setCookie("Visit", "1", 1);
+
+                }
+            }
+        });
+        function getCookie(cname) {
+            var name = cname + "=";
+            var decodedCookie = decodeURIComponent(document.cookie);
+            var ca = decodedCookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+        function setCookie(cname, cvalue, exdays) {
+            var d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(".logo-header").css("background", "#fff");
+
+            $("#mute").click(function () {
+                if ($("#bannerVideo").prop('muted')) {
+                    $("#bannerVideo").prop('muted', false);
+             
+                    document.getElementById("imgSpeaker").src = "/template/img/ic-speaker-24.png";
+                } else {
+                    $("#bannerVideo").prop('muted', true);
+        
+                    document.getElementById("imgSpeaker").src = "/template/img/ic-mute-24.png";
+
+                }
+            });
+        });
+    </script>
+}

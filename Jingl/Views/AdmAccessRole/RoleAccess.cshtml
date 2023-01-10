@@ -1,0 +1,111 @@
+﻿@model Jingl.General.Model.Admin.ViewModel.RoleAccessMenuViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout_Adm.cshtml";
+}
+
+<h2>Config RoleMenu</h2>
+
+<hr />
+@using (Html.BeginForm("RoleAccess", "AdmAccessRole", FormMethod.Post, new { Id = "formCreateCategory" }))
+{
+
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+            </div>
+            <h4 class="panel-title">Role Access Menu</h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-6">
+                    <label class="m-b-10">Role </label>
+                    @Html.HiddenFor(model => model.RoleId, new { Class = "form-control" })
+                    @Html.TextBoxFor(model => model.RoleNm, new { Class = "form-control m-b-30", Readonly = "true" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <ul id="browser" class="easyui-tree editor-field table table-striped table-advance table-hover">
+                        @foreach (var item in Model.ListMenu.Where(x => x.ParentMenuId == 0 && x.Id != 0))
+                        {
+                            <li class="sub-menu">
+                                @if (Model.ListSelectedMenu.Where(x => x.Id == item.Id).FirstOrDefault() != null)
+                                {
+                                    <span class="easyui-tree"><input type="checkbox" id="tt" class="easyui-tree" name="SelectedMenu" checked="checked" value="@item.Id">@item.MenuNm</span>
+                                }
+                                else
+                                {
+                                    <span class="easyui-tree"><input type="checkbox" id="tt" class="easyui-tree" name="SelectedMenu" value="@item.Id">@item.MenuNm</span>
+                                }
+                                <ul class="sub">
+                                    @foreach (var child in Model.ListMenu.Where(x => x.ParentMenuId == item.Id))
+                                    {
+                                        <li>
+                                            @if (Model.ListSelectedMenu.Where(x => x.Id == child.Id).FirstOrDefault() != null)
+                                            {
+                                                <span class="easyui-tree"><input type="checkbox" class="easyui-tree" name="SelectedChildMenu" checked="checked" value="@child.Id">@child.MenuNm</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="easyui-tree"><input type="checkbox" class="easyui-tree" name="SelectedChildMenu" value="@child.Id">@child.MenuNm</span>
+                                            }
+                                        </li>
+                                    }
+
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <a href="@Url.Action("Index", "AdmAccessRole")" class="btn btn-warning">Cancel</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            App.init();
+
+
+        });
+    </script>
+    <script>
+        $(function () {
+            BgrPic = {
+                UpdatePreview: function (obj) {
+                    // if IE < 10 doesn't support FileReader
+                    if (!window.FileReader) {
+                        // don't know how to proceed to assign src to image tag
+                    } else {
+                        var reader = new FileReader();
+                        var target = null;
+
+                        reader.onload = function (e) {
+                            target = e.target || e.srcElement;
+
+                            $(".bgrpic").prop("src", target.result);
+                        };
+                        reader.readAsDataURL(obj.files[0]);
+                    }
+                }
+            };
+        });
+    </script>
+}
+

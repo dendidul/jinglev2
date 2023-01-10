@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Jingl.General.Model.Admin.Transaction.BookModel>
+@{
+    ViewData["Title"] = "Workspacetalent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="myHeader">
+    <div class="logo-header">
+        <div class="coontainer-fluid">
+            <div class="col-md-12">
+                <ul class="nav">
+                    <li class="nav-item text-center pull-left">
+                        <a class="nav-link" href="javascript:history.back()">
+                            <div class="icon-img">
+                                <img src="/template/img/ic-back-white.png" style="width:42%;margin-left:-25%;margin-top:-8%" alt="" />
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item justify-content-center mr-center">
+                        <img src="~/template/img/Jing_e 1.png" style="margin-left:-84%" alt="Alternate Text" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="header-menu mt20">
+    <ul class="nav">
+
+        <li class="nav-item justify-content-center mr-center">
+            <h5 class="nav-link">Workspace</h5>
+        </li>
+    </ul>
+</div>
+<div class="form-group search-bar brdr-blue has-search">
+    <span class="fa fa-search form-control-feedback"></span>
+    <input type="text" class="form-control" placeholder="Cari berdasarkan User, Nomor Order, Judul Pesanan, Kategori " id="Filter">
+</div>
+
+
+<div class="card-content-tab-menu mt20">
+
+    <!-- begin tab-content -->
+    <div class="tab-content mt10">
+        <!-- begin tab-pane -->
+        <div class="tab-pane fade active show">
+            <ul class="nav flex-column" id="WorkspaceList">
+                @{
+                    foreach (var data in Model.Where(x=>x.Status != -2 && x.Status != -5 && x.Status != -8).ToList())
+                    {
+                   
+                        <li class="nav-item ct-span ">
+                            <a class="nav-link  wd-95" href="@Url.Action("BookingDetail","Account",new { bookId = data.Id })">
+                                <p class="title-work fw-600">@data.OrderNo / @data.ProjectNm</p>
+                                <p class="-mt15">Kategori Order : @data.CategoryNm</p>
+                                <p class="-mt15">Dipesan oleh : @data.UserName</p>
+                                <p class="-mt15">Status : @data.TransactionStatus</p>
+                                @*<p class="-mt15 deadline">
+            <img class="ic-deadline" src="/template/img/ic-deadline.png" alt="" />@data.Deadline
+        </p>*@
+                            </a>
+                            <span class="mr10"> > </span>
+                        </li>
+                    }
+                }
+
+              
+            </ul>
+        </div>
+        <!-- end tab-pane -->
+    </div>
+    <!-- end tab-content -->
+
+</div>
+
+
+@section scripts {
+    <script type="text/javascript">
+
+            $(document).ready(function () {
+                function FilterList(txtName,ulName) {
+                    // Declare variables
+                    var input, filter, ul, li, a, i, txtValue;
+                    input = document.getElementById(txtName);
+                    filter = input.value.toUpperCase();
+                    ul = document.getElementById(ulName);
+                    li = ul.getElementsByTagName('li');
+
+                    // Loop through all list items, and hide those who don't match the search query
+                    for (i = 0; i < li.length; i++) {
+                        a = li[i];
+                        txtValue = a.textContent || a.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            li[i].style.display = "";
+                        } else {
+                            li[i].style.display = "none";
+                        }
+                    }
+                }
+
+                $("#Filter").keyup(function () {
+                    FilterList("Filter", "WorkspaceList");
+                });
+
+
+            });
+    </script>
+}

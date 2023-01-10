@@ -1,0 +1,22 @@
+﻿@model Int32
+<li class="nav-item text-center foot-icon-item ">
+    <a id="ActivityMenu" class="nav-link active" asp-controller="Activity" asp-action="Notification">
+        <div class="icon-img ">
+            @*<img class="icon-menu" src="/template/img/ic-activity.png" alt="" />*@
+            @*<i class="fas fa-bell" style="position:relative">*@
+			<img class="icon-menu" src="/template/img/notification.svg" alt="" />
+			
+                @if (Model > 0 && Model <= 99)
+                {
+                    <span class="dot-badge">@Model.ToString()</span>
+                }
+                else if(Model > 99)
+                {
+                    <span class="dot-badge">99+</span>
+                }
+            </i>
+        </div>
+        @*<span>Notifikasi</span>*@
+
+    </a>
+</li>

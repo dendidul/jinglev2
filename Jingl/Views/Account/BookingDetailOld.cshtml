@@ -1,0 +1,827 @@
+﻿@model Jingl.General.Model.Admin.Transaction.BookModel
+@{
+    ViewData["Title"] = "ActiveWorkspace";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string enddate = "";
+    if (Model.Status > 2 && Model.Status <= 4)
+    {
+        if (Model.Deadline.HasValue)
+        {
+            enddate = Model.Deadline.Value.ToString("yyyy-MM-ddTHH:mm:ss");
+        }
+
+    }
+
+}
+
+<!-- begin #top-menu -->
+<!-- begin #top-menu -->
+<!-- end #top-menu -->
+<div class="box-white" style="padding-bottom: 60px;">
+    <div class="header-menu p-t-20">
+        <ul class="nav">
+            <li class="nav-item text-center pull-left">
+                @{
+                    if (Model.IsEmail == 1)
+                    {
+                        <a class="nav-link " href="@Url.Action("Index","Home")">
+                            <div class="icon-img mb4">
+                                <img class="icon-menu" src="/template/img/ic-back-blue.png" alt="" />
+                            </div>
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="nav-link " href="javascript:history.back()">
+                            <div class="icon-img mb4">
+                                <img class="icon-menu" src="/template/img/ic-back-blue.png" alt="" />
+                            </div>
+                        </a>
+                    }
+                }
+
+            </li>
+            <li class="nav-item justify-content-center mr-center">
+                @*<h5 class="nav-link -ml54"><b>Nomor Order :</b> @Model.OrderNo</h5>*@
+                <div class="nav-link -ml40">
+                    <h5 class="float-left"><b>Nomor Order :</b> @Model.OrderNo</h5>
+                    <input type="hidden" value="@Model.Status" id="CurrentStatus" />
+                    <input type="hidden" value="@Model.OrderNo" id="myCopyorder" class="myCopy" readonly>
+                    <div class="tooltip tooltip-bott">
+                        <i class="fas fa-copy m-l-5" onclick="myCopyorder()" onmouseout="outFuncorder()">
+                            <span class="tooltiptext" id="myTooltiporder">Copy to clipboard</span>
+                        </i>
+                    </div>
+                    <br />
+                    <h5 class="text-center">
+                        <b>Tanggal Order :</b>
+                        @{
+
+                            if (Model.CreatedDate.HasValue)
+                            {
+                                @Model.CreatedDate.Value.ToString("dd-MM-yyyy")
+                            }
+                        }
+                    </h5>
+                </div>
+
+            </li>
+        </ul>
+
+    </div>
+    <div class="divider-btm-w"></div>
+    @{
+
+        if (Model.Status > 2 && Model.Status <= 4)
+        {
+            <h5 class="text-center"> Ayo selesaikan ordermu sebelum waktunya habis </h5>
+            <div class="card-countdown shadow-lg mt20">
+                <div class="countdown " id="my-countdown" data-end-date="@enddate">
+                    <span class="days" title="Hari">0</span>
+                    <span class="hours" title="Jam">0</span>
+                    <span class="minutes" title="Menit">0</span>
+                </div>
+            </div>
+        }
+    }
+    @*<div class="countdown " id="my-countdown" data-end-date="2019-07-20T19:00:00">
+            <span class="days" title="Days">0</span>
+            <span class="hours" title="Hours">0</span>
+            <span class="minutes" title="Minutes">0</span>
+        </div>*@
+
+
+    <div class="ket-workspace col-12 mt40">
+        <div class="row list-ket-workspace">
+            <div class="wd-33 pd5 text-center">
+
+                @{
+                    if (Model.Status >= 3)
+                    {
+                        <div class="circle-ket-workspace-done ">
+                            <span class="det-ket-project black-clr">
+                                <img src="/template/img/ic-ceklis.png" class="ic-ket-workspace">
+                            </span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="circle-ket-workspace">
+                            <span class="det-ket-project black-clr">
+                                <img src="/template/img/ic-ceklis.png" class="ic-ket-workspace" onclick="javascript:UpdateBookingStatus(@Model.Id,3);return false;">
+                            </span>
+                        </div>
+                    }
+                }
+
+
+
+            <p class="black-clr mt10">Project Diterima</p>
+            </div>
+            <div class="wd-33 pd5 text-center">
+                @{
+                    if (Model.Status >= 4)
+                    {
+                        <div class="circle-ket-workspace-done">
+                            <span class="det-ket-project black-clr">
+                                <img src="~/template/img/ic-vid-blue.png" class="ic-ket-workspace">
+                            </span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="circle-ket-workspace">
+                            <span class="det-ket-project black-clr">
+                                <img src="~/template/img/ic-vid.png" class="ic-ket-workspace" onclick="javascript:UpdateBookingStatus(@Model.Id,4);return false;">
+                            </span>
+                        </div>
+                    }
+                }
+            <p class="black-clr mt10">Proses Perekaman</p>
+            </div>
+            <div class="wd-33 pd5 text-center">
+                @{
+                    if (Model.Status >= 5)
+                    {
+                        <div class="circle-ket-workspace-done ">
+                            <span class="det-ket-project black-clr">
+                                <img src="~/template/img/ic-accepted-blue.png" class="ic-ket-workspace">
+                            </span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="circle-ket-workspace">
+                            <span class="det-ket-project black-clr">
+                                <img src="~/template/img/ic-accepted.png" class="ic-ket-workspace">
+                            </span>
+                        </div>
+                    }
+                }
+
+            <p class="black-clr mt10">Video Terkirim</p>
+            </div>
+            @*<div class="wd-20 pd5 text-center">
+
+
+                    @{
+                        if (Model.Status >= 6)
+                        {
+                            <div class="circle-ket-workspace-done ">
+                                <span class="det-ket-project black-clr">
+                                    <img src="~/template/img/ic-completed-blue.png" class="ic-ket-workspace">
+                                </span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="circle-ket-workspace ">
+                                <span class="det-ket-project black-clr">
+                                    <img src="~/template/img/ic-completed.png" class="ic-ket-workspace">
+                                </span>
+                            </div>
+                        }
+                    }
+
+                    <p class="black-clr mt10">Project Completed</p>
+                </div>
+                <div class="wd-20 pd5 text-center">
+
+
+                    @{
+                        if (Model.Status >= 7)
+                        {
+                            <div class="circle-ket-workspace-done ">
+                                <span class="det-ket-project black-clr">
+                                    <img src="~/template/img/ic-tab3-active.png" class="ic-ket-workspace">
+                                </span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="circle-ket-workspace ">
+                                <span class="det-ket-project black-clr">
+                                    <img src="~/template/img/ic-rate-talent.png" class="ic-ket-workspace">
+                                </span>
+                            </div>
+                        }
+                    }
+
+                    <p class="black-clr mt10">Rate Talent</p>
+                </div>*@
+        </div>
+
+    </div>
+
+    @{
+        if (Model.Status == 4)
+        {
+
+            <div class="col-md-12">
+                <center>
+                    @*<canvas id="compare" width="320" height="240"  />*@
+                    <div class="recordHead">
+                        <video controls autoplay playsinline style="height: 300px; width: 100%;"></video>
+                        <i class="fas fa-video " id="btn-start-recording"></i>
+                    </div>
+
+                </center>
+            </div>
+            <div class="briefdetail m-t-20">
+                <div class="row">
+                    <div class="col-12">
+                        <h5 class="fw-600">Judul Project</h5>
+                        <p>@Model.ProjectNm</p>
+                    </div>
+                    <div class="col-6">
+                        <h5 class="fw-600">Untuk :</h5>
+                        <p class="">@Model.To</p>
+                    </div>
+                    <div class="col-6">
+                        <h5 class="fw-600">Dari :</h5>
+                        <p class="">@Model.From </p>
+                    </div>
+                    <div class="col-12">
+                        <h5 class="fw-600">Pesan :</h5>
+                        <p class="">@Model.BriefNeeds</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <hr />
+
+            <center>
+                <div id="btnRecord">
+                    <button id="btn-start-recording" class="btn btn-blue m-b-10">Mulai Perekaman</button>
+                    <button id="btn-stop-recording" class="btn btn-blue m-b-10">Berhenti merekam</button>
+                    <button id="btn-record-again" class="btn btn-blue m-b-10">Merekam lagi</button>
+                    <hr />
+                    @*<button id="btn-upload-video" class="btn btn-blue" onclick="UpdateBookingStatus(@Model.Id,5);return false;">Upload and Submit Video</button>*@
+                    <button id="btn-upload-video" class="btn btn-blue">Upload dan kirim Video</button>
+                    <div id="container" style="padding:1em 2em;"></div>
+
+                </div>
+
+            </center>
+
+        }
+        else if (Model.Status >= 5)
+        {
+            <div class="col-md-12">
+                <div class="embed-responsive embed-responsive-4by3 card-img-top">
+
+                    <video width="400" class="pb-video-frame" controls>
+                        <source src="@Model.Link" type="video/mp4">
+
+                    </video>
+
+
+
+                </div>
+            </div>
+        }
+    }
+
+    <div class="card-content-tab-menu mt10">
+
+        <div class="col-12">
+            <div class="text-center">
+                <h4 class="font-weight-bold">Brief Detail</h4>
+            </div>
+        </div>
+
+        <div class="row briefdetail m-t-20">
+
+            <!-- end nav-pills -->
+            <!-- begin tab-content -->
+            <div class="col-6">
+                <h6 class="title-work fw-600">Status :</h6>
+                <p class="">@Model.TransactionStatus</p>
+            </div>
+            <div class="col-6">
+                <h6 class="title-work fw-600">Dipesan oleh :</h6>
+                <p class="">@Model.CustomerName</p>
+            </div>
+            <div class="col-6">
+                <h6 class="title-work fw-600">Email :</h6>
+                <p class="">@Model.Email</p>
+            </div>
+            <div class="col-6">
+                <h6 class="title-work fw-600">Tanggal Order :</h6>
+                <p class="">
+                    @{
+
+                        if (Model.CreatedDate.HasValue)
+                        {
+                            @Model.CreatedDate.Value.ToString("dd-MM-yyyy")
+                        }
+                    }
+                </p>
+            </div>
+        </div>
+
+
+        @*<div class="tab-content">
+                <!-- begin tab-pane -->
+                <div class="tab-pane fade active show mb50" id="nav-pills-tab-1">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                    <h6 class="title-work fw-600">Judul Project :</h6>
+                    <p class="">@Model.ProjectNm</p>
+                </li>
+                <li class="divider-btm-w"></li>
+                <li class="nav-item mt20">
+                    <h6 class="title-work fw-600">Untuk :</h6>
+                    <p class="">@Model.To</p>
+                </li>
+                <li class="divider-btm-w"></li>
+                <li class="nav-item mt20">
+                    <h6 class="title-work fw-600">Dari :</h6>
+                    <p class="">@Model.From </p>
+                </li>
+                <li class="divider-btm-w"></li>
+                <li class="nav-item mt20">
+                    <h6 class="title-work fw-600">Lampiran :</h6>
+                    <p class="">@Model.BriefNeeds</p>
+                </li>
+                        <li class="nav-item  mt20">
+                            <h6 class="title-work fw-600">Status :</h6>
+                            <p class="">@Model.TransactionStatus</p>
+                        </li>
+                        <li class="nav-item  mt20">
+                            <h6 class="title-work fw-600">Dipesan oleh :</h6>
+                            <p class="">@Model.UserName</p>
+                        </li>
+                        <li class="nav-item  mt20">
+                            <h6 class="title-work fw-600">Email :</h6>
+                            <p class="">@Model.Email</p>
+                        </li>
+                        <li class="nav-item  mt20">
+                            <h6 class="title-work fw-600">Tanggal Order :</h6>
+                            <p class="">
+                                @{
+
+                                    if (Model.CreatedDate.HasValue)
+                                    {
+                                        @Model.CreatedDate.Value.ToString("dd-MM-yyyy")
+                                    }
+                                }
+                            </p>
+                        </li>
+
+                    </ul>
+                </div>
+                <!-- end tab-pane -->
+
+            </div>*@
+        <!-- end tab-content -->
+    </div>
+
+    <footer class="page-footer top-shadow">
+        <div class="col-12 text-center">
+            <div class="row">
+                <div class="col-3">
+
+                </div>
+                <div class="col-6">
+                    <a class="btn btn-blue " asp-controller="Account" asp-action="Support">Bantuan</a>
+                </div>
+                <div class="col-3">
+
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <div class="loadingSign" style="display: none">
+        <img src="~/template/img/loadingpink.gif" alt="Alternate Text" />
+    </div>
+</div>
+
+
+@section scripts
+    {
+    <script src="~/js/RecordRTC.js"></script>
+    @*<script src="https://cdn.webrtc-experiment.com/RecordRTC.js"></script>*@
+
+    @*   <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>*@
+    @*<script src="https://cdn.webrtc-experiment.com/common.js"></script>*@
+
+    <script type="text/javascript">
+        //var video = document.querySelector('video');
+
+        //function captureCamera(callback) {
+        //    navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(function (camera) {
+        //        callback(camera);
+        //    }).catch(function (error) {
+        //        alert('Unable to capture your camera. Please check console logs.');
+        //        console.error(error);
+        //    });
+        //}
+
+        //function stopRecordingCallback() {
+        //    video.src = video.srcObject = null;
+        //    video.muted = false;
+        //    video.volume = 1;
+        //    video.src = URL.createObjectURL(recorder.getBlob());
+
+        //    recorder.camera.stop();
+        //    recorder.destroy();
+        //    recorder = null;
+        //}
+
+        //var recorder; // globally accessible
+
+        //document.getElementById('btn-start-recording').onclick = function () {
+        //    //this.disabled = true;
+        //    captureCamera(function (camera) {
+        //        video.muted = true;
+        //        video.volume = 0;
+        //        video.srcObject = camera;
+
+        //        recorder = RecordRTC(camera, {
+        //            type: 'video'
+        //        });
+
+        //        recorder.startRecording();
+
+        //        // release camera on stopRecording
+        //        recorder.camera = camera;
+        //        $(this).hide();
+        //        $('#btn-stop-recording').show();
+
+        //        document.getElementById('btn-stop-recording').disabled = false;
+        //    });
+        //};
+
+        //document.getElementById('btn-stop-recording').onclick = function () {
+        //    //this.disabled = true;
+        //    $(this).hide();
+        //    recorder.stopRecording(stopRecordingCallback);
+        //};
+
+
+         function UpdateBookingStatus(BookingId, BookStatus) {
+
+
+                var CurrentStatus = $("#CurrentStatus").val();
+
+                var devisitStatus = parseInt(BookStatus) - parseInt(CurrentStatus);
+
+                if (BookStatus == "5" && devisitStatus == 1) {
+                    PostBlob(recorder.getBlob(), BookingId, BookStatus);
+                }
+                else if (devisitStatus == 1 && BookStatus != "5") {
+                    var url = "@Url.Action("UpdateBookingStatus", "Booking")";
+                    $.ajax({
+                        url: url,
+                        //cache: false,
+                        //traditional: true,
+                        type: "POST",
+                        data: { BookId: BookingId, status: BookStatus },
+                        //contentType: "application/json; charset=utf-8",
+                        //async: false,
+                        beforeSend:
+                            function () {
+                                //$("#spinner").show();
+                                $(".loadingSign").show();
+                            },
+                        complete: function () {
+                            $(".loadingSign").hide();
+                        },
+                        success: function (data) {
+                            $.gritter.add({
+                                title: 'Success !',
+                                text: 'Updated Successfully'
+                            });
+                            location.reload();
+                        },
+
+                        error: function (jqXHR, textStatus, errorMessage) {
+                            console.log(errorMessage);
+                        }
+                    });
+                }
+                else {
+                    $.gritter.add({
+                        title: 'Warning !',
+                        text: 'Warning'
+                    });
+                }
+            }
+
+
+
+
+
+
+
+
+
+
+        $(document).ready(function () {
+            var video = document.querySelector('video');
+
+            var recorder;
+
+
+
+
+
+                @*var CurrentStatus = $("#CurrentStatus").val();
+
+                var devisitStatus = parseInt(BookStatus) - parseInt(CurrentStatus);
+
+                if (devisitStatus == 1) {
+                    var url = "@Url.Action("UpdateBookingStatus", "Booking")";
+                    $.ajax({
+                        url: url,
+                        //cache: false,
+                        //traditional: true,
+                        type: "POST",
+                        data: { BookId: BookingId, status: BookStatus },
+                        //contentType: "application/json; charset=utf-8",
+                        //async: false,
+                        beforeSend:
+                            function () {
+
+                                //$("#spinner").show();
+                            },
+                        success: function (data) {
+                            $.gritter.add({
+                                title: 'Success !',
+                                text: 'Updated Successfully'
+                            });
+                            location.reload();
+                        },
+
+                        error: function (jqXHR, textStatus, errorMessage) {
+                            console.log(errorMessage);
+                        }
+                    });
+                }
+                else {
+                    $.gritter.add({
+                        title: 'Warning !',
+                        text: 'Warning'
+                    });
+                }*@
+
+
+
+
+
+
+
+
+
+            function PostBlob(blob, BookingId, BookStatus) {
+                // FormData
+                var formData = new FormData();
+                formData.append('video-filename', fileName);
+                formData.append('video-blob', blob);
+
+                // progress-bar
+                var hr = document.createElement('hr');
+                container.appendChild(hr);
+                var strong = document.createElement('strong');
+                strong.id = 'percentage';
+                strong.innerHTML = 'Video upload progress: ';
+                container.appendChild(strong);
+                var progress = document.createElement('progress');
+                container.appendChild(progress);
+
+
+
+
+                // POST the Blob using XHR2
+                xhr('/Files/UploadVideoFiles', formData, progress, percentage, function (fName) {
+
+                    container.appendChild(document.createElement('hr'));
+                    var mediaElement = document.createElement('video');
+
+                    var fileId = parseInt(fName);
+                    var url = "@Url.Action("UpdateMaterialSent", "Booking")";
+                    $.ajax({
+                        url: url,
+                        //dataType: 'json',
+                        //contentType: false,
+                        //processData: false,
+                        type: "POST",
+                        data: { BookId: BookingId, status: BookStatus, FileId: fileId },
+                        //contentType: "application/json; charset=utf-8",
+                        //async: false,
+                        beforeSend: function () {
+                            //$("#spinner").show();
+                            $(".loadingSign").show();
+                        },
+                        complete: function () {
+                            $(".loadingSign").hide();
+                        },
+                        success: function (data) {
+                            $.gritter.add({
+                                title: 'Success !',
+                                text: 'Updated Successfully'
+                            });
+                            location.reload();
+                        },
+
+                        error: function (jqXHR, textStatus, errorMessage) {
+                            console.log(errorMessage);
+                        }
+                    });
+
+                });
+              }
+
+              function UpdateMaterialSent(BookingId, BookStatus) {
+
+
+                var CurrentStatus = $("#CurrentStatus").val();
+
+                var devisitStatus = parseInt(BookStatus) - parseInt(CurrentStatus);
+
+                if (BookStatus == "5" && devisitStatus == 1) {
+                    PostBlob(recorder.getBlob(), BookingId, BookStatus);
+                }
+                else if (devisitStatus == 1 && BookStatus != "5") {
+                    var url = "@Url.Action("UpdateBookingStatus", "Booking")";
+                    $.ajax({
+                        url: url,
+                        //cache: false,
+                        //traditional: true,
+                        type: "POST",
+                        data: { BookId: BookingId, status: BookStatus },
+                        //contentType: "application/json; charset=utf-8",
+                        //async: false,
+                        beforeSend: function () {
+                            //$("#spinner").show();
+                            $(".loadingSign").show();
+                        },
+                        complete: function () {
+                            $(".loadingSign").hide();
+                        },
+                        success: function (data) {
+                            $.gritter.add({
+                                title: 'Success !',
+                                text: 'Updated Successfully'
+                            });
+                            location.reload();
+                        },
+
+                        error: function (jqXHR, textStatus, errorMessage) {
+                            console.log(errorMessage);
+                        }
+                    });
+                }
+                else {
+                    $.gritter.add({
+                        title: 'Warning !',
+                        text: 'Warning'
+                    });
+                }
+            }
+
+
+
+            function captureCamera(callback) {
+                navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(function (camera) {
+                    callback(camera);
+                }).catch(function (error) {
+                    alert('Unable to capture your camera ');
+                    console.error(error);
+                });
+            }
+
+            function xhr(url, data, progress, percentage, callback) {
+                $(".loadingSign").show();
+                var request = new XMLHttpRequest();
+                request.onreadystatechange = function () {
+                    if (request.readyState == 4 && request.status == 200) {
+                        callback(request.responseText);
+                    }
+                };
+
+                if (url.indexOf('/RecordRTC/DeleteFile') == -1) {
+                    request.upload.onloadstart = function () {
+                        percentage.innerHTML = 'Upload started...';
+                    };
+
+                    request.upload.onprogress = function (event) {
+                        progress.max = event.total;
+                        progress.value = event.loaded;
+                        percentage.innerHTML = 'Upload Progress ' + Math.round(event.loaded / event.total * 100) + "%";
+                    };
+
+                    request.upload.onload = function () {
+                        percentage.innerHTML = 'Saved!';
+                    };
+                }
+
+                request.open('POST', url);
+                request.send(data);
+            }
+
+
+
+            function stopRecordingCallback() {
+                video.src = video.srcObject = null;
+                video.muted = false;
+                video.volume = 1;
+                video.src = URL.createObjectURL(recorder.getBlob());
+
+                recorder.camera.stop();
+                fileName = (Math.round(Math.random() * 99999999) + 99999999) + '.webm';
+                //recorder.destroy();
+                //recorder = null;
+            }
+
+
+            var fileName;
+
+            $('#btn-stop-recording').hide();
+            $('#btn-record-again').hide();
+            $('#btn-upload-video').hide();
+
+
+            $("#btn-start-recording").click(function (e) {
+                if (recorder != null) {
+                    recorder.destroy();
+                    recorder = null;
+                }
+
+                captureCamera(function (camera) {
+                    video.muted = true;
+                    video.volume = 0;
+                    video.srcObject = camera;
+
+                    recorder = RecordRTC(camera, {
+                        type: 'video'
+                    });
+
+                    recorder.startRecording();
+
+                    // release camera on stopRecording
+                    recorder.camera = camera;
+                    $('#btn-stop-recording').show();
+                    $('#btn-start-recording').hide();
+
+                    //document.getElementById('btn-stop-recording').disabled = false;
+                });
+            });
+
+            $("#btn-stop-recording").click(function (e) {
+                recorder.stopRecording(stopRecordingCallback);
+                //recorder.stopRecording();
+                $('#btn-stop-recording').hide();
+                $('#btn-record-again').show();
+                $('#btn-upload-video').show();
+            });
+
+            $("#btn-record-again").click(function (e) {
+                //recorder.stopRecording(stopRecordingCallback);
+                $('#btn-start-recording').show();
+                $('#btn-record-again').hide();
+                $('#btn-upload-video').hide();
+            });
+
+            $("#btn-record-again").click(function (e) {
+                //recorder.stopRecording(stopRecordingCallback);
+                $('#btn-start-recording').show();
+                $('#btn-record-again').hide();
+                $('#btn-upload-video').hide();
+            });
+
+            $("#btn-upload-video").click(function (e) {
+                //recorder.stopRecording(stopRecordingCallback);
+                //$('#btn-start-recording').show();
+                //$('#btn-record-again').hide();
+                //$('#btn-upload-video').hide();
+                UpdateMaterialSent(@Model.Id, 5);
+            });
+
+
+
+        });
+
+        function myCopyorder() {
+            var copyText = document.getElementById("myCopyorder");
+            copyText.select();
+            document.execCommand("copy");
+
+            var tooltip = document.getElementById("myTooltiporder");
+            tooltip.innerHTML = "Copied";
+        }
+
+        function outFuncorder() {
+            var tooltip = document.getElementById("myTooltiporder");
+            tooltip.innerHTML = "Copy to clipboard";
+        }
+
+    </script>
+
+}
+
+

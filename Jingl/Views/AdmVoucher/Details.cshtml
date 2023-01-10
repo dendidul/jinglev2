@@ -1,0 +1,235 @@
+﻿@using Jingl.General.Model.Admin.Master
+@model Jingl.General.Model.Admin.Master.VoucherModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout_Adm.cshtml";
+    IEnumerable<TalentModel> TModel = ViewBag.ListTalent;
+}
+
+<h2>Details</h2>
+<form class="form-horizontal form-bordered" method="post" id="formDetailsVoucher">
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+            </div>
+            <h4 class="panel-title">Voucher Data</h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-6">
+                    <label class="m-b-10">Voucher Code</label>
+                    @Html.HiddenFor(model => model.Id, new { Class = "form-control" })
+                    @Html.TextBoxFor(model => model.VoucherCd, new { Class = "form-control m-b-30", disabled = "true" })
+                </div>
+                <div class="col-6">
+                    <label class="m-b-10">Voucher Name</label>
+                    @Html.TextBoxFor(model => model.VoucherNm, new { Class = "form-control m-b-30", disabled = "true" })
+                </div>
+
+                <div class="col-12">
+                    <label class="m-b-10">Voucher Description</label>
+                    @Html.TextAreaFor(model => model.VoucherDesc, new { Class = "form-control m-b-30", disabled = "true" })
+                </div>
+
+                <div class="col-6">
+                    <label class="m-b-10">Voucher Quota</label>
+                    @Html.TextBoxFor(model => model.RemainingCount, new { Class = "form-control m-b-30", disabled = "true" })
+                    @*<input type="text" name="RemainingCount" id="RemainingCount" class="form-control" value="(model => model.RemainingCount)" />*@
+                </div>
+                <div class="col-6">
+                    <label class="m-b-10">Value amount</label>
+                    @Html.TextBoxFor(model => model.Budget, new { Class = "form-control m-b-30", disabled = "true" })
+                    @*<input type="text" name="Budget" id="Amount" class="form-control" value="@Model.Budget" />*@
+                </div>
+
+                <div class="col-6">
+                    <label class="m-b-10">Amount</label>
+                    @Html.TextBoxFor(model => model.Amount, new { Class = "form-control m-b-30", disabled = "true" })
+                    @*<input type="text" name="Amount" id="Amount" class="form-control" value="@Model.Amount" />*@
+                </div>
+                <div class="col-6">
+                    <label class="m-b-10">Percentage</label>
+                    @Html.TextBoxFor(model => model.Percentage, new { Class = "form-control m-b-30", disabled = "true" })
+                    @*<input type="text" name="Percentage" id="Percentage" class="form-control" value="@Model.Percentage" />*@
+                </div>
+
+                <div class="col-6">
+                    <label>StartDate </label>
+                    @Html.TextBoxFor(model => model.StartDate, new { Class = "form-control datepicker m-b-30", disabled = "true" })
+                </div>
+                <div class="col-6">
+                    <label>EndDate </label>
+                    @Html.TextBoxFor(model => model.EndDate, new { Class = "form-control datepicker m-b-30", disabled = "true" })
+                </div>
+
+                <div class="col-12">
+                    <label class="m-b-10">Uses Per Customer</label>
+                    @Html.TextBoxFor(model => model.UsesPerCustomer, new { Class = "form-control m-b-30", disabled = "true" })
+                </div>
+
+                <div class="col-6">
+                    <label class="m-b-10">MinValue</label>
+                    @Html.TextBoxFor(model => model.MinValue, new { Class = "form-control m-b-30", disabled = "true" })
+                    @*<input type="text" name="MinValue" id="MinValue" class="form-control" value="@Model.MinValue" />*@
+                </div>
+                <div class="col-6">
+                    <label class="m-b-10">MaxValue</label>
+                    @Html.TextBoxFor(model => model.MaxValue, new { Class = "form-control m-b-30", disabled = "true" })
+                    @*<input type="text" name="MaxValue" id="MaxValue" class="form-control" value="@Model.MaxValue" />*@
+                </div>
+
+                <div class="col-12">
+                    <br />
+                    <label class="m-b-10">Voucher Application</label>
+                    <table class="table table-striped table-bordered" id="data-table-buttons" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center">
+                                    <input type="checkbox" id="select-all" disabled />
+                                </th>
+                                <th style="text-align:center">
+                                    Talent Id
+                                </th>
+                                <th style="text-align:center">
+                                    Talent Name
+                                </th>
+                                <th style="text-align:center">
+                                    Registered Date
+                                </th>
+                                <th style="text-align:center">
+                                    Gender
+                                </th>
+                                <th style="text-align:center">
+                                    Profession
+                                </th>
+                                <th style="text-align:center">
+                                    IsAvailable
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in TModel)
+                            {
+                                <tr>
+                                    <td style="text-align:center">
+                                        @{
+                                            if (Model.VoucherSelectedTalent.Where(x => x.TalentId == item.Id).Any() == true)
+                                            {
+                                                <input type="checkbox" name="SelectedTalent" class="rowchk" checked value="@item.Id" disabled />
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" name="SelectedTalent" class="rowchk" value="@item.Id" disabled />
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TalentNm)
+                                    </td>
+                                    <td style="text-align:center">
+                                        @{
+                                            if (item.CreatedDate.HasValue)
+                                            {
+                                                @item.CreatedDate.Value.ToString("dd-MM-yyyy")
+                                            }
+                                        }
+                                    </td>
+                                    <td style="text-align:center">
+                                        @{
+                                            if (item.Gender == "F")
+                                            {
+                                                <span>Female</span>
+                                            }
+                                            else if (item.Gender == "M")
+                                            {
+                                                <span>Male</span>
+                                            }
+                                            else
+                                            {
+                                                <span>-</span>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Profesion)
+                                    </td>
+                                    <td style="text-align:center">
+                                        @{
+                                            if (item.IsAvailable == true)
+                                            {
+                                                <span>Yes</span>
+                                            }
+                                            else
+                                            {
+                                                <span>No</span>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <br />
+                </div>
+                <br />
+
+                <div class="col-6">
+                    <div class="form-group m-b-30">
+                        <label>Status </label>
+                        @Html.DropDownListFor(model => model.IsActive, ViewBag.ListStatus as IEnumerable<SelectListItem>, "Pilih Status", new { Class = "form-control", Placeholder = "", disabled = "true" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <a href="@Url.Action("Index", "AdmVoucher")" class="btn btn-warning">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section scripts{
+
+    <script type="text/javascript">$(document).ready(function () {
+                App.init();
+
+            var handleDataTableButtons = function () {
+                "use strict";
+
+                if ($('#data-table-buttons').length !== 0) {
+                    $('#data-table-buttons').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [],
+                        responsive: true,
+                        "scrollY": "250px",
+                        "scrollCollapse": true,
+                        "paging": false
+                    });
+                }
+            };
+
+            var TableManageButtons = function () {
+                "use strict";
+                return {
+                    //main function
+                    init: function () {
+                        handleDataTableButtons();
+                    }
+                };
+            }();
+
+            TableManageButtons.init();
+
+            })</script>
+
+}

@@ -1,0 +1,1088 @@
+﻿@model Jingl.General.Model.User.ViewModel.ProfileViewModel
+@{
+    ViewData["Title"] = "UserProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    ViewData["MetaImage"] = Model.UserModel.ProfPicLink;
+    ViewData["Description"] = "Yuk lihat profile Talent Fameo";
+
+    var maxLoop = 8;
+    var index = 0;
+}
+
+@inject CookieManager.ICookie _httpCookie
+
+
+<div id="myHeader">
+    <div class="logo-header">
+        <div class="coontainer-fluid">
+            <div class="col-md-12">
+                <div class="headerTop" style="height: 40px;">
+                    <div class="setting-profile" style="left: 13px;right: unset;top: 0;position: absolute;">
+                        <a href="@Url.Action("Index","Home")">
+                            <div class="icon-img">
+                                <img src="/template/img/left-arrow.svg" style="width:25px;" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-auto w-100 p-4 text-white text-center" style="padding-top: 7px !important;">
+                        <h4 style="color: #fff;font-weight: bold;">Account</h4>
+                    </div>
+                    @*<img src="~/template/img/Jing_e 2.png" alt="Alternate Text" />*@
+                    <div class="setting-profile">
+                        <a href="@Url.Action("Setting", "Account", new { UserId = Model.UserModel.Id })">
+                            <i class="fas fa-cog"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="background: #fff;">
+    <div class="row">
+        <div class="col-12">
+            <!-- begin tab-content -->
+            <div class="tab-content mt10">
+                <!-- begin tab-pane USER -->
+                <div class="tab-pane fade active show" id="nav-pills-tab-1">
+                    <div class="card-content-home panel-body -mt20">
+                        <a href="@Url.Action("CompleteWorkspace","Account",new { UserId = Model.UserModel.Id})" id="btnCompCheck" title="Compleye Book" class="myBtnBook">
+                            <img src="/template/img/ic-amplop.png" alt="Camera" />
+                            <span class="notif-no-amplop">@Model.CompBookCount</span>
+                        </a>
+                        <ul class="media-list media-list-with-divider">
+                            <li class="media media-sm">
+                                <form id="Frm_EditProfile">
+                                    <a class="media-left header-upload" href="javascript:;">
+                                        <img id="UserImg" src="@Model.UserModel.ProfPicLink" alt="" class="media-object profile-user rounded-corner" />
+                                        <input type="hidden" name="UserName" id="UserName" value="@Model.UserModel.UserName" />
+                                        <input type="hidden" name="Id" id="UserId" value="@Model.UserModel.Id" />
+                                        <input type="hidden" name="Bio" id="Bio" value="@Model.UserModel.Bio" />
+                                        <input type="hidden" name="LastName" id="LastName" value="@Model.UserModel.LastName" />
+                                        <input type="hidden" name="Password" id="password" value="@Model.UserModel.Password" />
+                                        <div class="custom-upload" id="btnUpload" style="display:none">
+                                            <div class="form-group">
+                                                <label for="prof-upload"><i class="fas fa-camera"></i></label>
+                                                <input type="file" class="form-control-file" id="prof-upload" name="ProfImg" style="display:none" accept=".jpg, .png,.jpeg" onchange='profile.UpdatePreview(this)'>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="media-body" id="divInfo" style="width:100%">
+                                        <div class="m-l-10" style="height:115px;">
+                                            <h6 class="media-heading m-t-10" style="font-size: 24pt; font-family:Calibri"><b>Hi, @Model.UserModel.FirstName</b></h6>
+                                            <span class="spc"><i class="fas fa-mobile-alt m-r-5"></i> @Model.UserModel.PhoneNumber</span><br>
+                                            <span class="spc"><i class="fas fa-envelope-open-text m-r-5"></i> @Model.UserModel.Email</span><br>
+                                            <a class="" id="btnEditTalent" href="@Url.Action("EditProfile", "Account", new { UserId = Model.UserModel.Id})">
+                                                <span class="spc" style="color:#DA2D73"> <i class="fas fa-edit m-r-5" style="color:#DA2D73" rel="tooltip" title="Edit"></i>Ubah Profil</span>
+                                            </a>
+                                            @*<a class="" id="btnValidate" data-toggle="modal" data-target="#validateModal">
+                                                    <span class="spc" style="color:#DA2D73"> <i class="fas fa-edit m-r-5" style="color:#DA2D73" rel="tooltip" title="Validate"></i>Validasi Akun</span>
+                                                </a>*@
+                                        </div>
+                                    </div>
+                                    <div class="media-body form-horizontal" id="divEdit" style="display:none; width:100%">
+                                        <div class="m-l-10">
+                                            <div class="input-group mb-1">
+                                                <input type="text" id="FirstName" name="FirstName" class="form-control form-control-sm" value="@Model.UserModel.FirstName" />
+                                            </div>
+                                            <div class="input-group mb-1">
+                                                <input type="text" id="PhoneNumber" name="PhoneNumber" class="form-control form-control-sm" value="@Model.UserModel.PhoneNumber" />
+                                            </div>
+                                            <div class="input-group mb-1">
+                                                <input type="text" onchange="checkAvailEmailability()" id="Email" name="Email" class="form-control form-control-sm" value="@Model.UserModel.Email" />
+                                                <input type="hidden" name="name" id="isValidEmail" value="1" />
+                                                <span id="messageEmail"></span>
+                                            </div>
+                                            <div class="btn-edit">
+                                                <a class="" id="btnSave">
+                                                    <i class="fas fa-save m-r-5" style="color:#DA2D73" rel="tooltip" title="Save"></i> Save
+                                                </a>
+                                                <a class="" id="btnCancel">
+                                                    <i class="fas fa-times m-r-5" style="color:#DA2D73" rel="tooltip" title="Cancel"></i> Cancel
+                                                </a>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </form>
+
+                            </li>
+                            <li class="media media-sm">
+                                <div class="card-content-home w-100">
+                                    <div class="category-index">
+                                        <h5>Order Saya</h5>
+                                        <a href="@Url.Action("WorkSpace", "Account", new { UserId = Model.UserModel.Id })" ">Lihat Semua</a>
+                                    </div>
+                                    <div class="owl-carousel owl-actors owl-theme" style="display:block">
+                                        @{
+                                            var x1 = 0;
+                                            foreach (var book in Model.ListBooking)
+                                            {
+                                                if (x1 >= maxLoop)
+                                                {
+                                                    break;
+                                                }
+                                                <div class="item">
+                                                    <div class="exploredetail m-t-10">
+
+                                                        <div class="video">
+                                                            <div class="card-explore-top">
+                                                                <input type="hidden" class="FileVideoId" id="FileVideoId_@index" value="@book.FileId" />
+                                                                <input type="hidden" class="LinkVideo" id="LinkVideo_@index" value="@book.Link" />
+                                                                <input type="hidden" class="LinkPhoto" id="LinkPhoto_@index" value="@book.TalentPhotos" />
+                                                                <input type="hidden" class="LinkName" id="LinkName_@index" value="@book.TalentNm" />
+                                                                <input type="hidden" class="ViewCount" id="ViewCount_@index" value="@book.ViewsCount" />
+                                                                <input type="hidden" class="TalentId" id="TalentId_@index" value="@book.TalentId" />
+                                                                <input type="hidden" class="TransactionStatus" id="TransactionStatus_@index" value="@book.Status" />
+                                                                <img src="@book.TalentPhotos" alt="Profile Images" width="100%" height="100%" class="thmnail" />
+                                                                <a href="#" class="explore-button" data-toggle="modal" id="exploreLink">
+                                                                    <img src="/template/img/iconplaywhite.png" alt="Alternate Text" />
+                                                                </a>
+                                                                <a href="@Url.Action("CheckBookingData", "Booking", new { bookId = @book.Id })">
+                                                                    <div class="text-talent">
+                                                                        <span class="span-talent">
+                                                                            <span class="profesi" style="font-family:Lato; color: #000000; font-weight: bold; font-size: 16px">@book.TalentNm</span><br />
+                                                                            <span class="profesi" style="font-family:Lato; color: #949090; font-size: 11px;">@book.CreatedDate.Value.ToString("dd-MM-yyyy")</span><br />
+                                                                            <span class="profesi" style="font-family:Lato; color:#5f10be;font-size: 12px;font-weight: bold;white-space: initial;">@book.TransactionStatus</span><br />
+                                                                        </span>
+                                                                        <h4>@*@book.TalentNm*@</h4>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                index++;
+                                                x1++;
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="media media-sm">
+                                <div class="card-content-home w-100">
+                                    <div class="category-index">
+                                        <h5>Favorit Saya</h5>
+                                        <a href="@Url.Action("WishlistList", "Account", new { UserId = Model.UserModel.Id })">Lihat Semua</a>
+                                    </div>
+                                    <div class="owl-carousel owl-actors owl-theme" style="display:block">
+                                        @{
+                                            var z1 = 0;
+                                            foreach (var wishlist in Model.ListTalentWishlist)
+                                            {
+                                                if (z1 >= maxLoop)
+                                                {
+                                                    break;
+                                                }
+                                                <div class="item">
+                                                    <div class="exploredetail m-t-10">
+                                                        <div class="video">
+
+                                                            <div class="card-explore-top">
+                                                                <input type="hidden" class="FileVideoId" id="FileVideoId_@index" value="@wishlist.FileId" />
+                                                                <input type="hidden" class="LinkVideo" id="LinkVideo_@index" value="@wishlist.Link" />
+                                                                <input type="hidden" class="LinkPhoto" id="LinkPhoto_@index" value="@wishlist.LinkImg" />
+                                                                <input type="hidden" class="LinkName" id="LinkName_@index" value="@wishlist.TalentNm" />
+                                                                <input type="hidden" class="ViewCount" id="ViewCount_@index" value="@wishlist.ViewsCount" />
+                                                                <input type="hidden" class="TalentId" id="TalentId_@index" value="@wishlist.TalentId" />
+
+                                                                <img src="@wishlist.LinkImg" alt="Profile Images" width="100%" height="100%" class="thmnail" />
+
+                                                                <a href="#" class="explore-button " data-toggle="modal" id="exploreLink">
+                                                                    <img src="/template/img/iconplaywhite.png" alt="Alternate Text" />
+                                                                </a>
+
+                                                                <a href="@Url.Action("TalentDetail", "Talent", new { TalentId = wishlist.TalentId })">
+                                                                    <div class="text-talent">
+                                                                        <span class="span-talent">
+                                                                            <span class="profesi">@wishlist.Profesion</span>
+                                                                        </span>
+                                                                        <h4>@wishlist.TalentNm</h4>
+                                                                    </div>
+                                                                </a>
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                index++;
+                                                z1++;
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- end tab-pane -->
+            </div>
+        </div>
+    </div>
+    <!-- end tab-content -->
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="validateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Validasi Akun</h5>
+                <button type="button" class="close pull-right" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="padding: 35px;">
+                <h3 class="text-center">Validasi Akunmu</h3>
+                <p class="text-center m-b-20">Validasi akunmu dengan mengisi alamat emailmu</p>
+                <form>
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="VerifEmail" aria-describedby="emailHelp" placeholder="Enter email" value="@Model.UserModel.Email">
+                        <input type="hidden" name="name" id="IsValidEmail" />
+                        <span id="HeadermessageEmail"></span>
+                    </div>
+
+                    <button type="button" onclick="HeadercheckAvailEmailability()" class="btn btn-primary btn-login" style="margin: auto;display: table; padding: 8px 25px;">Submit</button>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+
+
+@section scripts {
+    <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script src="/js/CreateDevice.js"></script>
+    <script>
+        var applicationServerPublicKey = 'BAVga6_CDUnXjegxtgYKT-kgviHOUGQc877x-8c1usw_QoFt2jk_zyI68elT6Yn1kTM9kFe7FiMWbyyIwUiCP84';
+        $(function () {
+            profile = {
+                UpdatePreview: function (obj) {
+                    // if IE < 10 doesn't support FileReader
+                    if (!window.FileReader) {
+                        // don't know how to proceed to assign src to image tag
+                    } else {
+                        var reader = new FileReader();
+                        var target = null;
+
+                        reader.onload = function (e) {
+                            target = e.target || e.srcElement;
+                            $(".profile-user").prop("src", target.result);
+                        };
+                        reader.readAsDataURL(obj.files[0]);
+                    }
+                }
+            };
+        });
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '1608911229239324',
+                autoLogAppEvents: true,
+                xfbml: true,
+                version: 'v3.3'
+            });
+        };
+
+    </script>
+    <script type="text/javascript">
+        var applicationServerPublicKey = 'BAVga6_CDUnXjegxtgYKT-kgviHOUGQc877x-8c1usw_QoFt2jk_zyI68elT6Yn1kTM9kFe7FiMWbyyIwUiCP84';
+
+        function ShareVideo(fileId, TalentId) {
+            FB.ui({
+                method: 'share',
+                display: 'popup',
+                href: 'https://www.fameoapp.com/Talent/Video?FileId=' + fileId + '&TalentId=' + TalentId,
+                //href: "https://localhost:44374/Talent/Video?FileId=" + fileId + "&TalentId=" + TalentId
+                // href:'https://localhost:44374/Talent/Video?FileId=31&TalentId=1'
+                // href: 'https://localhost:44374/Talent/Video?FileId=' + fileId + '&TalentId=' + TalentId,
+            }, function (response) {
+                window.location.reload();
+            });
+        }
+
+        function DisableClaimBtn() {
+            var dateData = new Date();
+            var day = dateData.getDate();
+
+            if (day >= 25 && day <= 31) {
+                $('#btnClaim').prop('disabled', false);
+            }
+            else {
+                $('#btnClaim').prop('disabled', true);
+                //$('#btnClaim').prop('disabled', false);
+            }
+        }
+
+        function ShareProfile(TalentId) {
+            FB.ui({
+                method: 'send',
+                display: 'popup',
+                href: 'https://www.fameoapp.com/Talent/TalentDetail?TalentId=' + TalentId,
+                //href: 'https://localhost:44374/Talent/TalentDetail?TalentId=' + TalentId,
+                // href:'https://localhost:44374/Talent/Video?FileId=31&TalentId=1'
+                // href: 'https://localhost:44374/Talent/Video?FileId=' + fileId + '&TalentId=' + TalentId,
+            }, function (response) {
+                window.location.reload();
+            });
+        }
+
+
+        function CopyUserCode() {
+            var copyText = document.getElementById("UserCode");
+            copyText.select();
+            document.execCommand("copy");
+
+            var tooltip = document.getElementById("myTooltipUserCode");
+            tooltip.innerHTML = "Copied";
+        }
+
+        function outFuncUserCode() {
+            var tooltip = document.getElementById("myTooltipUserCode");
+           // tooltip.innerHTML = "Copy to clipboard";
+        }
+
+        function IsActiveNotification() {
+            var jsonRequest = {
+                PushEndpoint: $("#PushEndpoint").val(),
+                PushP256DH: $("#PushP256DH").val(),
+                PushAuth: $("#PushAuth").val(),
+                Name: $("#UserName").val()
+            };
+            $.ajax({
+                        url: "@Url.Action("CheckActiveNotification", "Notification")",
+                        //cache: false,
+                        //traditional: true,
+                        type: "POST",
+                        data: { model: jsonRequest },
+                        //contentType: "application/json; charset=utf-8",
+                        //async: false,
+                        beforeSend:
+                            function () {
+                                //$("#spinner").show();
+                            },
+                        success: function (data) {
+
+                            if (data == true) {
+
+
+                                $("#ChkAllowNotif").attr('checked', true);
+                            }
+                            else {
+                                $("#ChkAllowNotif").attr('checked', false);
+                            }
+
+
+
+                        },
+                        error: function (jqXHR, textStatus, errorMessage) {
+                            console.log(errorMessage);
+                        }
+                    });
+        }
+
+        $(document).ready(function () {
+
+
+            DisableClaimBtn();
+
+
+            $('#ChkAllowNotif').change(function () {
+                if ($('#ChkAllowNotif').is(":checked")) {
+                    var jsonRequest = {
+                        PushEndpoint : $("#PushEndpoint").val(),
+                        PushP256DH : $("#PushP256DH").val(),
+                        PushAuth: $("#PushAuth").val(),
+                        Name: $("#UserName").val()
+                    };
+                    $.ajax({
+                        url: "@Url.Action("AddDevice", "Notification")",
+                        //cache: false,
+                        //traditional: true,
+                        type: "POST",
+                        data: { model: jsonRequest },
+                        //contentType: "application/json; charset=utf-8",
+                        //async: false,
+                        beforeSend:
+                            function () {
+                                //$("#spinner").show();
+                            },
+                        success: function (data) {
+
+                            $.gritter.add({
+                                title: 'Success!',
+                                text: 'Notifikasi di aktifkan'
+                            });
+
+
+
+                        },
+                        error: function (jqXHR, textStatus, errorMessage) {
+                            console.log(errorMessage);
+                        }
+                    });
+
+
+                }
+
+                else {
+                    var jsonRequest = {
+                        PushEndpoint: $("#PushEndpoint").val(),
+                        PushP256DH: $("#PushP256DH").val(),
+                        PushAuth: $("#PushAuth").val(),
+                        Name: $("#UserName").val()
+                    };
+                      $.ajax({
+                        url: "@Url.Action("DeleteDevice", "Notification")",
+                        //cache: false,
+                        //traditional: true,
+                        type: "POST",
+                        data: { model: jsonRequest },
+                        //contentType: "application/json; charset=utf-8",
+                        //async: false,
+                        beforeSend:
+                            function () {
+                                //$("#spinner").show();
+                            },
+                        success: function (data) {
+
+                            $.gritter.add({
+                                title: 'Success!',
+                                text: 'Notifikasi di NonAktifkan'
+                            });
+
+
+                        },
+                        error: function (jqXHR, textStatus, errorMessage) {
+                            console.log(errorMessage);
+                        }
+                    });
+
+
+                }
+            });
+
+
+
+            $("#JoinTalent").click(function () {
+
+                var RoleId = $("#RoleId").val();
+                if (RoleId == "3") {
+                    $.gritter.add({
+                        title: 'Warning!',
+                        text: 'Anda telah terdaftar sebagai Talent'
+                    });
+                }
+                else {
+
+                    window.location.href = "@Url.Action("RegisterTalent","Talent",new {UserId = Model.UserModel.Id })";
+                }
+
+            });
+
+             $("#JoinTalentPengaturan").click(function () {
+
+                var RoleId = $("#RoleId").val();
+                if (RoleId == "3") {
+                    $.gritter.add({
+                        title: 'Warning!',
+                        text: 'Anda telah terdaftar sebagai Talent'
+                    });
+                }
+                else {
+
+                    window.location.href = "@Url.Action("RegisterTalent","Talent",new {UserId = Model.UserModel.Id })";
+                }
+
+            });
+
+            $("#btnClaim").click(function () {
+
+                var value = parseInt($("#IncomeValue").val());
+                var Userid = $("#UserModel_Id").val();
+                 if (value < 100000) {
+                     $.gritter.add({
+                         title: 'Warning!',
+                         text: 'Maaf minimum penarikan uang adalah Rp. 100.000'
+                     });
+                }
+                 else {
+                     $('#ClaimModal').modal('show');
+                     $('#formClaim').submit(function (e) {
+                    e.preventDefault();
+
+                    var formData = new FormData();
+
+                 var formData = new FormData($('#formClaim')[0]);
+                    var url = "@Url.Action("PostClaim", "Account")";
+
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+
+                        dataType: 'json',
+                        contentType: false,
+                        processData: false,
+
+                        //data: { model: jsonRequest, ProfImg: ProfImg},
+                        data: formData,
+                        //contentType: "application/json; charset=utf-8",
+                        //async: false,
+                        beforeSend:
+                            function () {
+                                //$("#spinner").show();
+                            },
+
+                        success: function (data) {
+
+                        @*window.location.href = "@Url.Action("Profile", "Account")";*@
+                            swal({
+                                title: "Success",
+                                text: "Claim Berhasil",
+                                icon: "success",
+                            }).then(function () {
+                                window.location.href = "@Url.Action("Profile", "Account")";
+                            });
+
+
+                        },
+                        error: function (jqXHR, textStatus, errorMessage) {
+                            console.log(errorMessage);
+                        }
+                    });
+
+
+                });
+
+
+
+
+
+                }
+
+            });
+
+
+
+
+
+            $("#TabPengaturan").click(function () {
+
+                IsActiveNotification();
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+
+            //$("#myImg").click(function (e) {
+
+            //    alert('jing');
+
+            //});
+
+         if (location.hash) {
+                $("a[href='" + location.hash + "']").tab("show");
+            }
+            $(document.body).on("click", "a[data-toggle='tab']", function (event) {
+                location.hash = this.getAttribute("href");
+            });
+
+            $('#btn-uploadvideo').click(function () {
+                $('#UploadVideo').modal('show');
+                $('#formUploadVideo').submit(function (e) {
+                    e.preventDefault();
+
+                    var formData = new FormData();
+
+                    var formData = new FormData($('#formUploadVideo')[0]);
+                    var url = "@Url.Action("UploadVideo", "Account")";
+
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+
+                        dataType: 'json',
+                        contentType: false,
+                        processData: false,
+
+                        //data: { model: jsonRequest, ProfImg: ProfImg},
+                        data: formData,
+                        //contentType: "application/json; charset=utf-8",
+                        //async: false,
+                        beforeSend:
+                            function () {
+                                //$("#spinner").show();
+                            },
+
+                        success: function (data) {
+
+                        @*window.location.href = "@Url.Action("Profile", "Account")";*@
+                            swal({
+                                title: "Success",
+                                text: "Video Berhasil di Upload",
+                                icon: "success",
+                            }).then(function () {
+                                window.location.href = "@Url.Action("Profile", "Account")";
+                            });
+
+
+                        },
+                        error: function (jqXHR, textStatus, errorMessage) {
+                            console.log(errorMessage);
+
+                        }
+                    });
+
+
+                });
+            });
+
+            $('.owl-profile').owlCarousel({
+                center: true,
+                loop: true,
+                margin: 10,
+                nav: false,
+                autoplay: true,
+                autoplayTimeout: 4000,
+                autoplayHoverPause: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    }
+                }
+            });
+
+
+
+            $(".explore-button").click(function (e) {
+
+                e.preventDefault();
+
+                var div_FileVideoid = $(this).parent().parent().find('.FileVideoId').attr('id');
+                var div_id = $(this).parent().parent().parent().find('.LinkVideo').attr('id');;
+                var div_profil = $(this).parent().parent().parent().find('.LinkPhoto').attr('id');
+                var div_namatalent = $(this).parent().parent().parent().find('.LinkName').attr('id');
+                var div_ViewCountid = $(this).parent().parent().parent().find('.ViewCount').attr('id');
+                var div_status = $(this).parent().parent().parent().find('.TransactionStatus').attr('id');
+
+                //alert(div_id);
+                var $source = $('#videoplayer');
+                var $profil = $('#modalImg');
+
+                var sources = $("#" + div_id + "").val();
+                var profil = $("#" + div_profil + "").val();
+                var nametalent = $("#" + div_namatalent + "").val();
+                var status = $("#" + div_status + "").val();
+                var ViewCount = $("#" + div_ViewCountid + "").val();
+                var VideoId = $("#" + div_FileVideoid + "").val();
+                if (VideoId != 0) {
+                    $("#VideoModal").modal('show');
+                    var jsonRequest = {
+                        UserId: 0,
+                        FileId: VideoId
+                    };
+
+                    var UrlInsert = "@Url.Action("InputFileWatched", "Files")";
+
+                    $.ajax({
+                        url: UrlInsert,
+                        //cache: false,
+                        //traditional: true,
+                        type: "POST",
+                        //data: JSON.stringify({ request: jsonRequest }),
+                        data: { model: jsonRequest },
+                        //dataType: "json",
+                        //contentType: "application/json; charset=utf-8",
+                        //async: false,
+                        beforeSend: function () {
+                            //$("#spinner").show();
+                            $(".loadingSign").show();
+                        },
+                        complete: function () {
+                            $(".loadingSign").hide();
+                        },
+                        success: function (data) {
+
+
+
+                        },
+                        error: function (jqXHR, textStatus, errorMessage) {
+                            console.log(errorMessage);
+                        }
+                    });
+
+                    $source[0].src = sources;
+                    $profil[0].src = profil;
+
+                    var Namatalent = nametalent;
+                    $("#views").text(ViewCount);
+                    $("#modalName").text(Namatalent);
+                    //  $source.parent()[0].load();
+                    $source[0].play();
+                    // $source.parent().load();
+                    $(".modalClose").click(function (e) {
+                        $source[0].pause();
+                        //history.back();
+                         window.location.href = "@Url.Action("TalentDetail", "Talent")?TalentId=" + TalentId;
+
+                    });
+
+                    $(".modal").on("shown.bs.modal", function () { // any time a modal is shown
+                        var urlReplace = "#" + $(this).attr('id'); // make the hash the id of the modal shown
+                        history.pushState(null, null, urlReplace); // push state that hash into the url
+                    });
+
+                    // If a pushstate has previously happened and the back button is clicked, hide any modals.
+                    $(window).on('popstate', function () {
+                        $(".modal").modal('hide');
+                        $source[0].pause();
+                    });
+                }
+                else {
+                    if (status == "-1") {
+                        swal("sayang sekali ordermu sudah expired");
+                    }
+                    else {
+                        swal("Ordermu belum jadi, tunggu dulu ya");
+                    }
+                }
+
+            });
+
+
+            $(function() {
+                    $('a[data-toggle="tab"]').on('click', function(e) {
+                        window.localStorage.setItem('activeTab', $(e.target).attr('href'));
+                    });
+                    var activeTab = window.localStorage.getItem('activeTab');
+                    if (activeTab) {
+                        $('#myTab a[href="' + activeTab + '"]').tab('show');
+                        window.localStorage.removeItem("activeTab");
+                    }
+               });
+
+        });
+
+        $(window).on("popstate", function () {
+            var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");
+            $("a[href='" + anchor + "']").tab("show");
+        });
+
+    </script>
+    <script>
+        $(document).on("change", ".file_multi_video", function (evt) {
+            var $source = $('#video_here');
+            $source[0].src = URL.createObjectURL(this.files[0]);
+            $source.parent()[0].load();
+        });
+
+
+
+    </script>
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var UserImg = document.getElementById("UserImg");
+        var TalentImg = document.getElementById("TalentImg");
+        var modalImg = document.getElementById("img01");
+
+        //$("#myImg").click(function (e) {
+
+        //    alert('jing');
+
+        //});
+
+        UserImg.onclick = function () {
+            modal.style.display = "flex";
+            modalImg.src = this.src;
+
+        }
+
+        var RoleId = $("#RoleId").val();
+
+        if (RoleId == 3) {
+            TalentImg.onclick = function () {
+                modal.style.display = "flex";
+                modalImg.src = this.src;
+
+            }
+        }
+
+
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("closeImg")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            if (@Model.UserModel.RoleId == 3) {
+                document.getElementById('bannerTalent').style.display = "none";
+            }
+            else {
+                document.getElementById('bannerTalent').style.display = "block";
+            }
+        });
+
+        $('.owl-index').owlCarousel({
+            stagePadding: 50,
+            center: true,
+            loop: true,
+            margin: 10,
+            nav: false,
+            autoplay: true,
+            autoplayTimeout: 4000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1
+                }
+            }
+        })
+
+
+        $('.owl-actors').owlCarousel({
+            margin: 10,
+            nav: false,
+            dots: false,
+            loop: false,
+            responsive: {
+                0: {
+                    items: 2
+                },
+                600: {
+                    items: 3
+                },
+                1000: {
+                    items: 5
+                }
+            }
+        })
+
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#btnEdit').click(function (e) {
+                //Hide
+                document.getElementById('divInfo').style.display = 'none';
+
+                //Show
+                document.getElementById('divEdit').style.display = 'table-cell';
+                document.getElementById('btnUpload').style.display = 'inline-block';
+
+            });
+            $('#btnCancel').click(function (e) {
+                //Hide
+                document.getElementById('divEdit').style.display = 'none';
+                document.getElementById('btnUpload').style.display = 'none';
+
+                //Show
+                document.getElementById('divInfo').style.display = 'table-cell';
+            });
+            $('#btnSave').click(function (e) {
+                e.preventDefault();
+                console.log("ABC");
+                var UserId = $("#UserId").val();
+                var firstName = $("#FirstName").val();
+                var phoneNumber = $("#PhoneNumber").val();
+                var email = $("#Email").val();
+                var isValidEmail = $("#isValidEmail").val();
+
+                var ProfImg = $('#prof-upload').prop('files');
+                var url = "@Url.Action("EditProfile","Account")";
+                var jsonRequest = {
+                    Id :UserId,
+                    FirstName: firstName,
+                    PhoneNumber: phoneNumber,
+                    Email: email
+
+                };
+                console.log(jsonRequest);
+                var formData = new FormData();
+                //formData.append('model', jsonRequest);
+
+                ////JSON obj
+                //formData.append('ProfImg', ProfImg);
+                var formData = new FormData($('#Frm_EditProfile')[0]);
+                console.log("123");
+                if (isValidEmail == 1) {
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+                        //cache: false,
+                        //traditional: true,
+                        //dataType: 'json',
+                        dataType: 'json',
+                        contentType: false,
+                        processData: false,
+
+                        //data: { model: jsonRequest, ProfImg: ProfImg},
+                        data: formData,
+                        //contentType: "application/json; charset=utf-8",
+                        //async: false,
+                        beforeSend:
+                            function () {
+                                $("#spinner").show();
+                            },
+                        success: function (data) {
+
+                            if (data == "OK") {
+                                $.gritter.add({
+                                    title: 'Success !',
+                                    text: 'Updated Successfully !'
+                                });
+                                location.reload();
+                                console.log("DEF");
+                            }
+
+                            else {
+
+                            }
+
+
+
+                        },
+                        error: function (jqXHR, textStatus, errorMessage) {
+                            console.log(errorMessage);
+                        }
+                    });
+                }
+                else {
+                    $.gritter.add({
+                        title: 'Not Valid !',
+                        text: 'Email is not Valid !'
+                    });
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (@Model.UserModel.RoleId != 3 && @Model.UserModel.RoleId != 2) {
+                $('#loginModal').modal('show');
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        function checkAvailEmailability() {
+                var email = $("#Email").val();
+
+            var url = '@Url.Action("VerifyEmailUsed", "Account")';
+            if (email != "@Model.UserModel.Email") {
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {
+                        email: email
+                    },
+                    success: function (data) {
+                        var message = $("#messageEmail");
+                        if (data == false) {
+                            //email available
+                            message.css("color", "green");
+                            message.html("Email is available");
+                            $("#isValidEmail").val(1);
+                        } else {
+                            //Email not available.
+                            message.css("color", "red");
+                            message.html("Email is NOT available");
+                            $("#isValidEmail").val(0);
+                        }
+                    }
+                })
+            }
+            else {
+                message.css("color", "green");
+                message.html("Email is available");
+                $("#isValidEmail").val(1);
+            }
+            }
+    </script>
+    <script type="text/javascript">
+        function HeadercheckAvailEmailability() {
+            var email = $("#VerifEmail").val();
+            var code = "@ViewBag.Code";
+            var firstName = "@ViewBag.FirstName";
+            var url = '@Url.Action("SendVerificationToken", "Helper")';
+            if (email != "@Model.UserModel.Email") {
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {
+                        code: code,
+                        recipient: email,
+                        FirstName: firstName
+                    },
+                    beforeSend: function () {
+                        //$("#spinner").show();
+                        $(".loadingSign").show();
+                    },
+                    complete: function () {
+                        $(".loadingSign").hide();
+                    },
+                    success: function (data) {
+                        var message = $("#HeadermessageEmail");
+                        if (data == true) {
+
+                            //message.css("color", "green");
+                            //message.html("Email is available");
+                            //$("#isValidEmail").val(1);
+                            swal({
+                                title: "Success",
+                                text: "Email Sudah Terkirim",
+                                icon: "success",
+                            }).then(function () {
+                                //$("#validateModal").modal('hide');
+                                window.location.href = "@Url.Action("Otp","Account")";
+                            });
+                        } else {
+                            //Email not available.
+                            message.css("color", "red");
+                            message.html("Email is NOT available");
+                            $("#isValidEmail").val(0);
+                        }
+                    }
+                })
+            }
+            else {
+                swal({
+                    title: "Success",
+                    text: "Email Sudah Terkirim",
+                    icon: "success",
+                }).then(function () {
+                    //$("#validateModal").modal('hide');
+                    window.location.href = "@Url.Action("Otp","Account")";
+                })
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+                if ("@Model.CompBookCount" != "0") {
+                    document.getElementById("btnCompCheck").style.display = "block";
+                } else {
+                    document.getElementById("btnCompCheck").style.display = "none";
+                }
+        });
+    </script>
+}
+
+
+

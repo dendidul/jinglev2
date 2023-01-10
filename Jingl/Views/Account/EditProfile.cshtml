@@ -1,0 +1,490 @@
+﻿@model Jingl.General.Model.Admin.UserManagement.UserModel
+@{
+    ViewData["Title"] = "EditProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="box-white" style="background: none">
+    <form class="form-horizontal form-bordered" id="Frm_EditProfile">
+        <div class="header-talent-detail header-upload1" style="background-image: url(@Model.BgrLink)">
+
+            <div class="icon-img mb4">
+                <a class="" href="javascript:history.back()">
+                    <img src="/template/img/left-arrow.svg" style="width:25px;" alt="">
+
+                </a>
+            </div>
+            <a class="" href="javascript:history.back()"></a>
+            @*<form >*@
+            <div class="custom-upload-header">
+                <div class="form-group">
+                    <label for="bgr-upload"><i class="fas fa-camera fa-1x"></i></label>
+                    <input type="file" class="form-control-file" id="bgr-upload" name="BgrImg" style="display:none" accept=".jpg, .png,.jpeg, .gif" onchange='Test2.UpdatePreview(this)'>
+                </div>
+            </div>
+
+            @*</form>*@
+        </div>
+        <!--end of header-->
+        <div class="container" style="background: #fff;padding-bottom:50px;">
+            <div class="row">
+                <div class="panel-body">
+                    <div class="media media-sm -mt94 d-block">
+                        <a class="media-left header-upload" href="#">
+                            @*<img id="file-upload" src="/template/img/ic-profil.png"*@
+                            <img id="file-upload" src="@Model.ProfPicLink" alt="" class="media-object rounded-corner media-profile">
+                            @*<form >*@
+                            <div class="custom-upload">
+                                <div class="form-group">
+                                    <label for="prof-upload"><i class="fas fa-camera"></i></i></label>
+                                    <input type="file" class="form-control-file" id="prof-upload" name="ProfImg" style="display:none" accept=".jpg, .png,.jpeg ,.gif" onchange='Test.UpdatePreview(this)'>
+                                </div>
+                            </div>
+
+                            @*</form>*@
+                        </a>
+
+                    </div>
+                </div>
+
+                <br />
+                <div class="register-content mt30 pdb30 panel-body panel-form form-signup w-100">
+                    @*<form class="form-horizontal form-bordered" id="Frm_EditProfile">*@
+
+                    <div class="form-group row">
+                        <div class="col-lg-12 col-md-12">
+                            <label for="FirstName">Name Depan</label>
+                            <input type="hidden" name="TalentId" value="@Model.TalentId" id="TalentId" />
+                            <input type="hidden" name="Id" value="@Model.Id" id="UserId" />
+                            <input type="text" name="FirstName" id="FirstName" value="@Model.FirstName" class="form-control" placeholder="First Name" required />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-12 col-md-12">
+                            <label for="LastName">Nama Belakang</label>
+                            <input type="text" name="LastName" id="LastName" value="@Model.LastName" class="form-control" placeholder="Last Name" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-12 col-md-12">
+                            <label for="LastName">Username</label>
+                            <input type="text" onchange="checkAvailUsernameability()" name="UserName" id="UserName" value="@Model.UserName" class="form-control" placeholder="Username" />
+                            <input type="hidden" name="name" id="isValidUsername" value="1" />
+                            <span id="message"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-12 col-md-12">
+                            <label for="LastName">Password</label>
+                            <input type="password" name="Password" id="Password" value="@Model.Password" class="form-control" placeholder="Last Name" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-12 col-md-12">
+                            <label for="PhoneNumber">Nomor Telepon</label>
+                            <input type="text" name="PhoneNumber" id="PhoneNumber" value="@Model.PhoneNumber" class="form-control" placeholder="Phone Number" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-12 col-md-12">
+                            <label for="LastName">Email</label>
+                            <input type="text" onchange="checkAvailEmailability()" name="Email" id="Email" value="@Model.Email" class="form-control" placeholder="Email" />
+                            <input type="hidden" name="isValidEmail" id="isValidEmail" value="1" />
+                            <span id="messageEmailValid"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-12 col-md-12">
+                            <label for="exampleInputEmail1">Bio</label>
+                            @*<textarea rows="3" class="form-control" id="Bio" value="@Model.Bio" placeholder="Bio"></textarea>*@
+                            @Html.TextAreaFor(model => model.Bio, new { Class = "form-control", PlaceHolder = "Bio", rows = "7", style = "white-space: pre-line;" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-12 col-md-12">
+                            <label for="Profesi">Profesi</label>
+                            <input type="text" name="Profesi" id="Profesi" value="@Model.Profesi" class="form-control" placeholder="Profesi" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-12 col-md-12">
+                            <img src="@Model.IdCardImg" class="img-fluid IdCardImg" />
+                            <br />
+                            <label class="file-container text-center">
+                                Upload KTP
+                                <input type="file" id="IdCardImg" class="form-control-file" name="IdCardImg" accept=".jpg, .png,.jpeg" onchange='IdCardPic.UpdatePreview(this)' />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group row" hidden="hidden">
+                        <div class="col-lg-12 col-md-12">
+                            <img src="@Model.NpwpImg" class="img-fluid NpwpImg" />
+                            <br />
+                            @*<label>Upload NPWP</label>*@
+                            <label class="file-container text-center">
+                                Upload NPWP
+                                <input type="file" name="NpwpImg" id="NpwpImg" class="form-control-file" accept=".jpg, .png,.jpeg" onchange='NPWPPic.UpdatePreview(this)' />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-lg-12 col-md-12">
+                            @{
+                                var lblText = "";
+                                if (@Model.VideoProfile != null)
+                                {
+
+                                    <div id="uploadVideo">
+                                        <video src="@Model.VideoProfile.Link" type="video/mp4" controls style="border: 0px solid rgb(15, 158, 238); height: 350px; width: 100%;">
+                                            <source src="@Model.VideoProfile.Link">
+                                        </video>
+                                    </div>
+                                    <div id="dvProgress" style="width: 100%; min-width: 2em; margin-bottom:5px;">
+                                    </div>
+                                    <br />
+                                    lblText = "Update Profile Video";
+                                }
+                                else
+                                {
+                                    lblText = "Upload Profile Video";
+
+                                }
+                                <label class="file-container text-center">
+                                    @lblText
+                                    <input type="file" name="ProfileVideo" class="form-control-file fileuploader" accept="video/mp4" />
+                                </label>
+                            }
+                        </div>
+
+                    </div>
+                    @{
+                        if (Model.TalentSelectedCategory != null)
+                        {
+                            <div class="form-group row" style="display:none">
+                                <div class="col-lg-12 col-md-12">
+                                    <label for="Kategori">Kategori</label><br />
+                                    @{
+                                        foreach (var data in Model.TalentCategory.Where(x => x.CategoryNm != "New" && x.CategoryNm != "Featured"))
+                                        {
+                                            if (Model.TalentSelectedCategory.Where(x => x.CategoryId == data.CategoryId).Any() == true)
+                                            {
+                                                <input type="checkbox" class="checkbox" name="SelectedCategory" checked value="@data.CategoryId" /> @data.CategoryNm <br />
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" class="checkbox" name="SelectedCategory" value="@data.CategoryId" /> @data.CategoryNm <br />
+                                            }
+
+                                        }
+                                    }
+                                </div>
+                            </div>
+
+                        }
+                    }
+
+                    <div class="register-buttons brbtn-fix mt40">
+                        <button type="submit" class="btn btn-block btn-login btn-primary">Simpan</button>
+                    </div>
+                    @*</form>*@
+
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+<!--header edit profile-->
+
+
+@section scripts
+    {
+    <script type="text/javascript">
+        function checkAvailUsernameability() {
+            var UserName = $("#UserName").val();
+            var url = '@Url.Action("VerifyUserNameUsed", "Account")';
+            if (UserName != "@Model.UserName") {
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {
+                        UserName: UserName
+                    },
+                    success: function (data) {
+                        var message = $("#message");
+                        if (data == false) {
+                            //username available
+                            message.css("color", "green");
+                            message.html("Username is available");
+                            $("#isValidUsername").val(1);
+                        } else {
+                            //username not available.
+                            message.css("color", "red");
+                            message.html("Username is NOT available");
+                            $("#isValidUsername").val(0);
+                        }
+                    }
+                })
+            }
+            else {
+                message.html("Username is available");
+                $("#isValidUsername").val(1);
+            }
+        }
+        function checkAvailEmailability() {
+            var Email = $("#Email").val();
+            var url = '@Url.Action("VerifyEmailUsed", "Account")';
+            if (Email != "@Model.Email") {
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: {
+                        Email: Email
+                    },
+                    success: function (data) {
+                        var message = $("#messageEmailValid");
+                        if (data == false) {
+                            //username available
+                            message.css("color", "green");
+                            message.html("Email is available");
+                            $("#isValidEmail").val(1);
+                        } else {
+                            //username not available.
+                            message.css("color", "red");
+                            message.html("Email is NOT available");
+                            $("#isValidEmail").val(0);
+                        }
+                    }
+                })
+            }
+            else {
+                message.html("Email is available");
+                $("#isValidEmail").val(1);
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            $('#Frm_EditProfile').submit(function (e) {
+                e.preventDefault();
+                var UserId = $("#UserId").val();
+                var firstName = $("#FirstName").val();
+                var lastName = $("#LastName").val();
+                var phoneNumber = $("#PhoneNumber").val();
+                var Bio = $("#Bio").val();
+                var UserName = $("#UserName").val();
+                var Password = $("#Password").val();
+                var ProfImg = $('#prof-upload').prop('files');
+                var isValidUsername = $("#isValidUsername").val();
+                var isValidEmail = $("#isValidEmail").val();
+
+                var url = "@Url.Action("EditProfile","Account")";
+                var jsonRequest = {
+                    Id :UserId,
+                    FirstName: firstName,
+                    LastName: lastName,
+                    Bio: Bio,
+                    PhoneNumber: phoneNumber,
+                    UserName: UserName,
+                    Password: Password
+                };
+
+                var formData = new FormData();
+                //formData.append('model', jsonRequest);
+
+                ////JSON obj
+                //formData.append('ProfImg', ProfImg);
+                var formData = new FormData($('#Frm_EditProfile')[0]);
+
+                if (isValidUsername == 1 && isValidEmail == 1) {
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+                        //cache: false,
+                        //traditional: true,
+                        //dataType: 'json',
+                        dataType: 'json',
+                        contentType: false,
+                        processData: false,
+
+                        //data: { model: jsonRequest, ProfImg: ProfImg},
+                        data: formData,
+                        //contentType: "application/json; charset=utf-8",
+                        //async: false,
+                        beforeSend:
+                            function () {
+                                //$("#spinner").show();
+                            },
+                        success: function (data) {
+
+                            if (data == "OK") {
+                                $.gritter.add({
+                                    title: 'Success !',
+                                    text: 'Updated Successfully !'
+                                });
+                                window.location.href = "@Url.Action("Profile","Account")";
+                            }
+
+                            else {
+
+                            }
+
+
+
+                        },
+                        error: function (jqXHR, textStatus, errorMessage) {
+                            console.log(errorMessage);
+                        }
+                    });
+                }
+                else {
+                    $.gritter.add({
+                        title: 'Not Valid !',
+                        text: 'Username or Email is not Valid !'
+                    });
+                }
+
+
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            Test = {
+                UpdatePreview: function (obj) {
+                    // if IE < 10 doesn't support FileReader
+                    if (!window.FileReader) {
+                        // don't know how to proceed to assign src to image tag
+                    } else {
+                        var reader = new FileReader();
+                        var target = null;
+
+                        reader.onload = function (e) {
+                            target = e.target || e.srcElement;
+                            $(".media-profile").prop("src", target.result);
+                        };
+                        reader.readAsDataURL(obj.files[0]);
+                    }
+                }
+            };
+        });
+        $(function () {
+            Test2 = {
+                UpdatePreview: function (obj) {
+                    // if IE < 10 doesn't support FileReader
+                    if (!window.FileReader) {
+                        // don't know how to proceed to assign src to image tag
+                    } else {
+                        var reader = new FileReader();
+                        var target = null;
+
+                        reader.onload = function (e) {
+                            target = e.target || e.srcElement;
+                            $(".header-upload1").css("background-image", "url('" + target.result + "')");
+                        };
+                        reader.readAsDataURL(obj.files[0]);
+                    }
+                }
+            };
+        });
+        $(function () {
+            IdCardPic = {
+                UpdatePreview: function (obj) {
+                    // if IE < 10 doesn't support FileReader
+                    if (!window.FileReader) {
+                        // don't know how to proceed to assign src to image tag
+                    } else {
+                        var reader = new FileReader();
+                        var target = null;
+
+                        reader.onload = function (e) {
+                            target = e.target || e.srcElement;
+
+                            $(".IdCardImg").prop("src", target.result);
+                        };
+                        reader.readAsDataURL(obj.files[0]);
+                    }
+                }
+            };
+        });
+        $(function () {
+            NPWPPic = {
+                UpdatePreview: function (obj) {
+                    // if IE < 10 doesn't support FileReader
+                    if (!window.FileReader) {
+                        // don't know how to proceed to assign src to image tag
+                    } else {
+                        var reader = new FileReader();
+                        var target = null;
+
+                        reader.onload = function (e) {
+                            target = e.target || e.srcElement;
+
+                            $(".NpwpImg").prop("src", target.result);
+                        };
+                        reader.readAsDataURL(obj.files[0]);
+                    }
+                }
+            };
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            (function (a) { a.fn.progressbarManager = function (h) { if (!a.fn.progressbarManager.GUID) { a.fn.progressbarManager.GUID = 1 } var e = a.extend({ debug: false, initValue: 0, totalValue: 100, style: "primary", animate: false, stripe: false, id: "pbm-bootsrap-progress-" + a.fn.progressbarManager.GUID, barIdPrefix: "pbm-progress-bar-", total: h.totalValue, addDefaultBar: true, data: {}, showValueHandler: function (j) { var k = j.elem.attr("aria-valuenow") + "%"; j.elem.text(k) }, hideValueHandler: function (j) { j.elem.text("") }, onComplete: function () { }, onBarComplete: function () { } }, h); e.total = parseInt(e.total); var i = a(this); function f(k) { var l = this; var o = 1; var r = {}; var n; var p = 0; var q = false; var m = c(k); i.append(m); var n = ""; var j = function () { p = 0; for (var s in r) { p += r[s].totalValuePercent } }; this.setValue = function (w, u) { var t = this.getBar(u); w = parseInt(w); if (t) { if (w > t.totalValue) { b("New Bar value is greater that the totalValue. Setting the bar percentage to full"); w = t.totalValue } var v = g(w, e.total); var s = Math.round(v * 10) / 10; t.elem.attr("aria-valuenow", s); t.currentPercent = v; t.currentPercentRounded = s; t.currentValue = w; t.elem.css("width", Math.round(v) + "%"); if (t.showText) { this.showValue(u) } if (this.isComplete(u)) { e.onBarComplete.call(t) } j(); if (this.isComplete()) { e.onComplete() } } return this }; this.animate = function (t) { var s = this.getBar(t); if (s) { s.elem.addClass("active") } return this }; this.animateRemove = function (t) { var s = this.getBar(t); if (s) { s.elem.removeClass("active") } return this }; this.stripe = function (t) { var s = this.getBar(t); if (s) { s.elem.addClass("progress-bar-striped") } return this }; this.removeStripe = function (t) { var s = this.getBar(t); if (s) { s.elem.removeClass("progress-bar-striped") } return this }; this.style = function (s, u) { var t = this.getBar(u); if (t) { t.elem.removeClass("bg-" + t.style); t.style = s; t.elem.addClass("bg-" + s) } return this }; this.showValue = function (u) { var t = this.getBar(u); if (u === true) { for (var s in r) { s.showText = true; s.showValueHandler(t) } } if (t) { t.showText = true; t.showValueHandler(t) } return this }; this.hideValue = function (u) { var t = this.getBar(u); if (u === true) { for (var s in r) { s.showText = false; s.hideValueHandler(t) } } if (t) { t.showText = false; t.hideValueHandler(t) } return this }; this.isComplete = function (t) { var s = this.getBar(t); return (s && s.currentValue >= s.totalValue) }; this.complete = function (t) { var s = this.getBar(t); if (s) { this.setValue(s.totalValue, t) } return this }; this.completeAll = function () { var s; for (s in r) { l.complete(s) } }; this.addBar = function (B) { var w = a.extend({ initValue: 0, totalValue: 100, style: "primary", animate: false, stripe: false, data: {}, showValueHandler: e.showValueHandler, hideValueHandler: e.hideValueHandler }, B); var s = e.barIdPrefix + o; var x = parseInt(w.initValue) || 0; var y = parseInt(w.totalValue) || (100 - p); var v = g(x, e.total); var t = Math.round(v * 10) / 10; var A = g(y, e.total); var z = Math.round(A * 10) / 10; if ((z + p) > 100) { b("container can not contain the new bar element based on the percentage of its total: " + z); b("Available space in percent is :" + (100 - p)); return true } if (x > y) { t = z } var u = d(s, Math.round(v), w.style, x, y, w.animate, w.stripe); m.append(u); r[s] = { totalValue: y, currentValue: x, init: x, initPercent: v, totalValuePercent: A, totalValuePercentRounded: z, currentPercent: v, currentPercentRounded: t, style: w.style, elem: u, showText: true, id: s, data: w.data, showValueHandler: w.showValueHandler, hideValueHandler: w.hideValueHandler }; w.showValueHandler(r[s]); o++; j(); return s }; this.removeBar = function (t) { var s = this.getBar(t); if (s) { s.elem.remove() } }; this.destroy = function () { m.remove() }; this.getBar = function (s) { var t = s || n; if (r[t]) { return r[t] } b("No progress bar element with id: " + t); return null }; if (e.addDefaultBar) { n = this.addBar(e) } } var c = function (j) { return a("<div></div>", { id: j, "class": "progress" }) }; var d = function (l, p, k, o, q, m, r) { var n = a("<div></div>"); var j = "progress-bar progress-bar-" + k; if (m) { j += " active " } if (r) { j += " progress-bar-striped"; j += " progress-bar-animated"; } n.attr("id", l).attr("role", "progress-bar"); n.attr("aria-valuenow", p).attr("aria-valuemin", o); n.attr("aria-valuemax", q).css({ width: p + "%", "min-width": "2em" }); n.addClass(j); n.append('<span class="sr-only sr-indicator">' + p + "% Complete</span></div>"); return n }; var g = function (k, j) { return 100 - (j - k) / j * 100 }; var b = function (j) { if (e.debug) { console.log("Progress Bar Manager Debug => " + j) } }; a.fn.progressbarManager.GUID++; return new f(e.id) } }(jQuery));
+            $('.fileuploader').change(function () {
+                var sizeInKb = parseFloat($(this).prop("files")['0'].size / 1024).toFixed(2);
+                var fileName = $(this).prop("files")['0'].name;
+                // Create new FileReader as a variable
+                var reader = new FileReader();
+
+                // Onload Function will run after video has loaded
+                reader.onload = function (file) {
+                    uploadProgress = $('#dvProgress').progressbarManager({
+                        totalValue: sizeInKb,
+                        initValue: '0kb',
+                        animate: true,
+                        stripe: true,
+                        style: 'primary'
+                    });
+                    var chunk = 0;
+                    var uploading = setInterval(function () {
+                        uploadProgress.setValue(chunk);
+                        if (uploadProgress.isComplete()) {
+                            clearInterval(uploading);
+                            uploadProgress.style('success');
+
+                            $(".progress-bar").animate({
+
+                            }, 10000, function () {
+                                $(this).closest('.progress').fadeOut(4000);
+                            });
+                            var fileContent = file.target.result;
+                            //$('#uploadVideo').find(':last-child').not(':only-child').remove();
+                            $('#uploadVideo').find('video').remove();
+
+                            $('#uploadVideo').append('<center><video src="' + fileContent + '" width="320" height="240" controls></video></center>');
+
+                        }
+                        chunk += 500;
+                    }, 500);
+                }
+
+
+                // Get the selected video from Dialog
+                reader.readAsDataURL(this.files[0]);
+
+
+            });
+        })
+    </script>
+}
+
+
+
+
+
+
+

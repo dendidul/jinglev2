@@ -1,0 +1,230 @@
+﻿@model Jingl.General.Model.User.ViewModel.NotificationViewModel
+@{
+    ViewData["Title"] = "Activity";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*@await Html.PartialAsync("_header")*@
+
+@await Html.PartialAsync("~/Views/Shared/_header.cshtml")
+
+<div id="myHeader">
+    <div class="logo-header">
+        <div class="coontainer-fluid">
+            <div class="col-md-12">
+                <div class="headerTop" style="height: 40px;">
+                    <div class="setting-profile" style="left: 13px;right: unset;top: 0;position: absolute;">
+                        <a href="javascript:history.back()">
+                            <div class="icon-img">
+                                <img src="/template/img/left-arrow.svg" style="width:25px;" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-auto w-100 p-4 text-white text-center" style="padding-top: 7px !important;">
+                        <h4 style="color: #fff;font-weight: bold;">All Order List</h4>
+                    </div>
+                    @*<img src="~/template/img/Jing_e 2.png" alt="Alternate Text" />*@
+                   
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="brhead-activity">
+    <h1>All Order</h1>
+    <!-- begin nav-pills -->
+    <ul class="nav nav-tab-menu nav-pills">
+
+        <li class="nav-items wd-50 br-rg">
+            <a href="#nav-pills-tab-1" data-toggle="tab" class="nav-link active">
+                <span class="brtext-activity">Aktif  <span class="">(@Model.CountActiveBook)</span></span>
+            </a>
+        </li>
+        <li class="nav-items wd-50">
+            <a href="#nav-pills-tab-2" data-toggle="tab" class="nav-link">
+                <span class="brtext-activity">
+                    Selesai  <span class="">(@Model.CountFinishBook)</span>
+                </span>
+            </a>
+        </li>
+    </ul>
+    <!-- end nav-pills -->
+</div>
+<div class="container" style=" background: #fff;">
+    <div class="row">
+        <div class="col-12">
+            <div class="card-content-tab-menu mt20 m-b-40">
+                
+               
+                <!-- begin tab-content -->
+                <div class="tab-content mt10">
+                    <!-- begin tab-pane -->
+                    <div class="tab-pane fade active show" id="nav-pills-tab-1">
+                        <ul class="nav flex-column" id="UserList">
+                            @{
+                                foreach (var data in Model.ListActiveBook)
+                                {
+
+
+                                    @:<li class="nav-item ct-activity">
+                                        @:<div class=" ct-span">
+                                            <a class="nav-link  wd-95" href="@Url.Action("BookingDetail","Account",new { bookId = data.Id })">
+                                                <table>
+                                                    <tr>
+                                                        <td>
+                                                            <p><img src="@data.UserImage" style="width:60px;height:60px;border-radius:8px" /> </p>
+                                                        </td>
+                                                        <td class="p-l-15">
+                                                            <p class="title-work fw-600">@data.CustName</p>
+                                                            <p class="-mt15">Status Order : @data.CountdownStatus</p>
+                                                            @{ if (@data.CreatedDate.HasValue)
+                                                                {<p class="-mt15">
+                                                                        Tanggal Order :
+                                                                        @data.CreatedDate.Value.ToString("dd-MM-yyyy")
+                                                                    </p>
+                                                                }
+                                                            }
+                                                            <p class="-mt15">No. Order : @data.OrderNo</p>
+                                                        </td>
+
+
+                                                    </tr>
+                                                </table>
+                                            </a>
+                                            <span class="mr10"> > </span>
+                                        @:</div>
+                                    @: </li>
+                                    @:@*<li class="br-bt"></li>*@
+                                }
+                            }
+
+
+                        </ul>
+                        @{
+                            if (Model.ListActiveBook.Count > 0)
+                            {
+                                <a href="#" id="loadMore" class="btn-more">Load More</a>
+                            }
+                        }
+                        @*<div id="loadMore">Load more</div>
+                            <div id="showLess">Show less</div>*@
+                    </div>
+                    <!-- end tab-pane -->
+                    <!-- begin tab-pane -->
+                    <div class="tab-pane fade" id="nav-pills-tab-2">
+                        @{
+                            if (Model.RoleId != 3)
+                            {
+                                <div class="close-content mt40 text-center">
+                                    <img src="/template/img/bg-invitation.png" class="mx-auto d-block img-close-content">
+                                    <h6 class="m-t-10 blue-clr">Akses Dibatasi</h6>
+                                    <p>
+                                        Halaman ini hanya bisa di akses oleh Talent Fameo
+                                    </p>
+                                </div>
+                            }
+                            else
+                            {
+                                @:  <ul class="nav flex-column">
+                                    foreach (var data in Model.ListFinishBook.Where(x => x.Status != -2 && x.Status != -5 && x.Status != -8).ToList())
+                                {
+
+
+                                        @:<li class="nav-item ct-activity2">
+                                            @:<div class=" ct-span">
+                                                <a class="nav-link  wd-95" href="@Url.Action("BookingDetail","Account",new { bookId = data.Id })">
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <p><img src="@data.UserImage" style="width:60px;height:60px;border-radius:8px" /> </p>
+                                                            </td>
+                                                            <td class="p-l-15">
+                                                                <p class="title-work fw-600">@data.CustName</p>
+                                                                <p class="-mt15">Status Order : @data.CountdownStatus</p>
+                                                                @{ if (@data.CreatedDate.HasValue)
+                                                                    {<p class="-mt15">
+                                                                            Tanggal Order :
+                                                                            @data.CreatedDate.Value.ToString("dd-MM-yyyy")
+                                                                        </p>
+                                                                    }
+                                                                }
+                                                                <p class="-mt15">No. Order : @data.OrderNo</p>
+                                                            </td>
+
+
+                                                        </tr>
+                                                    </table>
+                                                </a>
+                                                <span class="mr10"> > </span>
+                                            @:</div>
+                                        @: </li>
+                                        @:@*<li class="br-bt"></li>*@
+
+
+                                    }
+                                @:  </ul>
+
+
+                                if (Model.ListFinishBook.Count > 0)
+                                {
+                                    <a href="#" id="loadMore2" class="btn-more">Load More</a>
+                                }
+                            }
+
+                        }
+
+                    </div>
+                    <!-- end tab-pane -->
+                </div>
+                <!-- end tab-content -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            if (location.hash) {
+                $("a[href='" + location.hash + "']").tab("show");
+            }
+            $(document.body).on("click", "a[data-toggle='tab']", function (event) {
+                location.hash = this.getAttribute("href");
+            });
+
+
+
+
+            $(".ct-activity").slice(0, 10).show();
+            $("#loadMore").on("click", function (e) {
+                e.preventDefault();
+                $(".ct-activity:hidden").slice(0, 10).slideDown();
+                if ($(".ct-activity:hidden").length == 0) {
+                    $("#loadMore").text("No Activity").addClass("noContent");
+                }
+            });
+
+            $(".ct-activity2").slice(0, 10).show();
+            $("#loadMore2").on("click", function (e) {
+                e.preventDefault();
+                $(".ct-activity2:hidden").slice(0, 10).slideDown();
+                if ($(".ct-activity2:hidden").length == 0) {
+                    $("#loadMore2").text("No Activity").addClass("noContent");
+                }
+            });
+
+
+
+        })
+
+        $(window).on("popstate", function () {
+            var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");
+            $("a[href='" + anchor + "']").tab("show");
+        });
+
+    </script>
+}
+

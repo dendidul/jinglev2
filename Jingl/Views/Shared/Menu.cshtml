@@ -1,0 +1,41 @@
+﻿@{
+    List<Jingl.General.Model.Admin.ViewModel.RoleMenuViewModel> MenuLvl1 = ViewBag.Menu;
+    List<Jingl.General.Model.Admin.ViewModel.RoleMenuViewModel> MenuLvl2 = ViewBag.Menu;
+    List<Jingl.General.Model.Admin.ViewModel.RoleMenuViewModel> MenuLvl3 = ViewBag.Menu;
+}
+
+<ul class="nav">
+    @foreach (var mp in MenuLvl1.Where(p => p.ParentMenuId == 0 && p.Level == 1).OrderBy(p => p.Sequence))
+    {
+
+        <li class="has-sub">
+            <a href="@mp.Link">
+                <b class="caret"></b>
+                <i class="ion-ios-pulse"></i>
+                 <span>@mp.MenuNm</span>
+
+				 
+            </a>
+            <ul class="sub-menu">
+
+                @foreach (var child in MenuLvl2.Where(model => model.ParentMenuId != 0 && model.Level == 2))
+                {
+                    if (mp.MenuId == child.ParentMenuId)
+                    {
+                        <li>
+                            <a href="@child.Link">@child.MenuNm </a>
+                        </li>
+                    }
+                }
+            </ul>
+
+        </li>
+    }
+    
+   
+</ul>
+
+
+
+
+

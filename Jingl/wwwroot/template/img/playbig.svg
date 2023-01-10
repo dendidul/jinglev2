@@ -1,0 +1,20 @@
+<svg id="Group_163" data-name="Group 163" xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: rgba(29,27,27,0.98);
+      }
+
+      .cls-2 {
+        fill: rgba(15,14,14,0.98);
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <path id="Path_112" data-name="Path 112" class="cls-1" d="M20,0A20,20,0,1,1,0,20,20,20,0,0,1,20,0Z"/>
+  <path id="Path_107" data-name="Path 107" class="cls-2" d="M195.11,134.731l-25.424-15.3v20.406l13.365,8.428A20.045,20.045,0,0,0,195.11,134.731Z" transform="translate(-155.767 -109.634)"/>
+  <path id="Path_108" data-name="Path 108" class="cls-3" d="M186.585,129.634l-16.9,10.2V119.431Z" transform="translate(-155.767 -109.634)"/>
+</svg>

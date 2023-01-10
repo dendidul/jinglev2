@@ -1,0 +1,804 @@
+﻿@model Jingl.General.Model.User.ViewModel.HomeViewModel
+@{
+    ViewData["Title"] = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@inject CookieManager.ICookie _httpCookie
+
+@await Html.PartialAsync("~/Views/Shared/_headertop.cshtml")
+@await Html.PartialAsync("~/Views/Shared/_header.cshtml")
+
+<div id="box-index">
+    <div class="owl-carousel owl-index owl-theme p-t-10" style="background: #fff;">
+        @{
+            foreach (var i in Model.ListBanner)
+            {
+                <div class="item">
+                    <a href="@i.Link">
+                        <img class="d-block w-100" src="@i.Img" alt="First slide">
+                    </a>
+                </div>
+            }
+        }
+
+        @*<div class="item">
+                <a asp-controller="Home" asp-action="SamsungPrize">
+                    <img class="d-block w-100" src="~/template/img/join.png" alt="First slide">
+                </a>
+            </div>
+            <div class="item">
+                <a asp-controller="Home" asp-action="TipsVideo">
+                    <img class="d-block w-100" src="~/template/img/tips.png" alt="Second slide">
+                </a>
+            </div>
+            <div class="item">
+                <a asp-controller="Home" asp-action="BenefitLevel">
+                    <img class="d-block w-100" src="~/template/img/benefit.png" alt="Third slide">
+                </a>
+            </div>*@
+    </div>
+    <div class="container" style=" background: #fff;">
+        <div class="row">
+            <div class="col-12">
+
+
+                <!-- begin #search-bar -->
+                @*<div class="top-search-bar">
+                        <div class="form-group search-bar brdr-blue has-search">
+                            <span class="fa fa-search form-control-feedback"></span>
+                            <input type="text" class="form-control" placeholder="Search" id="Search">
+                        </div>
+                        <div class="box-search">
+
+                            <div class="filtertab">
+                                <ul class="list-filtertab">
+                                    <li class="divider-btm mt10">
+                                        <a href="#" class="grey-clr "><i class="fa fa-search mr10 "></i> Lipstick Mac Retro Max</a>
+                                    </li>
+                                    <li class="divider-btm mt10">
+                                        <a href="#" class="grey-clr"><i class="fa fa-search mr10 "></i> Travel ke Bangkok</a>
+                                    </li>
+                                    <li class="mt10">
+                                        <a href="#" class="grey-clr"><i class="fa fa-search mr10 "></i> Museum Macan</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="mt50">
+                                <ul class="nav nav-tab-menu-filter nav-pills">
+                                    <li class="nav-items wd-33">
+                                        <a href="#" data-toggle="tab" class="nav-link pd5 ">
+                                            <span class="">Reset</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-items wd-33">
+                                        <a href="#" data-toggle="tab" class="nav-link pd5 active">
+                                            <span class="">Filter</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-items wd-33">
+                                        <a href="#" data-toggle="tab" class="nav-link pd5">
+                                            <span class="">Cancel</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>*@
+                <!-- end #search-bar -->
+                <!-- begin #caraosel -->
+                @*<div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+                        <!--Indicators-->
+                        @*<ol class="carousel-indicators">
+                            <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-2" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-2" data-slide-to="2"></li>
+                            <li data-target="#carousel-example-2" data-slide-to="3"></li>
+                        </ol>
+                        <!--/.Indicators-->
+                        <!--Slides-->
+                        <div class="carousel-inner-home" role="listbox">
+                            <div class="carousel-item active">
+                                <div class="view">
+                                    <a asp-controller="Home" asp-action="SamsungPrize">
+                                        <img class="d-block w-100" src="~/template/img/join.png" alt="First slide">
+                                    </a>
+                                    <div class="mask rgba-black-light"></div>
+                                </div>
+                                <div class="carousel-caption">
+                                    <!--<h3 class="h3-responsive" style="color: #fff;">Light mask</h3>
+                                <p>First text</p>-->
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <!--Mask color-->
+                                <div class="view">
+                                    <a asp-controller="Home" asp-action="TipsVideo">
+                                        <img class="d-block w-100" src="~/template/img/tips.png" alt="Second slide">
+                                    </a>
+
+                                    <div class="mask rgba-black-strong"></div>
+                                </div>
+                                <div class="carousel-caption">
+                                    <!--<h3 class="h3-responsive" style="color: #fff;">Strong mask</h3>
+                                <p>Secondary text</p>-->
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <!--Mask color-->
+                                <div class="view">
+                                    <a asp-controller="Home" asp-action="BenefitLevel">
+                                        <img class="d-block w-100" src="~/template/img/benefit.png" alt="Third slide">
+                                    </a>
+                                    <div class="mask rgba-black-slight"></div>
+                                </div>
+                                <div class="carousel-caption" style="color: #fff;">
+                                    <!--<h3 class="h3-responsive">Slight mask</h3>
+                                <p>Third text</p>-->
+                                </div>
+                            </div>
+                            <!--<div class="carousel-item">
+
+                                <div class="view">
+                                    <img class="d-block w-100" src="/template/img/slider.png" alt="Forth slide">
+                                    <div class="mask rgba-black-slight"></div>
+                                </div>
+                                <div class="carousel-caption" style="color: #fff;">
+                                    <h3 class="h3-responsive">Slight mask</h3>
+                                    <p>Third text</p>
+                                </div>
+                            </div>
+                        </div>-->
+                            <!--/.Slides-->
+                            <!--Controls-->
+                            <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                            <!--/.Controls-->
+                        </div>
+
+
+
+                        @*<div class="card-content-home mt20">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <ul class="nav">
+                                            <li class="nav-item">
+                                                <a class="nav-link active fs-14" href="#">Trending</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6 nav-left">
+                                        <ul class="nav fl-right">
+                                            <li class="nav-item ">
+                                                <a class="nav-link fs-14" href="#">View All</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row trending-card">
+                                    <div class="col-6">
+                                        <div class="card-video-home">
+                                            <div class="header-video mb-2">
+                                                <a asp-controller="Talent" asp-action="TalentDetail"><img class="rounded" src="~/template/img/face.png" alt="Alternate Text" /></a>
+                                                <div class="ml-2">
+                                                    <span>username</span>
+                                                    <div>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="embed-responsive embed-responsive-4by3 card-img-top">
+                                                <div style="position:relative; padding-bottom:100%; overflow:hidden;"><iframe src="https://cdn.jwplayer.com/players/xrA6ly1F-ThqvFqX8.html" width="100%" height="100%" frameborder="0" scrolling="auto" allowfullscreen style="position:absolute;"></iframe></div>
+                                            </div>
+                                            <div class="card-body-video">
+                                                <h6 class="title-video">How to Travel Safely</h6>
+                                                <p class="card-text">How to Travel Safely</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="card-video-home">
+                                            <div class="header-video mb-2">
+                                                <img class="rounded" src="~/template/img/face.png" alt="Alternate Text" />
+                                                <div class="ml-2">
+                                                    <span>username</span>
+                                                    <div>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="embed-responsive embed-responsive-4by3 card-img-top">
+                                                <div style="position:relative; padding-bottom:100%; overflow:hidden;"><iframe src="https://cdn.jwplayer.com/players/ofmFv1l3-ThqvFqX8.html" width="100%" height="100%" frameborder="0" scrolling="auto" allowfullscreen style="position:absolute;"></iframe></div>
+                                            </div>
+                                            <div class="card-body-video">
+                                                <h6 class="title-video">How to Travel Safely</h6>
+                                                <p class="card-text">How to Travel Safely</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="card-video-home">
+                                            <div class="header-video mb-2">
+                                                <img class="rounded" src="~/template/img/face.png" alt="Alternate Text" />
+                                                <div class="ml-2">
+                                                    <span>username</span>
+                                                    <div>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="embed-responsive embed-responsive-4by3 card-img-top">
+                                                <div style="position:relative; padding-bottom:100%; overflow:hidden;"><iframe src="https://cdn.jwplayer.com/players/mtBhIgNU-ThqvFqX8.html" width="100%" height="100%" frameborder="0" scrolling="auto" allowfullscreen style="position:absolute;"></iframe></div>
+                                            </div>
+                                            <div class="card-body-video">
+                                                <h6 class="title-video">How to Travel Safely</h6>
+                                                <p class="card-text">How to Travel Safely</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="card-video-home">
+                                            <div class="header-video mb-2">
+                                                <img class="rounded" src="~/template/img/face.png" alt="Alternate Text" />
+                                                <div class="ml-2">
+                                                    <span>username</span>
+                                                    <div>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="embed-responsive embed-responsive-4by3 card-img-top">
+                                                <div style="position:relative; padding-bottom:100%; overflow:hidden;"><iframe src="https://cdn.jwplayer.com/players/B9nQl3L5-ThqvFqX8.html" width="100%" height="100%" frameborder="0" scrolling="auto" allowfullscreen style="position:absolute;"></iframe></div>
+                                            </div>
+                                            <div class="card-body-video">
+                                                <h6 class="title-video">How to Travel Safely</h6>
+                                                <p class="card-text">How to Travel Safely</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+
+            </div>
+        </div>
+        <div class="row mt20 p-b-20  align-items-center">
+
+            @{
+
+
+                int y = 0;
+                int z = 0;
+                int k = 0;
+                int maxloop = 5;
+
+                foreach (var talent in Model.ListTalentModel.Where(x => x.Id != 35 && x.Status == 3).Take(15).ToList())
+                {
+
+                    //if ((talent.sequence % 4) == 0 && talent.sequence != 0)
+                    if (talent.sequence == 4)
+                    {
+                        <div class="col-12">
+                            <h3>Best Video</h3>
+                        </div>
+
+                        int index = 1;
+                        foreach (var video in Model.ListBestVideo.ToList())
+                        {
+                            //if (z == 0)
+                            //{
+
+                            //    z++;
+                            //}
+
+                            //else
+                            if (maxloop < index)
+                            {
+                                break;
+                            }
+                            else
+                            {
+
+                                if (Model.ListBestVideo.Count() <= z)
+                                {
+
+                                }
+                                else
+                                {
+
+                                    <div class="col-6 col-lg-6 align-self-center">
+
+                                        <div class="exploredetail m-t-10 m-b-40">
+
+                                            <input type="hidden" class="FileVideoId" id="FileVideoId_@z" value="@video.FileId" />
+                                            <input type="hidden" class="LinkVideo" id="LinkVideo_@z" value="@video.Link" />
+                                            <input type="hidden" class="LinkPhoto" id="LinkPhoto_@z" value="@video.ProfImg" />
+                                            <input type="hidden" class="LinkName" id="LinkName_@z" value="@video.TalentNm" />
+                                            <input type="hidden" class="ViewCount" id="ViewCount_@z" value="@video.ViewsCount" />
+                                            <input type="hidden" class="TalentId" id="TalentId_@z" value="@video.TalentId" />
+                                            <div class="head">
+                                                <a href="@Url.Action("TalentDetail", "Talent", new { TalentId =@video.TalentId })">
+                                                    @{
+                                                        var temp = Model.ListBestVideo.Where(x => x.Sequence == video.Sequence).FirstOrDefault();
+                                                        var talentId = @video.TalentId;
+                                                        <img src="@temp.ProfImg" alt="Alternate Text" />
+                                                        <p>@video.TalentNm</p>
+                                                    }
+
+                                                </a>
+                                            </div>
+                                            <div class="video">
+                                                <div class="card-explore-top">
+
+                                                    <img class="thmnail" src="@Model.ListBestVideo.Where(x => x.Sequence == video.Sequence).FirstOrDefault().Thumbnails" width="100%" />
+                                                    <a href="#" class="explore-button " data-toggle="modal">
+                                                        <img src="~/template/img/iconplaywhite.png" alt="Alternate Text" />
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    z++;
+                                }
+                                index++;
+                            }
+
+
+                        }
+
+
+
+
+                        y++;
+                    }
+
+                    //else if ((talent.sequence % 10) == 0 && talent.sequence != 0)
+                    else if (talent.sequence == 10)
+                    {
+                        <div class="col-12">
+                            <h3>Trending Video</h3>
+                        </div>
+                        int IndexTrending = 1;
+                        foreach (var MostWatch in Model.ListMostWatchVideo.ToList())
+                        {
+                            //if (k == 0)
+                            //{
+
+                            //    k++;
+                            //}
+
+                            if (maxloop < IndexTrending)
+                            {
+                                break;
+                            }
+                            else
+                            {
+
+                                if (Model.ListMostWatchVideo.Count() <= k)
+                                {
+
+                                }
+                                else
+                                {
+
+                                    <div class="col-6 col-lg-6 align-self-center">
+
+                                        <div class="exploredetail m-t-10 m-b-40">
+                                            <input type="hidden" class="TrendingFileVideoId" id="TrendingFileVideoId_@k" value="@MostWatch.FileId" />
+                                            <input type="hidden" class="TrendingLinkVideo" id="TrendingLinkVideo_@k" value="@MostWatch.Link" />
+                                            <input type="hidden" class="TrendingLinkPhoto" id="TrendingLinkPhoto_@k" value="@MostWatch.ProfImg" />
+                                            <input type="hidden" class="TrendingLinkName" id="TrendingLinkName_@k" value="@MostWatch.TalentNm" />
+                                            <input type="hidden" class="TrendingViewCount" id="TrendingViewCount_@k" value="@MostWatch.ViewsCount" />
+                                            <input type="hidden" class="TrendingTalentId" id="TrendingTalentId_@k" value="@MostWatch.TalentId" />
+                                            <div class="head">
+                                                <a href="@Url.Action("TalentDetail", "Talent", new { TalentId =MostWatch.TalentId })">
+                                                    @{
+                                                        var temp = Model.ListMostWatchVideo.Where(x => x.Sequence == MostWatch.Sequence).FirstOrDefault();
+                                                        var talentId = MostWatch.TalentId;
+                                                        <img src="@temp.ProfImg" alt="Alternate Text" />
+                                                        <p>@MostWatch.TalentNm</p>
+                                                    }
+
+                                                </a>
+                                            </div>
+                                            <div class="video">
+                                                <div class="card-explore-top">
+
+                                                    <img class="thmnail" src="@Model.ListMostWatchVideo.Where(x => x.Sequence == MostWatch.Sequence).FirstOrDefault().Thumbnails" width="100%" />
+                                                    <a href="#" class="Talentexplore-button " data-toggle="modal">
+                                                        <img src="~/template/img/iconplaywhite.png" alt="Alternate Text" />
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    k++;
+                                }
+                                IndexTrending++;
+                            }
+                        }
+                    }
+
+
+
+
+                    <div class="col-6 col-lg-6 align-self-center">
+                        <a href="@Url.Action("TalentDetail","Talent",new {TalentId = talent.Id })">
+                            <div class="card-talent">
+                                <img src="@talent.LinkImg" alt="Alternate Text" />
+
+                            </div>
+                            <div class="text-talent">
+                                <h4>@talent.TalentNm</h4>
+                                <span class="span-talent">
+                                    <span>
+                                        IDR
+                                        <label class="amountlines">@talent.PriceAmount</label>
+                                    </span>
+                                    <span class="profesi">- @talent.Profesion</span>
+                                </span>
+                            </div>
+                        </a>
+                    </div>
+                }
+
+
+
+            }
+
+            @*<div class="col-12">
+                    <div class="">
+                        <a class="btn btn-blue" href="@Url.Action("OurTalent","Talent",new {CategoryId = 0 })">
+                            <span>Lihat semua Talent</span>
+                        </a>
+                    </div>
+                </div>*@
+            @*<div class="modal fade" id="VideoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-full" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+
+                        </div>
+                            <div class="modal-body" style="padding: 0 !important">
+                                <button type="button" class="close modalClose" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <div class="embed-responsive embed-responsive-4by3 card-modal-top">
+                                    <video class="embed-responsive-item" controls id="videoplayer">
+                                        <source src="~/template/img/P6090053.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+    <script type="text/javascript">
+        function preventBack(cookie) { window.history.forward(); }
+        $(document).ready(function () {
+
+            history.pushState(null, null, location.href);
+            window.onpopstate = function () {
+                history.go(1);
+
+            };
+
+         
+
+            //var referrer = document.referrer;
+
+            var TalentIndex = 0;
+
+            $('#Hire').click(function ()
+            {
+                var IdName = '#talentId_' + TalentIndex + '';
+                var TalentValue = $(IdName).val();
+                window.location.href = "../Booking/Hire?TalentId=" + TalentValue;
+            });
+
+            $('#love').click(function (e) {
+
+                e.preventDefault();
+                var OldTalentIndex = TalentIndex;
+                TalentIndex = TalentIndex + 1;
+                var IdName = '#talentId_' + OldTalentIndex + '';
+
+                var TalentValue = $(IdName).val();
+
+                if (TalentValue == null)
+                {
+                    $.gritter.add({
+                        title: 'Warning!',
+                        text: 'Sorry you dont pick any talent to your Wishlist !'
+                    });
+
+                }
+
+                else
+                {
+
+                    var url = "@Url.Action("AddToWishlist", "Booking")";
+                    var jsonRequest = {
+                        TalentId: TalentValue
+                        };
+
+                $.ajax({
+                    url: url,
+                    //cache: false,
+                    //traditional: true,
+                    type: "POST",
+                    data: { model: jsonRequest},
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+                    beforeSend:
+                        function () {
+                            //$("#spinner").show();
+                        },
+                    success: function (data) {
+
+                        if (data == "OK") {
+                            $.gritter.add({
+                                title: 'Success!',
+                                text: 'Successfully Add To Your Wishlist !'
+                            });
+
+
+                        }
+
+                        else {
+
+                        }
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                    });
+                }
+
+
+            });
+
+            $(".explore-button").click(function (e) {
+
+                e.preventDefault();
+                $("#VideoModal").modal('show');
+                var div_id = $(this).parent().parent().parent().find('.LinkVideo').attr('id');;
+                var div_profil = $(this).parent().parent().parent().find('.LinkPhoto').attr('id');
+                var div_namatalent = $(this).parent().parent().parent().find('.LinkName').attr('id');
+                var div_FileVideoid = $(this).parent().parent().parent().find('.FileVideoId').attr('id');
+                var div_ViewCountid = $(this).parent().parent().parent().find('.ViewCount').attr('id');
+                var div_Talentid = $(this).parent().parent().parent().find('.TalentId').attr('id');
+
+
+                //alert(div_id);
+                var $source = $('#videoplayer');
+                var $profil = $('#modalImg');
+
+                var sources = $("#" + div_id + "").val();
+                var profil = $("#" + div_profil + "").val();
+                var nametalent = $("#" + div_namatalent + "").val();
+                var VideoId = $("#" + div_FileVideoid + "").val();
+                var ViewCount = $("#" + div_ViewCountid + "").val();
+                var TalentId = $("#" + div_Talentid + "").val();
+
+                var jsonRequest = {
+                    UserId: 0,
+                    FileId: VideoId
+                };
+
+                var UrlInsert = "@Url.Action("InputFileWatched", "Files")";
+
+                $.ajax({
+                    url: UrlInsert,
+                    //cache: false,
+                    //traditional: true,
+                    type: "POST",
+                    //data: JSON.stringify({ request: jsonRequest }),
+                    data: { model: jsonRequest },
+                    //dataType: "json",
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+                    beforeSend: function () {
+                        //$("#spinner").show();
+                        $(".loadingSign").show();
+                    },
+                    complete: function () {
+                        $(".loadingSign").hide();
+                    },
+                    success: function (data) {
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+
+                $source[0].src = sources;
+                $profil[0].src = profil;
+
+                var Namatalent = nametalent;
+                $("#views").text(ViewCount);
+                $("#modalName").text(Namatalent);
+                if (TalentId != 0) {
+                    $("#TalentLink").attr('href', '../Talent/TalentDetail?TalentId=' + TalentId);
+
+                }
+
+              //  $source.parent()[0].load();
+                $source[0].play();
+               // $source.parent().load();
+                $(".modalClose").click(function (e) {
+                    $source[0].pause();
+                });
+
+                $(".modal").on("shown.bs.modal", function () { // any time a modal is shown
+                    var urlReplace = "#" + $(this).attr('id'); // make the hash the id of the modal shown
+                    history.pushState(null, null, urlReplace); // push state that hash into the url
+                });
+
+                // If a pushstate has previously happened and the back button is clicked, hide any modals.
+                $(window).on('popstate', function () {
+                    $(".modal").modal('hide');
+                    $source[0].pause();
+                });
+
+
+            });
+
+
+
+                 $(".Talentexplore-button").click(function (e) {
+
+                e.preventDefault();
+                $("#VideoModal").modal('show');
+                var div_id = $(this).parent().parent().parent().find('.TrendingLinkVideo').attr('id');;
+                     var div_profil = $(this).parent().parent().parent().find('.TrendingLinkPhoto').attr('id');
+                     var div_namatalent = $(this).parent().parent().parent().find('.TrendingLinkName').attr('id');
+                     var div_FileVideoid = $(this).parent().parent().parent().find('.TrendingFileVideoId').attr('id');
+                     var div_ViewCountid = $(this).parent().parent().parent().find('.TrendingViewCount').attr('id');
+                     var div_Talentid = $(this).parent().parent().parent().find('.TrendingTalentId').attr('id');
+                //alert(div_id);
+                var $source = $('#videoplayer');
+                var $profil = $('#modalImg');
+
+                var sources = $("#" + div_id + "").val();
+                var profil = $("#" + div_profil + "").val();
+                var nametalent = $("#" + div_namatalent + "").val();
+                     var VideoId = $("#" + div_FileVideoid + "").val();
+                     var ViewCount = $("#" + div_ViewCountid + "").val();
+                     var TalentId = $("#" + div_Talentid + "").val();
+                var jsonRequest = {
+                    UserId: 0,
+                    FileId: VideoId
+                };
+
+                var UrlInsert = "@Url.Action("InputFileWatched", "Files")";
+
+                $.ajax({
+                    url: UrlInsert,
+                    //cache: false,
+                    //traditional: true,
+                    type: "POST",
+                    //data: JSON.stringify({ request: jsonRequest }),
+                    data: { model: jsonRequest },
+                    //dataType: "json",
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+                    beforeSend: function () {
+                        //$("#spinner").show();
+                        $(".loadingSign").show();
+                    },
+                    complete: function () {
+                        $(".loadingSign").hide();
+                    },
+                    success: function (data) {
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+
+                $source[0].src = sources;
+                $profil[0].src = profil;
+
+                var Namatalent = nametalent;
+
+                     $("#views").text(ViewCount);
+                     $("#modalName").text(Namatalent);
+                     if (TalentId != 0) {
+                         $("#TalentLink").attr('href', '../Talent/TalentDetail?TalentId=' + TalentId);
+
+                     }
+
+              //  $source.parent()[0].load();
+                $source[0].play();
+               // $source.parent().load();
+                     $(".modalClose").click(function (e) {
+                         $source[0].pause();
+                     });
+
+                     $(".modal").on("shown.bs.modal", function () { // any time a modal is shown
+                         var urlReplace = "#" + $(this).attr('id'); // make the hash the id of the modal shown
+                         history.pushState(null, null, urlReplace); // push state that hash into the url
+                     });
+
+                     // If a pushstate has previously happened and the back button is clicked, hide any modals.
+                     $(window).on('popstate', function () {
+                         $(".modal").modal('hide');
+                         $source[0].pause();
+                     });
+
+            });
+
+
+
+            $('#nope').click(function (e) {
+
+                e.preventDefault();
+                TalentIndex = TalentIndex + 1;
+            });
+
+            $('.owl-index').owlCarousel({
+                stagePadding: 50,
+                center: true,
+                loop: true,
+                margin: 10,
+                nav: false,
+                autoplay: true,
+                autoplayTimeout: 4000,
+                autoplayHoverPause: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    }
+                }
+            })
+
+        });
+
+    </script>
+
+}

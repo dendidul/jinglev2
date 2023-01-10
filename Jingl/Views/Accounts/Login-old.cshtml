@@ -1,0 +1,181 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Temp_Layout.cshtml";
+}
+<div class="box-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="Loginuser">
+                    <div class="header-login">
+                        <img src="~/template/img/Jing_e 1.png" alt="Alternate Text" class="w-50" />
+                    </div>
+                    <div class="box-login">
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { Class = "", Id = "frm_Login" }))
+                        {
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="UserName" aria-describedby="emailHelp" placeholder="Enter email or username">
+                            </div>
+                            <div class="form-group">
+
+                                <input type="password" class="form-control" id="Password" placeholder="Password">
+                            </div>
+
+                            <button type="submit" class="btn btn-login btn-primary btn-block mt30">Submit</button>
+
+                            <a href="#" data-toggle="modal" data-target="#forgotpass" class="text-center p-t-10" style="display:table; margin:auto; color:rgba(0,0,0,0.8);">Lupa Password ?</a>
+                        }
+                    </div>
+
+                    <div class="modal fade" id="forgotpass" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                @*<div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalCenterTitle">Enter Your Email Address</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>*@
+                                <div class="modal-body" style="padding: 35px;">
+                                    <h3 class="text-center">Lupa Password</h3>
+                                    <p class="text-center m-b-20">Kami akan mengirim email untuk mereset password anda</p>
+                                    <form>
+                                        <div class="form-group">
+                                            <input  type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Enter email">
+                                            <input type="hidden" name="name" id="isValidEmail" />
+                                            <span id="messageEmail"></span>
+                                        </div>
+
+                                        <button type="button" onclick="checkAvailEmailability()" class="btn btn-primary btn-login" style="margin: auto;display: table; padding: 8px 25px;">Submit</button>
+                                    </form>
+                                   
+                                </div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+    <script>
+        function CheckValidUser() {
+
+        }
+
+        $(document).ready(function () {
+            App.init();
+
+            $('#frm_Login').submit(function (e) {
+                e.preventDefault();
+                var jsonRequest = {
+                    UserName: $("#UserName").val(),
+                    Password: $("#Password").val(),
+                };
+
+                var url = '@Url.Action("Login","AdmAccount")';
+
+              
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: {model:jsonRequest},
+                    success: function (data) {
+
+                        if (data.user == "Valid") {
+                        
+                            $.gritter.add({
+                                title: 'Success !',
+                                text: 'Success !'
+                            });
+                         
+                            if (data.roleId ==1)
+                            {
+                                 window.location.href = "@Url.Action("DashboardDataStudio", "AdmHome")";
+                            }
+                            else
+                            {
+                                 window.location.href = "@Url.Action("Index", "Home")";
+                            }
+
+                          
+                        }
+                        else if (data.user == "NotValid") {
+
+                            $.gritter.add({
+                                title: 'Not Valid !',
+                                text: 'User is not Valid !'
+                            });
+
+                        }
+                        else {
+                            return false;
+                        }
+
+                    },
+                    error: function (data) {
+                        alert("no");
+                    }
+                });
+
+            });
+
+
+
+        });
+
+        function checkAvailEmailability() {
+            var email = $("#Email").val();
+         
+            var url = '@Url.Action("SendEmailForgetPassword", "Account")';
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    email: email
+                },
+                beforeSend: function () {
+                    //$("#spinner").show();
+                    $(".loadingSign").show();
+                },
+                complete: function () {
+                    $(".loadingSign").hide();
+                },
+                success: function (data) {
+                    var message = $("#messageEmail");
+                    if (data == true) {
+                       
+                        //message.css("color", "green");
+                        //message.html("Email is available");
+                        //$("#isValidEmail").val(1);
+                          swal({
+                                title: "Success",
+                                text: "Email Sudah Terkirim",
+                                icon: "success",
+                          }).then(function () {
+                              $("#forgotpass").modal('hide');
+                                @*window.location.href = "@Url.Action("Profile", "Account")";*@
+                            });
+                    } else {
+                        //Email not available.
+                        message.css("color", "red");
+                        message.html("Email is NOT available");
+                        $("#isValidEmail").val(0);
+                    }
+                }
+            })
+        }
+</script>
+
+}
+
+
+
+
+
+

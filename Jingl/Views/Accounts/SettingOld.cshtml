@@ -1,0 +1,215 @@
+﻿@model Jingl.General.Model.User.ViewModel.ProfileViewModel
+
+@{
+    ViewData["Title"] = "Setting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@inject CookieManager.ICookie _httpCookie
+    <div id="myHeader">
+        <div class="logo-header">
+            <div class="coontainer-fluid">
+                <div class="col-md-12">
+                    <ul class="nav">
+                        <li class="nav-item text-center pull-left">
+                            <a class="nav-link" href="javascript:history.back()">
+                                <div class="icon-img">
+                                    <img src="/template/img/ic-back-white.png" style="width:42%;margin-left:-25%;margin-top:-8%" alt="" />
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item justify-content-center mr-center">
+                            <img src="~/template/img/Jing_e 1.png" style="margin-left:-84%" alt="Alternate Text" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" style="background: #fff">
+        <div class="row">
+            <div class="col-12">
+                <div class="card-content-home panel-body -mt20">
+                    <ul class="media-list media-list-with-divider">
+                        <li class=""></li>
+
+
+                        <li class="media media-sm" style="border-top: none;">
+                            <div class="container">
+                                <ul class="nav flex-column -ml10">
+                                    <h5 class="blue-clr ml15 mt15">Pengaturan Akun</h5>
+                                    <li class="nav-item ct-span ">
+                                        <a class="nav-link list-menu-activity wd-95" href="@Url.Action("BestTalent", "Talent")">
+                                            <span><b>Best Talent</b></span><br>
+                                            Intip Talent Terbaik Minggu ini
+                                        </a>
+                                        <span class="mr10"> > </span>
+                                    </li>
+                                  
+
+                                    @{
+                                        if (Model.UserModel.RoleId == 3)
+                                        {
+                                            <li class="nav-item ct-span ">
+                                                <a class="nav-link list-menu-activity wd-95" href="@Url.Action("EditProfile", "Account", new { UserId = Model.UserModel.Id })">
+                                                    <span><b>Edit Profile</b></span><br>
+                                                    Edit profilmu sebagai talent
+                                                </a>
+                                                <span class="mr10"> > </span>
+                                            </li>
+
+                                        }
+                                        else
+                                        {
+                                            <li class="nav-item ct-span">
+                                                <a class="nav-link list-menu-activity wd-95" style="color:gray" href="@Url.Action("EditProfile", "Account", new { UserId = Model.UserModel.Id })">
+                                                    <span><b>Edit Profile</b></span><br>
+                                                    Update your skill regularly
+                                                </a>
+                                            </li>
+                                        }
+
+                                    }
+
+
+                                    @*<span class="mr10"> > </span>*@
+
+                             
+                                    @{
+                                        if (Model.UserModel.RoleId == 3)
+                                        {
+                                            <li class="nav-item ct-span ">
+                                                <a class="nav-link list-menu-activity wd-95" href="@Url.Action("Billing", "Account", new { id = Model.UserModel.Id })">
+                                                    <span><b>Informasi Rekening</b></span><br>
+                                                    Detail Informasi Rekening
+                                                </a>
+                                                <span class="mr10"> > </span>
+                                            </li>
+                                           
+                                        }
+
+                                    }
+
+
+
+                                    @{
+                                        if (Model.UserModel.RoleId == 3)
+                                        {
+                                            <li class="nav-item ct-span disabled">
+                                                <a class="nav-link list-menu-activity wd-95" href="#">
+                                                    <span><b>Daftar sebagai Talent</b></span><br>
+                                                    Satu langkah mudah untuk jadi talent
+                                                </a>
+                                                <span class="mr10"> > </span>
+                                            </li>
+                                        
+                                        }
+                                        else
+                                        {
+                                            <li class="nav-item ct-span ">
+                                                <a class="nav-link list-menu-activity wd-95" href="@Url.Action("RegisterTalent", "Talent", new { UserId = Model.UserModel.Id })">
+                                                    <span><b>Daftar sebagai Talent</b></span><br>
+                                                    Satu langkah mudah untuk jadi Talent
+                                                </a>
+                                                <span class="mr10"> > </span>
+                                            </li>
+                                        }
+                                    }
+                                    @*<li class="br-bt"></li>*@
+                                    <h5 class="blue-clr ml15 mt15">Notifikasi</h5>
+                                    <li class="nav-item ct-span ">
+                                        <div class="widget-todolist-item">
+                                            <div class="widget-todolist-content wd-95">
+                                                <span><b>Aktifitas Terbaru</b></span><br>
+                                                <span style="padding-bottom: .5rem;">Izinkan pengiriman notifikasi aktifitas terbaru</span>
+                                                <span>
+                                                    <input type="hidden" id="PushEndpoint" name="PushEndpoint" />
+                                                    <input type="hidden" id="PushP256DH" name="PushP256DH" />
+                                                    <input type="hidden" id="PushAuth" name="PushAuth" />
+                                                </span>
+                                            </div>
+                                            <div class="widget-todolist-input">
+                                                <div class="checkbox checkbox-css">
+                                                    <input type="checkbox" id="ChkAllowNotif" />
+                                                    <label for="ChkAllowNotif" class="p-l-15"></label>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                      
+                                   
+
+
+                                    <h5 class="blue-clr ml15 mt15">About</h5>
+                                    <li class="nav-item ct-span ">
+                                        <a class="nav-link list-menu-activity wd-95" href="#">
+                                            <span><b>App Version</b></span><br>
+                                            @Model.AppVersion
+                                        </a>
+                                    </li>
+                                   
+                                    @*<li class="nav-item ct-span ">
+            <a class="nav-link list-menu-activity wd-95" href="#">
+                <span><b>Rate Us</b></span><br>
+                Kindly rate us in your play store or apple store
+            </a>
+            <span class="mr10"> > </span>
+        </li>*@
+                                    @*<li class="br-bt"></li>*@
+                                    <h5 class="blue-clr ml15 mt15">Other</h5>
+                                    @*<li class="nav-item ct-span ">
+            <a class="nav-link list-menu-activity wd-95" href="#">
+                <span><b>Privacy</b></span><br>
+                Be sure to read our privacy policy
+            </a>
+            <span class="mr10"> > </span>
+        </li>
+        <li class="br-bt"></li>
+        <li class="nav-item ct-span ">
+            <a class="nav-link list-menu-activity wd-95" href="#">
+                <span><b>Terms and Conditions</b></span><br>
+                Opens our terms and conditions
+            </a>
+            <span class="mr10"> > </span>
+        </li>*@
+                                    @*<li class="br-bt"></li>*@
+                                    <li class="nav-item ct-span ">
+                                        <a class="nav-link list-menu-activity wd-95" href="@Url.Action("Support","Account")">
+                                            <span><b>Bantuan</b></span><br>
+                                            Ada Masalah ? Yuk Tanya CS Kami
+                                        </a>
+                                        <span class="mr10"> > </span>
+                                    </li>
+
+                                 
+
+                                    <li class="nav-item ct-span ">
+                                        <a class="nav-link list-menu-activity wd-95" href="@Url.Action("TermConds","Account")">
+                                            <span><b>Terms & Conditions</b></span><br>
+
+                                        </a>
+                                        <span class="mr10"> > </span>
+                                    </li>
+
+                                 
+                                    <li class="nav-item ct-span ">
+                                        <a class="nav-link list-menu-activity wd-95" href="@Url.Action("RefundPolicy","Account")">
+                                            <span><b>Kebijakan Pengembalian Dana</b></span><br>
+                                        </a>
+                                        <span class="mr10"> > </span>
+                                    </li>
+
+                                  
+                                    <li class="nav-item ml15 mt30">
+                                        <a href="@Url.Action("LogOut","Account")"><b class="blue-clr">Logout</b></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+ 

@@ -1,0 +1,103 @@
+﻿@model IEnumerable<Jingl.General.Model.User.ViewModel.TalentCategoryViewModel>
+@{
+    ViewData["Title"] = "Discover";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*@await Html.PartialAsync("_header")*@
+
+
+<div class="box-white">
+    <div class="container" style="padding: 0 !important;">
+        <div class="row" style="padding: 0 !important;">
+            <div class="col-12">
+                <div class="header-menu p-t-30">
+                    <ul class="nav">
+                        <li class="nav-item text-center pull-left">
+                            <a class="nav-link " asp-controller="Account" asp-action="Profile">
+                                <div class="icon-img mb4">
+                                    <img class="icon-menu" src="/template/img/ic-back-blue.png" alt="" />
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item justify-content-center mr-center">
+                            <h5 class="nav-link -ml54">Favorite Saya</h5>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- begin #search-bar -->
+                <div class="top-search-bar">
+                    <div class="form-group search-bar brdr-blue has-search">
+                        <span class="fa fa-search form-control-feedback"></span>
+                        <input type="text" class="form-control" placeholder="Search" id="Search">
+                    </div>
+                    <div class="box-search">
+
+                        <div class="filtertab">
+                            <ul class="list-filtertab">
+                                <li class="divider-btm mt10">
+                                    <a href="#" class="grey-clr "><i class="fa fa-search mr10 "></i> Lipstick Mac Retro Max</a>
+                                </li>
+                                <li class="divider-btm mt10">
+                                    <a href="#" class="grey-clr"><i class="fa fa-search mr10 "></i> Travel ke Bangkok</a>
+                                </li>
+                                <li class="mt10">
+                                    <a href="#" class="grey-clr"><i class="fa fa-search mr10 "></i> Museum Macan</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt50">
+                            <ul class="nav nav-tab-menu-filter nav-pills">
+                                <li class="nav-items wd-33">
+                                    <a href="#" data-toggle="tab" class="nav-link pd5 ">
+                                        <span class="">Reset</span>
+                                    </a>
+                                </li>
+                                <li class="nav-items wd-33">
+                                    <a href="#" data-toggle="tab" class="nav-link pd5 active">
+                                        <span class="">Filter</span>
+                                    </a>
+                                </li>
+                                <li class="nav-items wd-33">
+                                    <a href="#" data-toggle="tab" class="nav-link pd5">
+                                        <span class="">Cancel</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- end #search-bar -->
+
+                <div class="container-fluid">
+                    <div class="row mt20">
+                        @{
+                            foreach (var data in Model)
+                            {
+                                <div class="col-6 col-lg-3">
+                                    @*<a href="/Talent/TalentDetail?TalentId=4">*@
+                                    <a href="@Url.Action("TalentDetail","Talent",new {TalentId = data.TalentId })">
+                                        <div class="card-talent">
+                                            <img src="@data.LinkImg" alt="Alternate Text" class="img-fluid">
+                                            <div class="text-talent">
+                                                <h4>@data.TalentNm</h4>
+                                                <span class="span-talent">
+                                                    <span>IDR @data.PriceAmount</span>
+                                                    <span class="profesi">- @data.Profesion</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                        }         
+                    </div>
+                </div>
+
+
+                <!--end begin button hire-->
+            </div>
+        </div>
+    </div>
+</div>
+

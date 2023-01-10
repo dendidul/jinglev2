@@ -1,0 +1,167 @@
+﻿@model Jingl.General.Model.Admin.ViewModel.DailyPaymentModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_Adm.cshtml";
+    int no = 1;
+}
+
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <div class="panel-heading-btn">
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+        </div>
+        <h4 class="panel-title">Daily Payment</h4>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-4">
+                <label>From</label>
+                @Html.TextBoxFor(model => model.BeginDate, new { Class = "form-control datepicker" })
+                @*<input type="text" id="FromDate" class="form-control datepicker" />*@
+            </div>
+            <div class="col-4">
+                <label>To</label>
+                @Html.TextBoxFor(model => model.EndDate, new { Class = "form-control datepicker" })
+                @*<input type="text" id="ToDate" class="form-control datepicker" />*@
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-6">
+                <button type="button" id="Export" class="btn btn-success"> Search</button>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+
+            <div class="col-12">
+                <table class="table table-striped table-bordered" id="data-table-buttons" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                No
+                            </th>
+                            <th>
+                                Order No
+                            </th>
+                            <th>
+                                Customer Code
+                            </th>
+                            <th>
+                                Customer Name
+                            </th>
+                            <th>
+                                Payment Date
+                            </th>
+                            <th>
+                                Payment Method
+                            </th>
+                            <th>
+                                Paid Amount
+
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.ListPaymentData)
+                        {
+                        <tr>
+                            <td>
+                                @no
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.OrderNo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.UserCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CustomerName)
+                            </td>
+
+                            <td>
+                                @{
+                                    @item.PaymentDate.ToString("dd-MM-yyyy")
+
+                                }
+
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PayMethod)
+                            </td>
+                            <td>
+                                <label class="amountlines">@item.TotalPay</label>
+                            </td>
+
+
+                        </tr>
+                            no++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            App.init();
+
+            //$("#BeginDate").val("");
+            //$("#EndDate").val("");
+
+            var handleDataTableButtons = function () {
+                "use strict";
+
+                if ($('#data-table-buttons').length !== 0) {
+                    $('#data-table-buttons').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [
+
+                            { extend: 'csv', className: 'btn-sm' },
+                            { extend: 'excel', className: 'btn-sm' }
+
+
+                        ],
+                        responsive: true,
+                        "scrollY": "600px",
+                        "scrollCollapse": true,
+                        "paging": false
+                    });
+                }
+            };
+
+            var TableManageButtons = function () {
+                "use strict";
+                return {
+                    //main function
+                    init: function () {
+                        handleDataTableButtons();
+                    }
+                };
+            }();
+
+            TableManageButtons.init();
+
+
+            $("#Export").click(function (e) {
+
+                //var BeginDate = ConvertStringToDate($("#BeginDate").val());
+                //var EndDate = ConvertStringToDate($("#EndDate").val());
+                var BeginDate = $("#BeginDate").val();
+                var EndDate = $("#EndDate").val();
+
+                window.location.href = "../AdmRptDailyPayment/SearchData?begindate=" + BeginDate + "&enddate=" + EndDate;
+
+            });
+
+        });
+    </script>
+}
+

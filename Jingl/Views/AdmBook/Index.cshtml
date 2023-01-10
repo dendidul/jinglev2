@@ -1,0 +1,314 @@
+﻿@*@model IEnumerable<Jingl.General.Model.Admin.Transaction.BookModel>*@
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_Adm.cshtml";
+}
+
+<h2>Bookings</h2>
+
+<style>
+    .button {
+        width: 60px;
+    }
+</style>
+
+<!-- end page-header -->
+<!-- begin panel -->
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <div class="panel-heading-btn">
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+        </div>
+        <h4 class="panel-title">Bookings</h4>
+    </div>
+    <div class="panel-body">
+        <p>
+            <a class="btn btn-pink" asp-action="Create">Create New</a>
+        </p>
+        <table class="table table-striped table-bordered" id="data-table-buttons" style="width:100%" data-order='[[ 0, "desc" ]]'>
+            <thead>
+                <tr>
+                    <th>
+                        Action
+                    </th>
+                    <th>
+                        Order No
+                    </th>
+                    <th>
+                        Order Date
+                    </th>
+                    <th>
+                        Periode
+                    </th>
+                    <th>
+                        Category
+                    </th>
+                    <th>
+                        Customer Name
+                    </th>
+                    <th>
+                        Talent Name
+                    </th>
+                    <th>
+                       DeadLine
+                    </th>
+                    <th>
+                        Complete Date
+                    </th>
+                    <th>
+                        Price per Video
+                    </th>
+                    <th>
+                        Payment Share
+                    </th>
+                    <th>
+                        Sales Price
+                    </th>
+                    <th>
+                       Voucher Code
+                    </th>
+                    <th>
+                        Total Pay
+                    </th>
+                    <th>
+                        Payment Method
+                    </th>
+                    <th>
+                       Status
+                    </th>
+
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @*@foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "AdmBook", new { id = item.Id }, new { @class = "btn btn-success m-b-5 button" })
+                            @Html.ActionLink("Details", "Details", "AdmBook", new { id = item.Id }, new { @class = "btn btn-warning m-b-5 button" })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger m-b-5 button" })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderNo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.CreatedDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Period)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CategoryNm)
+                        </td>
+                        <td>
+
+                            @Html.ActionLink(item.CustomerName, "Details", "AdmUser", new { id = item.BookedBy }, new { target = "_blank", title = "Click To Detail Customer Name", style = "text-decoration:none;" })
+                        </td>
+                        <td>
+
+                            @Html.ActionLink(item.TalentNm, "Details", "AdmTalent", new { id = item.TalentId }, new { target = "_blank", title = "Click To Detail Talent", style = "text-decoration:none;" })
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Deadline)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderCompleteDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PriceAmount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PaymentShare)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelitem => item.SalePrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VoucherCode)
+                        </td>
+                        <td>
+                            @{
+                                if (item.TotalPay.HasValue)
+                                {
+                                    <label class="amountlines">@Html.DisplayFor(modelItem => item.TotalPay)</label>
+                                }
+                            }
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PayMethod)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TransactionStatus)
+                        </td>
+                    </tr>
+                    }*@
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            App.init();
+            function formatDate(date) {
+                var d = new Date(date),
+                    month = '' + (d.getMonth() + 1),
+                    day = '' + d.getDate(),
+                    year = d.getFullYear();
+                if (month.length < 2)
+                    month = '0' + month;
+                if (day.length < 2)
+                    day = '0' + day;
+                return [day, month,year].join('-');
+            }
+            function formatDateTimeData(date) {
+                var d = new Date(date),
+                    month = '' + (d.getMonth() + 1),
+                    day = '' + d.getDate(),
+                    year = d.getFullYear(),
+                    hoursdata = d.getHours(),
+                    minutesdata = d.getMinutes();
+                if (month.length < 2)
+                    month = '0' + month;
+                if (day.length < 2)
+                    day = '0' + day;
+                if (hoursdata.length < 2)
+                    hoursdata = '0' + hour;
+                if (minutesdata.length < 2)
+                    minutesdata = '0' + minute;
+                var dateData = [day, month, year].join('-');
+                var TimeData = [hoursdata, minutesdata].join(':');
+                var datetimedata = dateData + '  ' + TimeData;
+                return datetimedata;
+            }
+            //TableManageResponsive.init();
+            var handleDataTableButtons = function () {
+                "use strict";
+                $.ajax({
+                    url: '@Url.Action("GetListBook", "AdmBook")',
+                    type: 'GET',
+                    //data: { PONUmber: $("#Tx_PoNumber").val(), NoRangka: $("#Tx_NoRangka").val() },
+                    success: function (result)
+                    {
+                        console.log(result);
+                        $('#data-table-buttons thead tr').clone(true).appendTo('#data-table-buttons thead');
+                        $('#data-table-buttons thead tr:eq(1) th').each(function (i) {
+                            var title = $(this).text();
+                            $(this).html('<input type="text" style="width:80px" placeholder="Search ' + title + '" />');
+                            $('input', this).on('keyup change', function () {
+                                if (table.column(i).search() !== this.value) {
+                                    table
+                                        .column(i)
+                                        .search(this.value)
+                                        .draw();
+                                }
+                            });
+                        });
+                        var table = $('#data-table-buttons').DataTable({
+                            dom: 'Bfrtip',
+                            buttons: [
+                                { extend: 'csv', className: 'btn-sm' },
+                                { extend: 'excel', className: 'btn-sm' }
+                            ],
+                            data: result,
+                            columns:
+                                [
+                                    {
+                                        "render": function (data, type, full, meta) {
+                                            return `<a href="/AdmBook/Edit?id=${full.Id}" class="btn btn-success m-b-5 button">Edit</a><a href="/AdmBook/Details?id=${full.Id}" class="btn btn-warning m-b-5 button">
+                                        Details</a > <a href="/AdmBook/Delete?id=${full.Id}" class="btn btn-danger m-b-5 button">Delete</a>`;
+                                            //if (full.POStatus != "PO Cancel" && full.POStatus != "PO Complete" && full.POStatus != "Rejected") {
+                                            //    return '<span >' + full.POStatus + '</span><br /><span style="color: darkviolet">BPKB Outstanding</span>';
+                                            //} else {
+                                            //    return '<span >' + full.POStatus + '</span><br />';
+                                            //}
+                                        }
+                                    },
+                                    { 'data': "OrderNo", "autowidth": true },
+                                    //{ 'data': "CreatedDate", "autowidth": true },
+                                    {
+                                        "render": function (data, type, full, meta) {
+                                            return `<span>${formatDate(full.CreatedDate)}</span>`;
+                                        }
+                                    },
+                                    { 'data': "Period", "autowidth": true },
+                                    { 'data': "CategoryNm", "autowidth": true },
+                                    // { 'data': "CustomerName", "autowidth": true },
+                                    {
+                                        "render": function (data, type, full, meta)
+                                        {
+                                            return `<a href="/AdmUser/Details?id=${full.BookedBy}">${full.CustomerName}</a>`;
+
+                                        }
+                                    },
+                                //{ 'data': "TalentNm", "autowidth": true },
+                                    {
+                                        "render": function (data, type, full, meta) {
+                                            return `<a href="/AdmTalent/Details?id=${full.TalentId}">${full.TalentNm}</a>`;
+                                        }
+                                    },
+                               // { 'data': "Deadline", "autowidth": true },
+                                    {
+                                        "render": function (data, type, full, meta) {
+                                            if (full.Deadline != null) {
+                                                return `<span >${formatDateTimeData(full.Deadline)}</span>`;
+                                            }
+                                            else {
+                                                return `<span></span>`;
+                                            }
+
+                                        }
+                                    },
+                                   // { 'data': "OrderCompleteDate", "autowidth": true },
+                                    {
+                                        "render": function (data, type, full, meta) {
+                                            if (full.OrderCompleteDate != null) {
+                                                return `<span >${formatDateTimeData(full.OrderCompleteDate)}</span>`;
+                                            }
+                                            else {
+                                                return `<span></span>`;
+                                            }
+                                        }
+                                    },
+                                { 'data': "PriceAmount", "autowidth": true },
+                                { 'data': "PaymentShare", "autowidth": true },
+                                { 'data': "SalePrice", "autowidth": true },
+                                { 'data': "VoucherCode", "autowidth": true },
+                                { 'data': "TotalPay", "autowidth": true },
+                                { 'data': "PayMethod", "autowidth": true },
+                                { 'data': "TransactionStatus", "autowidth": true },
+                                //{ 'data': "OrderNo", "autowidth": true }
+                                    ],
+                        "deferRender":true,
+                        //responsive: true,
+                        "scrollY": "500px",
+                        "scrollX": true,
+                        // "scrollCollapse": true,
+                       // "paging": false,
+                        orderCellsTop: true,
+                        fixedHeader: true
+                    });
+                    }
+                    });
+            };
+            var TableManageButtons = function () {
+                "use strict";
+                return {
+                    //main function
+                    init: function () {
+                        handleDataTableButtons();
+                    }
+                };
+            }();
+            TableManageButtons.init();
+        });
+    </script>
+}

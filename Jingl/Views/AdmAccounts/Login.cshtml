@@ -1,0 +1,279 @@
+﻿@model Jingl.General.Model.Admin.UserManagement.UserModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Fameo Admin | Login Page</title>
+    <link rel="shortcut icon" href="https://static.wixstatic.com/media/7f27b8_ee7121db275e4239ba84b33cc41975db%7Emv2.jpg/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/7f27b8_ee7121db275e4239ba84b33cc41975db%7Emv2.jpg" type="image/jpeg">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="~/assets-new-login/components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets-new-login/components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/assets-new-login/components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/assets-new-login/dist/css/AdminLTE.min.css">
+    <link href="~/assets/plugins/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/animate/animate.min.css" rel="stylesheet" />
+    <link href="~/assets/css/default/style.min.css" rel="stylesheet" />
+    <link href="~/assets/css/default/style-responsive.min.css" rel="stylesheet" />
+    <link href="~/assets/css/default/theme/default.css" rel="stylesheet" id="theme" />
+    <link href="~/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
+
+
+    <style>
+        .main-text {
+            position: absolute;
+            top: 100px;
+            width: 96.66666666666666%;
+            color: #FFF;
+        }
+
+        .carousel-btns {
+            margin-top: 2em;
+        }
+
+            .carousel-btns .btn {
+                width: 150px;
+            }
+
+        .carousel-inner .imgOverlay {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-inner img {
+            width: 100%;
+        }
+
+        .carousel-control {
+            width: auto;
+        }
+
+            .carousel-control .icon-prev,
+            .carousel-control .icon-next,
+            .carousel-control .fa-chevron-left,
+            .carousel-control .fa-chevron-right {
+                position: absolute;
+                top: 47%;
+                right: 0;
+                z-index: 5;
+                display: inline-block;
+                background-color: #000;
+                width: 38px;
+                height: 38px;
+                line-height: 40px;
+                font-size: 14px;
+            }
+
+            .carousel-control .icon-prev,
+            .carousel-control .fa-chevron-left {
+                left: 0;
+            }
+
+        .carousel-indicators li {
+            width: 12px;
+            height: 12px;
+            margin: 0 1px;
+            border: 2px solid #fff;
+            opacity: .8;
+        }
+
+        .carousel-indicators .active {
+            background-color: #28ace2;
+            border-color: #28ace2;
+        }
+
+        .carousel-control .icon-prev, .carousel-control .fa-chevron-left,
+        .carousel-control .icon-right, .carousel-control .fa-chevron-right {
+            border-radius: 50px;
+        }
+
+        .carousel-control .icon-prev, .carousel-control .fa-chevron-left {
+            left: 30px;
+        }
+
+        .carousel-control .icon-right, .carousel-control .fa-chevron-right {
+            right: 30px;
+        }
+
+        .carousel .carousel-inner {
+            height: 100%;
+        }
+    </style>
+
+
+</head>
+
+<body class="hold-transition lockscreen">
+    <div id="themeSlider" class="carousel slide carousel-fade" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="imgOverlay"></div>
+                @*<img src="~/assets-new-login/images/123.png">*@
+            </div>
+        </div>
+        <div class="main-text hidden-xs hidden-sm">
+            <div class="col-md-12 text-center">
+                <div class="clearfix"></div>
+                <div class="lockscreen-wrapper" style="float:right">
+                    <div class="login-box">
+                        <div class="login-box-body" style="border-radius: 10px">
+                            <div class="login-logo">
+                                <span><img src="~/images/icons/icon-96x96.png" /></span>
+                                <a style="font-size:20px ;text-decoration:none !important">
+                                    
+                                </a>
+                            </div>
+                            <p class="login-box-msg">Sign in to start your session</p>
+
+
+                            <div class="form-group has-feedback">
+                                @Html.TextBoxFor(model => model.UserName, new { Class = "form-control", required = "true", PlaceHolder = "UserName or Email Address"})
+                                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                            </div>
+                            <div class="form-group has-feedback">
+                                @Html.TextBoxFor(model => model.Password, new { Class = "form-control", type = "password", required = "true", PlaceHolder = "Password" })
+                                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-2"></div>
+                                <div class="col-xs-6"></div>
+                                <div class="col-xs-4">
+                                    <button type="submit" class="btn btn-primary btn-block btn-flat" style="border-radius:5px" id="btn_signin">Sign me in</button>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <br />
+                                <p class="text-center text-grey-darker">
+                                    &copy; Fameo Admin All Right Reserved @DateTime.Now.Year
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/assets-new-login/components/jquery/dist/jquery.min.js"></script>
+    <script src="~/assets-new-login/components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/assets/plugins/jquery/jquery-3.3.1.min.js"></script>
+    <script src="~/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/assets/plugins/js-cookie/js.cookie.js"></script>
+    <script src="~/assets/js/theme/default.min.js"></script>
+    <script src="~/assets/js/apps.min.js"></script>
+    <script src="~/assets/plugins/gritter/js/jquery.gritter.js"></script>
+    <script src="~/js/Common.js"></script>
+
+</body>
+</html>
+
+<script>
+
+    $('#btn_signin').click(function () {
+
+        var usr = $("#UserName").val();
+        var pass = $("#Password").val();
+
+        if (usr == '' && pass == '') {
+
+            $.gritter.add({
+                title: 'Empty !',
+                fade: true,
+                image: 'https://static.wixstatic.com/media/7f27b8_ee7121db275e4239ba84b33cc41975db%7Emv2.jpg/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/7f27b8_ee7121db275e4239ba84b33cc41975db%7Emv2.jpg',
+                text: 'Username and Password required !'
+            });
+            return false;
+        }
+
+        if (usr == '') {
+
+            $.gritter.add({
+                title: 'Empty !',
+                fade: true,
+                image: 'https://static.wixstatic.com/media/7f27b8_ee7121db275e4239ba84b33cc41975db%7Emv2.jpg/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/7f27b8_ee7121db275e4239ba84b33cc41975db%7Emv2.jpg',
+                text: 'Username required !'
+            });
+            return false;
+        }
+
+        if (pass == '') {
+
+            $.gritter.add({
+                title: 'Empty !',
+                fade: true,
+                image: 'https://static.wixstatic.com/media/7f27b8_ee7121db275e4239ba84b33cc41975db%7Emv2.jpg/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/7f27b8_ee7121db275e4239ba84b33cc41975db%7Emv2.jpg',
+                text: 'Password required !'
+            });
+            return false;
+        }
+
+      $.ajax(
+       {
+           type: "POST",
+           url: '@Url.Action("Login", "AdmAccounts")',
+           data: {
+               UserName: usr,
+               Password: pass
+           },
+           success: function (result) {
+               console.log(result);
+               if (result.User == "Valid" && result.RoleId == 1) {
+                   $.gritter.add({
+                       title: 'Success !',
+                       fade: true,
+                       image: 'https://static.wixstatic.com/media/7f27b8_ee7121db275e4239ba84b33cc41975db%7Emv2.jpg/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/7f27b8_ee7121db275e4239ba84b33cc41975db%7Emv2.jpg',
+                       text: 'Success'
+                   });
+
+                   window.setTimeout(function () {
+                       window.location.href = "@Url.Action("DashboardDataStudio", "AdmHome")";
+                   }, 1000);
+               }
+               else if (result.User == "Valid" && result.RoleId == 9) {
+                   $.gritter.add({
+                       title: 'Success !',
+                       fade: true,
+                       image: 'https://static.wixstatic.com/media/7f27b8_ee7121db275e4239ba84b33cc41975db%7Emv2.jpg/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/7f27b8_ee7121db275e4239ba84b33cc41975db%7Emv2.jpg',
+                       text: 'Success'
+                   });
+
+                   window.setTimeout(function () {
+                       window.location.href = "@Url.Action("DashboardDataStudio", "AgnHome")";
+                   }, 1000);
+               }
+               else if (result.User == "Valid" && result.RoleId !== 1) {
+                   $.gritter.add({
+                       title: 'Not Valid !',
+                       fade: true,
+                       image: 'https://static.wixstatic.com/media/7f27b8_ee7121db275e4239ba84b33cc41975db%7Emv2.jpg/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/7f27b8_ee7121db275e4239ba84b33cc41975db%7Emv2.jpg',
+                       text: 'Admin is not Valid !'
+                   });
+                   return false;
+               }
+               else {
+                   $.gritter.add({
+                       title: 'Not Valid !',
+                       fade: true,
+                       image: 'https://static.wixstatic.com/media/7f27b8_ee7121db275e4239ba84b33cc41975db%7Emv2.jpg/v1/fill/w_32%2Ch_32%2Clg_1%2Cusm_0.66_1.00_0.01/7f27b8_ee7121db275e4239ba84b33cc41975db%7Emv2.jpg',
+                       text: 'wrong Username or Password !'
+                   });
+                   return false;
+               }
+           }
+       });
+  });
+
+
+</script>

@@ -1,0 +1,70 @@
+﻿@model Jingl.General.Model.Admin.Transaction.ClaimModel
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div id="myHeader">
+    <div class="logo-header">
+        <div class="coontainer-fluid">
+            <div class="col-md-12">
+                <div class="headerTop" style="height: 40px;">
+                    <div class="setting-profile" style="left: 13px;right: unset;top: 0;position: absolute;">
+                        <a href="@Url.Action("Index","Home")" onclick="showLoaders();">
+                            <div class="icon-img">
+                                <img src="/template/img/left-arrow.svg" style="width:25px;" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-auto w-100 p-4 text-white text-center" style="padding-top: 7px !important;">
+                        <h4 style="color: #fff;font-weight: bold;">Tarik Dana</h4>
+                    </div>
+                    @*<img src="~/template/img/Jing_e 2.png" alt="Alternate Text" />*@
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 m-t-25">
+            <div class="claim-head">
+                <p>Status</p>
+                <h1>@Model.StatusNm</h1>
+            </div>
+            <div class="claim-head">
+                <p>Nomor Claim</p>
+                <h4>@Model.ClmNumber</h4>
+            </div>
+            <div class="claim-head">
+                <p>Tanggal</p>
+                @{
+                    var Date = Model.CreatedDate.Value.ToString("dd MMMM yyyy");
+
+                    <h4>@Date</h4>
+                }
+
+            </div>
+            <div class="claim-head">
+                <p>Penerima</p>
+                <h4>@Model.BeneficiaryName</h4>
+                <span>@Model.BankName - @Model.AccountNumber</span>
+            </div>
+            <div class="claim-head claimbg">
+                <p>Nominal</p>
+                <h1 class="m-t-20">Rp. @Model.Amount.Value.ToString("#,##0")</h1>
+
+            </div>
+
+            <div class="text-center">
+                <p class="claim-ask">Ada pertanyaan?<br />Hubungi Kami <a href="@Url.Action("Support","Account")">Disini</a></p>
+            </div>
+        </div>
+    </div>
+
+</div>
+

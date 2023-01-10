@@ -1,0 +1,2041 @@
+﻿@model Jingl.General.Model.Admin.Transaction.BookModel
+@*@{
+        ViewData["Title"] = "Pembayaran";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }*@
+
+<div id="wrapper">
+    <input type="hidden" id="BookId" value="@Model.Id" />
+    <div id="mask">
+        <div id="item1" class="item-pay">
+            <a name="item1"></a>
+            <div class="konten">
+                <div class="header-pay">
+                    <div class="left">
+                        <a href="javascript:location.reload();">
+                            <span class="sprite remove "></span>
+                        </a>
+                        @*<div class="headerTop">
+                            <img src="~/template/img/Jing_e 2.png" alt="Logo Jingl" />
+                        </div>*@
+                    </div>
+                    <div class="right">
+                        <h4>Pilih Pembayaran</h4>
+                    </div>
+                </div>
+                <section class="bg-pay">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="content-pay">
+                                    <div class="section-pay">
+                                        <a href="#item2" class="transfer panels">
+                                            <div class="list-payment-logo">
+                                                <span class="sprite bank-transfer"></span>
+
+                                            </div>
+                                            <div class="list-content">
+                                                <div class="list-title text-actionable-bold">Bank Transfer</div>
+                                                <div class="list-caption text-actionable-caption">Bayar menggunakan virtual account</div>
+                                            </div>
+                                            <div class="sprite list-next"></div>
+
+                                        </a>
+                                    </div>
+                                    @*<div class="section-pay">
+                                            <a href="#" class="transfer">
+                                                <div class="list-payment-logo">
+                                                    <span class="sprite gopay"></span>
+
+                                                </div>
+                                                <div class="list-content">
+                                                    <div class="list-title text-actionable-bold">GO-PAY</div>
+                                                    <div class="list-caption text-actionable-caption">Bayar dengan saldo GO-PAY Anda</div>
+                                                </div>
+                                                <div class="sprite list-next"></div>
+
+                                            </a>
+                                        </div>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div id="item2" class="item-pay">
+            <a name="item2"></a>
+            <div class="konten">
+                <div class="header-pay">
+                    <div class="left">
+                        <a href="#item1" class="panels">
+                            <span class="sprite header-prev "></span>
+                        </a>
+                        <img src="~/template/img/Jing_e 1.png" alt="Alternate Text" />
+                    </div>
+                    <div class="right">
+                        <h4>Bank Transfer</h4>
+                    </div>
+                </div>
+                <section class="bg-pay">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="content-pay">
+                                    <div class="section-pay">
+                                        @*style="display: none;"*@
+                                    <a href="#bca" class="transfer bca-btn">
+                                        <div class="list-payment-logo">
+                                            <span class="sprite bca"></span>
+                                        </div>
+                                        <div class="list-content">
+                                            <div class="list-title text-actionable-bold">BCA</div>
+                                            <div class="list-caption text-actionable-caption">Bayar di ATM BCA atau internet banking</div>
+                                        </div>
+                                        <div class="sprite list-next"></div>
+
+                                    </a>
+                                </div>
+                                <div class="section-pay">
+                                    <a id="" href="#mandiri" class="transfer mandiri-btn">
+                                        <div class="list-payment-logo">
+                                            <span class="sprite mandiri"></span>
+
+                                        </div>
+                                        <div class="list-content">
+                                            <div class="list-title text-actionable-bold">Mandiri</div>
+                                            <div class="list-caption text-actionable-caption">Bayar di ATM Mandiri atau internet banking</div>
+                                        </div>
+                                        <div class="sprite list-next"></div>
+
+                                    </a>
+                                </div>
+                                <div class="section-pay">
+                                    <a href="#bni" class="transfer bni-btn">
+                                        <div class="list-payment-logo">
+                                            <span class="sprite bni"></span>
+
+                                        </div>
+                                        <div class="list-content">
+                                            <div class="list-title text-actionable-bold">BNI</div>
+                                            <div class="list-caption text-actionable-caption">Bayar di ATM BNI atau internet banking</div>
+                                        </div>
+                                        <div class="sprite list-next"></div>
+
+                                    </a>
+                                </div>
+                                <div class="section-pay">
+                                    <a href="#bri" class="transfer bri-btn">
+                                        <div class="list-payment-logo">
+
+                                            <img src="~/template/img/logobri-min.png" alt="Alternate Text" style="width:40px;height:40px;" />
+
+                                        </div>
+                                        <div class="list-content">
+                                            <div class="list-title text-actionable-bold">BRI</div>
+                                            <div class="list-caption text-actionable-caption">Bayar di ATM BRI atau internet banking</div>
+                                        </div>
+                                        <div class="sprite list-next"></div>
+
+                                    </a>
+                                </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div id="mandiri" class="item-pay mandiri">
+            <a name="item3"></a>
+
+            <div class="konten bg-mandiri">
+                <div class="button-main btn-main">
+                    @*<a class="button-main-content" id="transfmandiri" href="#mandirirek">*@
+                    <a class="button-main-content" id="transfmandiri" href="#mandirirek">
+                        <div class="text-button-main">
+                            <span>Lihat Nomor Rekening</span>
+                        </div>
+                        <div class="sprite btn-main-next"></div>
+                    </a>
+                </div>
+                <div class="header-pay">
+                    <div class="left">
+                        <a href="#item2" class="panels ">
+                            <span class="sprite header-prev mandiri-back "></span>
+                        </a>
+                        <img src="~/template/img/Jing_e 1.png" alt="Alternate Text" />
+                    </div>
+                    <div class="right">
+                        <h4>Mandiri</h4>
+                    </div>
+                </div>
+
+                <section class="bg-pay ">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="content-pay">
+                                    <div class="section-pay">
+                                        <div class="amount">
+                                            <div class="amount-title float-left">
+                                                <span class="text-amount-title">jumlah</span>
+                                            </div>
+                                            <div class="amount-content float-right">
+                                                <span class="text-amount-rp">Rp </span>
+                                                @*<span class="text-amount-amount">@Model.TotalPay</span>*@
+                                                @*<label class="amountlines">@Model.TotalPay</label>*@
+                                                <label class="text-amount-amount amountlines">@Model.TotalPay</label>
+                                            </div>
+                                        </div>
+                                        <div class="order-id-optional">
+                                            <strong>Order ID</strong>
+                                            <div class="pull-right">
+                                                @*<span id="myCopy">
+                                                        @Model.OrderNo
+                                                    </span>*@
+                                                <input type="text" value="@Model.OrderNo" id="myCopy" disabled>
+                                                <div class="tooltip">
+                                                    <i class="fas fa-copy m-l-5" onclick="myCopy()" onmouseout="outFunc()">
+                                                        <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+                                                    </i>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                @*<div class="content-pay">
+                                        <div class="notice primary">
+                                            <div class="contents">
+                                                <span>Harap selesaikan pembayaran sebelum: </span>
+                                                <strong>10 April 09:55 WIB</strong>
+                                            </div>
+                                        </div>
+                                        <div class="main">
+                                            <div class="main-content">
+                                                <span class="text-main-title">Nomor rekening</span>
+                                                <span class="text-main-content">
+                                                    <div class="code">
+                                                        <span class="part">9881</span><span class="part">1188</span>
+                                                        <span class="part">9255</span><span class="part">4854</span>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                <div class="content-pay">
+                                    <div class="card-pay">
+                                        <div class="card-title">
+                                            <div class="contents">
+                                                <span>Cara Pembayaran</span>
+                                                <span class="pull-right bank-sprite mandiri"></span>
+                                            </div>
+                                        </div>
+                                        <div class="tabs full">
+                                            <ul class="nav nav-tabs nav-justified" id="pills-tab" role="tablist">
+                                                <li class="nav-item "><a href="#mandiritab" data-toggle="pill" class="text-actionable nav-link active" role="tab" aria-controls="pills-home" aria-selected="true">ATM Mandiri</a></li>
+                                                <li class="nav-item"><a href="#mandiriint" data-toggle="pill" class="text-actionable nav-link" role="tab" aria-controls="pills-profile" aria-selected="false">Internet Banking</a></li>
+                                            </ul>
+                                            <div class="tab-content" id="pills-tabContent">
+                                                <div class="tab-pane active" id="mandiritab" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 240 -->1<!-- /react-text --><!-- react-text: 241 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en mandiri-01"></i></td>
+                                                                    <td class="table-row text-body"><span>Pada menu utama, pilih <strong>Bayar/Beli</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 248 -->2<!-- /react-text --><!-- react-text: 249 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en mandiri-02"></i></td>
+                                                                    <td class="table-row text-body"><span>Pilih <strong>Lainnya</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 256 -->3<!-- /react-text --><!-- react-text: 257 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en mandiri-03"></i></td>
+                                                                    <td class="table-row text-body"><span>Pilih <strong>Multi Payment</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 264 -->4<!-- /react-text --><!-- react-text: 265 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img">@*<i class="va-sprite va-en mandiri-04">*@</i></td>
+                                                                    <td class="table-row text-body"><span>Pilih Penyedia <strong>"FasPay"</strong> dan pilih<strong> Lanjut</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 272 -->5<!-- /react-text --><!-- react-text: 273 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en mandiri-05"></i></td>
+                                                                    <td class="table-row text-body"><span>Masukkan <strong>"Nomor Virtual Account"</strong>  dan <strong>"Nominal"</strong> yang akan dibayarkan lalu tekan <strong>Benar</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 280 -->6<!-- /react-text --><!-- react-text: 281 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en mandiri-06"></i></td>
+                                                                    <td class="table-row text-body"><span>Pada halaman konfirmasi akan muncul detail pembayaran Anda. Jika informasi telah sesuai tekan <strong>Ya</strong>.</span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="mandiriint" class="tab-pane" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 292 -->1<!-- /react-text --><!-- react-text: 293 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Login ke Internet Banking Mandiri <a href="https://ib.bankmandiri.co.id/">(https://ib.bankmandiri.co.id/)</a>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 298 -->2<!-- /react-text --><!-- react-text: 299 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Pada menu utama, pilih <strong>Bayar</strong>, lalu pilih <strong>Multi Payment</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 304 -->3<!-- /react-text --><!-- react-text: 305 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Pilih akun Anda di <strong>Dari Rekening</strong>, kemudian di Penyedia Jasa pilih <strong>Faspay</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 310 -->4<!-- /react-text --><!-- react-text: 311 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan <strong>"Nomor Virtual Account"</strong> dan <strong>"Nominal"</strong> yang akan dibayarkan dan klik <strong>Lanjut</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 316 -->5<!-- /react-text --><!-- react-text: 317 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukan PIN dan Transaksi Selesai, simpan bukti pembayaran Anda</span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="card-titles">
+                                            <div class="contents">
+                                                <span>Kirim instruksi pembayaran ke email Anda?</span>
+                                            </div>
+                                        </div>
+                                        <form>
+                                            <div class="input-group input-pay col-xs-12">
+                                                <input type="email" class="" placeholder="masukan alamat email anda">
+                                                <span class="bar"></span>
+
+                                                <span class="helper danger hide"></span>
+                                                <div class="icons"><i class="sprite icon pencil"></i></div>
+                                            </div>
+                                            <input type="submit" style="display: none;">
+                                        </form>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="button-main show">
+                            <a class="button-main-content" href="#/">
+                                <div class="text-button-main"><span>Lihat Nomor Rekening</span></div>
+                                <div class="sprite btn-main-next"></div>
+                            </a>
+                        </div>*@
+                </section>
+            </div>
+        </div>
+        <div id="bni" class="item-pay bni">
+            <a name="item4"></a>
+            <div class="konten bg-mandiri">
+                <div class="button-main btn-main3">
+                    <a class="button-main-content" href="#bnirek" id="transfbni">
+                        <div class="text-button-main">
+                            <span>Lihat Nomor Rekening</span>
+                        </div>
+                        <div class="sprite btn-main-next"></div>
+                    </a>
+                </div>
+                <div class="header-pay">
+                    <div class="left">
+                        <a href="#item2" class="panels">
+                            <span class="sprite header-prev bni-back"></span>
+                        </a>
+                        <img src="~/template/img/Jing_e 1.png" alt="Alternate Text" />
+                    </div>
+                    <div class="right">
+                        <h4>BNI</h4>
+                    </div>
+                </div>
+
+                <section class="bg-pay ">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="content-pay">
+                                    <div class="section-pay">
+                                        <div class="amount">
+                                            <div class="amount-title float-left">
+                                                <span class="text-amount-title">jumlah</span>
+                                            </div>
+                                            <div class="amount-content float-right">
+                                                <span class="text-amount-rp">Rp </span>
+                                                @*<span class="text-amount-amount amountlines">@Model.TotalPay</span>*@
+                                                <label class="text-amount-amount amountlines">@Model.TotalPay</label>
+                                            </div>
+                                        </div>
+                                        <div class="order-id-optional">
+                                            <strong>Order ID</strong>
+                                            <div class="pull-right">
+                                                <input type="text" value="@Model.OrderNo" id="myCopybni" disabled>
+                                                <div class="tooltip">
+                                                    <i class="fas fa-copy m-l-5" onclick="myCopybni()" onmouseout="outFuncbni()">
+                                                        <span class="tooltiptext" id="myTooltipbni">Copy to clipboard</span>
+                                                    </i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                @*<div class="content-pay">
+                                        <div class="notice primary">
+                                            <div class="contents">
+                                                <span>Harap selesaikan pembayaran sebelum: </span>
+                                                <strong>10 April 09:55 WIB</strong>
+                                            </div>
+                                        </div>
+                                        <div class="main">
+                                            <div class="main-content">
+                                                <span class="text-main-title">Nomor rekening</span>
+                                                <span class="text-main-content">
+                                                    <div class="code">
+                                                        <span class="part">9881</span><span class="part">1188</span>
+                                                        <span class="part">9255</span><span class="part">4854</span>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                <div class="content-pay">
+                                    <div class="card-pay">
+                                        <div class="card-title">
+                                            <div class="contents">
+                                                <span>Cara Pembayaran</span>
+                                                <span class="pull-right bank-sprite bni"></span>
+                                            </div>
+                                        </div>
+                                        <div class="tabs full">
+                                            <ul class="nav nav-tabs nav-justified" id="pills-tab" role="tablist">
+                                                <li class="nav-item nav-bni"><a href="#bnitab" data-toggle="pill" class="text-actionable nav-link active" role="tab" aria-controls="pills-home" aria-selected="true">ATM BNI</a></li>
+                                                <li class="nav-item nav-bni"><a href="#bniint" data-toggle="pill" class="text-actionable nav-link" role="tab" aria-controls="pills-profile" aria-selected="false">Internet Banking</a></li>
+                                                <li class="nav-item nav-bni"><a href="#bnimob" data-toggle="pill" class="text-actionable nav-link" role="tab" aria-controls="pills-profile" aria-selected="false">Mobile Banking</a></li>
+                                            </ul>
+                                            <div class="tab-content" id="pills-tabContent">
+                                                <div class="tab-pane active" id="bnitab" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 240 -->1<!-- /react-text --><!-- react-text: 241 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-01"></i></td>
+                                                                    <td class="table-row text-body"><span>Pada menu utama, pilih <strong>Menu Lainnya</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 248 -->2<!-- /react-text --><!-- react-text: 249 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-02"></i></td>
+                                                                    <td class="table-row text-body"><span>Pilih <strong>Transfer</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 256 -->3<!-- /react-text --><!-- react-text: 257 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-03"></i></td>
+                                                                    <td class="table-row text-body"><span>Pilih <strong>Rekening Tabungan</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 264 -->4<!-- /react-text --><!-- react-text: 265 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-04"></i></td>
+                                                                    <td class="table-row text-body"><span>Pilih <strong>Ke Rekening BNI</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 272 -->5<!-- /react-text --><!-- react-text: 273 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-05"></i></td>
+                                                                    <td class="table-row text-body"><span>Masukkan nomor virtual account dan pilih <strong>tekan jika Benar</strong> Anda lalu tekan <strong>Benar</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 280 -->6<!-- /react-text --><!-- react-text: 281 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-06"></i></td>
+                                                                    <td class="table-row text-body"><span>Masukkan jumlah tagihan yang akan anda bayar secara lengkap. Pembayaran dengan jumlah tidak sesuai akan otomatis ditolak.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 272 -->7<!-- /react-text --><!-- react-text: 273 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-07"></i></td>
+                                                                    <td class="table-row text-body"><span>Jumlah yang dibayarkan, nomor rekening dan nama Merchant akan ditampilkan. Jika informasi telah sesuai, tekan  <strong>Ya</strong></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 280 -->8<!-- /react-text --><!-- react-text: 281 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-08"></i></td>
+                                                                    <td class="table-row text-body"><span>Transaksi Anda sudah selesai.</span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="bniint" class="tab-pane" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 292 -->1<!-- /react-text --><!-- react-text: 293 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Ketik alamat <a href="https://ibank.bni.co.id/">(https://ibank.bni.co.id/)</a>kemudia klik <strong>Masuk</strong></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 298 -->2<!-- /react-text --><!-- react-text: 299 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Silakan masukkan <strong>User ID</strong>dan<strong>Password</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 304 -->3<!-- /react-text --><!-- react-text: 305 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Klik Menu <strong>Transfer</strong> kemudian pilih <strong>Tambah Rekening Favorit.</strong></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 310 -->4<!-- /react-text --><!-- react-text: 311 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan nama, nomor rekening, dan email, lalu klik <strong>Lanjut</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 316 -->5<!-- /react-text --><!-- react-text: 317 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan <strong>Kode Otentikasi</strong> dari token Anda dan klik <strong>Lanjut</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 316 -->6<!-- /react-text --><!-- react-text: 317 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Kembali ke menu utama dan pilih <strong>Transfer</strong> lalu <strong>Transfer Antar Rekening BNI</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 316 -->7<!-- /react-text --><!-- react-text: 317 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Pilih rekening yang telah Anda favoritkan sebelumnya di <strong>Rekening Tujuan</strong> lalu lanjutkan pengisian, dan tekan <strong>Lanjut</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 316 -->8<!-- /react-text --><!-- react-text: 317 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Pastikan detail transaksi Anda benar, lalu masukkan <strong>Kode Otentikasi</strong> dan tekan <strong>Lanjut</strong>.</span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="bnimob" class="tab-pane">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1170 -->1<!-- /react-text --><!-- react-text: 1171 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Buka aplikasi BNI Mobile Banking dan login</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1176 -->2<!-- /react-text --><!-- react-text: 1177 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Pilih menu Transfer</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1182 -->3<!-- /react-text --><!-- react-text: 1183 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Pilih menu Virtual Account Billing</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1188 -->4<!-- /react-text --><!-- react-text: 1189 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Pilih rekening debit yang akan digunakan</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1194 -->5<!-- /react-text --><!-- react-text: 1195 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Pilih menu Input Baru dan masukkan 16 digit nomor Virtual Account</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1200 -->6<!-- /react-text --><!-- react-text: 1201 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Informasi tagihan akan muncul pada halaman validasi</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1206 -->7<!-- /react-text --><!-- react-text: 1207 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Jika informasi telah sesuai, masukkan Password Transaksi dan klik Lanjut</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1212 -->8<!-- /react-text --><!-- react-text: 1213 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Transaksi Anda akan diproses</span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="card-titles">
+                                            <div class="contents">
+                                                <span>Kirim instruksi pembayaran ke email Anda?</span>
+                                            </div>
+                                        </div>
+                                        <form>
+                                            <div class="input-group input-pay col-xs-12">
+                                                <input type="email" class="" placeholder="masukan alamat email anda">
+                                                <span class="bar"></span>
+
+                                                <span class="helper danger hide"></span>
+                                                <div class="icons"><i class="sprite icon pencil"></i></div>
+                                            </div>
+                                            <input type="submit" style="display: none;">
+                                        </form>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="button-main show">
+                            <a class="button-main-content" href="#/">
+                                <div class="text-button-main"><span>Lihat Nomor Rekening</span></div>
+                                <div class="sprite btn-main-next"></div>
+                            </a>
+                        </div>*@
+                </section>
+            </div>
+        </div>
+        <div id="bri" class="item-pay bri">
+            <a name="item5"></a>
+            <div class="konten bg-mandiri">
+                <div class="button-main btn-main5">
+                    <a class="button-main-content" href="#brirek" id="transfbri">
+                        <div class="text-button-main">
+                            <span>Lihat Nomor Rekening</span>
+                        </div>
+                        <div class="sprite btn-main-next"></div>
+                    </a>
+                </div>
+                <div class="header-pay">
+                    <div class="left">
+                        <a href="#item2" class="panels">
+                            <span class="sprite header-prev bri-back"></span>
+                        </a>
+                        <img src="~/template/img/Jing_e 1.png" alt="Alternate Text" />
+                    </div>
+                    <div class="right">
+                        <h4>BRI</h4>
+                    </div>
+                </div>
+
+                <section class="bg-pay ">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="content-pay">
+                                    <div class="section-pay">
+                                        <div class="amount">
+                                            <div class="amount-title float-left">
+                                                <span class="text-amount-title">jumlah</span>
+                                            </div>
+                                            <div class="amount-content float-right">
+                                                <span class="text-amount-rp">Rp </span>
+                                                @*<span class="text-amount-amount amountlines">@Model.TotalPay</span>*@
+                                                <label class="text-amount-amount amountlines">@Model.TotalPay</label>
+                                            </div>
+                                        </div>
+                                        <div class="order-id-optional">
+                                            <strong>Order ID</strong>
+                                            <div class="pull-right">
+                                                <input type="text" value="@Model.OrderNo" id="myCopybri" readonly style="border:none;">
+                                                <div class="tooltip">
+                                                    <i class="fas fa-copy m-l-5" onclick="myCopybri()" onmouseout="outFuncbri()">
+                                                        <span class="tooltiptext" id="myTooltipbri">Copy to clipboard</span>
+                                                    </i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                @*<div class="content-pay">
+                                        <div class="notice primary">
+                                            <div class="contents">
+                                                <span>Harap selesaikan pembayaran sebelum: </span>
+                                                <strong>10 April 09:55 WIB</strong>
+                                            </div>
+                                        </div>
+                                        <div class="main">
+                                            <div class="main-content">
+                                                <span class="text-main-title">Nomor rekening</span>
+                                                <span class="text-main-content">
+                                                    <div class="code">
+                                                        <span class="part">9881</span><span class="part">1188</span>
+                                                        <span class="part">9255</span><span class="part">4854</span>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                                <div class="content-pay">
+                                    <div class="card-pay">
+                                        <div class="card-title">
+                                            <div class="contents">
+                                                <span>Cara Pembayaran</span>
+                                                <img class="pull-right" src="~/template/img/Logo-Bank-BRI.png" alt="Alternate Text" width="70px;" />
+                                            </div>
+                                        </div>
+                                        <div class="tabs full">
+                                            <ul class="nav nav-tabs nav-justified" id="pills-tab" role="tablist">
+                                                <li class="nav-item nav-bni"><a href="#britab" data-toggle="pill" class="text-actionable nav-link active" role="tab" aria-controls="pills-home" aria-selected="true">ATM BRI</a></li>
+                                                <li class="nav-item nav-bni"><a href="#briint" data-toggle="pill" class="text-actionable nav-link" role="tab" aria-controls="pills-profile" aria-selected="false">Internet Banking</a></li>
+                                                <li class="nav-item nav-bni"><a href="#brimob" data-toggle="pill" class="text-actionable nav-link" role="tab" aria-controls="pills-profile" aria-selected="false">Mobile Banking</a></li>
+                                            </ul>
+                                            <div class="tab-content" id="pills-tabContent">
+                                                <div class="tab-pane active" id="britab" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 240 -->1<!-- /react-text --><!-- react-text: 241 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-01"></i></td>
+                                                                    <td class="table-row text-body"><span>Pada menu utama, pilih <strong>Transaksi Lain</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 248 -->2<!-- /react-text --><!-- react-text: 249 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-02"></i></td>
+                                                                    <td class="table-row text-body"><span>Pilih <strong>Pembayaran</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 256 -->3<!-- /react-text --><!-- react-text: 257 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-03"></i></td>
+                                                                    <td class="table-row text-body"><span>Setelah itu klik menu <strong>Lainnya</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 264 -->4<!-- /react-text --><!-- react-text: 265 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-04"></i></td>
+                                                                    <td class="table-row text-body"><span>lalu pilih menu <strong>Briva</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 272 -->5<!-- /react-text --><!-- react-text: 273 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-05"></i></td>
+                                                                    <td class="table-row text-body"><span>Masukkan nomor rekening dengan nomor Virtual Account Anda (contoh: 7810202001539202) dan pilih <strong> Benar</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 280 -->6<!-- /react-text --><!-- react-text: 281 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-06"></i></td>
+                                                                    <td class="table-row text-body"><span>Ketika muncul konfirmasi pembayaran, silahkan pilih Ya.</span></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 280 -->7<!-- /react-text --><!-- react-text: 281 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-08"></i></td>
+                                                                    <td class="table-row text-body"><span>Voila! Transaksi telah selesai dan silahkan ambil bukti pembayaran anda</span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="briint" class="tab-pane" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 292 -->1<!-- /react-text --><!-- react-text: 293 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Silahkan login Internet Banking, kemudian pilih Menu <strong>Pembayaran</strong></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 298 -->2<!-- /react-text --><!-- react-text: 299 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Lalu pilih menu <strong>Brivia</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 304 -->3<!-- /react-text --><!-- react-text: 305 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan nomor rekening dengan nomor Virtual Account Anda (contoh: 7810202001539202) kemudian klik <strong>Kirim</strong></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 310 -->4<!-- /react-text --><!-- react-text: 311 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Setelah itu, masukkan <strong> password </strong> serta <strong> mToken internet banking </strong></span></td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="brimob" class="tab-pane">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1170 -->1<!-- /react-text --><!-- react-text: 1171 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Silahkan login Mobile Banking, lalu pilih menu Pembayaran</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1176 -->2<!-- /react-text --><!-- react-text: 1177 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Setelah itu klik menu Brivia</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1182 -->3<!-- /react-text --><!-- react-text: 1183 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan nomor rekening dengan nomor Virtual Account Anda (contoh: 7810202001539202) dan jangan lupa tuliskan jumlah nominal tagihan yang ada di invoice</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1188 -->4<!-- /react-text --><!-- react-text: 1189 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Lalu masukkan PIN Mobile Banking dan klik Kirim</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1194 -->5<!-- /react-text --><!-- react-text: 1195 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Transaksi sudah selesai. Bukti pembayaran anda akan dikirimkan melalui notifikasi SMS</span></td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="card-titles">
+                                            <div class="contents">
+                                                <span>Kirim instruksi pembayaran ke email Anda?</span>
+                                            </div>
+                                        </div>
+                                        <form>
+                                            <div class="input-group input-pay col-xs-12">
+                                                <input type="email" class="" placeholder="masukan alamat email anda">
+                                                <span class="bar"></span>
+
+                                                <span class="helper danger hide"></span>
+                                                <div class="icons"><i class="sprite icon pencil"></i></div>
+                                            </div>
+                                            <input type="submit" style="display: none;">
+                                        </form>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="button-main show">
+                            <a class="button-main-content" href="#/">
+                                <div class="text-button-main"><span>Lihat Nomor Rekening</span></div>
+                                <div class="sprite btn-main-next"></div>
+                            </a>
+                        </div>*@
+                </section>
+            </div>
+        </div>
+        <div id="bca" class="item-pay bca" >
+            @*style="display: none;"*@
+            <a name="item6"></a>
+            <div class="konten bg-mandiri">
+                <div class="button-main btn-main7">
+                    <a class="button-main-content" href="#bcarek" id="transfbca">
+                        <div class="text-button-main">
+                            <span>Lihat Nomor Rekening</span>
+                        </div>
+                        <div class="sprite btn-main-next"></div>
+                    </a>
+                </div>
+                <div class="header-pay">
+                    <div class="left">
+                        <a href="#item2" class="panels">
+                            <span class="sprite header-prev bca-back"></span>
+                        </a>
+                        <img src="~/template/img/Jing_e 1.png" alt="Alternate Text" />
+                    </div>
+                    <div class="right">
+                        <h4>BCA</h4>
+                    </div>
+                </div>
+                <section class="bg-pay ">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="content-pay">
+                                    <div class="section-pay">
+                                        <div class="amount">
+                                            <div class="amount-title float-left">
+                                                <span class="text-amount-title">jumlah</span>
+                                            </div>
+                                            <div class="amount-content float-right">
+                                                <span class="text-amount-rp">Rp </span>
+
+                                                <label class="text-amount-amount amountlines">@Model.TotalPay</label>
+                                            </div>
+                                        </div>
+                                        <div class="order-id-optional">
+                                            <strong>Order ID</strong>
+                                            <div class="pull-right">
+                                                <input type="text" value="@Model.OrderNo" id="myCopybca" readonly style="border:none;">
+                                                <div class="tooltip">
+                                                    <i class="fas fa-copy m-l-5" onclick="myCopybca()" onmouseout="outFuncbca()">
+                                                        <span class="tooltiptext" id="myTooltipbca">Copy to clipboard</span>
+                                                    </i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="content-pay">
+                                    <div class="card-pay">
+                                        <div class="card-title">
+                                            <div class="contents">
+                                                <span>Cara Pembayaran</span>
+                                                <span class="pull-right bank-sprite bca"></span>
+                                            </div>
+                                        </div>
+                                        <div class="tabs full">
+                                            <ul class="nav nav-tabs nav-justified" id="pills-tab" role="tablist">
+                                                <li class="nav-item nav-bni"><a href="#bcatab" data-toggle="pill" class="text-actionable nav-link active" role="tab" aria-controls="pills-home" aria-selected="true">ATM BCA</a></li>
+                                                <li class="nav-item nav-bni"><a href="#bcaint" data-toggle="pill" class="text-actionable nav-link" role="tab" aria-controls="pills-profile" aria-selected="false">Klik BCA Individual</a></li>
+                                                <li class="nav-item nav-bni"><a href="#bcamob" data-toggle="pill" class="text-actionable nav-link" role="tab" aria-controls="pills-profile" aria-selected="false">Mobile Banking</a></li>
+                                            </ul>
+                                            <div class="tab-content" id="pills-tabContent">
+                                                <div class="tab-pane active" id="bcatab" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 240 -->1<!-- /react-text --><!-- react-text: 241 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bca-01"></i></td>
+                                                                    <td class="table-row text-body"><span>Pada menu utama, pilih <strong>Transaksi Lainnya</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 248 -->2<!-- /react-text --><!-- react-text: 249 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bca-02"></i></td>
+                                                                    <td class="table-row text-body"><span>Pilih <strong>Transfer</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 256 -->3<!-- /react-text --><!-- react-text: 257 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bca-03"></i></td>
+                                                                    <td class="table-row text-body"><span>lalu pilih <strong>Rekening BCA Virtual Account</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 264 -->4<!-- /react-text --><!-- react-text: 265 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bca-04"></i></td>
+                                                                    <td class="table-row text-body"><span>Masukkan nomor rekening dengan nomor Virtual Account Anda (contoh: 7810202001539202) dan pilih <strong> Benar</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 272 -->5<!-- /react-text --><!-- react-text: 273 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bca-05"></i></td>
+                                                                    <td class="table-row text-body"><span>Masukan jumlah yang ingin dibayarkan dan pilih <strong>Benar</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 272 -->6<!-- /react-text --><!-- react-text: 273 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bca-06"></i></td>
+                                                                    <td class="table-row text-body"><span>Ketika muncul konfirmasi pembayaran pastikan semua <strong>info sudah benar</strong> dan silahkan pilih <strong>Ya</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 280 -->7<!-- /react-text --><!-- react-text: 281 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bca-07"></i></td>
+                                                                    <td class="table-row text-body"><span>Voila! Transaksi telah selesai dan silahkan ambil bukti pembayaran anda.</span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="bcaint" class="tab-pane" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 292 -->1<!-- /react-text --><!-- react-text: 293 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Silahkan login ke aplikasi KlikBCA Individual, kemudian pilih Menu <strong>Transfer Dana</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 298 -->2<!-- /react-text --><!-- react-text: 299 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Lalu pilih menu <strong>Transfer ke BCA Virtual Account</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 304 -->3<!-- /react-text --><!-- react-text: 305 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan nomor Virtual Account (contoh: 7810202001539202) kemudian klik <strong>Lanjutkan</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 304 -->4<!-- /react-text --><!-- react-text: 305 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan nominal yang ingin dibayarkan kemudian klik <strong>Lanjutkan</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 304 -->5<!-- /react-text --><!-- react-text: 305 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Validasi pembayaran kemudian klik <strong>Kirim</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 310 -->6<!-- /react-text --><!-- react-text: 311 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Cetak <strong> nomor referensi </strong> sebagai <strong> bukti transfer </strong>Anda</span>.</td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="bcamob" class="tab-pane">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1170 -->1<!-- /react-text --><!-- react-text: 1171 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Silahkan login Mobile Banking, lalu pilih menu <strong>m-BCA</strong> lalu masukan kode akses m-BCA.</span></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1176 -->2<!-- /react-text --><!-- react-text: 1177 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Setelah itu pilih <strong>m-Transfer</strong> lalu pilih <strong>BCA Virtual Account</strong>.</span></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1182 -->3<!-- /react-text --><!-- react-text: 1183 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan nomor Virtual Account Anda (contoh: 7810202001539202) kemudian klik </strong>OK</strong>.</span></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1182 -->4<!-- /react-text --><!-- react-text: 1183 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan jumlah yang ingin dibayarkan kemudian klik </strong>OK</strong>.</span></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1188 -->5<!-- /react-text --><!-- react-text: 1189 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan <strong>PIN m-BCA</strong> lalu klik <strong>OK</strong>.</span></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1194 -->6<!-- /react-text --><!-- react-text: 1195 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Transaksi sudah selesai. Simpan <strong>notifikasi</strong> sebagai <strong>bukti bayar</strong>.</span></td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="card-titles">
+                                            <div class="contents">
+                                                <span>Kirim instruksi pembayaran ke email Anda?</span>
+                                            </div>
+                                        </div>
+                                        <form>
+                                            <div class="input-group input-pay col-xs-12">
+                                                <input type="email" class="" placeholder="masukan alamat email anda">
+                                                <span class="bar"></span>
+
+                                                <span class="helper danger hide"></span>
+                                                <div class="icons"><i class="sprite icon pencil"></i></div>
+                                            </div>
+                                            <input type="submit" style="display: none;">
+                                        </form>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="button-main show">
+                    <a class="button-main-content" href="#/">
+                        <div class="text-button-main"><span>Lihat Nomor Rekening</span></div>
+                        <div class="sprite btn-main-next"></div>
+                    </a>
+                </div>*@
+                </section>
+            </div>
+        </div>
+        <div id="mandirirek" class="item-pay">
+            <a name="item3"></a>
+
+            <div class="konten bg-mandiri">
+                <div class="button-main btn-main2">
+                    <a class="button-main-content" href="@Url.Action("PaymentSuccess","Booking")">
+                        <div class="text-button-main">
+                            <span>Mohon Selesaikan Pembayaran</span>
+                        </div>
+                        <div class="sprite btn-main-next"></div>
+                    </a>
+                </div>
+                <div class="header-pay">
+                    <div class="left">
+                        <img src="~/template/img/Jing_e 1.png" alt="Alternate Text" />
+                    </div>
+                    <div class="right">
+                        <h4>Mandiri</h4>
+                    </div>
+                </div>
+
+                <section class="bg-pay ">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="content-pay">
+                                    <div class="section-pay">
+                                        <div class="amount">
+                                            <div class="amount-title float-left">
+                                                <span class="text-amount-title">jumlah</span>
+                                            </div>
+                                            <div class="amount-content float-right">
+                                                <span class="text-amount-rp">Rp </span>
+                                                @*<span class="text-amount-amount">@Model.TotalPay</span>*@
+                                                <label class="text-amount-amount amountlines">@Model.TotalPay</label>
+                                            </div>
+                                        </div>
+                                        <div class="order-id-optional">
+                                            <strong>Order ID</strong>
+                                            <div class="pull-right">@Model.OrderNo</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="content-pay">
+                                    <div class="notice primary">
+                                        @*<div class="contents">
+                                            <span>Harap selesaikan pembayaran sebelum: </span>
+                                            <strong>10 April 09:55 WIB</strong>
+                                        </div>*@
+                                    </div>
+                                    <div class="main">
+                                        <div class="main-content">
+                                            <span class="text-main-title">Nomor rekening</span>
+                                            <span class="text-main-content">
+                                                <div class="code">
+                                                    @*<label class="part" id="no_va"></label>*@
+                                                    @*<span class="part">9881</span><span class="part">1188</span>
+                                                        <span class="part">9255</span><span class="part">4854</span>*@
+                                                    <input type="text" id="no_va" readonly>
+                                                    <div class="clipboard">
+                                                        <div class="tooltip">
+                                                            <i class="fas fa-copy m-l-5" onclick="myCopyrek()" onmouseout="outFuncrek()">
+                                                                <span class="tooltiptext" id="myTooltip">Copy to clipboard</span> Copy
+                                                            </i>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="content-pay">
+                                    <div class="card-pay">
+                                        <div class="card-title">
+                                            <div class="contents">
+                                                <span>Cara Pembayaran</span>
+                                                <span class="pull-right bank-sprite mandiri"></span>
+                                            </div>
+                                        </div>
+                                        <div class="tabs full">
+                                            <ul class="nav nav-tabs nav-justified" id="pills-tab" role="tablist">
+                                                <li class="nav-item "><a href="#mandiritab2" data-toggle="pill" class="text-actionable nav-link active" role="tab" aria-controls="pills-home" aria-selected="true">ATM Mandiri</a></li>
+                                                <li class="nav-item"><a href="#mandiriint2" data-toggle="pill" class="text-actionable nav-link" role="tab" aria-controls="pills-profile" aria-selected="false">Internet Banking</a></li>
+                                            </ul>
+                                            <div class="tab-content" id="pills-tabContent">
+                                                <div class="tab-pane active" id="mandiritab2" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 240 -->1<!-- /react-text --><!-- react-text: 241 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en mandiri-01"></i></td>
+                                                                    <td class="table-row text-body"><span>Pada menu utama, pilih <strong>Bayar/Beli</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 248 -->2<!-- /react-text --><!-- react-text: 249 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en mandiri-02"></i></td>
+                                                                    <td class="table-row text-body"><span>Pilih <strong>Lainnya</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 256 -->3<!-- /react-text --><!-- react-text: 257 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en mandiri-03"></i></td>
+                                                                    <td class="table-row text-body"><span>Pilih <strong>Multi Payment</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 264 -->4<!-- /react-text --><!-- react-text: 265 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img">@*<i class="va-sprite va-en mandiri-04">*@</i></td>
+                                                                    <td class="table-row text-body"><span>Pilih Penyedia <strong>"FasPay"</strong> dan pilih<strong> Lanjut</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 272 -->5<!-- /react-text --><!-- react-text: 273 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en mandiri-05"></i></td>
+                                                                    <td class="table-row text-body"><span>Masukkan <strong>"Nomor Virtual Account"</strong>  dan <strong>"Nominal"</strong> yang akan dibayarkan lalu tekan <strong>Benar</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 280 -->6<!-- /react-text --><!-- react-text: 281 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en mandiri-06"></i></td>
+                                                                    <td class="table-row text-body"><span>Pada halaman konfirmasi akan muncul detail pembayaran Anda. Jika informasi telah sesuai tekan <strong>Ya</strong>.</span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="mandiriint2" class="tab-pane" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 292 -->1<!-- /react-text --><!-- react-text: 293 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Login ke Internet Banking Mandiri <a href="https://ib.bankmandiri.co.id/">(https://ib.bankmandiri.co.id/)</a>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 298 -->2<!-- /react-text --><!-- react-text: 299 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Pada menu utama, pilih <strong>Bayar</strong>, lalu pilih <strong>Multi Payment</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 304 -->3<!-- /react-text --><!-- react-text: 305 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Pilih akun Anda di <strong>Dari Rekening</strong>, kemudian di Penyedia Jasa pilih <strong>Faspay</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 310 -->4<!-- /react-text --><!-- react-text: 311 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan <strong>"Nomor Virtual Account"</strong> dan <strong>"Nominal"</strong> yang akan dibayarkan dan klik <strong>Lanjut</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 316 -->5<!-- /react-text --><!-- react-text: 317 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukan PIN dan Transaksi Selesai, simpan bukti pembayaran Anda</span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="card-titles">
+                                            <div class="contents">
+                                                <span>Kirim instruksi pembayaran ke email Anda?</span>
+                                            </div>
+                                        </div>
+                                        <form>
+                                            <div class="input-group input-pay col-xs-12">
+                                                <input type="email" class="" placeholder="masukan alamat email anda">
+                                                <span class="bar"></span>
+
+                                                <span class="helper danger hide"></span>
+                                                <div class="icons"><i class="sprite icon pencil"></i></div>
+                                            </div>
+                                            <input type="submit" style="display: none;">
+                                        </form>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="button-main show">
+                            <a class="button-main-content" href="#/">
+                                <div class="text-button-main"><span>Lihat Nomor Rekening</span></div>
+                                <div class="sprite btn-main-next"></div>
+                            </a>
+                        </div>*@
+                </section>
+            </div>
+        </div>
+        <div id="bnirek" class="item-pay">
+            <a name="item4"></a>
+            <div class="konten bg-mandiri">
+                <div class="button-main btn-main4">
+                    <a class="button-main-content" href="@Url.Action("PaymentSuccess","Booking")">
+                        <div class="text-button-main">
+                            <span>Mohon Selesaikan Pembayaran</span>
+                        </div>
+                        <div class="sprite btn-main-next"></div>
+                    </a>
+                </div>
+                <div class="header-pay">
+                    <div class="left">
+
+                        <img src="~/template/img/Jing_e 1.png" alt="Alternate Text" />
+                    </div>
+                    <div class="right">
+                        <h4>BNI</h4>
+                    </div>
+                </div>
+
+                <section class="bg-pay ">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="content-pay">
+                                    <div class="section-pay">
+                                        <div class="amount">
+                                            <div class="amount-title float-left">
+                                                <span class="text-amount-title">jumlah</span>
+                                            </div>
+                                            <div class="amount-content float-right">
+                                                <span class="text-amount-rp">Rp </span>
+
+                                                @*<span class="text-amount-amount">@Model.TotalPay</span>*@
+                                                <label class="amountlines">@Model.TotalPay</label>
+                                            </div>
+                                        </div>
+                                        <div class="order-id-optional">
+                                            <strong>Order ID</strong>
+                                            <div class="pull-right">@Model.OrderNo</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="content-pay">
+                                    <div class="notice primary">
+                                        @*<div class="contents">
+                                            <span>Harap selesaikan pembayaran sebelum: </span>
+                                            <strong>10 April 09:55 WIB</strong>
+                                        </div>*@
+                                    </div>
+                                    <div class="main">
+                                        <div class="main-content">
+                                            <span class="text-main-title">Nomor rekening</span>
+                                            <span class="text-main-content">
+                                                <div class="code">
+                                                    <input type="text" id="no_va_bni" readonly>
+                                                    <div class="clipboard">
+                                                        <div class="tooltip">
+                                                            <i class="fas fa-copy m-l-5" onclick="myCopyrekbni()" onmouseout="outFuncrekbni()">
+                                                                <span class="tooltiptext" id="myTooltiprekbni">Copy to clipboard</span> Copy
+                                                            </i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="content-pay">
+                                    <div class="card-pay">
+                                        <div class="card-title">
+                                            <div class="contents">
+                                                <span>Cara Pembayaran</span>
+                                                <span class="pull-right bank-sprite bni"></span>
+                                            </div>
+                                        </div>
+                                        <div class="tabs full">
+                                            <ul class="nav nav-tabs nav-justified" id="pills-tab" role="tablist">
+                                                <li class="nav-item nav-bni"><a href="#bnitab2" data-toggle="pill" class="text-actionable nav-link active" role="tab" aria-controls="pills-home" aria-selected="true">ATM BNI</a></li>
+                                                <li class="nav-item nav-bni"><a href="#bniint2" data-toggle="pill" class="text-actionable nav-link" role="tab" aria-controls="pills-profile" aria-selected="false">Internet Banking</a></li>
+                                                <li class="nav-item nav-bni"><a href="#bnimob2" data-toggle="pill" class="text-actionable nav-link" role="tab" aria-controls="pills-profile" aria-selected="false">Mobile Banking</a></li>
+                                            </ul>
+                                            <div class="tab-content" id="pills-tabContent">
+                                                <div class="tab-pane active" id="bnitab2" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 240 -->1<!-- /react-text --><!-- react-text: 241 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-01"></i></td>
+                                                                    <td class="table-row text-body"><span>Pada menu utama, pilih <strong>Menu Lainnya</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 248 -->2<!-- /react-text --><!-- react-text: 249 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-02"></i></td>
+                                                                    <td class="table-row text-body"><span>Pilih <strong>Transfer</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 256 -->3<!-- /react-text --><!-- react-text: 257 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-03"></i></td>
+                                                                    <td class="table-row text-body"><span>Pilih <strong>Rekening Tabungan</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 264 -->4<!-- /react-text --><!-- react-text: 265 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-04"></i></td>
+                                                                    <td class="table-row text-body"><span>Pilih <strong>Ke Rekening BNI</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 272 -->5<!-- /react-text --><!-- react-text: 273 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-05"></i></td>
+                                                                    <td class="table-row text-body"><span>Masukkan nomor virtual account dan pilih <strong>tekan jika Benar</strong> Anda lalu tekan <strong>Benar</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 280 -->6<!-- /react-text --><!-- react-text: 281 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-06"></i></td>
+                                                                    <td class="table-row text-body"><span>Masukkan jumlah tagihan yang akan anda bayar secara lengkap. Pembayaran dengan jumlah tidak sesuai akan otomatis ditolak.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 272 -->7<!-- /react-text --><!-- react-text: 273 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-07"></i></td>
+                                                                    <td class="table-row text-body"><span>Jumlah yang dibayarkan, nomor rekening dan nama Merchant akan ditampilkan. Jika informasi telah sesuai, tekan  <strong>Ya</strong></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 280 -->8<!-- /react-text --><!-- react-text: 281 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-08"></i></td>
+                                                                    <td class="table-row text-body"><span>Transaksi Anda sudah selesai.</span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="bniint2" class="tab-pane" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 292 -->1<!-- /react-text --><!-- react-text: 293 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Ketik alamat <a href="https://ibank.bni.co.id/">(https://ibank.bni.co.id/)</a>kemudia klik <strong>Masuk</strong></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 298 -->2<!-- /react-text --><!-- react-text: 299 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Silakan masukkan <strong>User ID</strong>dan<strong>Password</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 304 -->3<!-- /react-text --><!-- react-text: 305 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Klik Menu <strong>Transfer</strong> kemudian pilih <strong>Tambah Rekening Favorit.</strong></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 310 -->4<!-- /react-text --><!-- react-text: 311 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan nama, nomor rekening, dan email, lalu klik <strong>Lanjut</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 316 -->5<!-- /react-text --><!-- react-text: 317 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan <strong>Kode Otentikasi</strong> dari token Anda dan klik <strong>Lanjut</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 316 -->6<!-- /react-text --><!-- react-text: 317 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Kembali ke menu utama dan pilih <strong>Transfer</strong> lalu <strong>Transfer Antar Rekening BNI</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 316 -->7<!-- /react-text --><!-- react-text: 317 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Pilih rekening yang telah Anda favoritkan sebelumnya di <strong>Rekening Tujuan</strong> lalu lanjutkan pengisian, dan tekan <strong>Lanjut</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 316 -->8<!-- /react-text --><!-- react-text: 317 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Pastikan detail transaksi Anda benar, lalu masukkan <strong>Kode Otentikasi</strong> dan tekan <strong>Lanjut</strong>.</span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="bnimob2" class="tab-pane active">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1170 -->1<!-- /react-text --><!-- react-text: 1171 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Buka aplikasi BNI Mobile Banking dan login</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1176 -->2<!-- /react-text --><!-- react-text: 1177 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Pilih menu Transfer</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1182 -->3<!-- /react-text --><!-- react-text: 1183 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Pilih menu Virtual Account Billing</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1188 -->4<!-- /react-text --><!-- react-text: 1189 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Pilih rekening debit yang akan digunakan</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1194 -->5<!-- /react-text --><!-- react-text: 1195 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Pilih menu Input Baru dan masukkan 16 digit nomor Virtual Account</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1200 -->6<!-- /react-text --><!-- react-text: 1201 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Informasi tagihan akan muncul pada halaman validasi</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1206 -->7<!-- /react-text --><!-- react-text: 1207 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Jika informasi telah sesuai, masukkan Password Transaksi dan klik Lanjut</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1212 -->8<!-- /react-text --><!-- react-text: 1213 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Transaksi Anda akan diproses</span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="card-titles">
+                                            <div class="contents">
+                                                <span>Kirim instruksi pembayaran ke email Anda?</span>
+                                            </div>
+                                        </div>
+                                        <form>
+                                            <div class="input-group input-pay col-xs-12">
+                                                <input type="email" class="" placeholder="masukan alamat email anda">
+                                                <span class="bar"></span>
+
+                                                <span class="helper danger hide"></span>
+                                                <div class="icons"><i class="sprite icon pencil"></i></div>
+                                            </div>
+                                            <input type="submit" style="display: none;">
+                                        </form>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="button-main show">
+                            <a class="button-main-content" href="#/">
+                                <div class="text-button-main"><span>Lihat Nomor Rekening</span></div>
+                                <div class="sprite btn-main-next"></div>
+                            </a>
+                        </div>*@
+                </section>
+            </div>
+        </div>
+        <div id="brirek" class="item-pay" >
+            <a name="item5"></a>
+
+            <div class="konten bg-mandiri">
+                <div class="button-main btn-main6">
+                    <a class="button-main-content" href="@Url.Action("PaymentSuccess","Booking")">
+                        <div class="text-button-main">
+                            <span>Mohon Selesaikan Pembayaran</span>
+                        </div>
+                        <div class="sprite btn-main-next"></div>
+                    </a>
+                </div>
+                <div class="header-pay">
+                    <div class="left">
+                        <img src="~/template/img/Jing_e 1.png" alt="Alternate Text" />
+                    </div>
+                    <div class="right">
+                        <h4>BRI</h4>
+                    </div>
+                </div>
+
+                <section class="bg-pay ">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="content-pay">
+                                    <div class="section-pay">
+                                        <div class="amount">
+                                            <div class="amount-title float-left">
+                                                <span class="text-amount-title">jumlah</span>
+                                            </div>
+                                            <div class="amount-content float-right">
+                                                <span class="text-amount-rp">Rp </span>
+                                                @*<span class="text-amount-amount">@Model.TotalPay</span>*@
+                                                <label class="text-amount-amount amountlines">@Model.TotalPay</label>
+                                            </div>
+                                        </div>
+                                        <div class="order-id-optional">
+                                            <strong>Order ID</strong>
+                                            <div class="pull-right">@Model.OrderNo</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="content-pay">
+                                    <div class="notice primary">
+                                        @*<div class="contents">
+                                            <span>Harap selesaikan pembayaran sebelum: </span>
+                                            <strong>10 April 09:55 WIB</strong>
+                                        </div>*@
+                                    </div>
+                                        <div class="main">
+                                            <div class="main-content">
+                                                <span class="text-main-title">Nomor rekening</span>
+                                                <span class="text-main-content">
+                                                    <div class="code">
+                                                        @*<label class="part" id="no_va"></label>*@
+                                                        @*<span class="part">9881</span><span class="part">1188</span>
+                        <span class="part">9255</span><span class="part">4854</span>*@
+                                                        <input type="text" id="no_va_bri" readonly style="border:none;">
+                                                        <div class="clipboard">
+                                                            <div class="tooltip">
+                                                                <i class="fas fa-copy m-l-5" onclick="myCopyrekbri()" onmouseout="outFuncrekbri()">
+                                                                    <span class="tooltiptext" id="myTooltiprekbri">Copy to clipboard</span> Copy
+                                                                </i>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <div class="content-pay">
+                                    <div class="card-pay">
+                                        <div class="card-title">
+                                            <div class="contents">
+                                                <span>Cara Pembayaran</span>
+                                                @*<span class="pull-right bank-sprite mandiri"></span>*@
+                                                <img class="pull-right" src="~/template/img/Logo-Bank-BRI.png" alt="Alternate Text" style="width:70px;" />
+                                            </div>
+                                        </div>
+                                        <div class="tabs full">
+                                            <ul class="nav nav-tabs nav-justified" id="pills-tab" role="tablist">
+                                                <li class="nav-item nav-bni"><a href="#britab2" data-toggle="pill" class="text-actionable nav-link active" role="tab" aria-controls="pills-brirektab" aria-selected="true">ATM BRI</a></li>
+                                                <li class="nav-item nav-bni"><a href="#briint2" data-toggle="pill" class="text-actionable nav-link" role="tab" aria-controls="pills-briinttab" aria-selected="false">Internet Banking</a></li>
+                                                <li class="nav-item nav-bni"><a href="#brimob2" data-toggle="pill" class="text-actionable nav-link" role="tab" aria-controls="pills-briintmob" aria-selected="false">Mobile Banking</a></li>
+                                            </ul>
+                                            <div class="tab-content" id="pills-tabContent">
+                                                <div class="tab-pane active" id="britab2" role="tabpanel" aria-labelledby="pills-brirektab-tab">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 240 -->1<!-- /react-text --><!-- react-text: 241 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-01"></i></td>
+                                                                    <td class="table-row text-body"><span>Pada menu utama, pilih <strong>Transaksi Lain</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 248 -->2<!-- /react-text --><!-- react-text: 249 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-02"></i></td>
+                                                                    <td class="table-row text-body"><span>Pilih <strong>Pembayaran</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 256 -->3<!-- /react-text --><!-- react-text: 257 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-03"></i></td>
+                                                                    <td class="table-row text-body"><span>Setelah itu klik menu <strong>Lainnya</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 264 -->4<!-- /react-text --><!-- react-text: 265 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-04"></i></td>
+                                                                    <td class="table-row text-body"><span>lalu pilih menu <strong>Briva</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 272 -->5<!-- /react-text --><!-- react-text: 273 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-05"></i></td>
+                                                                    <td class="table-row text-body"><span>Masukkan nomor rekening dengan nomor Virtual Account Anda (contoh: 7810202001539202) dan pilih <strong> Benar</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 280 -->6<!-- /react-text --><!-- react-text: 281 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-06"></i></td>
+                                                                    <td class="table-row text-body"><span>Ketika muncul konfirmasi pembayaran, silahkan pilih Ya.</span></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 280 -->7<!-- /react-text --><!-- react-text: 281 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bni-08"></i></td>
+                                                                    <td class="table-row text-body"><span>Voila! Transaksi telah selesai dan silahkan ambil bukti pembayaran anda</span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="briint2" class="tab-pane" role="tabpanel" aria-labelledby="pills-briinttab-tab">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 292 -->1<!-- /react-text --><!-- react-text: 293 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Silahkan login Internet Banking, kemudian pilih Menu <strong>Pembayaran</strong></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 298 -->2<!-- /react-text --><!-- react-text: 299 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Lalu pilih menu <strong>Brivia</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 304 -->3<!-- /react-text --><!-- react-text: 305 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan nomor rekening dengan nomor Virtual Account Anda (contoh: 7810202001539202) kemudian klik <strong>Kirim</strong></span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 310 -->4<!-- /react-text --><!-- react-text: 311 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Setelah itu, masukkan <strong> password </strong> serta <strong> mToken internet banking </strong></span></td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="brimob2" class="tab-pane active" aria-labelledby="pills-briintmob-tab">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1170 -->1<!-- /react-text --><!-- react-text: 1171 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Silahkan login Mobile Banking, lalu pilih menu Pembayaran</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1176 -->2<!-- /react-text --><!-- react-text: 1177 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Setelah itu klik menu Brivia</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1182 -->3<!-- /react-text --><!-- react-text: 1183 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan nomor rekening dengan nomor Virtual Account Anda (contoh: 7810202001539202) dan jangan lupa tuliskan jumlah nominal tagihan yang ada di invoice</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1188 -->4<!-- /react-text --><!-- react-text: 1189 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Lalu masukkan PIN Mobile Banking dan klik Kirim</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1194 -->5<!-- /react-text --><!-- react-text: 1195 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Transaksi sudah selesai. Bukti pembayaran anda akan dikirimkan melalui notifikasi SMS</span></td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="card-titles">
+                                            <div class="contents">
+                                                <span>Kirim instruksi pembayaran ke email Anda?</span>
+                                            </div>
+                                        </div>
+                                        <form>
+                                            <div class="input-group input-pay col-xs-12">
+                                                <input type="email" class="" placeholder="masukan alamat email anda">
+                                                <span class="bar"></span>
+
+                                                <span class="helper danger hide"></span>
+                                                <div class="icons"><i class="sprite icon pencil"></i></div>
+                                            </div>
+                                            <input type="submit" style="display: none;">
+                                        </form>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="button-main show">
+                            <a class="button-main-content" href="#/">
+                                <div class="text-button-main"><span>Lihat Nomor Rekening</span></div>
+                                <div class="sprite btn-main-next"></div>
+                            </a>
+                        </div>*@
+                </section>
+            </div>
+        </div>
+        <div id="bcarek" class="item-pay" >
+            @* style="display: none;"*@
+        <a name="item6"></a>
+
+        <div class="konten bg-mandiri">
+            <div class="button-main btn-main8">
+                <a class="button-main-content" href="@Url.Action("PaymentSuccess","Booking")">
+                    <div class="text-button-main">
+                        <span>Mohon Selesaikan Pembayaran</span>
+                    </div>
+                    <div class="sprite btn-main-next"></div>
+                </a>
+            </div>
+            <div class="header-pay">
+                <div class="left">
+                    <img src="~/template/img/Jing_e 1.png" alt="Alternate Text" />
+                </div>
+                <div class="right">
+                    <h4>BCA</h4>
+                </div>
+            </div>
+            <section class="bg-pay ">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="content-pay">
+                                <div class="section-pay">
+                                    <div class="amount">
+                                        <div class="amount-title float-left">
+                                            <span class="text-amount-title">jumlah</span>
+                                        </div>
+                                        <div class="amount-content float-right">
+                                            <span class="text-amount-rp">Rp </span>
+                                            @*<span class="text-amount-amount">@Model.TotalPay</span>*@
+            <label class="text-amount-amount amountlines">@Model.TotalPay</label>
+        </div>
+                                        </div>
+                                        <div class="order-id-optional">
+                                            <strong>Order ID</strong>
+                                            <div class="pull-right">@Model.OrderNo</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="content-pay">
+                                    <div class="notice primary">
+                                        @*<div class="contents">
+                                            <span>Harap selesaikan pembayaran sebelum: </span>
+                                            <strong>10 April 09:55 WIB</strong>
+                                        </div>*@
+                                    </div>
+                                    <div class="main">
+                                        <div class="main-content">
+                                            <span class="text-main-title">Nomor rekening</span>
+                                            <span class="text-main-content">
+                                                <div class="code">
+                                                    @*<label class="part" id="no_va"></label>*@
+                                                    @*<span class="part">9881</span><span class="part">1188</span>
+                            <span class="part">9255</span><span class="part">4854</span>*@
+                                                    <input type="text" id="no_va_bca" readonly style="border:none;">
+                                                    <div class="clipboard">
+                                                        <div class="tooltip">
+                                                            <i class="fas fa-copy m-l-5" onclick="myCopyrekbca()" onmouseout="outFuncrekbca()">
+                                                                <span class="tooltiptext" id="myTooltiprekbca">Copy to clipboard</span> Copy
+                                                            </i>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="content-pay">
+                                    <div class="card-pay">
+                                        <div class="card-title">
+                                            <div class="contents">
+                                                <span>Cara Pembayaran</span>
+                                                <span class="pull-right bank-sprite bca"></span>
+                                            </div>
+                                        </div>
+                                        <div class="tabs full">
+                                            <ul class="nav nav-tabs nav-justified" id="pills-tab" role="tablist">
+                                                <li class="nav-item nav-bni"><a href="#bcatab" data-toggle="pill" class="text-actionable nav-link active" role="tab" aria-controls="pills-home" aria-selected="true">ATM BCA</a></li>
+                                                <li class="nav-item nav-bni"><a href="#bcaint" data-toggle="pill" class="text-actionable nav-link" role="tab" aria-controls="pills-profile" aria-selected="false">Klik BCA Individual</a></li>
+                                                <li class="nav-item nav-bni"><a href="#bcamob" data-toggle="pill" class="text-actionable nav-link" role="tab" aria-controls="pills-profile" aria-selected="false">Mobile Banking</a></li>
+                                            </ul>
+                                            <div class="tab-content" id="pills-tabContent">
+                                                <div class="tab-pane active" id="bcatab" role="tabpanel" aria-labelledby="pills-home-tab">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 240 -->1<!-- /react-text --><!-- react-text: 241 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bca-01"></i></td>
+                                                                    <td class="table-row text-body"><span>Pada menu utama, pilih <strong>Transaksi Lainnya</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 248 -->2<!-- /react-text --><!-- react-text: 249 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bca-02"></i></td>
+                                                                    <td class="table-row text-body"><span>Pilih <strong>Transfer</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 256 -->3<!-- /react-text --><!-- react-text: 257 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bca-03"></i></td>
+                                                                    <td class="table-row text-body"><span>lalu pilih <strong>Rekening BCA Virtual Account</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 264 -->4<!-- /react-text --><!-- react-text: 265 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bca-04"></i></td>
+                                                                    <td class="table-row text-body"><span>Masukkan nomor rekening dengan nomor Virtual Account Anda (contoh: 7810202001539202) dan pilih <strong> Benar</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 272 -->5<!-- /react-text --><!-- react-text: 273 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bca-05"></i></td>
+                                                                    <td class="table-row text-body"><span>Masukan jumlah yang ingin dibayarkan dan pilih <strong>Benar</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 272 -->6<!-- /react-text --><!-- react-text: 273 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bca-06"></i></td>
+                                                                    <td class="table-row text-body"><span>Ketika muncul konfirmasi pembayaran pastikan semua <strong>info sudah benar</strong> dan silahkan pilih <strong>Ya</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 280 -->7<!-- /react-text --><!-- react-text: 281 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row table-img"><i class="va-sprite va-en bca-07"></i></td>
+                                                                    <td class="table-row text-body"><span>Voila! Transaksi telah selesai dan silahkan ambil bukti pembayaran anda.</span></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="bcaint" class="tab-pane" role="tabpanel" aria-labelledby="pills-profile-tab">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 292 -->1<!-- /react-text --><!-- react-text: 293 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Silahkan login ke aplikasi KlikBCA Individual, kemudian pilih Menu <strong>Transfer Dana</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 298 -->2<!-- /react-text --><!-- react-text: 299 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Lalu pilih menu <strong>Transfer ke BCA Virtual Account</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 304 -->3<!-- /react-text --><!-- react-text: 305 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan nomor Virtual Account (contoh: 7810202001539202) kemudian klik <strong>Lanjutkan</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 304 -->4<!-- /react-text --><!-- react-text: 305 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan nominal yang ingin dibayarkan kemudian klik <strong>Lanjutkan</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 304 -->5<!-- /react-text --><!-- react-text: 305 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Validasi pembayaran kemudian klik <strong>Kirim</strong>.</span></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 310 -->6<!-- /react-text --><!-- react-text: 311 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Cetak <strong> nomor referensi </strong> sebagai <strong> bukti transfer </strong>Anda</span>.</td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div id="bcamob" class="tab-pane">
+                                                    <div class="content-table scroll">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1170 -->1<!-- /react-text --><!-- react-text: 1171 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Silahkan login Mobile Banking, lalu pilih menu <strong>m-BCA</strong> lalu masukan kode akses m-BCA.</span></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1176 -->2<!-- /react-text --><!-- react-text: 1177 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Setelah itu pilih <strong>m-Transfer</strong> lalu pilih <strong>BCA Virtual Account</strong>.</span></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1182 -->3<!-- /react-text --><!-- react-text: 1183 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan nomor Virtual Account Anda (contoh: 7810202001539202) kemudian klik </strong>OK</strong>.</span></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1182 -->4<!-- /react-text --><!-- react-text: 1183 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan jumlah yang ingin dibayarkan kemudian klik </strong>OK</strong>.</span></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1188 -->5<!-- /react-text --><!-- react-text: 1189 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Masukkan <strong>PIN m-BCA</strong> lalu klik <strong>OK</strong>.</span></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td class="table-row table-numeric text-body"><!-- react-text: 1194 -->6<!-- /react-text --><!-- react-text: 1195 -->.<!-- /react-text --></td>
+                                                                    <td class="table-row text-body"><span>Transaksi sudah selesai. Simpan <strong>notifikasi</strong> sebagai <strong>bukti bayar</strong>.</span></td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr />
+                                        <div class="card-titles">
+                                            <div class="contents">
+                                                <span>Kirim instruksi pembayaran ke email Anda?</span>
+                                            </div>
+                                        </div>
+                                        <form>
+                                            <div class="input-group input-pay col-xs-12">
+                                                <input type="email" class="" placeholder="masukan alamat email anda">
+                                                <span class="bar"></span>
+
+                                                <span class="helper danger hide"></span>
+                                                <div class="icons"><i class="sprite icon pencil"></i></div>
+                                            </div>
+                                            <input type="submit" style="display: none;">
+                                        </form>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="button-main show">
+                    <a class="button-main-content" href="#/">
+                        <div class="text-button-main"><span>Lihat Nomor Rekening</span></div>
+                        <div class="sprite btn-main-next"></div>
+                    </a>
+                </div>*@
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+
+            //get all link with class panel
+            $('a.panels').click(function () {
+
+                //reset and highlight the clicked link
+                $('a.panel').removeClass('selected');
+                $(this).addClass('selected');
+
+                //grab the current item, to be used in resize function
+                current = $(this);
+
+                //scroll it to the destination
+                $('#wrapper').scrollTo($(this).attr('href'), 800);
+
+                //cancel the link default behavior
+                return false;
+            });
+
+
+            //resize all the items according to the new browser size
+            $(window).resize(function () {
+
+                //call the resizePanel function
+                resizePanel();
+            });
+
+            function resizePanel() {
+
+                //get the browser width and height
+                width = $(window).width();
+                height = $(window).height();
+
+                //get the mask width: width * total of items
+                mask_width = width * $('.item').length;
+
+                //set the dimension
+                $('#wrapper, .item').css({ width: width, height: height });
+                $('#mask').css({ width: mask_width, height: height });
+
+                //if the item is displayed incorrectly, set it to the corrent pos
+                $('#wrapper').scrollTo($('a.selected').attr('href'), 0);
+
+            }
+
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //Mandiri
+            $(".mandiri-btn").click(function () {
+                $(".btn-main").toggleClass("shows");
+            });
+            $(".mandiri-back").click(function () {
+                $(".btn-main").removeClass("shows");
+            });
+            $(".btn-main").click(function () {
+                $(this).removeClass("shows");
+                $(".btn-main2").addClass("shows");
+            })
+
+            //BNI
+            $(".bni-btn").click(function () {
+                $(".btn-main3").toggleClass("shows");
+            });
+            $(".bni-back").click(function () {
+                $(".btn-main3").removeClass("shows");
+            });
+            $(".btn-main3").click(function () {
+                $(this).removeClass("shows");
+                $(".btn-main4").addClass("shows");
+            })
+
+            //BRI
+            $(".bri-btn").click(function () {
+                $(".btn-main5").toggleClass("shows");
+            });
+            $(".bri-back").click(function () {
+                $(".btn-main5").removeClass("shows");
+            });
+            $(".btn-main5").click(function () {
+                $(this).removeClass("shows");
+                $(".btn-main6").addClass("shows");
+            })
+
+            //BCA
+            $(".bca-btn").click(function () {
+                $(".btn-main7").toggleClass("shows");
+            });
+            $(".bca-back").click(function () {
+                $(".btn-main7").removeClass("shows");
+            });
+            $(".btn-main7").click(function () {
+                $(this).removeClass("shows");
+                $(".btn-main8").addClass("shows");
+            })
+
+        });
+
+    </script>
+    @*<script type="text/javascript">
+            function myCopy() {
+                var copyText = document.getElementById("myCopy");
+                copyText.select();
+                document.execCommand("copy");
+
+                var tooltip = document.getElementById("myTooltip");
+                tooltip.innerHTML = "Copied: " + copyText.value;
+            }
+
+            function outFunc() {
+                var tooltip = document.getElementById("myTooltip");
+                tooltip.innerHTML = "Copy to clipboard";
+            }
+        </script>*@
+}

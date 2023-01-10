@@ -1,0 +1,114 @@
+﻿@model Jingl.General.Model.User.ViewModel.ExploreViewModel
+
+
+<div class="explore">
+    @{
+        int index = 0;
+        @foreach (var item in Model.ListVideo.Where(x=>x.TalentId !=35))
+        {
+    <div class="explore-img lazy">
+        <input type="hidden" class="FileVideoId" id="FileVideoId_@index" value="@item.FileId" />
+        <input type="hidden" class="LinkVideo" id="LinkVideo_@index" value="@item.Link" />
+        <input type="hidden" class="PhotoVideo" id="PhotoVideo_@index" value="@item.ProfImg" />
+        <input type="hidden" class="TalentId" id="TalentId_@index" value="@item.TalentId" />
+        <input type="hidden" class="TalentName" id="TalentName_@index" value="@item.TalentNm" />
+        <input type="hidden" class="CustomerName" id="CustomerName_@index" value="@item.CustomerName" />
+        <input type="hidden" class="ViewCount" id="ViewCount_@index" value="@item.ViewsCount" />
+        <div class="card-explore-top">
+            @*<video id="video" class="embed-responsive-item" style="object-fit: cover; filter:brightness(90%);">
+                <source src="@item.Link" type="video/mp4">
+            </video>*@
+            <img class="thmnail" src="@item.Thumbnails" style="width: 100%" />
+        </div>
+        <a href="#" class="explore-button btn-explore" data-toggle="modal" id="">
+            <img src="~/template/img/iconplaywhite.png" alt="Alternate Text" />
+        </a>
+    </div>
+            index++;
+        }
+    }
+
+
+
+    <!-- Modal -->
+    @*<div class="modal fade" id="modalExplore" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-full" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="modal-title modal-explore-title" id="exampleModalCenterTitle">
+                        <a href="">
+                            <img src="~/template/img/talent1.jpg" class="modal-img" id="modalImg" alt="Alternate Text" />
+                            <span class="modalName" id="modalName">Modal title</span>
+                        </a>
+                    </div>
+                    <button type="button" class="close modalClose" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" style="padding: 0 !important">
+                    <div class="embed-responsive embed-responsive-4by3 card-modal-top">
+                        <video class="embed-responsive-item" id="videoplayerexplore" controls>
+                            <source src="~/template/img/P6090053.mp4" type="video/mp4">
+                        </video>
+                        @*<div id="playButton" class="playButton" onclick="playPause()"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>*@
+
+    <div class="modal fade" id="modalExplore" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-full" role="document">
+            <div class="modal-content">
+                @*<div class="modal-header">
+                    <div class="modal-title modal-explore-title" id="exampleModalCenterTitle">
+                        <a href="">
+                            <img src="~/template/img/talent1.jpg" class="modal-img" id="modalImg" alt="Alternate Text" />
+                            <span class="modalName" id="modalName">Modal title</span>
+                        </a>
+                    </div>
+                    <button type="button" class="close modalClose" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>*@
+                <div class="modal-body" style="padding: 0 !important; position: relative;">
+                    <div class="modal-head-explore" id="headExplore">
+                        <a href="#" id="TalentLink">
+                            <img src="~/template/img/jkt2.png" class="modal-img" id="modalImg" alt="Alternate Text" />
+                            <div class="head-eye">
+                                <span class="modalName" id="modalName">Modal title</span>
+                                <span style="color:rgba(255,255,255,0.75);"><label style="color:rgba(255,255,255,0.75);" id="views"></label> dilihat</span>
+                            </div>
+                           
+                        </a>
+                        <button type="button" class="close modalClose" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="embed-responsive embed-responsive-4by3 card-modal-top">
+                        <video class="embed-responsive-item" id="videoplayerexplore" controls>
+                            <source src="#" type="video/mp4">
+                        </video>
+                        @*<div id="playButton" class="playButton" onclick="playPause()"></div>*@
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{ 
+    <script>
+        $(document).ready(function () {
+            $('#videoplayerexplore').click(function () {
+                alert('clik me');
+                $('#headExplore').fadeOut("slow");
+             
+            })
+        })
+
+
+    </script>
+}

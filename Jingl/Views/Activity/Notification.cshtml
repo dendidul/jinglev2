@@ -1,0 +1,193 @@
+﻿
+@model Jingl.General.Model.User.ViewModel.NotificationViewModel
+@{
+    ViewData["Title"] = "Activity";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*@await Html.PartialAsync("_header")*@
+
+@await Html.PartialAsync("~/Views/Shared/_header.cshtml")
+
+<div id="myHeader">
+    <div class="logo-header">
+        <div class="coontainer-fluid">
+            <div class="col-md-12">
+                <div class="headerTop" style="height: 40px;">
+                    <div class="setting-profile" style="left: 13px;right: unset;top: 0;position: absolute;">
+                        <a href="@Url.Action("Index","Home")">
+                            <div class="icon-img">
+                                <img src="/template/img/left-arrow.svg" style="width:25px;" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-auto w-100 p-4 text-white text-center" style="padding-top: 7px !important;">
+                        <h4 style="color: #fff;font-weight: bold;">Notifications</h4>
+                    </div>
+                    @*<img src="~/template/img/Jing_e 2.png" alt="Alternate Text" />*@
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="brhead-activity p-b-10">
+    <h1>Notifications</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="brhead-notif mt10">
+
+
+
+                @{
+                    foreach (var i in Model.UserNotificationList)
+                    {
+                        if (i.NotifCategory == "Claim")
+                        {
+                            <a href="@i.Link">
+                                <div class="brinfo">
+                                    <i class="fas fa-info"></i>
+                                    <div class="brinfo-sub">
+                                        <p>
+                                            <span class="welcome">TARIK DANA  @i.Message</span>
+                                        </p>
+
+
+                                        @{
+                                            var Diff = 0;
+
+                                            if (DateTime.Now.Day - i.CreatedDate.Value.Day > 0)
+                                            {
+                                                Diff = DateTime.Now.Day - i.CreatedDate.Value.Day;
+                                                @:<span class="time">@Diff day ago  </span>
+                                            }
+                                            else if (DateTime.Now.Hour - i.CreatedDate.Value.Hour > 0)
+                                            {
+                                                Diff = DateTime.Now.Hour - i.CreatedDate.Value.Hour;
+                                                @:<span class="time">@Diff hours ago  </span>
+                                            }
+                                            else if (DateTime.Now.Minute - i.CreatedDate.Value.Minute > 0)
+                                            {
+                                                Diff = DateTime.Now.Minute - i.CreatedDate.Value.Minute;
+                                                @:<span class="time">@Diff minutes ago  </span>
+                                            }
+                                            else
+                                            {
+                                                Diff = DateTime.Now.Second - i.CreatedDate.Value.Second;
+                                                @:<span class="time">@Diff seconds ago  </span>
+                                            }
+
+                                        }
+
+
+
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        else
+                        {
+                            if (i.NotifType == "T") // for talent
+                            {
+
+
+                                <a href="@Url.Action("BookingDetail", "Account", new { bookId = i.BookId, notificationId = i.Id })">
+                                    <div class="brinfo">
+                                        <i class="fas fa-info"></i>
+                                        <div class="brinfo-sub">
+                                            <p>
+                                                <span class="welcome">@i.Message</span>
+                                            </p>
+
+
+                                            @{
+                                                var Diff = 0;
+
+                                                if (DateTime.Now.Day - i.CreatedDate.Value.Day > 0)
+                                                {
+                                                    Diff = DateTime.Now.Day - i.CreatedDate.Value.Day;
+                                                    @:<span class="time">@Diff day ago  </span>
+                                                }
+                                                else if (DateTime.Now.Hour - i.CreatedDate.Value.Hour > 0)
+                                                {
+                                                    Diff = DateTime.Now.Hour - i.CreatedDate.Value.Hour;
+                                                    @:<span class="time">@Diff hours ago  </span>
+                                                }
+                                                else if (DateTime.Now.Minute - i.CreatedDate.Value.Minute > 0)
+                                                {
+                                                    Diff = DateTime.Now.Minute - i.CreatedDate.Value.Minute;
+                                                    @:<span class="time">@Diff minutes ago  </span>
+                                                }
+                                                else
+                                                {
+                                                    Diff = DateTime.Now.Second - i.CreatedDate.Value.Second;
+                                                    @:<span class="time">@Diff seconds ago  </span>
+                                                }
+
+                                            }
+
+
+
+                                        </div>
+                                    </div>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("CheckBookingData","Booking",new {bookId =i.BookId,notificationId = i.Id })">
+                                    <div class="brinfo">
+                                        <i class="fas fa-info"></i>
+                                        <div class="brinfo-sub">
+                                            <p>
+                                                <span class="welcome">@i.Message</span>
+                                            </p>
+
+                                            @{
+                                                var Diff = 0;
+
+                                                if (DateTime.Now.Day - i.CreatedDate.Value.Day > 0)
+                                                {
+                                                    Diff = DateTime.Now.Day - i.CreatedDate.Value.Day;
+                                                    @:<span class="time">@Diff day ago  </span>
+                                                }
+                                                else if (DateTime.Now.Hour - i.CreatedDate.Value.Hour > 0)
+                                                {
+                                                    Diff = DateTime.Now.Hour - i.CreatedDate.Value.Hour;
+                                                    @:<span class="time">@Diff hours ago  </span>
+                                                }
+                                                else if (DateTime.Now.Minute - i.CreatedDate.Value.Minute > 0)
+                                                {
+                                                    Diff = DateTime.Now.Minute - i.CreatedDate.Value.Minute;
+                                                    @:<span class="time">@Diff minutes ago  </span>
+                                                }
+                                                else
+                                                {
+                                                    Diff = DateTime.Now.Second - i.CreatedDate.Value.Second;
+                                                    @:<span class="time">@Diff seconds ago  </span>
+                                                }
+
+                                            }
+
+                                        </div>
+                                    </div>
+                                </a>
+                            }
+                        }
+
+
+
+                    }
+
+                }
+
+            </div>
+
+        </div>
+    </div>
+</div>
+

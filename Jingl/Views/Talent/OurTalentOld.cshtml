@@ -1,0 +1,108 @@
+﻿@model Jingl.General.Model.User.ViewModel.TalentViewModel
+@{
+    ViewData["Title"] = "Talent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="header-menu">
+    <ul class="nav">
+        <li class="nav-item text-center pull-left">
+            <a class="nav-link " href="javascript:history.back()">
+                <div class="icon-img mb4">
+                    <img class="icon-menu" src="/template/img/ic-back-blue.png" alt="" />
+                </div>
+            </a>
+        </li>
+        <li class="nav-item justify-content-center mr-center">
+            <h5 class="nav-link -ml54">Talent Kami</h5>
+        </li>
+    </ul>
+</div>
+<!-- begin #search-bar -->
+<div class="top-search-bar">
+    <!--<div class="row">
+        <div class="col-md-12">
+            <div class="input-group" id="adv-search">
+                <input type="text" class="form-control" placeholder="" />
+                <div class="input-group-btn">
+                    <div class="btn-group" role="group">
+                        <div class="dropdown dropdown-lg">
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                <form class="form-horizontal" role="form">
+                                  <div class="form-group">
+                                    <label for="filter">Filter by</label>
+                                    <select class="form-control">
+                                        <option value="0" selected>All Snippets</option>
+                                        <option value="1">Featured</option>
+                                        <option value="2">Most popular</option>
+                                        <option value="3">Top rated</option>
+                                        <option value="4">Most commented</option>
+                                    </select>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="contain">Author</label>
+                                    <input class="form-control" type="text" />
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="contain">Contains the words</label>
+                                    <input class="form-control" type="text" />
+                                  </div>
+                                  <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                </form>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>-->
+    <div class="form-group  search-bar brdr-blue has-search">
+        <span class="fa fa-search form-control-feedback"></span>
+        <input type="text" class="form-control" placeholder="Search">
+    </div>
+</div>
+<!-- end #search-bar -->
+<!--begin category-->
+<div class="container-fluid">
+    <div class="row mt20">
+        <div class="col-md-12">
+            <div class="owl-carousel kategori">
+                @{
+                    foreach (var cat in Model.ListCategoryModel)
+                    {
+                        @*<div><a asp-controller="Talent" asp-action="OurTalent" class="btn btn-primary btn-rounded btn-kategori active">@cat.CategoryNm</a></div>*@
+                        <div><a href="@Url.Action("OurTalent","Talent",new {CategoryId = cat.Id })" class="btn btn-primary btn-rounded btn-kategori active">@cat.CategoryNm</a></div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!--end Category-->
+<div class="container-fluid">
+    <div class="row mt20">
+        @{
+            foreach (var talent in Model.ListTalentViewModel)
+            {
+                <div class="col-6 col-lg-3">
+                    <a  href="@Url.Action("TalentDetail","Talent",new {TalentId = talent.TalentId })" >
+                        <div class="card-talent">
+                            <img src="@talent.LinkImg" alt="Alternate Text" />
+                            <div class="text-talent">
+                                <h4>@talent.TalentNm</h4>
+                                <span class="span-talent">
+                                    <span>IDR @talent.PriceAmount</span>
+                                    <span class="profesi">- @talent.Profesion</span>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        }
+
+      
+    </div>
+</div>

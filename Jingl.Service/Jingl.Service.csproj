@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jingl.General\Jingl.General.csproj" />
+    <ProjectReference Include="..\Jingl.Master.Model\Jingl.Master.Model.csproj" />
+    <ProjectReference Include="..\Jingl.Transaction.Model\Jingl.Transaction.Model.csproj" />
+    <ProjectReference Include="..\Jingl.UserManagement.Model\Jingl.UserManagement.Model.csproj" />
+  </ItemGroup>
+
+</Project>

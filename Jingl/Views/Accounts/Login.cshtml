@@ -1,0 +1,299 @@
+﻿@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@using Jingl.Web.Services
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Temp_Layout.cshtml";
+}
+@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> SignInManager
+
+<div class="box-white">
+
+    <div class="back-btn">
+        @*<a asp-controller="Jingl" asp-action="Index">
+                <img class="icon-menu mt-3 ml-3" src="~/template/img/ic-back-active.png" alt="" />
+            </a>*@
+    </div>
+
+    <!-- begin login -->
+    @*<div class="col-12">
+           <h3>Buat Akun</h3>
+           <label>Buat akun sekarang dan dapatkan penawaran menarik!</label>
+        </div>*@
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="con-login">
+
+                    <div>
+                        <button type="button" class="close login-close" aria-label="Close" onclick="javascript:window.location.href = '../Home/Index'">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 style="color: black;">Sign in to your account</h3>
+                        <h5>Login sekarang dan dapatkan penawaran menarik!</h5>
+                    </div>
+                    <div class="button-login m-t-20">
+                        <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" }">
+                            <div class="form-row">
+
+                                @{
+                                    var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+                                    if (loginProviders.Count == 0)
+                                    {
+                                        <div>
+                                            <p>
+                                                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                                for details on setting up this ASP.NET application to support logging in via external services.
+                                            </p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="text-center">
+                                            <p class="text-center font-italic">Login menggunakan akun media sosial</p>
+                                            <ul style="list-style:none" class="m-t-15">
+                                                @{ foreach (var provider in loginProviders)
+                                                    {
+
+                                                        if (provider.Name == "Google")
+                                                        {
+                                                            <li>
+                                                                <div class="col text-center">
+                                                                    <a href="@Url.Action("ExternalLogin","Account",new { returnUrl = "" , provider= "Google"  })" class="btn loginBtn loginBtn--google">
+                                                                        Login menggunakan Gmail
+                                                                    </a>
+                                                                    @*<button onclick="location.href='@Url.Action("ExternalLogin","Account",new { provider= "Google", returnUrl = ""   })'" class="loginBtn loginBtn--google">
+                                                                            Daftar menggunakan Gmail
+                                                                        </button>*@
+                                                                </div>
+                                                            </li>
+                                                        }
+                                                        else if (provider.Name == "Facebook")
+                                                        {
+                                                            <li>
+                                                                <div class="col text-center">
+                                                                    <a href="@Url.Action("ExternalLogin","Account",new { returnUrl = "" , provider= "Facebook"  })" class="btn loginBtn loginBtn--facebook">
+                                                                        Login menggunakan Facebook
+                                                                    </a>
+                                                                    @*<button href="@Url.Action("ExternalLogin","Account",new { provider= "Facebook", returnUrl = "" , })" class="loginBtn loginBtn--facebook">
+                                                                            Daftar menggunakan Facebook
+                                                                        </button>*@
+                                                                </div>
+                                                            </li>
+                                                        }
+
+                                                    }
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </form>
+                    </div>
+                    <div class="form-login" style="width: 100%">
+                        @*<a asp-controller="Account" asp-action="Signup" class="black-clr">Belum memiliki Akun? <b> Daftar disini</b></a>*@
+
+                        <p class="text-center m-t-10 m-b-25 font-italic">atau login menggunakan akun Fameo-mu</p>
+
+                        <form class="form-horizontal form-bordered " id="frm_Login">
+                            <div class="text-center">
+                                <div class="form-group row">
+                                    <div class="col-lg-12 col-md-12">
+                                        @*<label class="form-check-label m-b-5" for="Email">Email</label>*@
+                                        @*<input onchange="checkAvailEmailability()" type="text" name="" id="Email" value="@Model.Email" class="form-control" placeholder="Email" required />*@
+                                        <input type="text" name="" id="UserName" class="form-control" aria-describedby="emailHelp" placeholder="Enter email/username/mobile phone no" required />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-12 col-md-12">
+                                        @*<label class="form-check-label m-b-5" for="Password">Password</label>*@
+                                        <div class="togglepass">
+                                            <input type="password" name="" id="Password" class="form-control" placeholder="Enter password" required autocomplete="new-password" />
+                                            <span toggle="#Password" class="fa fa-fw fa-eye-slash field-icon toggle-password"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-12 col-md-12">
+                                    <p class="text-left m-t-10 m-b-25">
+                                        <input type="checkbox" checked id="chkRemember" /> Ingat Saya
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="register-buttons m-t-10 p-b-25">
+                                @*<button type="submit" class="btn btn-primary btn-block  btnprocess">Buat Akun<img src="/template/img/ic-proceed.png" class="ic-process"></button>*@
+                                <button type="submit" class="btn btnlogins" style="text-transform:uppercase">Login</button>
+                                <a href="#" data-toggle="modal" data-target="#forgotpass" class="text-center p-t-10" style="display:table; margin:auto; color:rgba(0,0,0,0.8);">Lupa Password ?</a>
+                                <br>
+                                <h5 class="fw-400">Belum punya akun bisa daftar <a href="@Url.Action("Onboarding","Account")">disini</a></h5>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="forgotpass" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                @*<div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Enter Your Email Address</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>*@
+                <div class="modal-body" style="padding: 35px;">
+                    <h3 class="text-center">Lupa Password</h3>
+                    <p class="text-center m-b-20">Kami akan mengirim email untuk mereset password anda</p>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Enter email">
+                            <input type="hidden" name="name" id="isValidEmail" />
+                            <span id="messageEmail"></span>
+                        </div>
+
+                        <button type="button" onclick="checkAvailEmailability()" class="btn btn-primary btn-login" style="margin: auto;display: table; padding: 8px 25px;">Submit</button>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+    <script>
+
+        $(".toggle-password").click(function () {
+
+            $(this).toggleClass("fa-eye-slash fa-eye");
+            var input = $($(this).attr("toggle"));
+            if (input.attr("type") == "password") {
+                input.attr("type", "text");
+            } else {
+                input.attr("type", "password");
+            }
+        });
+        function CheckValidUser() {
+
+        }
+
+        $(document).ready(function () {
+            App.init();
+
+            $('#frm_Login').submit(function (e) {
+                e.preventDefault();
+                var jsonRequest = {
+                    UserName: $("#UserName").val(),
+                    Password: $("#Password").val(),
+                };
+
+                var url = '@Url.Action("Login","AdmAccount")';
+
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: {model:jsonRequest},
+                    success: function (data) {
+
+                        if (data.user == "Valid") {
+
+                            $.gritter.add({
+                                title: 'Success !',
+                                text: 'Success !'
+                            });
+
+                            if (data.roleId ==1)
+                            {
+                                 window.location.href = "@Url.Action("DashboardDataStudio", "AdmHome")";
+                            }
+                            else
+                            {
+                                 window.location.href = "@Url.Action("Index", "Home")";
+                            }
+
+
+                        }
+                        else if (data.user == "NotValid") {
+
+                            $.gritter.add({
+                                title: 'Not Valid !',
+                                text: 'User is not Valid !'
+                            });
+
+                        }
+                        else {
+                            return false;
+                        }
+
+                    },
+                    error: function (data) {
+                        alert("no");
+                    }
+                });
+
+            });
+
+
+
+        });
+
+        function checkAvailEmailability() {
+            var email = $("#Email").val();
+
+            var url = '@Url.Action("SendEmailForgetPassword", "Account")';
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    email: email
+                },
+                beforeSend: function () {
+                    //$("#spinner").show();
+                    $(".loadingSign").show();
+                },
+                complete: function () {
+                    $(".loadingSign").hide();
+                },
+                success: function (data) {
+                    var message = $("#messageEmail");
+                    if (data == true) {
+
+                        //message.css("color", "green");
+                        //message.html("Email is available");
+                        //$("#isValidEmail").val(1);
+                          swal({
+                                title: "Success",
+                                text: "Email Sudah Terkirim",
+                                icon: "success",
+                          }).then(function () {
+                              $("#forgotpass").modal('hide');
+                                @*window.location.href = "@Url.Action("Profile", "Account")";*@
+                            });
+                    } else {
+                        //Email not available.
+                        message.css("color", "red");
+                        message.html("Email is NOT available");
+                        $("#isValidEmail").val(0);
+                    }
+                }
+            })
+        }
+    </script>
+
+}
+
+
+
+
+
+

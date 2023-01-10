@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Jingl.General.Model.Admin.Master.CategoryModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_Adm.cshtml";
+}
+
+
+<!-- end page-header -->
+<!-- begin panel -->
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <div class="panel-heading-btn">
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+        </div>
+        <h4 class="panel-title">Category</h4>
+    </div>
+    <div class="panel-body">
+        <p>
+            <a class="btn btn-pink" asp-action="Create">Create New</a>
+        </p>
+        <table class="table table-striped table-bordered" id="data-table-responsive" style="width:100%">
+            <thead>
+                <tr>
+                    @*<th hidden>
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>*@
+                    <th>
+                        Category Type
+                    </th>
+                    <th>
+                        Category Code
+                    </th>
+                    <th>
+                        Category Name@*@Html.DisplayNameFor(model => model.CategoryNm)*@
+                    </th>
+                    <th>
+                        Category Description@*@Html.DisplayNameFor(model => model.CategoryDesc)*@
+                    </th>
+
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    @*<td hidden>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryNm)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryDesc)
+                    </td>
+
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "AdmCategory", new { id = item.Id }, new { @class = "btn btn-success m-b-5" })
+                        @Html.ActionLink("Details", "Details", "AdmCategory", new { id = item.Id }, new { @class = "btn btn-warning m-b-5" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger m-b-5" })
+
+
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            App.init();
+            TableManageResponsive.init();
+        });
+    </script>
+}

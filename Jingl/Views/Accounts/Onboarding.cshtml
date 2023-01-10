@@ -1,0 +1,371 @@
+﻿@model Jingl.General.Model.Admin.UserManagement.UserModel
+
+@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@using Jingl.Web.Services
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Onboarding";
+}
+@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> SignInManager
+<!-- button back -->
+<div class="box-white">
+
+    <div class="back-btn">
+        @*<a asp-controller="Jingl" asp-action="Index">
+                <img class="icon-menu mt-3 ml-3" src="~/template/img/ic-back-active.png" alt="" />
+            </a>*@
+    </div>
+
+    <!-- begin login -->
+    @*<div class="col-12">
+           <h3>Buat Akun</h3>
+           <label>Buat akun sekarang dan dapatkan penawaran menarik!</label>
+        </div>*@
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="con-login">
+
+                    <button type="button" class="close login-close" aria-label="Close" onclick="javascript:window.location.href = '../Home/Index'">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="text-dark text-left">Buat Akun</h3>
+                    <h5 class="text-dark text-left">Buat akun sekarang dan dapatkan penawaran menarik!</h5>
+
+                    <div class="button-login m-t-20">
+                        <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" }">
+                            <div class="form-row">
+
+                                @{
+                                    var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+                                    if (loginProviders.Count == 0)
+                                    {
+                                        <div>
+                                            <p>
+                                                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                                for details on setting up this ASP.NET application to support logging in via external services.
+                                            </p>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="text-center">
+                                            <p class="text-center font-italic">Daftar menggunakan akun media sosial</p>
+                                            <ul style="list-style:none" class="m-t-15">
+                                                @{ foreach (var provider in loginProviders)
+                                                    {
+
+                                                        if (provider.Name == "Google")
+                                                        {
+                                                            <li>
+                                                                <div class="col text-center">
+                                                                    <a href="@Url.Action("ExternalLogin","Account",new { returnUrl = "" , provider= "Google"  })" class="btn loginBtn loginBtn--google">
+                                                                        Daftar menggunakan Gmail
+                                                                    </a>
+                                                                    @*<button onclick="location.href='@Url.Action("ExternalLogin","Account",new { provider= "Google", returnUrl = ""   })'" class="loginBtn loginBtn--google">
+                                                                            Daftar menggunakan Gmail
+                                                                        </button>*@
+                                                                </div>
+                                                            </li>
+                                                        }
+                                                        else if (provider.Name == "Facebook")
+                                                        {
+                                                            <li>
+                                                                <div class="col text-center">
+                                                                    <a href="@Url.Action("ExternalLogin","Account",new { returnUrl = "" , provider= "Facebook"  })" class="btn loginBtn loginBtn--facebook">
+                                                                        Daftar menggunakan Facebook
+                                                                    </a>
+                                                                    @*<button href="@Url.Action("ExternalLogin","Account",new { provider= "Facebook", returnUrl = "" , })" class="loginBtn loginBtn--facebook">
+                                                                            Daftar menggunakan Facebook
+                                                                        </button>*@
+                                                                </div>
+                                                            </li>
+                                                        }
+
+                                                    }
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </form>
+                    </div>
+                    <div class="form-login" style="width: 100%">
+                        @*<a asp-controller="Account" asp-action="Signup" class="black-clr">Belum memiliki Akun? <b> Daftar disini</b></a>*@
+                        <input type="hidden" id="PushEndpoint" name="PushEndpoint" />
+                        <input type="hidden" id="PushP256DH" name="PushP256DH" />
+                        <input type="hidden" id="PushAuth" name="PushAuth" />
+                        <p class="text-center m-t-10 m-b-25 font-italic">atau daftar menggunakan nomor ponselmu</p>
+
+                        @*<label class="radio-inline">
+                                <input type="radio" name="regisBy" id="email" value="email" required onclick="showEmail()" checked> Email
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="regisBy" id="mobilePhone" value="mobilePhone" required onclick="showMobile()"> Nomor Ponsel
+                            </label>*@
+
+                        <form class="form-horizontal form-bordered " id="Frm_SignUp">
+                            <div class="text-center">
+                                <div class="form-group row">
+                                    <div class="col-lg-12 col-md-12" id="emailForm" style="display:none">
+                                        @*<label class="form-check-label m-b-5" for="Email">Email</label>*@
+                                        @*<input onchange="checkAvailEmailability()" type="text" name="" id="Email" value="@Model.Email" class="form-control" placeholder="Email" required />*@
+                                        <input type="text" onchange="checkAvailEmailability()" name="" id="Email" class="form-control" placeholder="Email" />
+                                        <input type="hidden" name="name" id="isValidEmail" />
+                                        <span id="messageEmail"></span>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12" id="mobileForm" style="display:block">
+                                        @*<label class="form-check-label m-b-5" for="Email">Email</label>*@
+                                        @*<input onchange="checkAvailEmailability()" type="text" name="" id="Email" value="@Model.Email" class="form-control" placeholder="Email" required />*@
+                                        <input type="text" onchange="checkMobilePhoenNO()" name="" id="MobilePhoneNo" class="form-control" placeholder="Mobile Phone No" />
+                                        <input type="hidden" name="name" id="isValidMobile" />
+                                        <span id="messageMobile"></span>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-lg-12 col-md-12">
+                                        @*<label class="form-check-label m-b-5" for="Password">Password</label>*@
+                                        <input type="password" name="" id="Password" class="form-control" placeholder="Password" required autocomplete="new-password" />
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-12 col-md-12">
+                                    <p class="text-left m-t-10 m-b-25">
+                                        <input type="checkbox" checked id="chkRemember" /> Ingat Saya
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="register-buttons m-t-10 p-b-25">
+                                @*<button type="submit" class="btn btn-primary btn-block  btnprocess">Buat Akun<img src="/template/img/ic-proceed.png" class="ic-process"></button>*@
+                                <button type="submit" class="btn btnlogins">Buat Akun</button>
+
+                            </div>
+                        </form>
+                        <h5 class="fw-400">Jika sudah memiliki akun <a href="@Url.Action("Login","Account")">Login disini</a></h5>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+    {
+    <script type="text/javascript">
+                function checkAvailEmailability() {
+                    var email = $("#Email").val();
+
+                    var url = '@Url.Action("VerifyEmailUsed", "Account")';
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: {
+                            email: email
+                        },
+                        success: function (data) {
+                            var message = $("#messageEmail");
+                            if (data == false && email != "") {
+                                //email available
+                                message.css("color", "green");
+                                message.html("Email is available");
+                                $("#isValidEmail").val(1);
+                            } else {
+                                //Email not available.
+                                message.css("color", "red");
+                                message.html("Email is NOT available");
+                                $("#isValidEmail").val(0);
+                            }
+                        }
+                    })
+                }
+    </script>
+    <script type="text/javascript">
+                function checkMobilePhoenNO() {
+                    var mobilePhone = $("#MobilePhoneNo").val();
+
+                    var url = '@Url.Action("VerifyMobilePhone", "Account")';
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: {
+                            mobilePhone: mobilePhone
+                        },
+                        success: function (data) {
+                            var message = $("#messageMobile");
+                            if (data == false && mobilePhone != "") {
+                                //email available
+                                message.css("color", "green");
+                                message.html("Mobile Phone is available");
+                                $("#isValidMobile").val(1);
+                            } else {
+                                //Email not available.
+                                message.css("color", "red");
+                                message.html("Mobile Phone is NOT available");
+                                $("#isValidMobile").val(0);
+                            }
+                        }
+                    })
+                }
+    </script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $('#Frm_SignUp').submit(function (e) {
+                e.preventDefault();
+                var email = $("#Email").val();
+                var password = $("#Password").val();
+                var MobilePhoneNo = $("#MobilePhoneNo").val();
+                var isValidEmail = $("#isValidEmail").val();
+                var isValidMobile = $("#isValidMobile").val();
+                var url = "@Url.Action("PreSignUpPost", "Account")";
+                var jsonRequest = {
+                    Email: email,
+                    Password: password,
+                    PhoneNumber: MobilePhoneNo
+                };
+
+                if (isValidEmail == 1)
+                {
+                    console.log(jsonRequest);
+                    $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: { model: jsonRequest},
+                    beforeSend: function () {
+                          $(".loadingSign").show();
+                    },
+                    complete: function () {
+                        $(".loadingSign").hide();
+                    },
+                    success: function (data) {
+                        if (data == "OK") {
+                            window.location.href = "@Url.Action("Otp","Account")";
+                        }
+
+                        else {
+
+                            }
+                        },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+
+                }
+                else if (isValidMobile == 1)
+                {
+                    console.log(jsonRequest);
+                    $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: { model: jsonRequest},
+                    beforeSend: function () {
+                           $(".loadingSign").show();
+                    },
+                    complete: function () {
+                        $(".loadingSign").hide();
+                    },
+                    success: function (data) {
+
+                        var jsonNotif = {
+                        PushEndpoint : $("#PushEndpoint").val(),
+                        PushP256DH : $("#PushP256DH").val(),
+                        PushAuth: $("#PushAuth").val(),
+                            Name: $("#MobilePhoneNo").val()
+                    };
+                        $.ajax({
+                            url: "@Url.Action("AddDevice", "Notification")",
+                            //cache: false,
+                            //traditional: true,
+                            type: "POST",
+                            data: { model: jsonNotif },
+                            //contentType: "application/json; charset=utf-8",
+                            //async: false,
+                            beforeSend:
+                                function () {
+                                    //$("#spinner").show();
+                                },
+                            success: function (data) { }
+                        });
+
+
+                        if (data == "OK") {
+                            window.location.href = "@Url.Action("Index","Home")";
+                        }
+
+                        else {
+
+                        }
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+                }
+                else if (isValidEmail == 0)
+                {
+                    $.gritter.add({
+                                title: 'Not Valid !',
+                                text: 'Email is not Valid !'
+                            });
+                }
+                else if (isValidMobile == 0) {
+                    $.gritter.add({
+                        title: 'Not Valid !',
+                        text: 'Mobile Phone is not Valid !'
+                    });
+                }
+
+
+
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        function showEmail() {
+            var message = $("#messageMobile");
+
+            document.getElementById('emailForm').style.display = 'block';
+            document.getElementById('mobileForm').style.display = 'none';
+
+            document.getElementById("Email").required = true;
+            document.getElementById('MobilePhoneNo').required = false;
+
+
+            document.getElementById('MobilePhoneNo').value = '';
+            message.html('');
+            $("#isValidMobile").val(0);
+        }
+    </script>
+    <script type="text/javascript">
+        function showMobile() {
+            var message = $("#messageEmail");
+
+            document.getElementById('mobileForm').style.display = 'block';
+            document.getElementById('emailForm').style.display = 'none';
+
+            document.getElementById("MobilePhoneNo").required = true;
+            document.getElementById('Email').required = false;
+
+            document.getElementById('Email').value = '';
+            message.html('');
+            $("#isValidEmail").val(0);
+
+        }
+    </script>
+}
+
+
+

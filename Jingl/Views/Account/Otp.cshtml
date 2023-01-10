@@ -1,0 +1,191 @@
+﻿
+@{
+    ViewData["Title"] = "Otp";
+    Layout = "~/Views/Shared/_Temp_Layout.cshtml";
+}
+
+@inject CookieManager.ICookie _httpCookie
+
+<div class="box-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="header-menu">
+                    <ul class="nav">
+
+                        <li class="nav-item justify-content-center mr-center">
+                            <h5 class="nav-link"></h5>
+                        </li>
+                    </ul>
+                </div>
+                <div class="close-content otp-content mt20 text-center">
+                    <img src="~/template/img/surface1.svg" class="mx-auto d-block img-close-content">
+                    <h6 class="m-t-10 blue-clr">Verification Code</h6>
+                    <p>
+                        @*We sent a verification code to your number*@
+                        Kami telah mengirim verification code ke email anda
+                    </p>
+                </div>
+                <!--OTP-->
+                <form id="Frm_Verify">
+                    <div class="container-fluid">
+                        <div class="otp-head col-12 mt10">
+
+
+
+                            <div id="form">
+                                <div class="row -mlmr20">
+                                    <div class="col-12 text-center">
+                                        <div class="otp-head">
+                                            <input type="hidden" id="UserId" value="@_httpCookie.Get("UserId")" />
+                                            <input class="det-ket-project otp-num black-clr" type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="txtCode1" />
+                                            <input class="det-ket-project otp-num black-clr" type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="txtCode2" />
+                                            <input class="det-ket-project otp-num black-clr" type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="txtCode3" />
+                                            <input class="det-ket-project otp-num black-clr" type="text" maxLength="1" size="1" min="0" max="9" pattern="[0-9]{1}" id="txtCode4" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="register-buttons otp-button mb40">
+                        <a href="#" class="mb10">Tidak menerima verification code? </a> 
+                        <button type="button" id="btnResend" class="btn btn-otp"> Kirim ulang Verification Code</button>                  
+                        
+                    </div>
+
+                    <div class="brbtn-fix">
+                        <button type="submit" class="btn  brbtn-proses">Proceed</button>
+                    </div>
+
+                </form>
+                <!--end OTP-->
+            </div>
+        </div>
+    </div>
+   
+
+</div>
+
+@section scripts
+    {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#btnResend').click(function (e) {
+                e.preventDefault();
+                var UserId = $("#UserId").val();
+
+                var url = "@Url.Action("ResendVerificationCode", "Account")";
+                  $.ajax({
+                    url: url,
+                    //cache: false,
+                    //traditional: true,
+                    type: "POST",
+                    data: {UserId: UserId},
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+                      beforeSend: function () {
+                          //$("#spinner").show();
+                          $(".loadingSign").show();
+                      },
+                      complete: function () {
+                          $(".loadingSign").hide();
+                      },
+                      success: function (data) {
+                          if (data == "Ok") {
+                              $.gritter.add({
+                                  title: 'Success !',
+                                  text: 'kami telah mengirimkan verification code ke email anda'
+                              });
+                          }
+                          else {
+                              $.gritter.add({
+                                  title: 'Failure !',
+                                  text: 'Terdapat kesalahan saat pengirim verificationCode'
+                              });
+                          }
+                       
+
+                        @*if (data == true) {
+                            window.location.href = "@Url.Action("Index", "Home")";
+                        }
+
+                        else {
+
+                        }*@
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+            });
+
+            $('#Frm_Verify').submit(function (e) {
+                e.preventDefault();
+                var Code1 = $("#txtCode1").val();
+                var Code2 = $("#txtCode2").val();
+                var Code3 = $("#txtCode3").val();
+                var Code4 = $("#txtCode4").val();
+                var UserId = $("#UserId").val();
+
+                var verificationCode = Code1 + Code2 + Code3 + Code4;
+
+                var url = "@Url.Action("VerifyCode", "Account")";
+
+                $.ajax({
+                    url: url,
+                    //cache: false,
+                    //traditional: true,
+                    type: "POST",
+                    data: { code: verificationCode, UserId: UserId},
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+                    beforeSend: function () {
+                        //$("#spinner").show();
+                        $(".loadingSign").show();
+                    },
+                    complete: function () {
+                        $(".loadingSign").hide();
+                    },
+                    success: function (data) {
+
+                        if (data == true) {
+                            window.location.href = "@Url.Action("Index", "Home")";
+                        }
+
+                        else {
+                            $.gritter.add({
+                                title: 'Failure !',
+                                text: 'Verification Code yang anda masukkan salah'
+                            });
+                        }
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+
+
+            });
+
+            $('input.det-ket-project.otp-num.black-clr').on('keyup', function () {
+                if ($(this).val()) {
+                    $(this).next().focus();
+                }
+            });
+        });
+
+           
+    </script>
+}

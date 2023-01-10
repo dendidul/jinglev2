@@ -1,0 +1,470 @@
+﻿@model Jingl.General.Model.User.ViewModel.TalentViewModel
+@{
+    ViewData["Title"] = "index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*@await Html.PartialAsync("_header")*@
+@await Html.PartialAsync("~/Views/Shared/_header.cshtml")
+<div class="splash-screen animated fadeInDown" id="loader">
+    <!-- begin brand -->
+    <!-- end brand -->
+    <!-- begin login-content -->
+    <div class="splash-content">
+        <div>
+            <img src="~/template/img/Jing_e 1.png" class="mx-auto d-block img-logo">
+        </div>
+    </div>
+    <!-- end login-content -->
+</div>
+<div class="container" style="padding: 0 !important; background: #fff;">
+    <div class="row" style="padding: 0 !important;">
+        <div class="col-12">
+            <div id="box-index" style="display:none;">
+
+                <!-- begin #search-bar -->
+                <div class="top-search-bar">
+                    <!--<div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group" id="adv-search">
+                                <input type="text" class="form-control" placeholder="" />
+                                <div class="input-group-btn">
+                                    <div class="btn-group" role="group">
+                                        <div class="dropdown dropdown-lg">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                                <form class="form-horizontal" role="form">
+                                                  <div class="form-group">
+                                                    <label for="filter">Filter by</label>
+                                                    <select class="form-control">
+                                                        <option value="0" selected>All Snippets</option>
+                                                        <option value="1">Featured</option>
+                                                        <option value="2">Most popular</option>
+                                                        <option value="3">Top rated</option>
+                                                        <option value="4">Most commented</option>
+                                                    </select>
+                                                  </div>
+                                                  <div class="form-group">
+                                                    <label for="contain">Author</label>
+                                                    <input class="form-control" type="text" />
+                                                  </div>
+                                                  <div class="form-group">
+                                                    <label for="contain">Contains the words</label>
+                                                    <input class="form-control" type="text" />
+                                                  </div>
+                                                  <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>-->
+                    <div class="form-group search-bar brdr-blue has-search">
+                        <span class="fa fa-search form-control-feedback"></span>
+                        <input type="text" class="form-control" placeholder="Search" id="Search">
+                    </div>
+                    <div class="box-search">
+
+                        <div class="filtertab">
+                            <ul class="list-filtertab">
+                                <li class="divider-btm mt10">
+                                    <a href="#" class="grey-clr "><i class="fa fa-search mr10 "></i> Lipstick Mac Retro Max</a>
+                                </li>
+                                <li class="divider-btm mt10">
+                                    <a href="#" class="grey-clr"><i class="fa fa-search mr10 "></i> Travel ke Bangkok</a>
+                                </li>
+                                <li class="mt10">
+                                    <a href="#" class="grey-clr"><i class="fa fa-search mr10 "></i> Museum Macan</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="mt50">
+                            <ul class="nav nav-tab-menu-filter nav-pills">
+                                <li class="nav-items wd-33">
+                                    <a href="#" data-toggle="tab" class="nav-link pd5 ">
+                                        <span class="">Reset</span>
+                                    </a>
+                                </li>
+                                <li class="nav-items wd-33">
+                                    <a href="#" data-toggle="tab" class="nav-link pd5 active">
+                                        <span class="">Filter</span>
+                                    </a>
+                                </li>
+                                <li class="nav-items wd-33">
+                                    <a href="#" data-toggle="tab" class="nav-link pd5">
+                                        <span class="">Cancel</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- end #search-bar -->
+                <!-- begin #caraosel -->
+                <div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+                    <!--Indicators-->
+                    @*<ol class="carousel-indicators">
+                            <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-example-2" data-slide-to="1"></li>
+                            <li data-target="#carousel-example-2" data-slide-to="2"></li>
+                            <li data-target="#carousel-example-2" data-slide-to="3"></li>
+                        </ol>*@
+                    <!--/.Indicators-->
+                    <!--Slides-->
+                    <div class="carousel-inner-home" role="listbox">
+                        <div class="carousel-item active">
+                            <div class="view">
+                                <a asp-controller="Home" asp-action="SamsungPrize">
+                                    <img class="d-block w-100" src="~/template/img/Tingkatkan_level.jpg" alt="First slide">
+                                </a>
+                                <div class="mask rgba-black-light"></div>
+                            </div>
+                            <div class="carousel-caption">
+                                <!--<h3 class="h3-responsive" style="color: #fff;">Light mask</h3>
+                                <p>First text</p>-->
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <!--Mask color-->
+                            <div class="view">
+                                <a asp-controller="Home" asp-action="Carapesan">
+                                    <img class="d-block w-100" src="~/template/img/cara_pesan_jingl.png" alt="Second slide">
+                                </a>
+
+                                <div class="mask rgba-black-strong"></div>
+                            </div>
+                            <div class="carousel-caption">
+                                <!--<h3 class="h3-responsive" style="color: #fff;">Strong mask</h3>
+                                <p>Secondary text</p>-->
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <!--Mask color-->
+                            <div class="view">
+                                <img class="d-block w-100" src="/template/img/cek_talent.png" alt="Third slide">
+                                <div class="mask rgba-black-slight"></div>
+                            </div>
+                            <div class="carousel-caption" style="color: #fff;">
+                                <!--<h3 class="h3-responsive">Slight mask</h3>
+                                <p>Third text</p>-->
+                            </div>
+                        </div>
+                        <!--<div class="carousel-item">
+
+                                <div class="view">
+                                    <img class="d-block w-100" src="/template/img/slider.png" alt="Forth slide">
+                                    <div class="mask rgba-black-slight"></div>
+                                </div>
+                                <div class="carousel-caption" style="color: #fff;">
+                                    <h3 class="h3-responsive">Slight mask</h3>
+                                    <p>Third text</p>
+                                </div>
+                            </div>
+                        </div>-->
+                        <!--/.Slides-->
+                        <!--Controls-->
+                        <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                        <!--/.Controls-->
+                    </div>
+                    <!--begin category-->
+                    <div class="container-fluid">
+                        <div class="row mt20">
+                            <div class="col-md-12">
+                                <div class="owl-carousel kategori">
+                                    @{
+                                        foreach (var cat in Model.ListCategoryModel)
+                                        {
+                                            @*<div><a asp-controller="Talent" asp-action="OurTalent" class="btn btn-primary btn-rounded btn-kategori active">@cat.CategoryNm</a></div>*@
+                                            <div><a href="@Url.Action("OurTalent","Talent",new {CategoryId = cat.Id })" class="btn btn-primary btn-rounded btn-kategori active">@cat.CategoryNm</a></div>
+                                        }
+                                    }
+
+                                    @*<div><a asp-controller="Talent" asp-action="OurTalent" class="btn btn-primary btn-rounded btn-kategori active">JKT48</a></div>
+                                        <div><a class="btn btn-primary btn-rounded btn-kategori" href="#">Blackpink</a></div>
+                                        <div><a class="btn btn-primary btn-rounded btn-kategori" href="#">content</a></div>
+                                        <div><a class="btn btn-primary btn-rounded btn-kategori" href="#">content</a></div>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--end Category-->
+                    @*<div class="card-content-home mt20">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <ul class="nav">
+                                            <li class="nav-item">
+                                                <a class="nav-link active fs-14" href="#">Trending</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-6 nav-left">
+                                        <ul class="nav fl-right">
+                                            <li class="nav-item ">
+                                                <a class="nav-link fs-14" href="#">View All</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="row trending-card">
+                                    <div class="col-6">
+                                        <div class="card-video-home">
+                                            <div class="header-video mb-2">
+                                                <a asp-controller="Talent" asp-action="TalentDetail"><img class="rounded" src="~/template/img/face.png" alt="Alternate Text" /></a>
+                                                <div class="ml-2">
+                                                    <span>username</span>
+                                                    <div>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="embed-responsive embed-responsive-4by3 card-img-top">
+                                                <div style="position:relative; padding-bottom:100%; overflow:hidden;"><iframe src="https://cdn.jwplayer.com/players/xrA6ly1F-ThqvFqX8.html" width="100%" height="100%" frameborder="0" scrolling="auto" allowfullscreen style="position:absolute;"></iframe></div>
+                                            </div>
+                                            <div class="card-body-video">
+                                                <h6 class="title-video">How to Travel Safely</h6>
+                                                <p class="card-text">How to Travel Safely</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="card-video-home">
+                                            <div class="header-video mb-2">
+                                                <img class="rounded" src="~/template/img/face.png" alt="Alternate Text" />
+                                                <div class="ml-2">
+                                                    <span>username</span>
+                                                    <div>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="embed-responsive embed-responsive-4by3 card-img-top">
+                                                <div style="position:relative; padding-bottom:100%; overflow:hidden;"><iframe src="https://cdn.jwplayer.com/players/ofmFv1l3-ThqvFqX8.html" width="100%" height="100%" frameborder="0" scrolling="auto" allowfullscreen style="position:absolute;"></iframe></div>
+                                            </div>
+                                            <div class="card-body-video">
+                                                <h6 class="title-video">How to Travel Safely</h6>
+                                                <p class="card-text">How to Travel Safely</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="card-video-home">
+                                            <div class="header-video mb-2">
+                                                <img class="rounded" src="~/template/img/face.png" alt="Alternate Text" />
+                                                <div class="ml-2">
+                                                    <span>username</span>
+                                                    <div>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="embed-responsive embed-responsive-4by3 card-img-top">
+                                                <div style="position:relative; padding-bottom:100%; overflow:hidden;"><iframe src="https://cdn.jwplayer.com/players/mtBhIgNU-ThqvFqX8.html" width="100%" height="100%" frameborder="0" scrolling="auto" allowfullscreen style="position:absolute;"></iframe></div>
+                                            </div>
+                                            <div class="card-body-video">
+                                                <h6 class="title-video">How to Travel Safely</h6>
+                                                <p class="card-text">How to Travel Safely</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="card-video-home">
+                                            <div class="header-video mb-2">
+                                                <img class="rounded" src="~/template/img/face.png" alt="Alternate Text" />
+                                                <div class="ml-2">
+                                                    <span>username</span>
+                                                    <div>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent checked"></span>
+                                                        <span class="fa fa-star fa-star-talent"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="embed-responsive embed-responsive-4by3 card-img-top">
+                                                <div style="position:relative; padding-bottom:100%; overflow:hidden;"><iframe src="https://cdn.jwplayer.com/players/B9nQl3L5-ThqvFqX8.html" width="100%" height="100%" frameborder="0" scrolling="auto" allowfullscreen style="position:absolute;"></iframe></div>
+                                            </div>
+                                            <div class="card-body-video">
+                                                <h6 class="title-video">How to Travel Safely</h6>
+                                                <p class="card-text">How to Travel Safely</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+
+                    <div class="tinder mt30">
+                        @*<div class="tinder--status">
+                                <i class="fas fa-plus"></i>
+                                <i class="fa fa-heart"></i>
+                            </div>*@
+                        <div class="tinder--cards">
+                            @{
+                                int i = 0;
+                                foreach (var data in Model.ListTalentModel)
+                                {
+                                    int currentOld = @DateTime.Now.Year - @data.BirthDate.Value.Year;
+                                    <div class="tinder--card shadow">
+                                        <div class="card-video-home-discover">
+                                            <div class="embed-responsive embed-responsive-4by3 card-img-top-discover">
+                                                <img src="@data.LinkImg" />
+                                            </div>
+                                            <div class="card-body-video pdb30 pull-left ket-disc">
+
+
+                                                <input type="hidden" id="talentId_@i" name="talentId_@i" value="@data.Id" />
+
+
+                                                <p class="mb5"><strong>@data.TalentNm,@currentOld</strong></p>
+
+                                                <p class="mt5">category : @data.CategoryName<strong></strong></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    i++;
+                                }
+                            }
+
+
+
+                        </div>
+                        <div class="tinder--buttons">
+                            <div class="col-12 text-center">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <button id="nope" class="btn btn-rounded -mr40"><img src="/template/img/dislike.png" class="ic-button"></button>
+                                    </div>
+                                    <div class="col-4">
+                                        <button class="btn btn-blue" id="Hire">Hire</button>
+                                        @*<a href="@Url.Action("Hire","Booking",new {TalentId = 1 })" class="btn btn-blue">Hire</a>*@
+                                    </div>
+                                    <div class="col-4">
+                                        <button id="love" class="btn btn-rounded -ml40"><img src="/template/img/heart.png" class="ic-button"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                @section scripts
+                    {
+                    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var TalentIndex = 0;
+
+            $('#Hire').click(function ()
+            {
+                var IdName = '#talentId_' + TalentIndex + '';
+                var TalentValue = $(IdName).val();
+                window.location.href = "../Booking/Hire?TalentId=" + TalentValue;
+            });
+
+            $('#love').click(function (e) {
+
+                e.preventDefault();
+                var OldTalentIndex = TalentIndex;
+                TalentIndex = TalentIndex + 1;
+                var IdName = '#talentId_' + OldTalentIndex + '';
+
+                var TalentValue = $(IdName).val();
+
+                if (TalentValue == null)
+                {
+                    $.gritter.add({
+                        title: 'Warning!',
+                        text: 'Sorry you dont pick any talent to your Wishlist !'
+                    });
+
+                }
+
+                else
+                {
+
+                    var url = "@Url.Action("AddToWishlist", "Booking")";
+                    var jsonRequest = {
+                        TalentId: TalentValue
+                        };
+
+                $.ajax({
+                    url: url,
+                    //cache: false,
+                    //traditional: true,
+                    type: "POST",
+                    data: { model: jsonRequest},
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+                    beforeSend:
+                        function () {
+                            //$("#spinner").show();
+                        },
+                    success: function (data) {
+
+                        if (data == "OK") {
+                            $.gritter.add({
+                                title: 'Success!',
+                                text: 'Successfully Add To Your Wishlist !'
+                            });
+
+
+                        }
+
+                        else {
+
+                        }
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                    });
+                }
+
+
+            });
+
+            $('#nope').click(function (e) {
+
+                e.preventDefault();
+                TalentIndex = TalentIndex + 1;
+            });
+
+        });
+
+                    </script>
+                }
+
+
+            </div>
+        </div>
+    </div>

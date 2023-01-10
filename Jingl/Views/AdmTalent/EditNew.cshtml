@@ -1,0 +1,591 @@
+﻿@model Jingl.General.Model.Admin.Master.TalentModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout_Adm.cshtml";
+}
+@*@using (Html.BeginForm("Edit", "AdmTalent", FormMethod.Post, new { Id = "formTalentEdit" }))
+    {*@
+<h2>Edit</h2>
+@*<form class="form-horizontal form-bordered" id="FormTalentEdit">*@
+@using (Html.BeginForm("Edit", "AdmTalent", FormMethod.Post, new { Id = "formCreateUser", enctype = "multipart/form-data" }))
+{
+    <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-12 col-lg-12 align-self-center">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    </div>
+                    <h4 class="panel-title">Talent Data</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <label>First Name</label>
+                            @Html.HiddenFor(model => model.Id, new { Class = "form-control" })
+                            @Html.HiddenFor(model => model.UserId, new { Class = "form-control" })
+                            @*@Html.TextBoxFor(model => model.TalentNm, new { Class = "form-control", required = "true" })*@
+                            @Html.TextBoxFor(model => model.FirstName, new { Class = "form-control", required = "true" })
+
+
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>Last Name </label>
+                                @Html.TextBoxFor(model => model.LastName, new { Class = "form-control" })
+
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>Gender </label>
+                                @Html.DropDownListFor(model => model.Gender, ViewBag.ListGender as IEnumerable<SelectListItem>, "Pilih Gender", new { Class = "form-control", Placeholder = "", required = "true" })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Profession</label>
+                            @Html.TextBoxFor(model => model.Profesion, new { Class = "form-control", required = "true" })
+                        </div>
+                        <div class="col-4">
+                            <label>Instagram</label>
+                            @Html.TextBoxFor(model => model.Instagram, new { Class = "form-control", required = "true" })
+                        </div>
+                        <div class="col-4">
+                            <label>Facebook</label>
+                            @Html.TextBoxFor(model => model.Facebook, new { Class = "form-control", required = "true" })
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Email</label>
+                            @Html.TextBoxFor(model => model.Email, new { Class = "form-control", required = "true" })
+                        </div>
+                        <div class="col-4">
+                            <label>Phone Number</label>
+                            @Html.TextBoxFor(model => model.PhoneNumber, new { Class = "form-control", required = "true" })
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>User Code</label>
+                                @Html.TextBoxFor(model => model.UserCode, new { Class = "form-control", ReadOnly = true })
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Profile Picture</label><br />
+                            <a target="_blank" href="@Model.LinkImg"><img class="img-fluid profpic" src="@Model.LinkImg" /></a>
+                            <br /><br />
+                            <label>Change Profile Picture</label><br />
+                            <input type="file" name="ProfImg" id="ProfImg" class="form-control-file " accept=".jpg, .png,.jpeg ,.gif" onchange='ProfPic.UpdatePreview(this)' />
+                        </div>
+                        <div class="col-4">
+                            <label>Background Picture</label><br />
+                            <a target="_blank" href="@Model.BgrImg"><img class="img-fluid bgrpic" src="@Model.BgrImg" /></a>
+                            <br /><br />
+                            <label>Change Background Picture</label><br />
+                            <input type="file" id="BgrImg" class="form-control-file" name="BgrImg" accept=".jpg, .png,.jpeg ,.gif" onchange='BgrPic.UpdatePreview(this)' />
+                        </div>
+
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Referal Code </label>
+                            @Html.TextBoxFor(model => model.ReferralUserCode, new { Class = "form-control" })
+                        </div>
+                        <div class="col-4">
+                            <label>Status </label>
+                            @Html.DropDownListFor(model => model.IsActive, ViewBag.ListStatus as IEnumerable<SelectListItem>, "Pilih Status", new { Class = "form-control", Placeholder = "", required = "true" })
+                        </div>
+                        <div class="col-4">
+                            <label>Note </label>
+                            @Html.TextAreaFor(model => model.Note, new { Class = "form-control", rows = 4 })
+                        </div>
+
+                    </div>
+                    <br />
+                    <div class="row">
+
+                        <div class="col-4">
+                            <label for="Kategori">Talent Category</label><br />
+                            @{
+
+                                foreach (var data in Model.TalentCategory)
+                                {
+                                    if (Model.TalentSelectedCategory.Where(x => x.CategoryId == data.CategoryId).Any() == true)
+                                    {
+                                        <input type="checkbox" class="checkbox" name="SelectedCategory" checked value="@data.CategoryId" /> @data.CategoryNm <br />
+                                    }
+                                    else
+                                    {
+                                        <input type="checkbox" class="checkbox" name="SelectedCategory" value="@data.CategoryId" /> @data.CategoryNm <br />
+                                    }
+
+                                }
+                            }
+                        </div>
+                        <div class="col-4">
+                            <label>Talent Priority </label>
+                            @Html.CheckBoxFor(model => model.IsAvailable)
+                        </div>
+
+                        <div class="col-4" id="PriceAmountDiv">
+                            <label>Price Amount</label>
+                            @*@Html.TextBoxFor(model => model.PriceAmount, new { Class = "form-control" })*@
+                            <input type="text" name="PriceAmountData" id="PriceAmount" class="form-control" value="@Model.PriceAmount" />
+
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+
+                    </div>
+                    <h4 class="panel-title">Talent Document</h4>
+                </div>
+                <div class="panel-body">
+
+
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Id Card</label><br />
+                            <a target="_blank" href="@Model.IdCardImg"><img class="img-fluid IdCardImg" src="@Model.IdCardImg" /></a>
+                            <br /><br />
+                            <label>Change Id Card</label><br />
+                            <input type="file" name="IdCardImg" id="IdCardImg" class="form-control-file " accept=".jpg, .png,.jpeg" onchange='IdCardPic.UpdatePreview(this)' />
+                        </div>
+                        <div class="col-4">
+                            <label>NPWP</label><br />
+                            <a target="_blank" href="@Model.NpwpImg"><img class="img-fluid NpwpImg" src="@Model.NpwpImg" /></a>
+                            <br /><br />
+                            <label>Change NPWP</label><br />
+                            <input type="file" id="NpwpImg" class="form-control-file" name="NpwpImg" accept=".jpg, .png,.jpeg" onchange='NPWPPic.UpdatePreview(this)' />
+                        </div>
+                        <div class="col-4">
+                            <label>Rekening</label><br />
+                            <a target="_blank" href="@Model.AcNumImg"><img class="img-fluid AcNumImg" src="@Model.AcNumImg" /></a>
+                            <br /><br />
+                            <label>Change Rekening</label><br />
+                            <input type="file" id="AcNumImg" class="form-control-file" name="AcNumImg" accept=".jpg, .png,.jpeg" onchange='AcNumPic.UpdatePreview(this)' />
+                        </div>
+
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Bank</label>
+                            @*@Html.TextBoxFor(model => model.Profesion, new { Class = "form-control", required = "true" })*@
+                            @Html.DropDownListFor(model => model.Bank, ViewBag.ListBank as IEnumerable<SelectListItem>, "Pilih Bank", new { Class = "form-control", Placeholder = "" })
+                        </div>
+                        <div class="col-4">
+                            <label>Rekening Number</label>
+                            @Html.TextBoxFor(model => model.AccountNumber, new { Class = "form-control" })
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>Beneficiary Name </label>
+                                @Html.TextBoxFor(model => model.BeneficiaryName, new { Class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+
+                    </div>
+                    <h4 class="panel-title">Talent Video</h4>
+                </div>
+                <div class="panel-body">
+
+
+                    <div class="row">
+                     
+                        @*@{
+                            int index = 0;
+                            foreach (var video in Model.ListTalentVideo)
+                            {
+                                <div class="col-4" id="Video_@index">
+                                    <input type="hidden" name="ListCurrentVideo[@index]" value="@video.FileId" />
+                                    <video src="@video.Link" type="video/mp4" controls style="border: 0px solid rgb(15, 158, 238); height: 300px; width: 320px;">
+                                        <source src="@video.Link">
+                                    </video>
+                                    <p><a href="#" class="deletefile">Delete File</a></p>
+                                </div>
+                                index++;
+                            }
+
+                        }*@
+
+
+                    </div>
+                    <br />
+                    @*<div class="row">
+                            <p><label>Upload New Videos</label></p><br /> &nbsp;  &nbsp;
+                            <p><input type="file" multiple name="ListVideo" accept="video/mp4" /></p>
+
+                        </div>*@
+
+                    <div class="row">
+                        <div class="col-12">
+                            <button class="btn btn-primary addUpload" type="submit">Add Row</button>
+                            <br /> <br />
+                            <form>
+                                <div class="divupload">
+                                    <div class="form-row">
+                                        <div class="form-group col-4">
+                                            <label for="exampleFormControlFile1">Upload video</label>
+                                        </div>
+                                        <div class="form-group col-3">
+                                            <label for="inputPassword4">Video Name</label>
+                                        </div>
+                                        <div class="form-group col-3">
+                                            <label for="inputPassword4">Video Category</label>
+                                        </div>
+                                        <div class="form-group col-1">
+                                            <label for="inputPassword4">Action</label>
+                                        </div>
+                                    </div>
+                                    @{
+                                        int index = 0;
+                                        foreach (var item in Model.ListTalentVideo)
+                                        {
+                                            <div class="form-row">
+                                                <div class="form-group col-4">
+                                                    <input type="hidden" name="ListCurrentVideo[@index]" value="@item.FileId" />
+                                                    <video src="@item.Link" type="video/mp4" controls style="border: 0px solid rgb(15, 158, 238); height: 250px; width: 280px;">
+                                                        <source src="@item.Link">
+                                                    </video>
+                                                    <input type="file" name="ListVideo[@index]" class="form-control-file file_multi_video" id="exampleFormControlFile1" accept="video/mp4">
+
+                                                </div>
+                                                <div class="form-group col-3">
+
+                                                    <input type="text" name="VideoNm[@index]" class="form-control" id="inputPassword4" placeholder="Video Name" value="@item.VideoNm">
+                                                </div>
+                                                <div class="form-group col-3">
+
+                                                    <input type="text" name="VideoCategory[@index]" class="form-control" id="inputPassword4" placeholder="Video Category" value="@item.VideoNm">
+                                                </div>
+                                                <div class="form-group col-1">
+                                                    <button type="button" id="remScnt" class="btn btn-danger">Remove</button>
+                                                </div>
+                                            </div>
+                                            index++;
+                                        }
+                                    }
+
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                    <br />
+                    <div class="row">
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <a href="@Url.Action("ListTalent", "AdmTalent")" class="btn btn-warning">Cancel</a>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+}
+@*</form>*@
+
+@section scripts{
+    <script src="~/assets/autonumeric/AutoNumeric.js"></script>
+    @*<script src="~/assets/jqueryMask/jquery.masknumber.js"></script>*@
+
+    @*<script src="~/assets/plugins/masked-input/masked-input.min.js"></script>*@
+    <script type="text/javascript">
+
+        //function decimalcomma() {
+        //    var cleave = new Cleave('#PriceAmount', {
+        //        numeral: true,
+        //        numeralThousandsGroupStyle: 'thousand'
+        //    });
+
+        //    $('#PriceAmount').on('input', function () {
+        //    });
+        //}
+        $(document).ready(function () {
+
+                App.init();
+                //$('#PriceAmount').maskNumber({ decimal: '_', thousands: '*' });
+                //$('#PriceAmount').mask("#,##0.00", { reverse: true });
+
+                $("#PriceAmount").autoNumeric('init', { vMin: 0, vMax: 10000000000000.00, mDec: 2 });
+                //$('#PriceAmount').autoNumeric('set', 0);
+
+            //if ($("#IsPriority").is(':checked')) {
+            //    $("#PriceAmount").prop('readonly', false);
+            //} else {
+            //    $("#PriceAmount").prop('readonly', true);
+            //}
+
+            //$('#IsPriority').click(function () {
+            //    if ($(this).is(':checked')) {
+            //        $("#PriceAmount").prop('readonly', false);
+            //    } else {
+            //        $("#PriceAmount").prop('readonly', true);
+            //    }
+            //});
+
+
+                $(".deletefile").click(function (e) {
+                    //$("a").removeAttr("href");
+                    e.preventDefault();
+                    var div_id = $(this).closest('div').attr('id');
+                    //$(div_id).remove();
+                    $("#"+div_id+"").remove();
+                });
+
+                $('#FormTalentEdit').submit(function (e) {
+                e.preventDefault();
+                    @*var Id = $("#Id").val();
+                    var TalentNm = $("#TalentNm").val();
+                    var Gender = $("#Gender").val();
+                var phoneNumber = $("#PhoneNumber").val();
+                var Bio = $("#Bio").val();
+                var ProfImg = $('#prof-upload').prop('files');
+
+                var url = "@Url.Action("Edit","AdmTalent")";
+                var jsonRequest = {
+                    Id :UserId,
+                    FirstName: firstName,
+                    LastName: lastName,
+                    Bio: Bio,
+                    PhoneNumber:phoneNumber
+                };*@
+
+                    var ProfImg = $('#ProfImg').prop('files');
+
+
+                    var formData = new FormData();
+                    var yuhuh = parseFloat($('#PriceAmount').val().replace(/[^\d\.]/g, ''));
+                //formData.append('model', jsonRequest);
+                    $('#PriceAmount').val(parseFloat($('#PriceAmount').val().replace(/[^\d\.]/g, '')));
+                ////JSON obj
+                //formData.append('ProfImg', ProfImg);
+                    var formData = new FormData($('#FormTalentEdit')[0]);
+                     var url = "@Url.Action("Edit","AdmTalent")";
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    //cache: false,
+                    //traditional: true,
+                    //dataType: 'json',
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+
+                    //data: { model: jsonRequest, ProfImg: ProfImg},
+                    data: formData,
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+                    beforeSend: function () {
+                        //$("#spinner").show();
+                        $(".loadingSign").show();
+                    },
+                    complete: function () {
+                        $(".loadingSign").hide();
+                    },
+                    success: function (data) {
+
+                        window.location.href = "@Url.Action("ListTalent", "AdmTalent")";
+                        @*if (data == "OK") {
+                            $.gritter.add({
+                                title: 'Success !',
+                                text: 'Updated Successfully !'
+                            });
+                            window.location.href = "@Url.Action("Index", "AdmTalent")";
+                        }
+
+                        else {
+
+                        }*@
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+
+
+            });
+
+            });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            ProfPic = {
+                UpdatePreview: function (obj) {
+                    // if IE < 10 doesn't support FileReader
+                    if (!window.FileReader) {
+                        // don't know how to proceed to assign src to image tag
+                    } else {
+                        var reader = new FileReader();
+                        var target = null;
+
+                        reader.onload = function (e) {
+                            target = e.target || e.srcElement;
+                            $(".profpic").prop("src", target.result);
+                        };
+                        reader.readAsDataURL(obj.files[0]);
+                    }
+                }
+            };
+        });
+        $(function () {
+            BgrPic = {
+                UpdatePreview: function (obj) {
+                    // if IE < 10 doesn't support FileReader
+                    if (!window.FileReader) {
+                        // don't know how to proceed to assign src to image tag
+                    } else {
+                        var reader = new FileReader();
+                        var target = null;
+
+                        reader.onload = function (e) {
+                            target = e.target || e.srcElement;
+
+                            $(".bgrpic").prop("src", target.result);
+                        };
+                        reader.readAsDataURL(obj.files[0]);
+                    }
+                }
+            };
+        });
+        $(function () {
+            IdCardPic = {
+                UpdatePreview: function (obj) {
+                    // if IE < 10 doesn't support FileReader
+                    if (!window.FileReader) {
+                        // don't know how to proceed to assign src to image tag
+                    } else {
+                        var reader = new FileReader();
+                        var target = null;
+
+                        reader.onload = function (e) {
+                            target = e.target || e.srcElement;
+
+                            $(".IdCardImg").prop("src", target.result);
+                        };
+                        reader.readAsDataURL(obj.files[0]);
+                    }
+                }
+            };
+        });
+        $(function () {
+            NPWPPic = {
+                UpdatePreview: function (obj) {
+                    // if IE < 10 doesn't support FileReader
+                    if (!window.FileReader) {
+                        // don't know how to proceed to assign src to image tag
+                    } else {
+                        var reader = new FileReader();
+                        var target = null;
+
+                        reader.onload = function (e) {
+                            target = e.target || e.srcElement;
+
+                            $(".NpwpImg").prop("src", target.result);
+                        };
+                        reader.readAsDataURL(obj.files[0]);
+                    }
+                }
+            };
+        });
+        $(function () {
+            AcNumPic = {
+                UpdatePreview: function (obj) {
+                    // if IE < 10 doesn't support FileReader
+                    if (!window.FileReader) {
+                        // don't know how to proceed to assign src to image tag
+                    } else {
+                        var reader = new FileReader();
+                        var target = null;
+
+                        reader.onload = function (e) {
+                            target = e.target || e.srcElement;
+
+                            $(".AcNumImg").prop("src", target.result);
+                        };
+                        reader.readAsDataURL(obj.files[0]);
+                    }
+                }
+            };
+        });
+    </script>
+    <script>
+        $(function () {
+            var scntDiv = $('.divupload');
+            var i = $('.divupload .form-row').length + 1;
+
+
+            $('.addUpload').on('click', function () {
+                /* $('<p><label for="p_scnts"><input type="text" id="p_scnt" size="20" name="p_scnt_' + i + '" value="" placeholder="Input Value" /></label> <a href="#" id="remScnt">Remove</a></p>').appendTo(scntDiv); */
+
+                $('<div class="form-row"><div class="form-group col-5"><input type="file" name="ListVideo[' + i + ']" class="form-control-file file_multi_video" id="exampleFormControlFile1"></div><div class="form-group col-3"><input type="text" name="VideoNm[' + i + ']" class="form-control" id="inputPassword4" placeholder="Video Name"></div><div class="form-group col-3"><input type="text" name="VideoCategory[' + i + ']" class="form-control" id="inputPassword4" placeholder="Video Category"></div> <div class="form-group col-1"><button type="button" id="remScnt" class="btn btn-danger">Remove</button></div>').appendTo(scntDiv);
+                i++;
+                return false;
+            });
+
+            $("body").on('click', "#remScnt", function () {
+                if (i > 2) {
+                    $(this).parents(".form-row").remove();
+                    i--;
+                }
+                return false;
+            });
+
+            /* $("body").on("click", "#remScnt", function() {
+                 $(this).parents(".form-row").remove();
+             });*/
+
+            //$(document).on('change', ".file_multi_video", function (evt) {
+            //    var $source = $(".video_here");
+            //    $source[0].src = URL.createObjectURL(this.files[0]);
+            //    $source.parent()[0].load();
+            //});
+        });
+
+    </script>
+}

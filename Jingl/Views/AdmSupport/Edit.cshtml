@@ -1,0 +1,76 @@
+﻿@model Jingl.General.Model.Admin.Transaction.SupportModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout_Adm.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "AdmSupport", FormMethod.Post, new { Id = "formCreateCategory" }))
+{
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+            </div>
+            <h4 class="panel-title">Edit</h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-6">
+                    <label>Email Address</label>
+                    @Html.HiddenFor(model => model.Id, new { Class = "form-control" })
+                    @Html.TextBoxFor(model => model.EmailAddress, new { Class = "form-control", required = "true" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label>Subject</label>
+                    @Html.TextBoxFor(model => model.Subject, new { Class = "form-control", required = "true" })
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label>Details</label>
+                    @Html.TextAreaFor(model => model.Details, new { Class = "form-control", required = "true" })
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label>Status</label>
+                    @Html.DropDownListFor(model => model.Status, ViewBag.ListRegStat as IEnumerable<SelectListItem>, "Pilih Status", new { Class = "form-control", Placeholder = "", required = "true" })
+                </div>
+
+            </div>
+
+            <br />
+            <div class="row">
+                <div class="col-6">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <a href="@Url.Action("Index","AdmSupport")" class="btn btn-warning">Cancel</a>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+}
+
+
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            App.init();
+        });
+    </script>
+}
+

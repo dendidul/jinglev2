@@ -1,0 +1,537 @@
+﻿@model Jingl.General.Model.Admin.Master.TalentModel
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+    ViewData["Title"] = Model.TalentNm;
+    ViewData["Url"] = "https://app.jingl.com/Talent/TalentDetail?TalentId=" + Model.Id; ;
+    ViewData["MetaImage"] = Model.LinkImg;
+    ViewData["Description"] = "Yuk lihat profile Talent Fameo"; 
+
+}
+
+@inject CookieManager.ICookie _httpCookie
+<!-- begin #top-menu -->
+<!-- begin #top-menu -->
+<!-- begin #top-menu -->
+<div class="box-white">
+    <div class="header-talent-detail" style="background-image: url(@Model.BgrImg)">
+        <div class="clearfix">
+            <div class="float-left">
+                <a class="" href="javascript:history.back()">
+                    <div class="icon-img mb4">
+                        <img class="icon-menu" src="~/template/img/ic-back-blue.png" alt="" />
+                    </div>
+                </a>
+            </div>
+            <div class="float-right">
+                @*<a href="#" class="btnShare" data-toggle="modal" data-target="#sharemodal">
+                        <i class="fas fa-share-alt"></i>
+                    </a>*@
+            </div>
+        </div>
+
+        <div class="modal fade" id="sharemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">Share Profile To</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="col-12 text-center">
+                            <a href="#" class="btn btn-fb" onclick="ShareProfile(@Model.Id)"><i class="fab fa-facebook"></i>Share</a>
+                            @{
+                                var link = "https://wa.me/?text=https%3A%2F%2Fapp.jingl.com%2FTalent%2FTalentDetail%3FTalentId%3D" + Model.Id;
+                            }
+                            <a href="@link" class="btn btn-wa"><i class="fab fa-whatsapp"></i>Share</a>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@*<div id="myModal" class="modalImg">
+    <span class="closeImg">&times;</span>
+    <img class="modal-contentImg" id="img01">
+</div>*@
+
+<!-- end #top-menu -->
+<div class="panel-body panel-talent">
+    <div class="media media-sm d-block">
+        <div class="box-profile">
+            <a class="media-left" href="#">
+                <input type="hidden" value="@Model.Id" id="TalentId" />
+                <img id="myImg" src="@Model.LinkImg" alt="" class="media-object rounded-corner" style="width: 150px; height: 150px;" />
+            </a>
+            <div class="box-follow">
+                <div>
+
+                    @*<span class="span-follow ">
+                            @{
+                                if (Model.Level == 1)
+                                {
+                                    <a href="#" data-toggle="modal" data-target="#">
+                                        <img src="~/template/img/ranger.jpeg" class="ic-talent-page diamond">
+                                    </a>
+
+                                }
+                                else if (Model.Level == 2)
+                                {
+                                    <a href="#" data-toggle="modal" data-target="#">
+                                        <img src="~/template/img/elite.jpeg" class="ic-talent-page diamond">
+                                    </a>
+
+                                }
+                                else if (Model.Level == 3)
+                                {
+                                    <a href="#" data-toggle="modal" data-target="#">
+                                        <img src="~/template/img/master.jpeg" class="ic-talent-page diamond">
+                                    </a>
+
+                                }
+                                else if (Model.Level == 4)
+                                {
+                                    <a href="#" data-toggle="modal" data-target="#">
+                                        <img src="~/template/img/majestic.jpeg" class="ic-talent-page diamond">
+                                    </a>
+
+                                }
+                            }
+
+
+                            @Model.LevelName
+                        </span>*@
+                </div>
+                <div class="profile-sosmed">
+                    <a class="btn facebook" href="https://id-id.facebook.com/@Model.Facebook"><span><i class="fab fa-facebook"></i> </span></a>
+                    <a class="btn instagram" href="https://www.instagram.com/@Model.Instagram"><span><i class="fab fa-instagram"></i> </span></a>
+                    <a href="#" class="btn facebook" data-toggle="modal" data-target="#sharemodal">
+                        <i class="fas fa-share-alt"></i>
+                    </a>
+                </div>
+                @*<span class="span-follow"><span>1500</span> Followers</span>*@
+                <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalScrollableTitle">Tips</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm">
+                                            <h5> Cara Meningkatkan Level</h5>
+                                            <p>
+                                                Kamu dapat meningkatkan level kamu dengan meningkatkan nilai
+                                                transaksi sebanyak banyaknya. Semakin banyak nilai transaksi
+                                                semakin cepat level kamu naik.
+                                            </p>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Level</th>
+                                                        <th scope="col">Order Amount</th>
+                                                        <th scope="col">Favorit Amount</th>
+                                                        <th scope="col">Unit Price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <th scope="row"><img src="~/template/img/medal-bronze.png" style="width:20px" alt="Alternate Text" />Bronze</th>
+                                                        <td>1-19</td>
+                                                        <td>50-499</td>
+                                                        <td>5000-100000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row"><img src="~/template/img/medal-silver.png" style="width:20px" alt="Alternate Text" />Silver</th>
+                                                        <td>20-49</td>
+                                                        <td>500-1499</td>
+                                                        <td>150000-200000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row"><img src="~/template/img/medal-gold.png" style="width:20px" alt="Alternate Text" />Gold</th>
+                                                        <td>50-499</td>
+                                                        <td>1500-3499</td>
+                                                        <td>400000-600000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th scope="row"><img src="~/template/img/medal-diamond.png" style="width:20px" alt="Alternate Text" />Diamond</th>
+                                                        <td>500></td>
+                                                        <td>3500></td>
+                                                        <td>800000-1000000</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="desc-talent mt10">
+            <div class="level">
+                @*<h4 class="media-heading">@Model.TalentNm,  @currentOld - @Model.Profesion</h4>*@
+                <h4 class="media-heading">@Model.TalentNm, @Model.Profesion</h4>
+                @*<span><img src="~/template/img/medal-diamond.png" alt="Alternate Text" style="width:10%" />Diamond Level</span>*@
+            </div>
+
+
+            <span class="fa fa-star fa-star-talent checked"></span>
+            <span class="fa fa-star fa-star-talent checked"></span>
+            <span class="fa fa-star fa-star-talent checked"></span>
+            <span class="fa fa-star fa-star-talent checked"></span>
+
+
+
+            <p class="black-clr" style="margin-bottom:.3rem">
+                Bio : @Model.Bio
+            </p>
+            <p class="black-clr">
+                Fee Video : IDR
+                <label class="amountlines">@Model.PriceAmount</label>
+            </p>
+        </div>
+        @*<div class="ket-project col-12 mt30">
+                <div class="row -mlmr20 align-self-center justify-content-center">
+                    <div class="col-3 text-center">
+                        <div class="circle-ket-project">
+                            <span class="det-ket-project black-clr">20</span>
+                        </div>
+                        <p class="black-clr mt10">Completed</p>
+                    </div>
+                    <div class="col-3 text-center">
+                        <div class="circle-ket-project">
+                            <span class="det-ket-project black-clr">2</span>
+                        </div>
+                        <p class="black-clr mt10">On-Going</p>
+                    </div>
+                    <div class="col-3 text-center">
+                        <div class="circle-ket-project">
+                            <span class="det-ket-project black-clr">5</span>
+                        </div>
+                        <p class="black-clr mt10">Repeat Hire</p>
+                    </div>
+                </div>
+
+            </div>*@
+    </div>
+</div>
+<div class="card-content-tab-menu -mt20 mb50 p-b-40">
+    <div class="bg-tab-talent mt20">
+        <!-- begin nav-pills -->
+        <ul class="nav nav-tab-menu-talent nav-pills talent-detail-tab nav-tlndtl">
+            <li class="nav-items w-100 text-center">
+                <a href="#nav-pills-tab-1" data-toggle="tab" class="nav-link ic-tab-view pd5 active">
+                    @*<img src="/template/img/ic-tab1-active.png" class="ic-tab">*@
+                    Video Talent
+                </a>
+            </li>
+
+
+        </ul>
+        <!-- end nav-pills -->
+    </div>
+    <!-- begin tab-content -->
+    <div class="tab-content mt10">
+
+        <!-- begin tab-pane -->
+        <div class="tab-pane fade active show" id="nav-pills-tab-1">
+            <div class="close-content text-center">
+
+                <div class="trending-card">
+                    <div class="row">
+                        @{
+                            int x = 0;
+                            foreach (var data in Model.ListTalentVideo)
+                            {
+                                <div class="col-6">
+                                    <div class="card-video-home">
+                                        <input type="hidden" class="FileVideoId" id="FileVideoId_@x" value="@data.FileId" />
+                                        <input type="hidden" class="LinkVideo" id="LinkVideo_@x" value="@data.Link" />
+                                        <div class="embed-responsive embed-responsive-4by3 card-explore-top">
+                                            @*<iframe class="pb-video-frame" src="@data.Link" frameborder="0" aut allowfullscreen></iframe>*@
+                                            <video class="embed-responsive-item" style="object-fit: cover; filter:brightness(90%);">
+                                                <source src="@data.Link" type="video/mp4" />
+                                            </video>
+                                            <a href="#" class="explore-button btn-explore" data-toggle="modal" id="">
+                                                <img src="~/template/img/iconplaywhite.png" alt="Alternate Text" />
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                x++;
+                            }
+                        }
+
+                        @*<div class="col-6">
+                                <div class="card-video-home">
+                                    <div class="embed-responsive embed-responsive-4by3 card-img-top">
+                                        <iframe class="pb-video-frame" src="https://www.youtube.com/embed/K68UrdUOr2Y?list=RDzuAcaBkcYGE?ecver=1" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                    <div class="card-body-video">
+                                        <h6 class="title-video">How to Travel Safely</h6>
+                                        <p class="card-text">How to Travel Safely</p>
+                                    </div>
+                                </div>
+                            </div>*@
+                        @*<div class="col-6">
+                                <div class="card-video-home">
+                                    <div class="embed-responsive embed-responsive-4by3 card-img-top">
+                                        <iframe class="pb-video-frame" src="https://www.youtube.com/embed/K68UrdUOr2Y?list=RDzuAcaBkcYGE?ecver=1" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                    <div class="card-body-video">
+                                        <h6 class="title-video">How to Travel Safely</h6>
+                                        <p class="card-text">How to Travel Safely</p>
+                                    </div>
+                                </div>
+                            </div>*@
+                        @*<div class="col-6">
+                                <div class="card-video-home">
+                                    <div class="embed-responsive embed-responsive-4by3 card-img-top">
+                                        <iframe class="pb-video-frame" src="https://www.youtube.com/embed/K68UrdUOr2Y?list=RDzuAcaBkcYGE?ecver=1" frameborder="0" allowfullscreen></iframe>
+                                    </div>
+                                    <div class="card-body-video">
+                                        <h6 class="title-video">How to Travel Safely</h6>
+                                        <p class="card-text">How to Travel Safely</p>
+                                    </div>
+                                </div>
+                            </div>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end tab-pane -->
+        <!-- begin tab-pane -->
+        <div class="tab-pane fade" id="nav-pills-tab-2">
+            <div class="panel panel-inverse">
+                <div class="panel-body ">
+                    @*<div id="nv-donut-chart" class="height-sm"></div>*@
+                </div>
+            </div>
+        </div>
+        <!-- end tab-pane -->
+
+    </div>
+    <!-- end tab-content -->
+</div>
+</div>
+
+<!-- Footer -->
+<footer class="page-footer top-shadow">
+    <div class="col-12 text-center">
+        <div class="row">
+            @*<div class="col-4">
+            <button class="btn btn-rounded -mr40"><img src="/template/img/dislike.png" class="ic-button"></button>
+        </div>*@
+            @{
+                if (_httpCookie.Get("UserId") != "")
+                {
+
+
+                    if (Convert.ToInt32(_httpCookie.Get("UserId")) != Model.UserId)
+                    {
+                        if (Model.Id != 35)
+                        {
+                            <div class="col-12">
+                                <a href="@Url.Action("Hire","Booking",new {TalentId = Model.Id })" class="btn btn-blue">Pesan Video</a>
+                            </div>
+                        }
+
+                    }
+                }
+                else
+                {
+                    <div class="col-6">
+                        @*<a href="@Url.Action("Onboarding","Account")" class="btn btn-blue">Login</a>*@
+                        <a href="#" class="btn btn-blue" data-toggle="modal" data-target="#loginModal" style="width:100%;">Login</a>
+                    </div>
+                    <div class="col-6">
+                        @*<a href="@Url.Action("Onboarding","Account")" class="btn btn-blue">Login</a>*@
+                        <a href="@Url.Action("Onboarding", "Account")" class="btn btn-blue" style="width:100%;">Daftar</a>
+                    </div>
+                }
+            }
+
+            @*<div class="col-4">
+            <button class="btn btn-rounded -ml40"><img src="/template/img/heart.png" class="ic-button"></button>
+        </div>*@
+        </div>
+    </div>
+</footer>
+<!-- Footer -->
+
+@section scripts
+    {
+    <script async defer src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script>
+        var applicationServerPublicKey = 'BAVga6_CDUnXjegxtgYKT-kgviHOUGQc877x-8c1usw_QoFt2jk_zyI68elT6Yn1kTM9kFe7FiMWbyyIwUiCP84';
+        $(function () {
+            profile = {
+                UpdatePreview: function (obj) {
+                    // if IE < 10 doesn't support FileReader
+                    if (!window.FileReader) {
+                        // don't know how to proceed to assign src to image tag
+                    } else {
+                        var reader = new FileReader();
+                        var target = null;
+
+                        reader.onload = function (e) {
+                            target = e.target || e.srcElement;
+                            $(".profile-user").prop("src", target.result);
+                        };
+                        reader.readAsDataURL(obj.files[0]);
+                    }
+                }
+            };
+        });
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '384451719004954',
+                autoLogAppEvents: true,
+                xfbml: true,
+                version: 'v3.2'
+            });
+        };
+
+    </script>
+    <script>
+
+        var applicationServerPublicKey = 'BAVga6_CDUnXjegxtgYKT-kgviHOUGQc877x-8c1usw_QoFt2jk_zyI68elT6Yn1kTM9kFe7FiMWbyyIwUiCP84';
+
+        function ShareProfile(TalentId) {
+            FB.ui({
+                method: 'share',
+                display: 'popup',
+                href: 'https://app.jingl.com/Talent/TalentDetail?TalentId=' + TalentId,
+                //href: 'https://localhost:44374/Talent/TalentDetail?TalentId=' + TalentId,
+                // href:'https://localhost:44374/Talent/Video?FileId=31&TalentId=1'
+                // href: 'https://localhost:44374/Talent/Video?FileId=' + fileId + '&TalentId=' + TalentId,
+            }, function (response) {
+                window.location.reload();
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Hire').click(function () {
+                var TalentValue = $("#TalentId").val();
+                window.location.href = "../Booking/Hire?TalentId=" + TalentValue;
+            });
+
+            $(".explore-button").click(function (e) {
+                e.preventDefault();
+                $("#VideoModal").modal('show');
+                var div_id = $(this).parent().parent().find('.LinkVideo').attr('id');;
+                  var div_FileVideoid = $(this).parent().parent().find('.FileVideoId').attr('id');
+        var VideoId = $("#" + div_FileVideoid + "").val();
+         var jsonRequest = {
+                    UserId: 0,
+                    FileId: VideoId
+                };
+
+                var UrlInsert = "@Url.Action("InputFileWatched", "Files")";
+
+                $.ajax({
+                    url: UrlInsert,
+                    //cache: false,
+                    //traditional: true,
+                    type: "POST",
+                    //data: JSON.stringify({ request: jsonRequest }),
+                    data: { model: jsonRequest },
+                    //dataType: "json",
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+                    beforeSend: function () {
+                        //$("#spinner").show();
+                        $(".loadingSign").show();
+                    },
+                    complete: function () {
+                        $(".loadingSign").hide();
+                    },
+                    success: function (data) {
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+
+
+                //alert(div_id);
+                var $source = $('#videoplayer');
+                var $profil = $('#modalImg');
+                $source[0].src = $("#" + div_id + "").val();
+                $profil[0].src = "@Model.LinkImg";
+                $("#modalName").text("@Model.TalentNm");
+                //  $source.parent()[0].load();
+                $source[0].play();
+                // $source.parent().load();
+                $(".modalClose").click(function (e) {
+                    $source[0].pause();
+                });
+
+                $(".modal").on("shown.bs.modal", function () { // any time a modal is shown
+                    var urlReplace = "#" + $(this).attr('id'); // make the hash the id of the modal shown
+                    history.pushState(null, null, urlReplace); // push state that hash into the url
+                });
+
+                // If a pushstate has previously happened and the back button is clicked, hide any modals.
+                $(window).on('popstate', function () {
+                    $(".modal").modal('hide');
+                    $source[0].pause();
+                });
+
+            });
+        });
+    </script>
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var img = document.getElementById("myImg");
+        var modalImg = document.getElementById("img01");       
+        img.onclick = function () {
+            modal.style.display = "flex";
+            modalImg.src = this.src;
+       
+        }
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("closeImg")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function () {
+            modal.style.display = "none";
+        }
+    </script>
+
+}

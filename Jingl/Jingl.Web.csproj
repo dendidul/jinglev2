@@ -1,0 +1,701 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+    <UserSecretsId>c64b0204-5118-4a69-a62c-9ca82f35b309</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\HomeController1.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="clientsecret.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\.well-known\assetlinks.json" />
+    <Content Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\grunt\configBridge.json" />
+    <Content Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\grunt\npm-shrinkwrap.json" />
+    <Content Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\package.json" />
+    <Content Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\grunt\configBridge.json" />
+    <Content Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\grunt\npm-shrinkwrap.json" />
+    <Content Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\package.json" />
+	
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CookieManager" Version="2.0.0" />
+    <PackageReference Include="Google.Apis.Gmail.v1" Version="1.38.0.1495" />
+    <PackageReference Include="Google.Cloud.Storage.V1" Version="3.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+    <PackageReference Include="NETCore.Encrypt" Version="2.0.7" />
+    <PackageReference Include="NReco.VideoConverter.LT" Version="1.1.2" />
+    <PackageReference Include="NSwag.AspNetCore" Version="13.6.2" />
+    <PackageReference Include="Sendgrid" Version="9.10.0" />
+    <PackageReference Include="WebEssentials.AspNetCore.PWA" Version="1.0.49" />
+    <PackageReference Include="WebPush-NetCore" Version="1.0.2" />
+    <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
+    <PackageReference Include="Xabe.FFmpeg" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="clientsecret.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\assets-talent-comment\css\bootstrap.css.map" />
+    <None Include="wwwroot\assets-talent-comment\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\assets-talent-comment\css\style.css.map" />
+    <None Include="wwwroot\assets-talent-comment\fonts\codropsicons\codropsicons.svg" />
+    <None Include="wwwroot\assets-talent-comment\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\assets-talent-comment\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\assets-talent-comment\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\assets-talent-comment\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\assets-talent-comment\fonts\icomoon\icomoon.svg" />
+    <None Include="wwwroot\assets-talent-comment\fonts\themify.svg" />
+    <None Include="wwwroot\assets-talent-comment\js\chartjs.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\dashboard.js" />
+    <None Include="wwwroot\assets-talent-comment\js\less.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\chart-js\Chart.bundle.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\chart-js\chartjs-init.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\chosen\chosen.jquery.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\chosen\chosen.jquery.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\chosen\chosen.proto.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\chosen\chosen.proto.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\data-table\buttons.bootstrap.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\data-table\buttons.colVis.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\data-table\buttons.flash.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\data-table\buttons.html5.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\data-table\buttons.print.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\data-table\datatables-init.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\data-table\dataTables.bootstrap.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\data-table\dataTables.buttons.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\data-table\datatables.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\data-table\jquery-1.12.4.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\data-table\jquery.dataTables.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\data-table\jszip.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\data-table\pdfmake.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\data-table\vfs_fonts.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\flot-chart\curvedLines.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\flot-chart\excanvas.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\flot-chart\flot-chart-init.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\flot-chart\flot-tooltip\jquery.flot.tooltip.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\flot-chart\jquery.flot.categories.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\flot-chart\jquery.flot.crosshair.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\flot-chart\jquery.flot.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\flot-chart\jquery.flot.pie.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\flot-chart\jquery.flot.resize.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\flot-chart\jquery.flot.stack.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\flot-chart\jquery.flot.threshold.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\flot-chart\jquery.flot.time.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\gauge\gauge.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\gmap\gmap.init.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\gmap\gmapApi.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\gmap\gmaps.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\gmap\gmaps.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\peitychart\jquery.peity.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\peitychart\peitychart.init.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\vector-map\country\jquery.vmap.algeria.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\vector-map\country\jquery.vmap.argentina.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\vector-map\country\jquery.vmap.brazil.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\vector-map\country\jquery.vmap.europe.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\vector-map\country\jquery.vmap.france.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\vector-map\country\jquery.vmap.germany.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\vector-map\country\jquery.vmap.greece.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\vector-map\country\jquery.vmap.iran.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\vector-map\country\jquery.vmap.iraq.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\vector-map\country\jquery.vmap.russia.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\vector-map\country\jquery.vmap.tunisia.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\vector-map\country\jquery.vmap.turkey.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\vector-map\country\jquery.vmap.usa.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\vector-map\country\jquery.vmap.world.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\vector-map\jquery.vmap.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\vector-map\jquery.vmap.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\vector-map\jquery.vmap.sampledata.js" />
+    <None Include="wwwroot\assets-talent-comment\js\lib\vector-map\vector.init.js" />
+    <None Include="wwwroot\assets-talent-comment\js\main.js" />
+    <None Include="wwwroot\assets-talent-comment\js\plugins.js" />
+    <None Include="wwwroot\assets-talent-comment\js\popper.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\selectFx.js" />
+    <None Include="wwwroot\assets-talent-comment\js\vendor\jquery-1.11.3.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\vendor\jquery-2.1.4.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\vendor\modernizr-2.8.3.min.js" />
+    <None Include="wwwroot\assets-talent-comment\js\widgets.js" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\0c2f4e7e3ce607a0f7f238a71122520ed74aaa15\style.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\0c2f4e7e3ce607a0f7f238a71122520ed74aaa15\variables.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\0c2f4e7e3ce607a0f7f238a71122520ed74aaa15\_gauge.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\0c2f4e7e3ce607a0f7f238a71122520ed74aaa15\_switches.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\0c2f4e7e3ce607a0f7f238a71122520ed74aaa15\_widgets.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_alert.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_background-variant.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_badge.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_border-radius.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_box-shadow.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_breakpoints.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_buttons.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_caret.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_clearfix.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_float.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_forms.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_gradients.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_grid-framework.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_grid.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_hover.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_image.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_list-group.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_lists.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_nav-divider.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_pagination.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_reset-text.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_resize.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_screen-reader.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_size.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_table-row.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_text-emphasis.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_text-hide.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_text-truncate.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_transition.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\1ea663541d8aa72314e8caea4edf18e46ea3ed2e\_visibility.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\bootstrap.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_alert.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_badge.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_breadcrumb.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_button-group.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_buttons.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_card.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_carousel.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_close.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_code.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_custom-forms.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_dropdown.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_forms.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_functions.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_grid.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_images.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_input-group.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_jumbotron.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_list-group.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_media.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_mixins.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_modal.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_nav.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_navbar.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_pagination.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_popover.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_print.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_progress.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_reboot.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_root.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_tables.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_tooltip.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_transitions.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_type.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_utilities.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\590089d940a3045eb8c8b24b183c435305a7d5a9\_variables.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\bootstrap.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_alert.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_badge.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_breadcrumb.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_button-group.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_buttons.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_card.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_carousel.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_close.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_code.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_custom-forms.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_dropdown.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_forms.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_functions.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_grid.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_images.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_input-group.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_jumbotron.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_list-group.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_media.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_mixins.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_modal.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_nav.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_navbar.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_pagination.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_popover.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_print.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_progress.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_reboot.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_root.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_tables.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_tooltip.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_transitions.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_type.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_utilities.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\62cfef4a3fbfab02df9a4ee49a4d404e06273937\_variables.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6da42945727bdadaec570db1596987e0a46bfa4d\socials.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6da42945727bdadaec570db1596987e0a46bfa4d\style.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6da42945727bdadaec570db1596987e0a46bfa4d\variables.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6da42945727bdadaec570db1596987e0a46bfa4d\_gauge.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6da42945727bdadaec570db1596987e0a46bfa4d\_switches.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6da42945727bdadaec570db1596987e0a46bfa4d\_widgets.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_align.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_background.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_borders.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_clearfix.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_display.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_embed.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_flex.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_float.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_position.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_screenreaders.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_sizing.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_spacing.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_text.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\6e69d195df721b3a89b57cbd4813c065acff1449\_visibility.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_alert.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_background-variant.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_badge.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_border-radius.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_box-shadow.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_breakpoints.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_buttons.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_caret.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_clearfix.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_float.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_forms.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_gradients.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_grid-framework.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_grid.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_hover.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_image.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_list-group.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_lists.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_nav-divider.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_pagination.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_reset-text.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_resize.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_screen-reader.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_size.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_table-row.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_text-emphasis.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_text-hide.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_text-truncate.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_transition.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\c64c3075ab570bf2e2c270d1fb05ff7e3db68931\_visibility.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_align.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_background.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_borders.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_clearfix.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_display.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_embed.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_flex.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_float.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_position.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_screenreaders.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_sizing.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_spacing.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_text.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\.sass-cache\d192277f41c6848ff7411af310ee7b2a42ab6d76\_visibility.scssc" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\bootstrap-grid.css.map" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\bootstrap-grid.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\bootstrap-reboot.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\bootstrap.css.map" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\bootstrap.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_alert.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_background-variant.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_badge.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_border-radius.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_box-shadow.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_breakpoints.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_buttons.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_caret.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_clearfix.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_float.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_forms.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_gradients.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_grid-framework.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_grid.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_hover.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_image.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_list-group.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_lists.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_nav-divider.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_navbar-align.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_pagination.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_reset-text.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_resize.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_screen-reader.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_size.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_table-row.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_text-emphasis.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_text-hide.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_text-truncate.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_transition.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\mixins\_visibility.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\utilities\_align.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\utilities\_background.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\utilities\_borders.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\utilities\_clearfix.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\utilities\_display.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\utilities\_embed.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\utilities\_flex.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\utilities\_float.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\utilities\_position.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\utilities\_screenreaders.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\utilities\_sizing.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\utilities\_spacing.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\utilities\_text.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\utilities\_visibility.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_alert.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_badge.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_breadcrumb.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_button-group.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_buttons.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_card.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_carousel.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_close.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_code.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_custom-forms.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_dropdown.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_forms.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_functions.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_grid.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_images.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_input-group.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_jumbotron.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_list-group.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_media.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_mixins.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_modal.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_nav.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_navbar.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_pagination.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_popover.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_print.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_progress.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_reboot.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_root.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_tables.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_tooltip.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_transitions.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_type.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_utilities.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\bootstrap\_variables.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\socials.css.map" />
+    <None Include="wwwroot\assets-talent-comment\scss\socials.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\style.css.map" />
+    <None Include="wwwroot\assets-talent-comment\scss\style.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\variables.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\_gauge.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\_switches.scss" />
+    <None Include="wwwroot\assets-talent-comment\scss\_widgets.scss" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\CHANGELOG.md" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\css\bootstrap.css.map" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\js\bootstrap.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\js\bootstrap.min.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\js\npm.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\Gruntfile.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\grunt\.jshintrc" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\grunt\bs-commonjs-generator.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\grunt\bs-lessdoc-parser.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\grunt\bs-raw-files-generator.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\grunt\change-version.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\grunt\sauce_browsers.yml" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\affix.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\alert.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\button.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\carousel.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\collapse.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\dropdown.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\modal.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\popover.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\scrollspy.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\tab.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\tooltip.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\transition.js" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\alerts.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\badges.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\bootstrap.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\breadcrumbs.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\button-groups.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\buttons.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\carousel.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\close.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\code.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\component-animations.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\dropdowns.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\forms.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\glyphicons.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\grid.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\input-groups.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\jumbotron.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\labels.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\list-group.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\media.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\alerts.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\background-variant.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\border-radius.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\buttons.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\center-block.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\clearfix.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\forms.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\gradients.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\grid-framework.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\grid.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\hide-text.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\image.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\labels.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\list-group.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\nav-divider.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\nav-vertical-align.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\opacity.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\pagination.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\panels.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\progress-bar.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\reset-filter.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\reset-text.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\resize.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\responsive-visibility.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\size.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\tab-focus.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\table-row.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\text-emphasis.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\text-overflow.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\vendor-prefixes.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\modals.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\navbar.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\navs.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\normalize.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\pager.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\pagination.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\panels.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\popovers.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\print.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\progress-bars.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\responsive-embed.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\responsive-utilities.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\scaffolding.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\tables.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\theme.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\thumbnails.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\tooltip.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\type.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\utilities.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\variables.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\wells.less" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\LICENSE" />
+    <None Include="wwwroot\assets\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\README.md" />
+    <None Include="wwwroot\assets\plugins\jquery-tag-it\.githooks\install.sh" />
+    <None Include="wwwroot\assets\plugins\jquery-tag-it\.githooks\post-commit" />
+    <None Include="wwwroot\assets\plugins\jquery-tag-it\.githooks\pre-commit" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\CHANGELOG.md" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\css\bootstrap.css.map" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\js\bootstrap.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\js\bootstrap.min.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\dist\js\npm.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\Gruntfile.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\grunt\.jshintrc" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\grunt\bs-commonjs-generator.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\grunt\bs-lessdoc-parser.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\grunt\bs-raw-files-generator.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\grunt\change-version.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\grunt\sauce_browsers.yml" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\affix.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\alert.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\button.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\carousel.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\collapse.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\dropdown.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\modal.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\popover.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\scrollspy.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\tab.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\tooltip.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\js\transition.js" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\alerts.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\badges.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\bootstrap.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\breadcrumbs.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\button-groups.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\buttons.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\carousel.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\close.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\code.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\component-animations.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\dropdowns.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\forms.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\glyphicons.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\grid.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\input-groups.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\jumbotron.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\labels.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\list-group.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\media.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\alerts.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\background-variant.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\border-radius.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\buttons.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\center-block.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\clearfix.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\forms.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\gradients.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\grid-framework.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\grid.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\hide-text.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\image.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\labels.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\list-group.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\nav-divider.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\nav-vertical-align.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\opacity.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\pagination.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\panels.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\progress-bar.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\reset-filter.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\reset-text.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\resize.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\responsive-visibility.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\size.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\tab-focus.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\table-row.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\text-emphasis.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\text-overflow.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\mixins\vendor-prefixes.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\modals.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\navbar.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\navs.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\normalize.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\pager.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\pagination.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\panels.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\popovers.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\print.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\progress-bars.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\responsive-embed.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\responsive-utilities.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\scaffolding.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\tables.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\theme.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\thumbnails.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\tooltip.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\type.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\utilities.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\variables.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\less\wells.less" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\LICENSE" />
+    <None Include="wwwroot\Jingl\plugins\bootstrap-eonasdan-datetimepicker\node_modules\bootstrap\README.md" />
+    <None Include="wwwroot\Jingl\plugins\jquery-tag-it\.githooks\install.sh" />
+    <None Include="wwwroot\Jingl\plugins\jquery-tag-it\.githooks\post-commit" />
+    <None Include="wwwroot\Jingl\plugins\jquery-tag-it\.githooks\pre-commit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jingl.Service\Jingl.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="credentials.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\Account\BookingDetail-bkp.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Account\Workspace.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Account\Workspace-old.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\AdmBanner\Delete.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\AgnBook\Delete.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\AdmBook\Delete.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\AdmCategory\Delete.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\AdmParameter\Delete.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\AdmRole\Delete.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\AdmSupport\Delete.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\AdmUser\Delete.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\AdmUser\Index - Copy.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\AdmUser\Index.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Home\Index-Old.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Talent\TalentVideo.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="wwwroot\template\css\style.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
+    <Folder Include="wwwroot\assets-new-login\" />
+    <Folder Include="wwwroot\Upload\Photos\" />
+    <Folder Include="wwwroot\Upload\Videos\mp4\Watermark\" />
+  </ItemGroup>
+
+</Project>

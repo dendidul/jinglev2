@@ -1,0 +1,151 @@
+﻿@model Jingl.General.Model.Admin.Transaction.BookModel
+@{
+    ViewData["Title"] = "Confirm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Model.Potongan = Model.Potongan != null ? Model.Potongan : 0;
+
+    decimal dVal = 0;
+    if (Model.SalePrice.HasValue)
+    { 
+        dVal = Model.SalePrice.Value;
+    }    
+    decimal dPrice=(dVal <= 0 ? Model.PriceAmount.Value : dVal);
+
+    decimal TotalAmount = dPrice - Convert.ToDecimal(Model.Potongan);
+}
+<div class="header-menu">
+    <ul class="nav">
+        <li class="nav-item text-center pull-left">
+            <a class="nav-link" href="javascript:history.back()">
+                <div class="icon-img mb4">
+                    <img class="icon-menu" src="/template/img/ic-back-blue.png" alt="" />
+                </div>
+            </a>
+        </li>
+        <li class="nav-item justify-content-center mr-center">
+            <h5 class="nav-link -ml54">Konfirmasi Pembayaran</h5>
+        </li>
+    </ul>
+</div>
+
+    <div class="payconfirm">
+        <div class="container-fluid">
+            <div class="row">
+               
+                    <h3 class="text-center">Detail Transaksi</h3>
+               
+                
+                <div class="col-12 clearfix mt10">
+                    <h5 class=" float-left">Talent Name</h5>
+                    <span class="float-right Bold">@Model.TalentNm <input type="hidden" id="TalentId" value="@Model.TalentId" />   <input type="hidden" id="BookId" value="@Model.Id" />   <input type="hidden" id="PayMethod" value="@Model.PayMethod" /></span>
+                </div>
+                <div class="col-12 clearfix mt10">
+                    <h5 class=" float-left">Billing</h5>
+                    <span class="float-right Bold">IDR. @Model.PriceAmount  <input type="hidden" id="PriceAmount" value="@Model.PriceAmount" /><input type="hidden" id="SalePrice" value="@Model.SalePrice" /><input type="hidden" id="PaymentShare" value="@Model.PaymentShare" /> </span>
+              
+                </div>
+                <div class="col-12 clearfix mt10">
+                    <h5 class=" float-left">Potongan</h5>
+                    <span class="float-right Bold">IDR. @Model.Potongan  <input type="hidden" id="Potongan" value="@Model.Potongan" /> </span>
+                 
+                </div>
+                <div class="col-12 clearfix mt30">
+                    <h5 class=" float-left">Total Amount</h5>
+                    <h4 class="float-right Bold">IDR. @TotalAmount  <input type="hidden" id="TotalAmount" value="@TotalAmount" /></h4>
+                
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 mt10">
+                    <div class="register-buttons mt40">
+                        <button type="button" class="btn  btn-blue btn-block  btnprocess2" id="BtnProcess">Pay<img src="~/template/img/ic-proceed-pink.png" class="ic-process"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+@section scripts
+    {
+
+    <script type="text/javascript">
+            $(document).ready(function () {
+
+                $("#BtnProcess").click(function (e)
+                {
+
+                e.preventDefault();
+                var BookId = $("#BookId").val();
+                var TalentId = $("#TalentId").val();
+                var TotalAmount = $("#TotalAmount").val();
+                var PriceAmount = $("#PriceAmount").val();
+                var SalePrice = $("#SalePrice").val();
+                var PaymentShare = $("#PaymentShare").val();                    
+                var Potongan = $("#Potongan").val();
+                var PayMethodId = $("#PayMethod").val();
+
+
+                var url = "@Url.Action("PayConfirm", "Booking")";
+                var jsonRequest = {
+                    Id: BookId,
+                    TalentId: TalentId,
+                    TotalPay: TotalAmount,
+                    PriceAmount: PriceAmount,
+                    SalePrice: SalePrice,
+                    PaymentShare: PaymentShare,
+                    Potongan: Potongan,
+                    PayMethodId: PayMethodId
+                 
+                };
+
+
+
+                $.ajax({
+                    url: url,
+                    //cache: false,
+                    //traditional: true,
+                    type: "POST",
+                    data: { model: jsonRequest},
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+                    beforeSend:
+                        function () {
+                            //$("#spinner").show();
+                        },
+                    success: function (data) {
+
+                        if (data.status == "OK") {
+                            $.gritter.add({
+                                title: 'Success!',
+                                text: 'Payment SuccessFully !'
+                            });
+                            window.location.href = "../Booking/PaymentSuccess";
+
+                        }
+
+                        else {
+                            $.gritter.add({
+                                title: 'Warning!',
+                                text: 'Payment Failed !'
+                            });
+                        }
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+
+
+            });
+
+            });
+    </script>
+
+}
+

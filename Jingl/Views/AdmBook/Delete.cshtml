@@ -1,0 +1,243 @@
+﻿@model Jingl.General.Model.Admin.Transaction.BookModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout_Adm.cshtml";
+}
+@using (Html.BeginForm("Delete", "AdmBook", FormMethod.Post, new { Id = "formCreateUser", enctype = "multipart/form-data" }))
+{
+    @*<form id="FormBookEdit" class="form-horizontal form-bordered">*@
+    <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-12 col-lg-12 align-self-center">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    </div>
+                    <h4 class="panel-title">Edit</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Order No</label>
+                            @Html.HiddenFor(model => model.OrderNo, new { Class = "form-control" })
+                            @Html.TextBoxFor(model => model.OrderNo, new { Class = "form-control", disabled = "true" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Project Name</label>
+                            @Html.HiddenFor(model => model.Id, new { Class = "form-control" })
+                            @Html.HiddenFor(model => model.Rate, new { Class = "form-control" })
+                            @Html.TextBoxFor(model => model.ProjectNm, new { Class = "form-control", disabled = "true" })
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>Talent </label>
+                                @Html.DropDownListFor(model => model.TalentId, ViewBag.ListTalent as IEnumerable<SelectListItem>, "Pilih Talent", new { Class = "form-control", Placeholder = "", disabled = "true" })
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>Booked By</label>
+                                @Html.DropDownListFor(model => model.BookedBy, ViewBag.ListUser as IEnumerable<SelectListItem>, "Pilih User", new { Class = "form-control", Placeholder = "", disabled = "true" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label>To </label>
+                            @Html.TextBoxFor(model => model.To, new { Class = "form-control", disabled = "true" })
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>From </label>
+                                @Html.TextBoxFor(model => model.From, new { Class = "form-control", disabled = "true" })
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <label>BriefNeeds</label>
+                            @Html.TextAreaFor(model => model.BriefNeeds, new { Class = "form-control", disabled = "true" })
+                        </div>
+                    </div>
+                    <div class="row">
+
+
+                        <div class="col-4">
+                            <label>Deadline </label>
+                            @Html.TextBoxFor(model => model.Deadline, new { Class = "form-control datetimepicker", disabled = "true" })
+                        </div>
+                        <div class="col-4">
+                            <label>Payment Expired Date </label>
+                            @Html.TextBoxFor(model => model.ExpiredDate, new { Class = "form-control", disabled = "true" })
+                        </div>
+                        <div class="col-4">
+                            <label>Period</label>
+                            @Html.TextBoxFor(model => model.Period, new { Class = "form-control", disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Voucher Code</label>
+                            @Html.TextBoxFor(model => model.VoucherCode, new { Class = "form-control", disabled = "true" })
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>Total Pay </label>
+                                @Html.TextBoxFor(model => model.TotalPay, new { Class = "form-control", disabled = "true" })
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>Book Category </label>
+                                @Html.DropDownListFor(model => model.BookCategory, ViewBag.BookCategory as IEnumerable<SelectListItem>, "Pilih Category", new { Class = "form-control", Placeholder = "", disabled = "true" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Video</label><br />
+
+                            <video width="300" class="pb-video-frame" controls id="video_here">
+                                <source src="@Model.Link" type="video/mp4">
+
+                            </video>
+
+                        </div>
+                        <div class="col-4">
+                            <label>Reaction Video</label><br />
+
+                            <video width="300" class="pb-video-frame" controls id="reaction_video_here">
+                                <source src="@Model.ReactionLink" type="video/mp4">
+
+                            </video>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Payment Method</label>
+                            @Html.DropDownListFor(model => model.PayMethod, ViewBag.ListPaymentMethod as IEnumerable<SelectListItem>, "Pilih Payment Method", new { Class = "form-control", Placeholder = "", disabled = "true" })
+                        </div>
+                        <div class="col-4">
+                            <label>Payment Channel</label>
+                            @Html.TextBoxFor(model => model.PaymentChannel, new { Class = "form-control", disabled = "true" })
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+
+                                <label>Status </label>
+                                @Html.DropDownListFor(model => model.Status, ViewBag.ListTransactionStatus as IEnumerable<SelectListItem>, "Pilih Status", new { Class = "form-control", Placeholder = "", disabled = "true" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+
+                                <label>Reason </label>
+                                @Html.TextAreaFor(model => model.Reason, new { Class = "form-control", disabled = "true" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+
+                            <label>Review </label>
+                            @Html.TextAreaFor(model => model.Review, new { Class = "form-control", disabled = "true" })
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+
+                            <label>Is Public </label>
+                            @Html.CheckBoxFor(model => model.ispublic_, new { Disabled = "true" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <a href="@Url.Action("Index", "AdmBook")" class="btn btn-warning">Cancel</a>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    @*</form>*@
+}
+
+
+@section scripts{
+
+    <script type="text/javascript">
+            $(document).ready(function () {
+                App.init();
+                $("#TotalPay").autoNumeric('init', { vMin: 0, vMax: 10000000000000.00, mDec: 0 });
+
+                $(document).on("change", ".ReactionFileVideo", function (evt) {
+                    var $source = $('#reaction_video_here');
+                    $source[0].src = URL.createObjectURL(this.files[0]);
+                    $source.parent()[0].load();
+                });
+
+                $(document).on("change", ".FileVideo", function (evt) {
+                    var $source = $('#video_here');
+                    $source[0].src = URL.createObjectURL(this.files[0]);
+                    $source.parent()[0].load();
+                });
+
+                $('#FormBookEdit').submit(function (e) {
+                e.preventDefault();
+                var formData = new FormData();
+                    var TotalPay = $("#TotalPay").val().replace(',', '');
+                    $("#TotalPay").val(TotalPay);
+                    var formData = new FormData($('#FormBookEdit')[0]);
+                     var url = "@Url.Action("Delete","AdmBook")";
+
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+
+                        dataType: 'json',
+                        contentType: false,
+                        processData: false,
+
+
+                        data: formData,
+
+                        beforeSend: function () {
+                            //$("#spinner").show();
+                            $(".loadingSign").show();
+                        },
+                        complete: function () {
+                            $(".loadingSign").hide();
+                        },
+                    success: function (data) {
+
+                        window.location.href = "@Url.Action("Index", "AdmBook")";
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+
+
+            });
+            });
+    </script>
+}

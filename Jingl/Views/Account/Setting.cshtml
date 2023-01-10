@@ -1,0 +1,324 @@
+﻿@model Jingl.General.Model.User.ViewModel.ProfileViewModel
+
+@{
+    ViewData["Title"] = "Setting";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@inject CookieManager.ICookie _httpCookie
+<div id="myHeader">
+    <div class="logo-header">
+        <div class="coontainer-fluid">
+            <div class="col-md-12">
+                <div class="headerTop" style="height: 40px;">
+                    <div class="setting-profile" style="left: 13px;right: unset;top: 0;position: absolute;">
+                        <a href="javascript:history.back()">
+                            <div class="icon-img">
+                                <img src="/template/img/left-arrow.svg" style="width:25px;" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-auto w-100 p-4 text-white text-center" style="padding-top: 7px !important;">
+                        <h4 style="color: #fff;font-weight: bold;">Edit Profile</h4>
+                    </div>
+                    @*<img src="~/template/img/Jing_e 2.png" alt="Alternate Text" />*@
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="background: #fff">
+    <div class="row">
+        <div class="col-12">
+            <div class="card-content-home panel-body -mt20">
+                <ul class="media-list media-list-with-divider">
+                    <li class=""></li>
+
+
+                    <li class="media media-sm" style="border-top: none;">
+                        <div class="container">
+                            <div id="divTalentSetting" style="display:none">
+                                <ul class="nav flex-column -ml10">
+
+                                    <h5 class="blue-clr ml15 mt15">Pengaturan Akun</h5>
+                                    @*<li class="nav-item ct-span ">
+            <a class="nav-link list-menu-activity wd-95" href="@Url.Action("BestTalent", "Talent")">
+                <span><b>Best Talent</b></span><br>
+                Intip Talent Terbaik Minggu ini
+            </a>
+            <span class="mr10"> > </span>
+        </li>*@
+
+                                    <li class="nav-item ct-span ">
+                                        <a class="nav-link list-menu-activity wd-95" href="@Url.Action("EditProfile", "Account", new { UserId = Model.UserModel.Id })">
+                                            <span><b>Edit Profile</b></span><br>
+                                            Edit profilmu agar lebih menarik
+                                        </a>
+                                        <span class="mr10"> > </span>
+                                    </li>
+
+                                    @{
+                                        if (Model.UserModel.RoleId == 3 && Model.TalentModel.IsUnderAgency == true)
+                                        {
+
+
+                                        }
+                                        else
+                                        {
+                                            <li class="nav-item ct-span ">
+                                                <a class="nav-link list-menu-activity wd-95" href="@Url.Action("Billing", "Account", new { id = Model.UserModel.Id })">
+                                                    <span><b>Informasi Rekening</b></span><br>
+                                                    Detail Informasi Rekening
+                                                </a>
+                                                <span class="mr10"> > </span>
+                                            </li>
+                                        }
+
+                                    }
+
+
+
+                                    @*@{
+            if (Model.UserModel.RoleId == 3)
+            {
+                <li class="nav-item ct-span disabled">
+                    <a class="nav-link list-menu-activity wd-95" href="#">
+                        <span><b>Daftar sebagai Talent</b></span><br>
+                        Satu langkah mudah untuk jadi talent
+                    </a>
+                    <span class="mr10"> > </span>
+                </li>
+
+            }
+            else
+            {
+                <li class="nav-item ct-span ">
+                    <a class="nav-link list-menu-activity wd-95" href="@Url.Action("RegisterTalent", "Talent", new { UserId = Model.UserModel.Id })">
+                        <span><b>Daftar sebagai Talent</b></span><br>
+                        Satu langkah mudah untuk jadi Talent
+                    </a>
+                    <span class="mr10"> > </span>
+                </li>
+            }
+        }
+        @**@
+                                </ul>
+                            </div>
+                            <ul class="nav flex-column -ml10">
+                                <h5 class="blue-clr ml15 mt15">Notifikasi</h5>
+                                <li class="nav-item ct-span ">
+                                    <div class="widget-todolist-item">
+                                        <div class="widget-todolist-content wd-95">
+                                            <span><b>Aktifitas Terbaru</b></span><br>
+                                            <span style="padding-bottom: .5rem;">Izinkan pengiriman notifikasi aktifitas terbaru</span>
+                                            <span>
+                                                <input type="hidden" id="PushEndpoint" name="PushEndpoint" />
+                                                <input type="hidden" id="PushP256DH" name="PushP256DH" />
+                                                <input type="hidden" id="PushAuth" name="PushAuth" />
+                                            </span>
+                                        </div>
+                                        <div class="widget-todolist-input">
+                                            <div class="checkbox checkbox-css">
+                                                <input type="checkbox" id="ChkAllowNotif" checked />
+                                                <label for="ChkAllowNotif" class="p-l-15"></label>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <h5 class="blue-clr ml15 mt15">About</h5>
+                                <li class="nav-item ct-span">
+                                    <a class="nav-link list-menu-activity wd-95" style="cursor:default">
+                                        <span><b>App Version</b></span><br>
+                                        @Model.AppVersion
+                                    </a>
+                                </li>
+                                <h5 class="blue-clr ml15 mt15">Other</h5>
+                                <li class="nav-item ct-span ">
+                                    <a class="nav-link list-menu-activity wd-95" href="@Url.Action("Support", "Account")">
+                                        <span><b>Bantuan</b></span><br>
+                                        Ada Masalah ? Yuk Tanya CS Kami
+                                    </a>
+                                    <span class="mr10"> > </span>
+                                </li>
+                                @{
+                                    if (Model.UserModel.RoleId == 3)
+                                    {
+                                        <li class="nav-item ct-span ">
+                                            <a class="nav-link list-menu-activity wd-95" href="@Url.Action("TermCondsTalent", "Account")">
+                                                <span><b>Terms & Conditions</b></span><br>
+
+                                            </a>
+                                            <span class="mr10"> > </span>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li class="nav-item ct-span ">
+                                            <a class="nav-link list-menu-activity wd-95" href="@Url.Action("TermCondsUser", "Account")">
+                                                <span><b>Terms & Conditions</b></span><br>
+
+                                            </a>
+                                            <span class="mr10"> > </span>
+                                        </li>
+                                    }
+                                }
+                                <li class="nav-item ct-span ">
+                                    <a class="nav-link list-menu-activity wd-95" href="@Url.Action("RefundPolicy", "Account")">
+                                        <span><b>Kebijakan Pengembalian Dana</b></span><br>
+                                    </a>
+                                    <span class="mr10"> > </span>
+                                </li>
+                                @{
+                                    if (Model.UserModel.RoleId == 3)
+                                    {
+                                        <li class="nav-item ml15 mt30" style="display:none">
+                                            <a href="@Url.Action("UserProfile", "Account")"><b class="blue-clr">Profile Sebagai User</b></a>
+                                        </li>
+                                    }
+                                }
+                                <li class="nav-item ml15 mt30">
+                                    <a href="@Url.Action("LogOut","Account")"><b class="blue-clr">Logout</b></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts
+    {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (@Model.UserModel.RoleId == 3) {
+                document.getElementById("divTalentSetting").style.display = "block";
+            }
+            else {
+                document.getElementById("divTalentSetting").style.display = "none";
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            IsActiveNotification();
+                $('#ChkAllowNotif').change(function () {
+                if ($('#ChkAllowNotif').is(":checked")) {
+                    var jsonRequest = {
+                        PushEndpoint : $("#PushEndpoint").val(),
+                        PushP256DH : $("#PushP256DH").val(),
+                        PushAuth: $("#PushAuth").val(),
+                        Name: $("#UserName").val()
+                    };
+                    $.ajax({
+                        url: "@Url.Action("AddDevice", "Notification")",
+                        //cache: false,
+                        //traditional: true,
+                        type: "POST",
+                        data: { model: jsonRequest },
+                        //contentType: "application/json; charset=utf-8",
+                        //async: false,
+                        beforeSend:
+                            function () {
+                                //$("#spinner").show();
+                            },
+                        success: function (data) {
+
+                            $.gritter.add({
+                                title: 'Success!',
+                                text: 'Notifikasi di aktifkan'
+                            });
+
+
+
+                        },
+                        error: function (jqXHR, textStatus, errorMessage) {
+                            console.log(errorMessage);
+                        }
+                    });
+
+
+                }
+
+                else {
+                    var jsonRequest = {
+                        PushEndpoint: $("#PushEndpoint").val(),
+                        PushP256DH: $("#PushP256DH").val(),
+                        PushAuth: $("#PushAuth").val(),
+                        Name: $("#UserName").val()
+                    };
+                      $.ajax({
+                        url: "@Url.Action("DeleteDevice", "Notification")",
+                        //cache: false,
+                        //traditional: true,
+                        type: "POST",
+                        data: { model: jsonRequest },
+                        //contentType: "application/json; charset=utf-8",
+                        //async: false,
+                        beforeSend:
+                            function () {
+                                //$("#spinner").show();
+                            },
+                        success: function (data) {
+
+                            $.gritter.add({
+                                title: 'Success!',
+                                text: 'Notifikasi di NonAktifkan'
+                            });
+
+
+                        },
+                        error: function (jqXHR, textStatus, errorMessage) {
+                            console.log(errorMessage);
+                        }
+                    });
+
+
+                }
+                });
+
+                function IsActiveNotification() {
+            var jsonRequest = {
+                PushEndpoint: $("#PushEndpoint").val(),
+                PushP256DH: $("#PushP256DH").val(),
+                PushAuth: $("#PushAuth").val(),
+                Name: $("#UserName").val()
+            };
+            $.ajax({
+                        url: "@Url.Action("CheckActiveNotification", "Notification")",
+                        //cache: false,
+                        //traditional: true,
+                        type: "POST",
+                        data: { model: jsonRequest },
+                        //contentType: "application/json; charset=utf-8",
+                        //async: false,
+                        beforeSend:
+                            function () {
+                                //$("#spinner").show();
+                            },
+                        success: function (data) {
+
+                            if (data == true) {
+
+
+                                $("#ChkAllowNotif").attr('checked', true);
+                            }
+                            else {
+                                $("#ChkAllowNotif").attr('checked', false);
+                            }
+
+
+
+                        },
+                        error: function (jqXHR, textStatus, errorMessage) {
+                            console.log(errorMessage);
+                        }
+                    });
+        }
+            });
+    </script>
+}

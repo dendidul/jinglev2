@@ -1,0 +1,214 @@
+﻿@model Jingl.General.Model.Admin.Transaction.TalentRegModel
+@{
+    //ViewData["Title"] = "Signup";
+    Layout = "~/Views/Shared/_Temp_Layout.cshtml";
+}
+<div id="myHeader">
+    <div class="logo-header">
+        <div class="coontainer-fluid">
+            <div class="col-md-12">
+                <ul class="nav">
+                    <li class="nav-item text-center pull-left">
+                        <a class="nav-link" href="javascript:history.back()">
+                            <div class="icon-img">
+                                <img src="/template/img/ic-back-white.png" style="width:42%;margin-left:-25%;margin-top:-8%" alt="" />
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item justify-content-center mr-center">
+                        <img src="~/template/img/Jing_e 1.png" style="margin-left:-84%" alt="Alternate Text" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="box-white">
+    <form class="form-horizontal form-bordered p-t-30" id="Frm_Register">
+        <!-- button back -->
+       
+        <!-- begin login -->
+        <div class="col-12 text-center">
+            <h4 class="register-header regis-head m-b-40">
+                Daftar Sebagai Talent
+            </h4>
+        </div>
+
+        <div class="register-content mt30 panel-body panel-form form-signup">
+
+            <div class="form-group row">
+                <div class="col-lg-12 col-md-12">
+                    <input type="hidden" id="UserId" name="UserId" value="@Model.UserId" />
+                    <input type="hidden" id="UserId" name="TalentNm" value="@Model.TalentNm" />
+                    <input type="hidden" id="UserId" name="Email" value="@Model.Email" />
+                    <input type="text" name="TalentNm" id="TalentNm" class="form-control" placeholder="Nama" value="@Model.TalentNm" readonly style="color:black;" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-12 col-md-12">
+                    <input type="text" name="Email" id="Email" class="form-control" placeholder="Email" value="@Model.Email" style="color:black;" readonly />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-12 col-md-12">
+                    <input type="text" name="Instagram" id="Instagram" class="form-control" placeholder="Instagram (contoh: jingl_id)" required />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-12 col-md-12">
+                    <input type="text" name="Facebook" id="Facebook" class="form-control" placeholder="Facebook  (contoh:jingl_id)" required />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-12 col-md-12">
+                    <input type="text" name="Profesion" id="Profesi" class="form-control" placeholder="Profesi" required />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-lg-12 col-md-12">
+                    <select class="form-control border-radius20 selectpicker" name="TalentCategory" data-size="10" data-live-search="true" data-style="btn-white" id="TalentCategory" required>
+                        <option value="" selected disabled>Talent Category</option>
+                        @{
+                            foreach (var category in Model.TalentCategory.Where(code => code.CategoryNm != "Featured" && code.CategoryNm != "New"))
+                            {
+                                <option value="@category.CategoryId">@category.CategoryNm</option>
+                            }
+                          }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-lg-12 col-md-12">
+                    <select class="form-control border-radius20 selectpicker" name="Rdy" data-size="10" data-live-search="true" data-style="btn-white" id="RdyVideo" required>
+                        <option value="" selected disabled>Kamu bersedia membuat video dalam 2-3 hari?</option>
+                        <option value="1">Ya</option>
+                        <option value="0">Tidak</option>
+                    </select>
+                </div>
+            </div>
+
+            @*<div class="form-group row">
+            <div class="col-lg-12 col-md-12">
+                <label for="Kategori">Kategori</label><br />
+                @{
+
+                    foreach (var data in Model.TalentCategory)
+                    {
+                        <input type="checkbox" class="checkbox" name="TalentCategory" value="@data.CategoryId" /> @data.CategoryNm <br />
+                    }
+                }
+
+            </div>
+        </div>*@
+            <div class="form-group row">
+                <div class="col-lg-12 col-md-12">
+                    @Html.TextAreaFor(model => model.Note, new { Placeholder = "Tambahkan Catatan (jika diperlukan) ", Rows = "4", Class = "form-control" })
+
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-lg-12 col-md-12">
+                    <input type="checkbox" id="agreement_checkbox" value="" required>
+                    <label for="agreement_checkbox" class="regular-clr">
+                        Yes ,Saya setuju dengan syarat dan ketentuan
+                    </label>
+                </div>
+            </div>
+
+            <div class="register-buttons mt15">
+                <button type="submit" class="btn btn-blue  m-b-20">Proses </button>
+            </div>
+
+
+        </div>
+    </form>
+</div>
+
+
+@section scripts
+    {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+            $('#Frm_Register').submit(function (e) {
+                e.preventDefault();
+                var UserId = $("#UserId").val();
+                var TalentNm = $("#TalentNm").val();
+                var Email = $("#Email").val();
+                var LinkScm = $("#LinkScm").val();
+               // var FollowersCount = $("#FollowersCount").val();
+                var RdyVideo = $("#RdyVideo").val();
+                var Profesi = $("#Profesi").val();
+                var Notes = $("#Note").val();
+
+                var url = "@Url.Action("RegisterTalent","Talent")";
+                var jsonRequest = {
+                    UserId:UserId,
+                    TalentNm: TalentNm,
+                    Email: Email,
+                    LinkScm: LinkScm,
+                 //   FollowersCount: FollowersCount,
+                    RdyVideo: RdyVideo,
+                    Profesion: Profesi,
+                    Note: Note
+                };
+
+                var formData = new FormData();
+                //formData.append('model', jsonRequest);
+
+                ////JSON obj
+                //formData.append('ProfImg', ProfImg);
+                var formData = new FormData($('#Frm_Register')[0]);
+
+
+                $.ajax({
+                    url: url,
+                    //cache: false,
+                    //traditional: true,
+                    type: "POST",
+                    //data: { model: jsonRequest},
+                    data: formData,
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+                    beforeSend: function () {
+                        //$("#spinner").show();
+                        $(".loadingSign").show();
+                    },
+                    complete: function () {
+                        $(".loadingSign").hide();
+                    },
+                    success: function (data) {
+
+                        if (data == "OK") {
+                            $.gritter.add({
+                                title: 'Success!',
+                                text: 'Successfully Registered !'
+                            });
+
+                            window.location.href = "@Url.Action("Profile","Account")";
+                        }
+
+                        else {
+
+                        }
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+
+
+            });
+        });
+    </script>
+}

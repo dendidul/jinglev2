@@ -1,0 +1,436 @@
+﻿@model Jingl.General.Model.Admin.Transaction.BookModel
+@{
+    ViewData["Title"] = "ActiveWorkspace";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string enddate = "";
+    if (Model.Status > 2 && Model.Status <= 4)
+    {
+        enddate = Model.Deadline.Value.ToString("yyyy-MM-ddTHH:mm:ss");
+    }
+
+}
+
+<!-- begin #top-menu -->
+<!-- begin #top-menu -->
+
+<div class="header-menu mt20">
+    <ul class="nav">
+        <li class="nav-item text-center pull-left">
+            <a class="nav-link " href="javascript:history.back()">
+                <div class="icon-img mb4">
+                    <img class="icon-menu" src="/template/img/ic-back-blue.png" alt="" />
+                </div>
+            </a>
+        </li>
+        <li class="nav-item justify-content-center mr-center">
+            <h5 class="nav-link -ml54"><b>ORDER NUMBER :</b> @Model.OrderNo</h5>
+            <input type="hidden" value="@Model.Status" id="CurrentStatus" />
+        </li>
+    </ul>
+</div>
+<div class="divider-btm-w"></div>
+<!-- end #top-menu -->
+
+@{
+    if (Model.Status > 2 && Model.Status <= 4)
+    {
+        <div class="card-countdown shadow-lg mt20">
+            <div class="countdown " id="my-countdown" data-end-date="@enddate">
+                <span class="days" title="Days">0</span>
+                <span class="hours" title="Hours">0</span>
+                <span class="minutes" title="Minutes">0</span>
+            </div>
+        </div>
+    }
+}
+@*<div class="countdown " id="my-countdown" data-end-date="2019-07-20T19:00:00">
+        <span class="days" title="Days">0</span>
+        <span class="hours" title="Hours">0</span>
+        <span class="minutes" title="Minutes">0</span>
+    </div>*@
+
+<div class="ket-workspace col-12 mt40">
+    <div class="row list-ket-workspace">
+        <div class="wd-33 pd5 text-center">
+
+            @{
+                if (Model.Status >= 3)
+                {
+                    <div class="circle-ket-workspace-done ">
+                        <span class="det-ket-project black-clr">
+                            <img src="/template/img/ic-ceklis.png" class="ic-ket-workspace">
+                        </span>
+                    </div>
+                }
+                else
+                {
+                    <div class="circle-ket-workspace">
+                        <span class="det-ket-project black-clr">
+                            <img src="/template/img/ic-ceklis.png" class="ic-ket-workspace" onclick="javascript:UpdateBookingStatus(@Model.Id,3);return false;">
+                        </span>
+                    </div>
+                }
+            }
+
+
+
+            <p class="black-clr mt10">Project Accepted</p>
+        </div>
+        <div class="wd-33 pd5 text-center">
+            @{
+                if (Model.Status >= 4)
+                {
+                    <div class="circle-ket-workspace-done">
+                        <span class="det-ket-project black-clr">
+                            <img src="~/template/img/ic-vid-blue.png" class="ic-ket-workspace">
+                        </span>
+                    </div>
+                }
+                else
+                {
+                    <div class="circle-ket-workspace">
+                        <span class="det-ket-project black-clr">
+                            <img src="~/template/img/ic-vid.png" class="ic-ket-workspace" onclick="javascript:UpdateBookingStatus(@Model.Id,4);return false;">
+                        </span>
+                    </div>
+                }
+            }
+            <p class="black-clr mt10">Recording Process</p>
+        </div>
+        <div class="wd-33 pd5 text-center">
+
+
+            @{
+                if (Model.Status >= 5)
+                {
+                    <div class="circle-ket-workspace-done ">
+                        <span class="det-ket-project black-clr">
+                            <img src="~/template/img/ic-accepted-blue.png" class="ic-ket-workspace">
+                        </span>
+                    </div>
+                }
+                else
+                {
+                    <div class="circle-ket-workspace">
+                        <span class="det-ket-project black-clr">
+                            <img src="~/template/img/ic-accepted.png" class="ic-ket-workspace">
+                        </span>
+                    </div>
+                }
+            }
+
+            <p class="black-clr mt10">Material Sent</p>
+        </div>
+        @*<div class="wd-20 pd5 text-center">
+
+
+                @{
+                    if (Model.Status >= 6)
+                    {
+                        <div class="circle-ket-workspace-done ">
+                            <span class="det-ket-project black-clr">
+                                <img src="~/template/img/ic-completed-blue.png" class="ic-ket-workspace">
+                            </span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="circle-ket-workspace ">
+                            <span class="det-ket-project black-clr">
+                                <img src="~/template/img/ic-completed.png" class="ic-ket-workspace">
+                            </span>
+                        </div>
+                    }
+                }
+
+                <p class="black-clr mt10">Project Completed</p>
+            </div>
+            <div class="wd-20 pd5 text-center">
+
+
+                @{
+                    if (Model.Status >= 7)
+                    {
+                        <div class="circle-ket-workspace-done ">
+                            <span class="det-ket-project black-clr">
+                                <img src="~/template/img/ic-tab3-active.png" class="ic-ket-workspace">
+                            </span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="circle-ket-workspace ">
+                            <span class="det-ket-project black-clr">
+                                <img src="~/template/img/ic-rate-talent.png" class="ic-ket-workspace">
+                            </span>
+                        </div>
+                    }
+                }
+
+                <p class="black-clr mt10">Rate Talent</p>
+            </div>*@
+    </div>
+
+</div>
+@{
+    if (Model.Status == 4)
+    {
+        <div class="col-md-12">
+            <center>
+
+
+                <video controls autoplay playsinline></video>
+                <hr />
+                <div id="btnRecord">
+                    <button id="btn-start-recording" class="btn btn-blue">Start Recording</button>
+                    <button id="btn-stop-recording" class="btn btn-blue">Stop Recording</button>
+                    <button id="btn-record-again" class="btn btn-blue">Record Again</button>
+                    <hr />
+                    <button id="btn-upload-video" class="btn btn-blue" onclick="javascript:UpdateBookingStatus(@Model.Id,5);return false;">Upload and Submit Video</button>
+                </div>
+
+            </center>
+
+        </div>
+    }
+}
+
+<div class="card-content-tab-menu mt20">
+
+    <!-- begin nav-pills -->
+    <ul class="nav nav-tab-menu nav-pills">
+        <li class="nav-items text-center w-100">
+            <a href="#nav-pills-tab-1" data-toggle="tab" class="nav-link pd5 active">
+                <span class="">Brief Detail</span>
+            </a>
+        </li>
+
+    </ul>
+    <!-- end nav-pills -->
+    <!-- begin tab-content -->
+    <div class="tab-content mt10">
+        <!-- begin tab-pane -->
+        <div class="tab-pane fade active show mb50" id="nav-pills-tab-1">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <h6 class="title-work fw-600">Title of Project :</h6>
+                    <p class="">@Model.ProjectNm</p>
+                </li>
+                <li class="divider-btm-w"></li>
+                <li class="nav-item mt20">
+                    <h6 class="title-work fw-600">For :</h6>
+                    <p class="">@Model.To</p>
+                </li>
+                <li class="divider-btm-w"></li>
+                <li class="nav-item mt20">
+                    <h6 class="title-work fw-600">From :</h6>
+                    <p class="">@Model.From </p>
+                </li>
+                <li class="divider-btm-w"></li>
+                <li class="nav-item mt20">
+                    <h6 class="title-work fw-600">Brief :</h6>
+                    <p class="">@Model.BriefNeeds</p>
+                </li>
+
+
+            </ul>
+        </div>
+        <!-- end tab-pane -->
+
+    </div>
+    <!-- end tab-content -->
+</div>
+
+<footer class="page-footer top-shadow">
+    <div class="col-12 text-center">
+        <div class="row">
+            <div class="col-3">
+
+            </div>
+            <div class="col-6">
+                <a class="btn btn-blue-help " asp-controller="Account" asp-action="Support">Help</a>
+            </div>
+            <div class="col-3">
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+@section scripts
+    {
+    <script src="https://cdn.webrtc-experiment.com/RecordRTC.js"></script>
+    <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
+    <script src="https://cdn.webrtc-experiment.com/common.js"></script>
+
+    <script type="text/javascript">
+        //var video = document.querySelector('video');
+
+        //function captureCamera(callback) {
+        //    navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(function (camera) {
+        //        callback(camera);
+        //    }).catch(function (error) {
+        //        alert('Unable to capture your camera. Please check console logs.');
+        //        console.error(error);
+        //    });
+        //}
+
+        //function stopRecordingCallback() {
+        //    video.src = video.srcObject = null;
+        //    video.muted = false;
+        //    video.volume = 1;
+        //    video.src = URL.createObjectURL(recorder.getBlob());
+
+        //    recorder.camera.stop();
+        //    recorder.destroy();
+        //    recorder = null;
+        //}
+
+        //var recorder; // globally accessible
+
+        //document.getElementById('btn-start-recording').onclick = function () {
+        //    //this.disabled = true;
+        //    captureCamera(function (camera) {
+        //        video.muted = true;
+        //        video.volume = 0;
+        //        video.srcObject = camera;
+
+        //        recorder = RecordRTC(camera, {
+        //            type: 'video'
+        //        });
+
+        //        recorder.startRecording();
+
+        //        // release camera on stopRecording
+        //        recorder.camera = camera;
+        //        $(this).hide();
+        //        $('#btn-stop-recording').show();
+
+        //        document.getElementById('btn-stop-recording').disabled = false;
+        //    });
+        //};
+
+        //document.getElementById('btn-stop-recording').onclick = function () {
+        //    //this.disabled = true;
+        //    $(this).hide();
+        //    recorder.stopRecording(stopRecordingCallback);
+        //};
+        function UpdateBookingStatus(BookingId, BookStatus) {
+            var CurrentStatus = $("#CurrentStatus").val();
+
+            var devisitStatus = parseInt(BookStatus) - parseInt(CurrentStatus);
+
+            if (devisitStatus == 1) {
+                var url = "@Url.Action("UpdateBookingStatus", "Booking")";
+                $.ajax({
+                    url: url,
+                    //cache: false,
+                    //traditional: true,
+                    type: "POST",
+                    data: { BookId: BookingId, status: BookStatus },
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+                    beforeSend:
+                        function () {
+
+                            //$("#spinner").show();
+                        },
+                    success: function (data) {
+                        $.gritter.add({
+                            title: 'Success !',
+                            text: 'Updated Successfully'
+                        });
+                        location.reload();
+                    },
+
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+            }
+            else {
+                $.gritter.add({
+                    title: 'Warning !',
+                    text: 'Warning'
+                });
+            }
+
+
+
+
+        }
+
+        $(document).ready(function () {
+            var video = document.querySelector('video');
+
+            function captureCamera(callback) {
+                navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(function (camera) {
+                    callback(camera);
+                }).catch(function (error) {
+                    alert('Unable to capture your camera. Please check console logs.');
+                    console.error(error);
+                });
+            }
+
+
+
+            function stopRecordingCallback() {
+                video.src = video.srcObject = null;
+                video.muted = false;
+                video.volume = 1;
+                video.src = URL.createObjectURL(recorder.getBlob());
+
+                recorder.camera.stop();
+                recorder.destroy();
+                recorder = null;
+            }
+
+            var recorder;
+
+            $('#btn-stop-recording').hide();
+            $('#btn-record-again').hide();
+            $('#btn-upload-video').hide();
+
+
+            $("#btn-start-recording").click(function (e) {
+                captureCamera(function (camera) {
+                    video.muted = true;
+                    video.volume = 0;
+                    video.srcObject = camera;
+
+                    recorder = RecordRTC(camera, {
+                        type: 'video'
+                    });
+
+                    recorder.startRecording();
+
+                    // release camera on stopRecording
+                    recorder.camera = camera;
+                    $('#btn-stop-recording').show();
+                    $('#btn-start-recording').hide();
+
+                    //document.getElementById('btn-stop-recording').disabled = false;
+                });
+            });
+
+            $("#btn-stop-recording").click(function (e) {
+                recorder.stopRecording(stopRecordingCallback);
+                $('#btn-stop-recording').hide();
+                $('#btn-record-again').show();
+                $('#btn-upload-video').show();
+            });
+
+            $("#btn-record-again").click(function (e) {
+                //recorder.stopRecording(stopRecordingCallback);
+                $('#btn-start-recording').show();
+                $('#btn-record-again').hide();
+                $('#btn-upload-video').hide();
+            });
+
+        });
+
+    </script>
+
+}
+
+

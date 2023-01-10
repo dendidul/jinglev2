@@ -1,0 +1,418 @@
+﻿@model Jingl.General.Model.User.ViewModel.TalentViewModel
+@{
+    ViewData["Title"] = "OurTalent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int Category = 0;
+}
+@await Html.PartialAsync("~/Views/Shared/_headertop.cshtml")
+@await Html.PartialAsync("~/Views/Shared/_header.cshtml")
+
+<div class="container" style="padding: 0 !important">
+    <div class="row" style="margin: 0 !important">
+        <div class="col-12" style="padding: 0 !important">
+            <!-- begin #search-bar -->
+            <div class="top-search-bar">
+                <!--<div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group" id="adv-search">
+                            <input type="text" class="form-control" placeholder="" />
+                            <div class="input-group-btn">
+                                <div class="btn-group" role="group">
+                                    <div class="dropdown dropdown-lg">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+                                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                            <form class="form-horizontal" role="form">
+                                              <div class="form-group">
+                                                <label for="filter">Filter by</label>
+                                                <select class="form-control">
+                                                    <option value="0" selected>All Snippets</option>
+                                                    <option value="1">Featured</option>
+                                                    <option value="2">Most popular</option>
+                                                    <option value="3">Top rated</option>
+                                                    <option value="4">Most commented</option>
+                                                </select>
+                                              </div>
+                                              <div class="form-group">
+                                                <label for="contain">Author</label>
+                                                <input class="form-control" type="text" />
+                                              </div>
+                                              <div class="form-group">
+                                                <label for="contain">Contains the words</label>
+                                                <input class="form-control" type="text" />
+                                              </div>
+                                              <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                                </div>
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>-->
+                <div class="form-group  search-bar brdr-blue has-search">
+                    <span class="fa fa-search form-control-feedback"></span>
+                    <input type="text" class="form-control" placeholder="Cari Nama Talent" id="search">
+                </div>
+            </div>
+            <!-- end #search-bar -->
+            <!--begin category-->
+            <div class="container" style="padding: 0 !important">
+                <div class="row mt20" style="margin: 0 !important">
+                    <div class="col-md-12" style="padding: 0 !important">
+                        <div class="owl-carousel owl-ourtalent  m-t-5 p-l-5">
+                            @*<div class="item">
+                                <a class="btn btn-default  btn-kategori btn-all" href="@Url.Action("Explore","Explore")">
+                                    <span>Lihat semua Video</span>
+                                </a>
+                            </div>*@
+                            <div>
+                                <a href="#" class="btn btn-kategori">Semua</a>
+                                <input type="hidden" class="CategoryContent" id="CategoryContent_0" />
+                            </div>
+                            @{
+                                int index = 1;
+                            }
+                            @{
+                                foreach (var cat in Model.ListCategoryModel)
+                                {
+                                    <div>
+                                        @*<a href="@Url.Action("OurTalent","Talent",new {CategoryId = cat.Id })" class="btn btn-kategori ">@cat.CategoryNm</a>*@
+                                        @*<a href="#" class="btn btn-kategori">@cat.CategoryNm</a>*@
+                                        <a href="#" class="btn btn-kategori" id="btnCategory_@cat.Id">@cat.CategoryNm</a>
+
+                                        @*<input type="hidden" class="CategoryContent" id="CategoryContent_@index" value="@cat.Id" />*@
+                                        <input type="hidden" class="CategoryContent" id="CategoryContent_@cat.Id" value="@cat.Id" />
+
+                                    </div>
+                                    index++;
+
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end Category-->
+            <div class="container" style="padding: 0 !important" id="OurTalentcontent">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            //function FilterList(txtName,ulName) {
+            //    // Declare variables
+            //    var input, filter, ul, li, a, i, txtValue;
+            //    input = document.getElementById(txtName);
+            //    filter = input.value.toUpperCase();
+            //    ul = document.getElementById(ulName);
+            //    li = ul.getElementsByTagName('li');
+
+            //    // Loop through all list items, and hide those who don't match the search query
+            //    for (i = 0; i < li.length; i++) {
+            //        a = li[i];
+            //        txtValue = a.textContent || a.innerText;
+            //        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            //            li[i].style.display = "";
+            //        } else {
+            //            li[i].style.display = "none";
+            //        }
+            //    }
+            //}
+
+            //$("#Filter").keyup(function () {
+            //    FilterList("Filter", "WorkspaceList");
+            //});
+
+            $("#search").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#TalentData").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $('#search').keyup(function () {
+
+                var filter = this.value.toLowerCase();  // no need to call jQuery here
+
+                $('.filterdata').each(function () {
+                    /* cache a reference to the current .media (you're using it twice) */
+                    var _this = $(this);
+                    var title = _this.find('h4').text().toLowerCase();
+
+                    /*
+                        title and filter are normalized in lowerCase letters
+                        for a case insensitive search
+                     */
+                    if (title.indexOf(filter) < 0) {
+                        //_this.hide();
+                        //_this.display = "none";
+                        _this.hide();
+                    }
+                    else {
+                        _this.show();
+                    }
+                });
+            });
+
+
+            $('.owl-ourtalent').owlCarousel({
+                stagePadding: 50,
+                center: false,
+                loop: false,
+                margin: 5,
+                dots: false,
+                nav: false,
+                items: 2,
+                autoWidth: true,
+                responsive: {
+                    0: {
+                        items: 4
+                    }
+                }
+
+            });
+
+
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            var url = "@Url.Action("OurTalentcontent","Talent")";
+            var IdCategory = null;
+            if (@ViewBag.CategoryId != null && @ViewBag.CategoryId != 0) {
+                IdCategory = @ViewBag.CategoryId;
+            }
+            console.log(IdCategory);
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: { CategoryId: IdCategory },
+                dataType: "html",
+                //url: url,
+                //cache: false,
+                //traditional: true,
+                //type: "POST",
+                ////data: JSON.stringify({ request: jsonRequest }),
+                //data: JSON.stringify(stringJson),
+                //dataType: "html",
+                ////contentType: "application/json; charset=utf-8",
+                ////async: false,
+                beforeSend: function () {
+                    //$("#spinner").show();
+                    $(".loadingSign").show();
+                },
+                complete: function () {
+                    $(".loadingSign").hide();
+
+                },
+                success: function (data) {
+                    $("#btnCategory_" + IdCategory + "").addClass("active");
+                    $("#OurTalentcontent").html(data);
+                    console.log(data)
+                     $("label.amountlines").digits();
+
+
+                },
+                error: function (jqXHR, textStatus, errorMessage) {
+                    console.log(errorMessage);
+                }
+            });
+
+
+            $('.btn-kategori').click(function (e) {
+                $(".btn-kategori.active").removeClass("active");
+                // adding classname 'active' to current click li
+                $(this).addClass("active");
+                @*var url = "@Url.Action("ExploreContent","Explore")";*@
+                var div_IdCategory = $(this).parent().find('.CategoryContent').attr('id');
+                var IdCategory = $("#" + div_IdCategory + "").val();
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: { CategoryId: IdCategory },
+                    dataType: "html",
+                    beforeSend: function () {
+                        $(".loadingSign").show();
+                    },
+                    complete: function () {
+                        $(".loadingSign").hide();
+                    },
+                    success: function (data) {
+
+                        $("#OurTalentcontent").html(data);
+                        $("label.amountlines").digits();
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+            });
+        })
+
+    </script>
+    @*<script type="text/javascript">
+            $(document).ready(function () {
+                 $(".explore-button").click(function (e) {
+
+                    e.preventDefault();
+                    $("#VideoModal").modal('show');
+                    var div_id = $(this).parent().parent().parent().find('.LinkVideo').attr('id');;
+                    var div_profil = $(this).parent().parent().parent().find('.LinkPhoto').attr('id');
+                    var div_namatalent = $(this).parent().parent().parent().find('.LinkName').attr('id');
+                    var div_FileVideoid = $(this).parent().parent().parent().find('.FileVideoId').attr('id');
+                    var div_ViewCountid = $(this).parent().parent().parent().find('.ViewCount').attr('id');
+                    var div_Talentid = $(this).parent().parent().parent().find('.TalentId').attr('id');
+
+                    var $source = $('#videoplayer');
+                    var $profil = $('#modalImg');
+
+                    var sources = $("#" + div_id + "").val();
+                    var profil = $("#" + div_profil + "").val();
+                    var nametalent = $("#" + div_namatalent + "").val();
+                    var VideoId = $("#" + div_FileVideoid + "").val();
+                    var ViewCount = $("#" + div_ViewCountid + "").val();
+                    var TalentId = $("#" + div_Talentid + "").val();
+
+                    var jsonRequest = {
+                        UserId: 0,
+                        FileId: VideoId
+                    };
+
+                     var UrlInsert = "@Url.Action("InputFileWatched", "Files")";
+                     if (VideoId != 0) {
+                         $.ajax({
+                             url: UrlInsert,
+                             type: "POST",
+
+                             data: { model: jsonRequest },
+                             beforeSend: function () {
+
+                                 $(".loadingSign").show();
+                             },
+                             complete: function () {
+                                 $(".loadingSign").hide();
+                             },
+                             success: function (data) {
+
+
+
+                             },
+                             error: function (jqXHR, textStatus, errorMessage) {
+                                 console.log(errorMessage);
+                             }
+                         });
+
+                         $source[0].src = sources;
+                         $profil[0].src = profil;
+
+                         var Namatalent = nametalent;
+                         $("#views").text(ViewCount);
+                         $("#modalName").text(Namatalent);
+                         if (TalentId != 0) {
+                             $("#TalentLink").attr('href', '../Talent/TalentDetail?TalentId=' + TalentId);
+
+                         }
+                         $source[0].play();
+                         $(".modalClose").click(function (e) {
+                             $source[0].pause();
+                             history.back();
+                         });
+
+                         $(".modal").on("shown.bs.modal", function () {
+                             var urlReplace = "#" + $(this).attr('id');
+                             history.pushState(null, null, urlReplace);
+                         });
+                         $(window).on('popstate', function () {
+                             $(".modal").modal('hide');
+                             $source[0].pause();
+                         });
+                     }
+                     else {
+                         swal(nametalent + " belum upload videonya, sabar ya");
+                     }
+
+                });
+            })
+        </script>*@
+    <script type="text/javascript">
+        function openVideo(VideoId, sources, profil, nametalent, ViewCount, TalentId) {
+
+            var $source = $('#videoplayer');
+            var $profil = $('#modalImg');
+
+                var jsonRequest = {
+                    UserId: 0,
+                    FileId: VideoId
+            };
+            console.log(sources);
+                 var UrlInsert = "@Url.Action("InputFileWatched", "Files")";
+            if (VideoId != 0) {
+                $("#VideoModal").modal('show');
+                     $.ajax({
+                         url: UrlInsert,
+                         type: "POST",
+
+                         data: { model: jsonRequest },
+                         beforeSend: function () {
+
+                             $(".loadingSign").show();
+                         },
+                         complete: function () {
+                             $(".loadingSign").hide();
+                         },
+                         success: function (data) {
+
+
+
+                         },
+                         error: function (jqXHR, textStatus, errorMessage) {
+                             console.log(errorMessage);
+                         }
+                     });
+
+                     $source[0].src = sources;
+                     $profil[0].src = profil;
+
+                     var Namatalent = nametalent;
+                     $("#views").text(ViewCount);
+                     $("#modalName").text(Namatalent);
+                     if (TalentId != 0) {
+                         $("#TalentLink").attr('href', '../Talent/TalentDetail?TalentId=' + TalentId);
+
+                     }
+                     $source[0].play();
+                     $(".modalClose").click(function (e) {
+                         $source[0].pause();
+                         //history.back();
+                         window.location.href = "@Url.Action("TalentDetail", "Talent")?TalentId=" + TalentId;
+                     });
+
+                     $(".modal").on("shown.bs.modal", function () {
+                         var urlReplace = "#" + $(this).attr('id');
+                         history.pushState(null, null, urlReplace);
+                     });
+                     $(window).on('popstate', function () {
+                         $(".modal").modal('hide');
+                         $source[0].pause();
+                     });
+                 }
+                 else {
+                     swal(nametalent + " belum upload videonya, sabar ya");
+                 }
+    }
+    </script>
+}
+
+
+

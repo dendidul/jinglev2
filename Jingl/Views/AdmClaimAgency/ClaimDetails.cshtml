@@ -1,0 +1,81 @@
+﻿@model Jingl.General.Model.Admin.Transaction.ClaimAgencyModel
+
+
+
+<div>
+    <table class="table table-striped table-bordered" id="data-table-buttons" style="width:100%">
+        <thead>
+            <tr>
+
+                <th>
+                    Order No
+                </th>
+                <th>
+                    Talent Nm
+                </th>
+                <th>
+                    Voucher Code
+                </th>
+                <th>
+                    Talent Price
+                </th>
+                <th>
+                    Sale Price
+                </th>
+                <th>
+                    Disctount
+                </th>
+                <th>
+                    Method
+                </th>
+                <th>
+                    Total Pay
+                </th>
+                <th>
+                   Talent Income
+                </th>
+
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.BookingList)
+            {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TalentNm)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VoucherCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PriceAmount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalePrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Potongan)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PayMethod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalPay)
+                </td>
+                <td>
+                    <label class="incomedata">@Html.DisplayFor(modelItem => item.TalentIncome)</label>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+

@@ -1,0 +1,76 @@
+﻿@model Jingl.General.Model.Admin.Master.BannerModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout_Adm.cshtml";
+}
+
+<h2>Details</h2>
+
+<form class="form-horizontal form-bordered" method="post" id="formEditBanner">
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+            </div>
+            <h4 class="panel-title">Talent Data</h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-6">
+                    <label class="m-b-10">Banner Category</label>
+                    @Html.HiddenFor(model => model.Id, new { Class = "form-control" })
+                    @Html.TextBoxFor(model => model.BannerCategory, new { Class = "form-control m-b-30", disabled = "true" })
+                </div>
+                <div class="col-6">
+                    <label class="m-b-10">Banner Name</label>
+                    @Html.TextBoxFor(model => model.BannerNm, new { Class = "form-control m-b-30", disabled = "true" })
+                </div>
+
+                <div class="col-6">
+                    <label class="m-b-10">Link</label>
+                    @Html.TextBoxFor(model => model.Link, new { Class = "form-control m-b-30", disabled = "true" })
+                </div>
+                <div class="col-6">
+                    <label class="m-b-10">Sequence</label>
+                    @Html.TextBoxFor(model => model.Sequence, new { Class = "form-control m-b-30", disabled = "true" })
+                </div>
+                <div class="col-6">
+                    <label class="m-b-10">Banner Description</label>
+                    @Html.TextAreaFor(model => model.BannerDesc, new { Class = "form-control m-b-30", disabled = "true" })
+                </div>
+                <div class="col-6">
+                    <label>Banner Picture</label><br />
+                    <a target="_blank" href="@Model.Img"><img class="img-fluid bgrpic" src="@Model.Img" /></a>
+                    <br /><br />
+
+                </div>
+                <div class="col-6">
+                    <label class="m-b-10">Visible</label>
+                    @Html.DropDownListFor(model => model.IsVisible, ViewBag.ListStatus as IEnumerable<SelectListItem>, "Pilih Status", new { Class = "form-control", Placeholder = "", disabled = "true" })
+                </div>
+            </div>
+            <br />  <br />
+            <div class="row">
+                <div class="col-6">
+
+                    <a href="@Url.Action("Index", "AdmBanner")" class="btn btn-warning">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section scripts{
+
+    <script type="text/javascript">
+    $(document).ready(function () {
+        App.init();
+
+    })
+    </script>
+ 
+}

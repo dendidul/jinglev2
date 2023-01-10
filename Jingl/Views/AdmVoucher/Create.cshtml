@@ -1,0 +1,353 @@
+﻿@using Jingl.General.Model.Admin.Master
+@model Jingl.General.Model.Admin.Master.VoucherModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout_Adm.cshtml";
+    IEnumerable<TalentModel> TModel = ViewBag.ListTalent;
+}
+
+<h2>Create</h2>
+<form class="form-horizontal form-bordered" method="post" id="formCreateVoucher">
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+            </div>
+            <h4 class="panel-title">Voucher Data</h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-6">
+                    <label class="m-b-10">Voucher Code</label>
+                    @Html.HiddenFor(model => model.Id, new { Class = "form-control" })
+                    @Html.TextBoxFor(model => model.VoucherCd, new { Class = "form-control m-b-30", required = "true" })
+                </div>
+                <div class="col-6">
+                    <label class="m-b-10">Voucher Name</label>
+                    @Html.TextBoxFor(model => model.VoucherNm, new { Class = "form-control m-b-30", required = "true" })
+                </div>
+
+                <div class="col-12">
+                    <label class="m-b-10">Voucher Description</label>
+                    @Html.TextAreaFor(model => model.VoucherDesc, new { Class = "form-control m-b-30", required = "true" })
+                </div>
+
+                <div class="col-6">
+                    <label class="m-b-10">Voucher Quota</label>
+                    @Html.TextBoxFor(model => model.RemainingCount, new { Class = "form-control m-b-30" })
+                    @*<input type="text" name="RemainingCount" id="RemainingCount" class="form-control" value="(model => model.RemainingCount)" />*@
+                </div>
+                <div class="col-6" hidden="hidden">
+                    <label class="m-b-10">Value Amount</label>
+                    @Html.TextBoxFor(model => model.Budget, new { Class = "form-control m-b-30" })
+                    @*<input type="text" name="Budget" id="Amount" class="form-control" value="@Model.Budget" />*@
+                </div>
+
+                <div class="col-6">
+                    <label class="m-b-10">Amount</label>
+                    @Html.TextBoxFor(model => model.Amount, new { Class = "form-control m-b-30" })
+                    @*<input type="text" name="Amount" id="Amount" class="form-control" value="@Model.Amount" />*@
+                </div>
+                <div class="col-6">
+                    <label class="m-b-10">Percentage</label>
+                    @Html.TextBoxFor(model => model.Percentage, new { Class = "form-control m-b-30" })
+                    @*<input type="text" name="Percentage" id="Percentage" class="form-control" value="@Model.Percentage" />*@
+                </div>
+
+                <div class="col-6">
+                    <label>StartDate </label>
+                    @Html.TextBoxFor(model => model.StartDate, new { Class = "form-control datepicker m-b-30", required = "true" })
+                    @Html.Hidden("StartDateTemp")
+                </div>
+                <div class="col-6">
+                    <label>EndDate </label>
+                    @Html.TextBoxFor(model => model.EndDate, new { Class = "form-control datepicker m-b-30", required = "true" })
+                    @Html.Hidden("EndDateTemp")
+                </div>
+
+                <div class="col-12">
+                    <label class="m-b-10">Uses Per Customer</label>
+                    @Html.TextBoxFor(model => model.UsesPerCustomer, new { Class = "form-control m-b-30" })
+                </div>
+
+                <div class="col-6" hidden="hidden">
+                    <label class="m-b-10">MinValue</label>
+                    @Html.TextBoxFor(model => model.MinValue, new { Class = "form-control m-b-30" })
+                    @*<input type="text" name="MinValue" id="MinValue" class="form-control" value="@Model.MinValue" />*@
+                </div>
+                <div class="col-6" hidden="hidden">
+                    <label class="m-b-10">MaxValue</label>
+                    @Html.TextBoxFor(model => model.MaxValue, new { Class = "form-control m-b-30" })
+                    @*<input type="text" name="MaxValue" id="MaxValue" class="form-control" value="@Model.MaxValue" />*@
+                </div>
+
+                <div class="col-12">
+                    <br />
+                    <label class="m-b-10">Voucher Application</label>
+                    <table class="table table-striped table-bordered" id="data-table-buttons" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th style="text-align:center">
+                                    <input type="checkbox" id="select-all" />
+                                </th>
+                                <th style="text-align:center">
+                                    Talent Id
+                                </th>
+                                <th style="text-align:center">
+                                    Talent Name
+                                </th>
+                                <th style="text-align:center">
+                                    Registered Date
+                                </th>
+                                <th style="text-align:center">
+                                    Gender
+                                </th>
+                                <th style="text-align:center">
+                                    Profession
+                                </th>
+                                <th style="text-align:center">
+                                    IsAvailable
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in TModel)
+                            {
+                                <tr>
+                                    <td style="text-align:center">
+                                        <input type="checkbox" name="SelectedTalent" class="rowchk" value="@item.Id" />
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TalentNm)
+                                    </td>
+                                    <td style="text-align:center">
+                                        @{
+                                            if (item.CreatedDate.HasValue)
+                                            {
+                                                @item.CreatedDate.Value.ToString("dd-MM-yyyy")
+                                            }
+                                        }
+                                    </td>
+                                    <td style="text-align:center">
+                                        @{
+                                            if (item.Gender == "F")
+                                            {
+                                                <span>Female</span>
+                                            }
+                                            else if (item.Gender == "M")
+                                            {
+                                                <span>Male</span>
+                                            }
+                                            else
+                                            {
+                                                <span>-</span>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Profesion)
+                                    </td>
+                                    <td style="text-align:center">
+                                        @{
+                                            if (item.IsAvailable == true)
+                                            {
+                                                <span>Yes</span>
+                                            }
+                                            else
+                                            {
+                                                <span>No</span>
+                                            }
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <br />
+                </div>
+                <br />
+
+                <div class="col-6">
+                    <div class="form-group m-b-30">
+                        <label>Status </label>
+                        @Html.DropDownListFor(model => model.IsActive, ViewBag.ListStatus as IEnumerable<SelectListItem>, "Pilih Status", new { Class = "form-control", Placeholder = "", required = "true" })
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group m-b-30">
+                        <label>Visible </label>
+                        @Html.CheckBoxFor(model => model.isVisible)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <a href="@Url.Action("Index", "AdmVoucher")" class="btn btn-warning">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            App.init();
+
+            $("#RemainingCount").autoNumeric('init', { vMin: 0, vMax: 10000.00, mDec: 0 });
+            $("#Budget").autoNumeric('init', { vMin: 0, vMax: 10000000000000.00, mDec: 0 });
+            $("#Amount").autoNumeric('init', { vMin: 0, vMax: 10000000000000.00, mDec: 0 });
+            $("#Percentage").autoNumeric('init', { vMin: 0, vMax: 100.00, mDec: 0 });
+            $("#UsesPerCustomer").autoNumeric('init', { vMin: 0, vMax: 10000.00, mDec: 0 });
+            $("#MinValue").autoNumeric('init', { vMin: 0, vMax: 10000000000000.00, mDec: 0 });
+            $("#MaxValue").autoNumeric('init', { vMin: 0, vMax: 10000000000000.00, mDec: 0 });
+
+            var handleDataTableButtons = function () {
+                "use strict";
+
+                if ($('#data-table-buttons').length !== 0) {
+                    $('#data-table-buttons').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [],
+                        responsive: true,
+                        "scrollY": "250px",
+                        "scrollCollapse": true,
+                        "paging": false
+                    });
+                }
+            };
+
+            var TableManageButtons = function () {
+                "use strict";
+                return {
+                    //main function
+                    init: function () {
+                        handleDataTableButtons();
+                    }
+                };
+            }();
+
+            TableManageButtons.init();
+
+            $('#select-all').on('change', function () {
+                if (this.checked) {
+                    $(".rowchk").prop('checked', true);
+                }
+                else {
+                    $(".rowchk").prop('checked', false);
+                }
+            });
+
+            $('#formCreateVoucher').submit(function (e) {
+            e.preventDefault();
+                @*var Id = $("#Id").val();
+                var TalentNm = $("#TalentNm").val();
+                var Gender = $("#Gender").val();
+            var phoneNumber = $("#PhoneNumber").val();
+            var Bio = $("#Bio").val();
+            var ProfImg = $('#prof-upload').prop('files');
+
+            var url = "@Url.Action("Edit","AdmTalent")";
+            var jsonRequest = {
+                Id :UserId,
+                FirstName: firstName,
+                LastName: lastName,
+                Bio: Bio,
+                PhoneNumber:phoneNumber
+            };*@            
+
+            $("#StartDateTemp").val($("#StartDate").val());
+            $("#EndDateTemp").val($("#EndDate").val());
+
+            var formData = new FormData();
+            //formData.append('model', jsonRequest);
+
+            ////JSON obj
+            //formData.append('ProfImg', ProfImg);
+                    var formData = new FormData($('#formCreateVoucher')[0]);
+                    var url = "@Url.Action("Create","AdmVoucher")";
+            //var boxes = $('.rowchk');
+            //var boxes = []; 
+            //$(".rowchk:checked").each(function() { 
+            //    boxes.push($(this).val()); 
+            //}); 
+                
+            $.ajax({
+                url: url,
+                type: "POST",
+                //cache: false,
+                //traditional: true,
+                //dataType: 'json',
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+
+                //data: { talent: boxes, model: formData},
+                data: formData,
+                //contentType: "application/json; charset=utf-8",
+                //async: false,
+                beforeSend:
+                    function () {
+                        //$("#spinner").show();
+                    },
+                success: function (data) {
+
+                    window.location.href = "@Url.Action("Index", "AdmVoucher")";
+                    @*if (data == "OK") {
+                        $.gritter.add({
+                            title: 'Success !',
+                            text: 'Updated Successfully !'
+                        });
+                        window.location.href = "@Url.Action("Index", "AdmTalent")";
+                    }
+
+                    else {
+
+                    }*@
+
+
+
+                },
+                error: function (jqXHR, textStatus, errorMessage) {
+                    console.log(errorMessage);
+                }
+            });
+
+            });
+        })
+
+    </script>
+    <script>
+        $(function () {
+            BgrPic = {
+                UpdatePreview: function (obj) {
+                    // if IE < 10 doesn't support FileReader
+                    if (!window.FileReader) {
+                        // don't know how to proceed to assign src to image tag
+                    } else {
+                        var reader = new FileReader();
+                        var target = null;
+
+                        reader.onload = function (e) {
+                            target = e.target || e.srcElement;
+
+                            $(".bgrpic").prop("src", target.result);
+                        };
+                        reader.readAsDataURL(obj.files[0]);
+                    }
+                }
+            };
+        });
+    </script>
+}

@@ -1,0 +1,95 @@
+﻿
+@{
+    ViewData["Title"] = "SamsungPrize";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@inject CookieManager.ICookie _httpCookie
+<div id="myHeader">
+    <div class="logo-header">
+        <div class="coontainer-fluid">
+            <div class="col-md-12">
+                <ul class="nav">
+                    <li class="nav-item text-center pull-left">
+                        <a class="nav-link" href="javascript:history.back()">
+                            <div class="icon-img">
+                                <img src="/template/img/ic-back-white.png" style="width:42%;margin-left:-25%;margin-top:-8%" alt="" />
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item justify-content-center mr-center">
+                        <img src="~/template/img/Jing_e 1.png" style="margin-left:-84%" alt="Alternate Text" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box-white">
+    <div class="header-menu p-t-20">
+        <ul class="nav">
+            <li class="nav-item justify-content-center mr-center">
+                <h5 class="nav-link "><b>Join Fameo</b></h5>
+            </li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <img class="img-fluid" src="~/template/img/join.png" alt="Responsive image">
+
+            </div>
+        </div>
+        <div class="row m-t-20">
+            <div class="col-12">
+                <h5>Saatnya kamu berbahagia dengan handphone Samsung S10 terbaru! Mau?</h5>
+                <p class="text-justify">
+                    Caranya gampang banget:
+                    <ul class="ml-4">
+                        <li>Daftar jadi talent jingl</li>
+                        <li>Promosikan diri kamu di sosial media, lalu cari user yang hire kamu sebanyak-banyaknya</li>
+                        <li>Kamu harus menduduki tahta best talent dari Juli-Agustus 2019, atau di akhir Agustus 2019 kamu memiliki video pesanan terbanyak dari user.</li>
+                    </ul>
+                <p>Yesh, udah itu aja. Maka promosikan dirimu sebanyak-banyaknya ya dan undang orang-orang untuk memesan video kamu!</p>
+                <p>Good Luck!</p>
+                <p>Fameo Team.</p>
+                <div class="register-buttons mt40 p-b-25">
+                    @{
+                        if (_httpCookie.Get("UserId") != "")
+                        {
+
+
+                           
+                                    <div class="col-12">
+                                        <a href="@Url.Action("RegisterTalent","Talent",new {TalentId = Convert.ToInt32(_httpCookie.Get("UserId"))})" class="btn btn-blue">Daftar Disini</a>
+                                    </div>
+                              
+                           
+                        }
+                        else
+                        {
+                            <div class="col-12">
+                                @*<a href="@Url.Action("Onboarding","Account")" class="btn btn-blue">Login</a>*@
+                                <a href="#" class="btn btn-blue" data-toggle="modal" data-target="#loginModal">Daftar Disini</a>
+                            </div>
+                        }
+                    }
+
+
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+
+}
+
+
+
+

@@ -1,0 +1,51 @@
+﻿@model Jingl.General.Model.User.ViewModel.TalentViewModel
+
+<div class="row mt20" style="margin: 0 !important" ">
+    @{
+        int indexx = 0;
+        foreach (var talent in Model.ListTalentViewModel.Where(x => x.TalentId != 35).ToList())
+        {
+
+            <div class="col-6 col-lg-6 filterdata align-self-center" style="padding: 10px !important">
+                <div class="exploredetail">
+                    <div class="video">
+                        <div class="card-explore-top">
+                            <!-- VIDEO SECTION -->
+                            <input type="hidden" class="FileVideoId" id="FileVideoId_@indexx" value="@talent.FileId" />
+                            <input type="hidden" class="LinkVideo" id="LinkVideo_@indexx" value="@talent.Link" />
+                            <input type="hidden" class="LinkPhoto" id="LinkPhoto_@indexx" value="@talent.LinkImg" />
+                            <input type="hidden" class="LinkName" id="LinkName_@indexx" value="@talent.TalentNm" />
+                            <input type="hidden" class="ViewCount" id="ViewCount_@indexx" value="@talent.ViewsCount" />
+                            <input type="hidden" class="TalentId" id="TalentId_@indexx" value="@talent.TalentId" />
+                            <!-- END VIDEO SECTION -->
+                            <img src="@talent.LinkImg" alt="Alternate Text" width="100%" height="100%" class="thmnail" />
+                            <a href="javascript:openVideo('@talent.FileId', '@talent.Link', '@talent.LinkImg', '@talent.TalentNm', '@talent.ViewsCount', '@talent.TalentId')" class="explore-button" data-toggle="modal" id="exploreLink">
+                                <img src="/template/img/iconplaywhite.png" alt="Alternate Text" />
+                            </a>
+                        </div>
+                    </div>
+                    <a href="@Url.Action("TalentDetail","Talent",new {TalentId = talent.TalentId })">
+                        <div class="text-talent">
+                            <span class="profesi">@talent.Profesion</span>
+                            <h4>@talent.TalentNm</h4>
+                            <span class="span-talent">
+                                <span>
+                                    IDR
+                                    <label class="amountlines">@talent.PriceAmount</label>
+                                </span>
+                            </span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            indexx++;
+        }
+    }
+
+
+</div>
+<!-- MODAL -->
+<!-- END MODAL -->
+@section script {
+    
+}

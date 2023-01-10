@@ -1,0 +1,170 @@
+﻿@model Jingl.General.Model.Admin.Master.BannerModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout_Adm.cshtml";
+}
+
+<h2>Create</h2>
+<form class="form-horizontal form-bordered" method="post" id="formCreateBanner">
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+            </div>
+            <h4 class="panel-title">Talent Data</h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-6">
+                    <label class="m-b-10">Banner Category</label>
+                    @Html.HiddenFor(model => model.Id, new { Class = "form-control" })
+                    @Html.TextBoxFor(model => model.BannerCategory, new { Class = "form-control m-b-30", required = "true" })
+                </div>
+                <div class="col-6">
+                    <label class="m-b-10">Banner Name</label>
+                    @Html.TextBoxFor(model => model.BannerNm, new { Class = "form-control m-b-30", required = "true" })
+                </div>
+
+                <div class="col-6">
+                    <label class="m-b-10">Link</label>
+                    @Html.TextBoxFor(model => model.Link, new { Class = "form-control m-b-30", required = "true" })
+                </div>
+                <div class="col-6">
+                    <label class="m-b-10">Sequence</label>
+                    @Html.TextBoxFor(model => model.Sequence, new { Class = "form-control m-b-30", required = "true" })
+                </div>
+                <div class="col-6">
+                    <label class="m-b-10">Banner Description</label>
+                    @Html.TextAreaFor(model => model.BannerDesc, new { Class = "form-control m-b-30", required = "true" })
+                </div>
+                <div class="col-6">
+                    <label>Banner Picture</label><br />
+                    <a target="_blank" href="#"><img class="img-fluid bgrpic" /></a>
+                    <br /><br />
+                    <label>Upload Banner Picture</label><br />
+                    <input type="file" id="BgrImg" class="form-control-file m-b-30" name="BgrImg" accept=".jpg, .png,.jpeg ,.gif" onchange='BgrPic.UpdatePreview(this)' />
+                </div>
+                <div class="col-6">
+                    <label class="m-b-10">Visible</label>
+                    @Html.DropDownListFor(model => model.IsVisible, ViewBag.ListStatus as IEnumerable<SelectListItem>, "Pilih Status", new { Class = "form-control", Placeholder = "", required = "true" })
+                </div>
+            </div>
+            <br />  <br />
+            <div class="row">
+                <div class="col-6">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <a href="@Url.Action("Index", "AdmBanner")" class="btn btn-warning">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>   
+
+
+
+
+        @section scripts {
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    App.init();
+
+                $('#formCreateBanner').submit(function (e) {
+                e.preventDefault();
+                    @*var Id = $("#Id").val();
+                    var TalentNm = $("#TalentNm").val();
+                    var Gender = $("#Gender").val();
+                var phoneNumber = $("#PhoneNumber").val();
+                var Bio = $("#Bio").val();
+                var ProfImg = $('#prof-upload').prop('files');
+
+                var url = "@Url.Action("Edit","AdmTalent")";
+                var jsonRequest = {
+                    Id :UserId,
+                    FirstName: firstName,
+                    LastName: lastName,
+                    Bio: Bio,
+                    PhoneNumber:phoneNumber
+                };*@            
+
+
+                var formData = new FormData();
+                //formData.append('model', jsonRequest);
+
+                ////JSON obj
+                //formData.append('ProfImg', ProfImg);
+                        var formData = new FormData($('#formCreateBanner')[0]);
+                     var url = "@Url.Action("Create","AdmBanner")";
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    //cache: false,
+                    //traditional: true,
+                    //dataType: 'json',
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+
+                    //data: { model: jsonRequest, ProfImg: ProfImg},
+                    data: formData,
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+                    beforeSend:
+                        function () {
+                            //$("#spinner").show();
+                        },
+                    success: function (data) {
+
+                        window.location.href = "@Url.Action("Index", "AdmBanner")";
+                        @*if (data == "OK") {
+                            $.gritter.add({
+                                title: 'Success !',
+                                text: 'Updated Successfully !'
+                            });
+                            window.location.href = "@Url.Action("Index", "AdmTalent")";
+                        }
+
+                        else {
+
+                        }*@
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+
+
+            });
+                })
+
+            </script>
+            <script>
+                $(function () {
+                    BgrPic = {
+                        UpdatePreview: function (obj) {
+                            // if IE < 10 doesn't support FileReader
+                            if (!window.FileReader) {
+                                // don't know how to proceed to assign src to image tag
+                            } else {
+                                var reader = new FileReader();
+                                var target = null;
+
+                                reader.onload = function (e) {
+                                    target = e.target || e.srcElement;
+
+                                    $(".bgrpic").prop("src", target.result);
+                                };
+                                reader.readAsDataURL(obj.files[0]);
+                            }
+                        }
+                    };
+                });
+            </script>
+        }

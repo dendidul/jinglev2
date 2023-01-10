@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_Layout_Adm.cshtml";
+}
+
+<style>
+    iframe:focus {
+        outline: none;
+    }
+
+    iframe[seamless] {
+        display: block;
+    }
+</style>
+    
+    <!-- begin #content -->
+    
+        <!-- begin breadcrumb -->
+        <ol class="breadcrumb pull-right">
+            <li class="breadcrumb-item"><a href="javascript:;">Home</a></li>
+            <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+        <!-- end breadcrumb -->
+        <!-- begin page-header -->
+        <h1 class="page-header">Dashboard</h1>
+        <!-- end page-header -->
+        <!-- begin row -->
+<div class="row">
+    <div class="col-12">
+        @*<iframe src="https://share.geckoboard.com/dashboards/LEUHCIDXR3LB6ZSL" style=" border:none ;"></iframe>*@
+
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://share.geckoboard.com/dashboards/LEUHCIDXR3LB6ZSL" allowfullscreen="true" style="border-radius:10px"></iframe>
+        </div></div>
+
+</div>
+      
+<!-- end #content -->
+@section scripts{
+    <script src="~/assets/plugins/gritter/js/jquery.gritter.js"></script>
+    <script src="~/assets/plugins/flot/jquery.flot.min.js"></script>
+    <script src="~/assets/plugins/flot/jquery.flot.time.min.js"></script>
+    <script src="~/assets/plugins/flot/jquery.flot.resize.min.js"></script>
+    <script src="~/assets/plugins/flot/jquery.flot.pie.min.js"></script>
+    <script src="~/assets/plugins/sparkline/jquery.sparkline.js"></script>
+    <script src="~/assets/plugins/jquery-jvectormap/jquery-jvectormap.min.js"></script>
+    <script src="~/assets/plugins/jquery-jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="~/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="~/assets/js/demo/dashboard.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            App.init();
+            //Dashboard.init();
+        });
+    </script>
+
+
+
+}
+

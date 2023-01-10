@@ -1,0 +1,294 @@
+﻿@model Jingl.General.Model.Admin.Transaction.BookModel
+@{
+    ViewData["Title"] = "Booking";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int index = 0;
+}
+<div class="box-white" style="background: none">
+    <div id="myHeader">
+        <div class="logo-header">
+            <div class="coontainer-fluid">
+                <div class="col-md-12">
+                    <ul class="nav">
+                        <li class="nav-item text-center pull-left">
+                            <a class="nav-link" href="javascript:history.back()">
+                                <div class="icon-img">
+                                    <img src="/template/img/ic-back-white.png" style="width:42%;margin-left:-25%;margin-top:-8%" alt="" />
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item justify-content-center mr-center">
+                            <img src="~/template/img/Jing_e 1.png" style="margin-left:-84%" alt="Alternate Text" />
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style=" background: #fff; ">
+        <div class="row" >
+            <div class="col-12">
+                <div class="register-content mt30 panel-body panel-form">
+                    @*<div class="nav-item justify-content-center mr-center">
+                <h4 class="nav-link -ml54 hire-label">Talentku</h4>
+            </div>*@
+                    <ul class="nav">
+                        @*<li class="nav-item text-center pull-left">
+                            <a class="nav-link" href="javascript:history.back()">
+                                <div class="icon-img mb4">
+                                    @*<img class="icon-menu" src="/template/img/ic-back-blue.png" alt="" />
+                                </div>
+                            </a>
+                        </li>*@
+                        <li class="nav-item justify-content-center mr-center">
+                            <h4 class="nav-link hire-label m-b-30">Yuk tulis order pesanan kamu</h4>
+                        </li>
+                    </ul>
+
+                    <form class="form-horizontal form-bordered" id="Frm_Hire">
+                        <div class="form-row">
+                            <div class="form-group col-12">
+                                @*<div class="col-lg-12 col-md-12">
+
+                <div class="text-center tlnimg">
+                    <img src="@Model.TalentPhotos" alt="Alternate Text" />
+
+                    <span class="mywave" style="font-size:30px;">@Model.TalentNm <input type="hidden" id="TalentId" value="@Model.TalentId" /></span>
+                </div>
+                <div class="dropdown-divider"></div>
+            </div>*@
+
+                                <div class="box-hiretalent">
+                                    @*<center>*@
+
+                                    <div class="text-center tlnimg hrtln">
+                                        <img src="@Model.TalentPhotos" alt="Alternate Text" class="media-object" />
+
+
+                                        <h6 class="">
+
+                                            <span class="mywave" style="font-size:30px;">@Model.TalentNm <input type="hidden" id="TalentId" value="@Model.TalentId" /></span>
+
+                                        </h6>
+                                    </div>
+                                    @*</center>*@
+
+
+                                </div>
+
+                            </div>
+                            <div class="dropdown-divider" style="margin-top:-1%"></div>
+                            <div class="form-group col-12">
+                                @*<div class="col-lg-12 col-md-12">
+                @Html.DropDownListFor(model => model.BookCategory, ViewBag.BookCategory as IEnumerable<SelectListItem>, "Pilih Category", new { Class = "form-control", Placeholder = "" })
+                <select class="form-control border-radius20 selectpicker" data-size="10" data-live-search="true" data-style="btn-white" id="BookCategory" required>
+                    <option value="" selected disabled>Judul Projek</option>
+                    <option value="1">Ucapan Ulang Tahun</option>
+                    <option value="2">Ucapan Pernikahan</option>
+                    <option value="3">Ucapan Selamat Wisuda</option>
+                    <option value="4">Ucapan Kelahiran</option>
+                    <option value="5">Ucapan Hari Besar</option>
+                    <option value="3">Ucapan Anniversary</option>
+                    <option value="3">Ucapan Lainnya (tuliskan pada Brief)</option>
+                     </select>
+            </div>*@
+                                <div class="col-12">
+                                    <h5 class="Bold hire-label">Pilih tema ucapan</h5>
+                                    
+                                    @foreach (var kategori in ViewBag.BookCategory)
+                                    {
+                                        <div class="form-check form-check-inline col-4">
+                                            <input class="form-check-input kategori-radio" type="radio" name="BookCategory" id="BookCategory_@index" value="@kategori.Id" required onclick="showJudul()">
+                                            @*<label class="form-check-label" for="BookCategory_@index" id="lblBookCategory_@index">
+                                                @kategori.CategoryNm
+                                            </label>*@
+                                            <span class="form-check-label"> @kategori.CategoryNm</span>
+                                        </div>
+                                        index++;
+                                    }
+                                </div>
+
+                            </div>
+                            <div class="form-group col-12" style="display:none" id="judulPesanan">
+                                <div class="col-12">
+                                    <h5>Judul</h5>
+                                    <input type="text" name="" id="ProjectNm" class="form-control" placeholder="contoh: Ucapan Selamat Bekerja" />
+                                </div>
+                            </div>
+                            <div class="form-group col-6">
+                                <div class="col-12" style="padding-right: 0 !important">
+                                    <h5>Untuk</h5>
+                                    <input type="text" name="" id="For" class="form-control" placeholder="contoh: Rama" required />
+                                </div>
+                                  
+                             
+                            </div>
+
+                            <div class="form-group col-6">
+                                <div class="col-12" style="padding-left: 0 !important">
+                                    <h5>Dari</h5>
+                                    <input type="text" name="" id="From" class="form-control" placeholder="contoh: Sinta"  value="@Model.From" required />
+                                </div>
+                             
+                              
+                            </div>
+                            <div class="form-group col-12">
+                                <div class="col-12">
+                                    <h5>Pesan</h5>
+                                    <textarea rows="3" class="form-control" id="Brief" placeholder="contoh: Rama Selamat Bekerja Seamangat!!!!" required></textarea>
+                                </div>
+                            </div>
+                            @*<div class="form-group col-12">
+                                <div class="col-12">
+                                    <h5 class="hire-label">Videonya mau dikirim kemana?</h5>
+                                </div>
+                            </div>*@
+
+                            <div class="form-group col-12">
+                                <div class="col-12">
+                                    <h5 class="hire-label">Videonya mau dikirim kemana?</h5>
+                                    <input type="email" name="" id="Email" class="form-control" placeholder="contoh: rama@email.com" />
+                                </div>
+                            </div>
+                            @*<div class="form-group col-12">
+                                <div class="col-12">
+                                    <input type="text" name="" id="PhoneNumber" class="form-control" placeholder="Jika pilih WhatsApp, tulis nomor HP disini " />
+                                </div>
+                            </div>*@
+                            @*<div class="form-group col-12">
+                                <div class="col align-self-center ck-box">
+                                    <div class=" checkbox checkbox-css m-b-30 text-center mt20">
+                                        <div class="checkbox checkbox-css m-b-30">
+                                            <input type="checkbox" id="agreement_checkbox" value="0">
+                                            <label for="agreement_checkbox" class="regular-clr">
+                                                Jangan publikasikan video di Jingl
+                                            </label>
+                                            <input type="hidden" id="IsPublic" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                            <div class="form-group col-12">
+                                <div class="register-buttons mt40 m-b-20">
+                                    <button type="submit" id="BtnProcess" class="btn btn-primary btn-block  btn-blue">Proses Booking </button>
+                                </div>
+                            </div>
+                         
+                        </div>
+                    
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+       
+    </div>
+
+
+
+@section scripts
+    {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.kategori-radio').on('click', function () {
+                var div_id = $(this).attr('id');
+                var LabelText = $(this).parent().find('span').text();
+                //$("#ProjectNm").val(LabelText);
+              
+               
+            });
+
+            $('#agreement_checkbox').on('click', function () {
+            });
+
+            $("#Frm_Hire").submit(function (e) {
+               
+                e.preventDefault();
+                var ProjectNm = ""
+                if ($("#ProjectNm").val() != null && $("#ProjectNm").val() != "") {
+                    ProjectNm = $("#ProjectNm").val();
+                }
+                else {
+                    ProjectNm = "";
+                }
+                var TalentId = $("#TalentId").val();
+                var To = $("#For").val();
+                var From = $("#From").val();
+                var BriefNeeds = $("#Brief").val();
+                var Email = $("#Email").val();
+                var PhoneNumber = $("#PhoneNumber").val();
+               
+                var BookCategory = $('.kategori-radio:checked').val();
+                var IsPublic = 1;
+
+                var url = "@Url.Action("Hire", "Booking")";
+                var jsonRequest = {
+                    TalentId: TalentId,
+                    ProjectNm: ProjectNm,
+                    To: To,
+                    From: From,
+                    BriefNeeds: BriefNeeds,
+                    Email: Email,
+                    PhoneNumber: PhoneNumber,
+                    IsPublic: IsPublic,
+                    BookCategory: BookCategory
+                };
+
+
+
+                $.ajax({
+                    url: url,
+                    //cache: false,
+                    //traditional: true,
+                    type: "POST",
+                    data: { model: jsonRequest},
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+                    beforeSend:
+                        function () {
+                            //$("#spinner").show();
+                        },
+                    success: function (data) {
+
+                        if (data.status == "OK") {
+                            $.gritter.add({
+                                title: 'Success!',
+                                text: 'Booking Successfully !'
+                            });
+                            window.location.href = "../Booking/DataConfirm?BookId=" + data.bookId;
+                           
+                        }
+
+                        else {
+
+                        }
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+
+
+            });
+        });
+    </script>
+}<script  type="text/javascript">
+    function showJudul() {
+        if ($('.kategori-radio:checked').val() == 9)
+        {
+            document.getElementById('judulPesanan').style.display = 'block';
+        }
+        else
+        {
+            document.getElementById('judulPesanan').style.display = 'none';
+        }
+    }
+ </script>
+
+
+

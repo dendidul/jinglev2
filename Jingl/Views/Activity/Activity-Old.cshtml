@@ -1,0 +1,200 @@
+﻿@model Jingl.General.Model.User.ViewModel.NotificationViewModel
+@{
+    ViewData["Title"] = "Activity";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*@await Html.PartialAsync("_header")*@
+@await Html.PartialAsync("~/Views/Shared/_headertop.cshtml")
+@await Html.PartialAsync("~/Views/Shared/_header.cshtml")
+
+
+
+<div class="container" style=" background: #fff;">
+    <div class="row">
+        <div class="col-12">
+            <div class="card-content-tab-menu mt20 m-b-40">
+                <!-- begin nav-pills -->
+                <ul class="nav nav-tab-menu nav-pills">
+
+                    <li class="nav-items wd-50 br-rg">
+                        <a href="#nav-pills-tab-1" data-toggle="tab" class="nav-link pd5 active">
+                            <span class="">Notifikasi <span class="badge badge-info">@Model.CountUserNotification</span></span>
+                        </a>
+                    </li>
+                    <li class="nav-items wd-50">
+                        <a href="#nav-pills-tab-2" data-toggle="tab" class="nav-link pd5">
+                            <span class="">
+                                Undangan
+
+                                <span class="badge badge-info">@Model.CountTalentNotification</span>
+
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+                <!-- end nav-pills -->
+                <!-- begin tab-content -->
+                <div class="tab-content mt10">
+                    <!-- begin tab-pane -->
+                    <div class="tab-pane fade active show" id="nav-pills-tab-1">
+                        <ul class="nav flex-column" id="UserList">
+                            @{
+                                foreach (var data in Model.UserNotificationList)
+                                {
+
+
+                                    @:<li class="nav-item ct-activity">
+                                        @:<div class=" ct-span">
+                                            <img src="@data.ImgProfPic" style="width:50px;height:50px;border-radius:8px;object-fit:cover" />
+                                            @:<a class="nav-link list-menu-activity wd-95" href="@Url.Action("CheckBookingData","Booking",new {bookId =data.BookId,notificationId = data.Id })">
+                                                if (data.IsReaded == 0)
+                                                {
+                                                    <label style="color:#00a0e5">@data.Message</label>
+                                                }
+                                                else
+                                                {
+                                                    <label style="color:gray">@data.Message</label>
+                                                }
+
+
+                                            @: </a>
+                                            <span class="mr10"> > </span>
+                                        @:</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    @: </li>
+                                    @:@*<li class="br-bt"></li>*@
+                                }
+                            }
+
+
+                        </ul>
+                        <a href="#" id="loadMore" class="btn-more">Load More</a>
+                        @*<div id="loadMore">Load more</div>
+                            <div id="showLess">Show less</div>*@
+                    </div>
+                    <!-- end tab-pane -->
+                    <!-- begin tab-pane -->
+                    <div class="tab-pane fade" id="nav-pills-tab-2">
+                        @{
+                            if (Model.RoleId != 3)
+                            {
+                                <div class="close-content mt40 text-center">
+                                    <img src="/template/img/bg-invitation.png" class="mx-auto d-block img-close-content">
+                                    <h6 class="m-t-10 blue-clr">Akses Dibatasi</h6>
+                                    <p>
+                                        Halaman ini hanya bisa di akses oleh Talent Fameo
+                                    </p>
+                                </div>
+                            }
+                            else
+                            {
+                                @:  <ul class="nav flex-column">
+                                    foreach (var data in Model.TalentNotificationList)
+                                    {
+
+
+                                        @:<li class="nav-item ct-activity2">
+                                            @:<div class="ct-span">
+                                                <img src="@data.ImgProfPic" style="width:50px;height:50px;border-radius:8px" />
+                                                @:<a class="nav-link list-menu-activity wd-95" href="@Url.Action("BookingDetail","Account",new {bookId =data.BookId,notificationId = data.Id})">
+
+
+
+
+                                                    if (data.IsReaded == 0)
+                                                    {
+                                                        <label style="color:#00a0e5">@data.Message</label>
+                                                    }
+                                                    else
+                                                    {
+                                                        <label style="color:gray">@data.Message</label>
+                                                    }
+
+                                                @:</a>
+                                                <span class="mr10">></span>
+                                            @:</div>
+                                        @: </li>
+
+
+
+
+
+
+
+
+                                    }
+                                @:  </ul>
+                                <a href="#" id="loadMore2" class="btn-more">Load More</a>
+                            }
+
+                        }
+
+                    </div>
+                    <!-- end tab-pane -->
+                </div>
+                <!-- end tab-content -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+    {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            if (location.hash) {
+                $("a[href='" + location.hash + "']").tab("show");
+            }
+            $(document.body).on("click", "a[data-toggle='tab']", function (event) {
+                location.hash = this.getAttribute("href");
+            });
+     
+       
+
+
+            $(".ct-activity").slice(0, 10).show();
+            $("#loadMore").on("click", function (e) {
+                e.preventDefault();
+                $(".ct-activity:hidden").slice(0, 10).slideDown();
+                if ($(".ct-activity:hidden").length == 0) {
+                    $("#loadMore").text("No Activity").addClass("noContent");
+                }
+            });
+
+            $(".ct-activity2").slice(0, 10).show();
+            $("#loadMore2").on("click", function (e) {
+                e.preventDefault();
+                $(".ct-activity2:hidden").slice(0, 10).slideDown();
+                if ($(".ct-activity2:hidden").length == 0) {
+                    $("#loadMore2").text("No Activity").addClass("noContent");
+                }
+            });
+
+     
+
+        })
+
+        $(window).on("popstate", function () {
+            var anchor = location.hash || $("a[data-toggle='tab']").first().attr("href");
+            $("a[href='" + anchor + "']").tab("show");
+        });
+
+    </script>
+}
+

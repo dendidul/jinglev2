@@ -1,0 +1,31 @@
+﻿/*.panel-sophie > .panel-heading {
+    background: #DA2D73;
+    color: #fff;
+}
+.btn-pink:hover {
+    background: rgb(218, 45, 115, 0.9);
+    border-color: #DA2D73;
+}
+.sidebar {
+    background: #fff;
+}
+    .sidebar .nav > li > a {
+        color: rgba(0,0,0,0.87);
+    }
+    .sidebar .nav > li > a i {
+        color: #DA2D73;
+    }
+    .sidebar .nav > li.nav-profile {
+        background : #DA2D73;
+        margin-bottom: 15px;
+    }
+    .sidebar .nav > li.nav-profile.active > a {
+        background: #DA2D73;
+
+    .sidebar .sub-menu > li > a:hover {
+        color: rgba(0,0,0,0.87);
+    }
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+    background: #DA2D73 !important;
+    border-color: #DA2D73 !important;
+    color: #fff;*/

@@ -1,0 +1,300 @@
+﻿@*@model IEnumerable<Jingl.General.Model.User.ViewModel.TalentCategoryViewModel>*@
+@model Jingl.General.Model.User.ViewModel.WishlistViewModel
+@{
+    ViewData["Title"] = "WishlistList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*@await Html.PartialAsync("~/Views/Shared/_headertop.cshtml")
+    @await Html.PartialAsync("~/Views/Shared/_header.cshtml")*@
+<div id="myHeader">
+    <div class="logo-header">
+        <div class="coontainer-fluid">
+            <div class="col-md-12">
+                <ul class="nav">
+                    <li class="nav-item text-center pull-left">
+                        <a class="nav-link" href="javascript:history.back()">
+                            <div class="icon-img">
+                                <img src="/template/img/ic-back-white.png" style="width:42%;margin-left:-25%;margin-top:-8%" alt="" />
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item justify-content-center mr-center">
+                        <div class="headerTops">
+                            <img src="~/template/img/Jing_e 2.png" style="margin-left:-84%" alt="Alternate Text" />
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" style="padding: 0 !important">
+    <div class="row" style="margin: 0 !important">
+        <div class="col-12" style="padding: 0 !important">
+            <!-- begin #search-bar -->
+            <div class="top-search-bar">
+                <div class="form-group  search-bar brdr-blue has-search">
+                    <span class="fa fa-search form-control-feedback"></span>
+                    <input type="text" class="form-control" placeholder="Cari Nama Talent" id="search">
+                </div>
+            </div>
+            <div class="container" style="padding: 0 !important" id="OurTalentcontent">
+                <div class="row mt20" style="margin: 0 !important">
+                    @{
+                        var index = 0;
+                        foreach (var talent in Model.ListTalent)
+                        {
+                            <div class="col-6 col-lg-6 filterdata align-self-center" style="padding: 10px !important">
+                                <div class="exploredetail m-t-10 m-b-40">
+                                    <a href="@Url.Action("TalentDetail", "Talent", new { TalentId = talent.TalentId })">
+                                        <div class="video">
+                                            <div class="card-explore-top">
+                                                <input type="hidden" class="FileVideoId" id="FileVideoId_@index" value="@Model.ListVideo.Where(i => i.TalentId == @talent.TalentId && i.BookCategory == 0).FirstOrDefault().FileId" />
+                                                <input type="hidden" class="LinkVideo" id="LinkVideo_@index" value="@Model.ListVideo.Where(i => i.TalentId == @talent.TalentId && i.BookCategory == 0).FirstOrDefault().Link" />
+                                                <input type="hidden" class="LinkPhoto" id="LinkPhoto_@index" value="@talent.LinkImg" />
+                                                <input type="hidden" class="LinkName" id="LinkName_@index" value="@talent.TalentNm" />
+                                                <input type="hidden" class="ViewCount" id="ViewCount_@index" value="@Model.ListVideo.Where(i => i.TalentId == @talent.TalentId && i.BookCategory == 0).FirstOrDefault().ViewsCount" />
+                                                <input type="hidden" class="TalentId" id="TalentId_@index" value="@talent.TalentId" />
+                                                <img src="@talent.LinkImg" alt="Alternate Text" width="100%" height="100%" class="thmnail" />
+                                                <a href="#" class="explore-button " data-toggle="modal" id="exploreLink">
+                                                    <img src="/template/img/iconplaywhite.png" alt="Alternate Text" />
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="text-talent">
+                                            <span class="span-talent">
+                                                <span class="profesi">@talent.Profesion</span>
+                                            </span>
+                                            <h4>@talent.TalentNm</h4>
+                                            <h5>IDR <label class="amountlines">@talent.PriceAmount</label></h5>
+                                        </div>
+                                    </a>
+                                    <div class="row text-center">
+                                        <div class="col-6  text-center">
+                                            @*<a href="@Url.Action("Hire","Booking",new {TalentId = @talent.TalentId})" class="btn btn-blue" style="margin-bottom:10px">*@
+                                            <a href="@Url.Action("Hire","Booking",new {TalentId = @talent.TalentId})">
+
+                                                <div class="icon-img text-center">
+                                                    <img src="~/template/img/ic-order.png" alt="Alternate Text" />
+                                                </div><label style="text-align:center">Pesan Video</label>
+
+                                            </a>
+                                        </div>
+                                        <div class="col-6  text-center">
+                                            <input type="hidden" class="TalentId" id="TalentId_@index" value="@talent.TalentId" style="margin-bottom:10px" />
+                                            @*<a id="unBookmarkBtn" class="btn btn-blue unbook-btn">*@
+                                            <a id="unBookmarkBtn" class="unbook-btn" href="">
+                                                <div class="icon-img text-center">
+                                                    <img src="~/template/img/ic-unbookmark.png" alt="Alternate Text" />
+                                                </div> <label style="text-align:center">Hapus Favorit</label>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            index++;
+
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            //function FilterList(txtName,ulName) {
+            //    // Declare variables
+            //    var input, filter, ul, li, a, i, txtValue;
+            //    input = document.getElementById(txtName);
+            //    filter = input.value.toUpperCase();
+            //    ul = document.getElementById(ulName);
+            //    li = ul.getElementsByTagName('li');
+
+            //    // Loop through all list items, and hide those who don't match the search query
+            //    for (i = 0; i < li.length; i++) {
+            //        a = li[i];
+            //        txtValue = a.textContent || a.innerText;
+            //        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            //            li[i].style.display = "";
+            //        } else {
+            //            li[i].style.display = "none";
+            //        }
+            //    }
+            //}
+
+            //$("#Filter").keyup(function () {
+            //    FilterList("Filter", "WorkspaceList");
+            //});
+
+            $("#search").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#TalentData").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+
+            $('#search').keyup(function () {
+
+                var filter = this.value.toLowerCase();  // no need to call jQuery here
+
+                $('.filterdata').each(function () {
+                    /* cache a reference to the current .media (you're using it twice) */
+                    var _this = $(this);
+                    var title = _this.find('h4').text().toLowerCase();
+
+                    /*
+                        title and filter are normalized in lowerCase letters
+                        for a case insensitive search
+                     */
+                    if (title.indexOf(filter) < 0) {
+                        //_this.hide();
+                        //_this.display = "none";
+                        _this.hide();
+                    }
+                    else {
+                        _this.show();
+                    }
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(".unbook-btn").click(function (e) {
+
+                var hiden_TalentId = $(this).parent().parent().parent().find('.TalentId').attr('id');
+                var talentId = $("#" + hiden_TalentId + "").val();
+                var jsonRequest = {
+                    TalentId: talentId
+                };
+
+                var UrlInsert = "@Url.Action("RemoveFromWishlist", "Booking")";
+                $.ajax({
+                    url: UrlInsert,
+                    //cache: false,
+                    //traditional: true,
+                    type: "POST",
+                    data: { model: jsonRequest },
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+                    beforeSend:
+                        function () {
+                            //$("#spinner").show();
+                        },
+                    success: function (data) {
+
+                        if (data == "OK") {
+                            $.gritter.add({
+                                title: 'Success!',
+                                text: 'Successfully Remove From Your Favourite!'
+                            });
+                            window.location.reload();
+                        }
+
+                        else {
+
+                        }
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+             $(".explore-button").click(function (e) {
+
+                e.preventDefault();
+                $("#VideoModal").modal('show');
+                 var div_FileVideoid = $(this).parent().parent().find('.FileVideoId').attr('id');
+                var div_id = $(this).parent().parent().parent().find('.LinkVideo').attr('id');;
+                var div_profil = $(this).parent().parent().parent().find('.LinkPhoto').attr('id');
+                var div_namatalent = $(this).parent().parent().parent().find('.LinkName').attr('id');
+                var div_ViewCountid = $(this).parent().parent().parent().find('.ViewCount').attr('id');
+
+                //alert(div_id);
+                var $source = $('#videoplayer');
+                var $profil = $('#modalImg');
+
+                var sources = $("#" + div_id + "").val();
+                var profil = $("#" + div_profil + "").val();
+                var nametalent = $("#" + div_namatalent + "").val();
+
+                var ViewCount = $("#" + div_ViewCountid + "").val();
+                 var VideoId = $("#" + div_FileVideoid + "").val();
+
+                  var jsonRequest = {
+                            UserId: 0,
+                            FileId: VideoId
+                        };
+
+                        var UrlInsert = "@Url.Action("InputFileWatched", "Files")";
+
+                        $.ajax({
+                            url: UrlInsert,
+                            //cache: false,
+                            //traditional: true,
+                            type: "POST",
+                            //data: JSON.stringify({ request: jsonRequest }),
+                            data: { model: jsonRequest },
+                            //dataType: "json",
+                            //contentType: "application/json; charset=utf-8",
+                            //async: false,
+                            beforeSend: function () {
+                                //$("#spinner").show();
+                                $(".loadingSign").show();
+                            },
+                            complete: function () {
+                                $(".loadingSign").hide();
+                            },
+                            success: function (data) {
+
+
+
+                            },
+                            error: function (jqXHR, textStatus, errorMessage) {
+                                console.log(errorMessage);
+                            }
+                        });
+
+                $source[0].src = sources;
+                $profil[0].src = profil;
+
+                var Namatalent = nametalent;
+                $("#views").text(ViewCount);
+                $("#modalName").text(Namatalent);
+                //  $source.parent()[0].load();
+                $source[0].play();
+                // $source.parent().load();
+                $(".modalClose").click(function (e) {
+                    $source[0].pause();
+                    history.back();
+                });
+
+                $(".modal").on("shown.bs.modal", function () { // any time a modal is shown
+                    var urlReplace = "#" + $(this).attr('id'); // make the hash the id of the modal shown
+                    history.pushState(null, null, urlReplace); // push state that hash into the url
+                });
+
+                // If a pushstate has previously happened and the back button is clicked, hide any modals.
+                $(window).on('popstate', function () {
+                    $(".modal").modal('hide');
+                    $source[0].pause();
+                   
+                });
+
+            });
+        });
+    </script>
+}

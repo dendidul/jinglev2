@@ -1,0 +1,126 @@
+﻿
+@{
+    ViewData["Title"] = "Help";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="box-white">
+    <div id="myHeader">
+        <div class="logo-header">
+            <div class="coontainer-fluid">
+                <div class="col-md-12">
+					<div class="headerTop" style="height: 40px;">
+                    <div class="setting-profile" style="left: 13px;right: unset;top: 0;position: absolute;">
+                        <a href="/Account/Profile">
+                            <div class="icon-img">
+                                <img src="/template/img/left-arrow.svg" style="width:25px;" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mx-auto w-100 p-4 text-white text-center" style="padding-top: 7px !important;">
+                        <h4 style="color: #fff;font-weight: bold;">Support</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <p align="justify">We are sorry for the inconvinience cost by any change, How do we help you today?</p>
+            </div>
+			
+			<div class="col-12">       
+				<p align="center">
+					<a href="https://wa.me/6281388396191?text=Hello">
+						<img src="/template/img/wa-chat.png" width="40%">
+					</a>
+				</p>
+				<p align="center">Or submit your problem using form below.</p>
+			</div>
+			
+            <div class="col-12">
+                <form id="Frm_Help">
+                    <div class="form-group">
+                        <label for="SupportSubject">Subject</label>
+                        <input type="text" class="form-control" id="SupportSubject">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="SupportDetail">Berikan informasi lebih detail</label>
+                        <textarea class="form-control" id="SupportDetail" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="SupportEmail">Alamat Emailmu</label>
+                        <input type="email" class="form-control" id="SupportEmail">
+                    </div>
+
+                    @*<div action="/file-upload" class="dropzone mb30" id="UploadForm">
+            <div class="fallback">
+                <input name="file" type="file" id="SupportUpload" multiple />
+            </div>
+        </div>*@
+
+                    <button type="submit" class="btn btn-blue btn-primary m-b-20">Submit</button>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+    @section scripts {
+        <script type="text/javascript">
+            Dropzone.options.UploadForm = {
+                maxFilesize: 20
+            }
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('#Frm_Help').submit(function (e) {
+                    e.preventDefault();
+                    
+                    var supportSubject = $("#SupportSubject").val();
+                    var supportDetail = $("#SupportDetail").val();
+                    var supportEmail = $("#SupportEmail").val();
+                    var url = "@Url.Action("Support","Account")";
+                    var jsonRequest = {
+                        Subject: supportSubject,
+                        Details : supportDetail,
+                        EmailAddress : supportEmail
+                    };
+
+                    $.ajax({
+                    url: url,
+                    //cache: false,
+                    //traditional: true,
+                    type: "POST",
+                    data: { model: jsonRequest},
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+                    beforeSend:
+                        function () {
+                            //$("#spinner").show();
+                        },
+                    success: function (data) {
+
+                        if (data == "OK") {
+                            //window.location.href = "@Url.Action("Index","Home")";
+                            history.back();
+                        }
+
+                        else {
+
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+                })
+            })
+
+        </script>
+    }

@@ -1,0 +1,417 @@
+﻿@model Jingl.General.Model.Admin.Master.TalentModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout_Adm.cshtml";
+}
+@*@using (Html.BeginForm("Edit", "AdmTalent", FormMethod.Post, new { Id = "formTalentEdit" }))
+    {*@
+<h2>Edit</h2>
+<form class="form-horizontal form-bordered" id="FormTalentEdit">
+    <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-12 col-lg-12 align-self-center">
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                        <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+                    </div>
+                    <h4 class="panel-title">Talent Data</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Talent Name</label>
+                            @Html.HiddenFor(model => model.Id, new { Class = "form-control" })
+                            @Html.HiddenFor(model => model.UserId, new { Class = "form-control" })
+                            @Html.TextBoxFor(model => model.TalentNm, new { Class = "form-control", required = "true" })
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label>Gender </label>
+                                @Html.DropDownListFor(model => model.Gender, ViewBag.ListGender as IEnumerable<SelectListItem>, "Pilih Gender", new { Class = "form-control", Placeholder = "", required = "true" })
+                            </div>
+                        </div>
+                        @*<div class="col-4">
+                                <div class="form-group">
+                                    <label>Booked By</label>
+                                    @Html.DropDownListFor(model => model.BookedBy, ViewBag.ListUser as IEnumerable<SelectListItem>, "Pilih User", new { Class = "form-control", Placeholder = "", required = "true" })
+                                </div>
+                            </div>*@
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Profession</label>
+                            @Html.TextBoxFor(model => model.Profesion, new { Class = "form-control", required = "true" })
+                        </div>
+                        <div class="col-4">
+                            <label>Instagram</label>
+                            @Html.TextBoxFor(model => model.Instagram, new { Class = "form-control", required = "true" })
+                        </div>
+                        <div class="col-4">
+                            <label>Facebook</label>
+                            @Html.TextBoxFor(model => model.Facebook, new { Class = "form-control", required = "true" })
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>Followers </label>
+                                @Html.TextBoxFor(model => model.FollowersCount, new { Class = "form-control", required = "true" })
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Profile Picture</label><br />
+                            <a target="_blank" href="#"><img class="img-fluid profpic"  /></a>
+                            <br /><br />
+                            <label>Change Profile Picture</label><br />
+                            <input type="file" name="ProfImg" id="ProfImg" class="form-control-file " accept=".jpg, .png,.jpeg ,.gif" onchange='ProfPic.UpdatePreview(this)' />
+                        </div>
+                        <div class="col-4">
+                            <label>Background Picture</label><br />
+                            <a target="_blank" href="#"><img class="img-fluid bgrpic"  /></a>
+                            <br /><br />
+                            <label>Change Background Picture</label><br />
+                            <input type="file" id="BgrImg" class="form-control-file" name="BgrImg" accept=".jpg, .png,.jpeg ,.gif" onchange='BgrPic.UpdatePreview(this)' />
+                        </div>
+
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Referal Code </label>
+                            @Html.TextBoxFor(model => model.ReferralUserCode, new { Class = "form-control" })
+                        </div>
+                        <div class="col-4">
+                            <label>Status </label>
+                            @Html.DropDownListFor(model => model.IsActive, ViewBag.ListStatus as IEnumerable<SelectListItem>, "Pilih Status", new { Class = "form-control", Placeholder = "", required = "true" })
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+
+                    </div>
+                    <h4 class="panel-title">Talent Document</h4>
+                </div>
+                <div class="panel-body">
+
+
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Id Card</label><br />
+                            <a target="_blank" href="#"><img class="img-fluid IdCardImg"  /></a>
+                            <br /><br />
+                            <label>Change Id Card</label><br />
+                            <input type="file" name="IdCardImg" id="IdCardImg" class="form-control-file " accept=".jpg, .png,.jpeg" onchange='IdCardPic.UpdatePreview(this)' />
+                        </div>
+                        <div class="col-4">
+                            <label>NPWP</label><br />
+                            <a target="_blank" href="#"><img class="img-fluid NpwpImg" /></a>
+                            <br /><br />
+                            <label>Change NPWP</label><br />
+                            <input type="file" id="NpwpImg" class="form-control-file" name="NpwpImg" accept=".jpg, .png,.jpeg" onchange='NPWPPic.UpdatePreview(this)' />
+                        </div>
+                        <div class="col-4">
+                            <label>Rekening</label><br />
+                            <a target="_blank" href="#"><img class="img-fluid AcNumImg" /></a>
+                            <br /><br />
+                            <label>Change Rekening</label><br />
+                            <input type="file" id="AcNumImg" class="form-control-file" name="AcNumImg" accept=".jpg, .png,.jpeg" onchange='AcNumPic.UpdatePreview(this)' />
+                        </div>
+
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-4">
+                            <label>Bank</label>
+                            @*@Html.TextBoxFor(model => model.Profesion, new { Class = "form-control", required = "true" })*@
+                            @Html.DropDownListFor(model => model.Bank, ViewBag.ListBank as IEnumerable<SelectListItem>, "Pilih Bank", new { Class = "form-control", Placeholder = "", required = "true" })
+                        </div>
+                        <div class="col-4">
+                            <label>Rekening Number</label>
+                            @Html.TextBoxFor(model => model.AccountNumber, new { Class = "form-control", required = "true" })
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label>Beneficiary Name </label>
+                                @Html.TextBoxFor(model => model.BeneficiaryName, new { Class = "form-control", required = "true" })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="panel panel-inverse">
+                <div class="panel-heading">
+                    <div class="panel-heading-btn">
+
+                    </div>
+                    <h4 class="panel-title">Talent Video</h4>
+                </div>
+                <div class="panel-body">
+
+
+                    <div class="row">
+                        @*<div class="col-6">
+                                <label>Profile Picture</label><br />
+                                <a target="_blank" href="@Model.LinkImg"><img class="img-fluid profpic" src="@Model.LinkImg" /></a>
+                                <br /><br />
+                                <label>Change Profile Picture</label><br />
+                                <input type="file" name="ProfImg" id="ProfImg" class="form-control-file " accept=".jpg, .png,.jpeg" onchange='Test.UpdatePreview(this)' />
+                            </div>*@
+                        @*@{
+                            int index = 0;
+                            foreach (var video in Model.ListTalentVideo)
+                            {
+                                <div class="col-4" id="Video_@index">
+                                    <input type="hidden" name="ListCurrentVideo[@index]" value="@video.FileId" />
+                                    <video src="@video.Link" type="video/mp4" controls style="border: 0px solid rgb(15, 158, 238); height: 300px; width: 320px;">
+                                        <source src="@video.Link">
+                                    </video>
+                                    <p><a href="#" class="deletefile">Delete File</a></p>
+                                </div>
+                                index++;
+                            }
+
+                        }*@
+
+
+                    </div>
+                    <br />
+                    <div class="row">
+                        <p><label>Upload New Videos</label></p><br /> &nbsp;  &nbsp;
+                        <p><input type="file" multiple name="ListVideo" accept="video/mp4" /></p>
+
+                    </div>
+
+                    <br />
+                    <div class="row">
+                        <div class="col-6">
+                            <button type="submit" class="btn btn-success">Save</button>
+                            <a href="@Url.Action("ListTalent", "AdmTalent")" class="btn btn-warning">Cancel</a>
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+    @*}*@
+</form>
+
+@section scripts{
+
+    <script type="text/javascript">
+            $(document).ready(function () {
+                App.init();
+
+                $(".deletefile").click(function (e) {
+                    //$("a").removeAttr("href");
+                    e.preventDefault();
+                    var div_id = $(this).closest('div').attr('id');
+                    //$(div_id).remove();
+                    $("#"+div_id+"").remove();
+                });
+
+                $('#FormTalentEdit').submit(function (e) {
+                e.preventDefault();
+                    @*var Id = $("#Id").val();
+                    var TalentNm = $("#TalentNm").val();
+                    var Gender = $("#Gender").val();
+                var phoneNumber = $("#PhoneNumber").val();
+                var Bio = $("#Bio").val();
+                var ProfImg = $('#prof-upload').prop('files');
+
+                var url = "@Url.Action("Edit","AdmTalent")";
+                var jsonRequest = {
+                    Id :UserId,
+                    FirstName: firstName,
+                    LastName: lastName,
+                    Bio: Bio,
+                    PhoneNumber:phoneNumber
+                };*@
+
+                    var ProfImg = $('#ProfImg').prop('files');
+
+
+                var formData = new FormData();
+                //formData.append('model', jsonRequest);
+
+                ////JSON obj
+                //formData.append('ProfImg', ProfImg);
+                    var formData = new FormData($('#FormTalentEdit')[0]);
+                     var url = "@Url.Action("Edit","AdmTalent")";
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    //cache: false,
+                    //traditional: true,
+                    //dataType: 'json',
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+
+                    //data: { model: jsonRequest, ProfImg: ProfImg},
+                    data: formData,
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+                    beforeSend: function () {
+                        //$("#spinner").show();
+                        $(".loadingSign").show();
+                    },
+                    complete: function () {
+                        $(".loadingSign").hide();
+                    },
+                    success: function (data) {
+
+                        window.location.href = "@Url.Action("ListTalent", "AdmTalent")";
+                        @*if (data == "OK") {
+                            $.gritter.add({
+                                title: 'Success !',
+                                text: 'Updated Successfully !'
+                            });
+                            window.location.href = "@Url.Action("Index", "AdmTalent")";
+                        }
+
+                        else {
+
+                        }*@
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+
+
+            });
+
+            });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            ProfPic = {
+                UpdatePreview: function (obj) {
+                    // if IE < 10 doesn't support FileReader
+                    if (!window.FileReader) {
+                        // don't know how to proceed to assign src to image tag
+                    } else {
+                        var reader = new FileReader();
+                        var target = null;
+
+                        reader.onload = function (e) {
+                            target = e.target || e.srcElement;
+                            $(".profpic").prop("src", target.result);
+                        };
+                        reader.readAsDataURL(obj.files[0]);
+                    }
+                }
+            };
+        });
+        $(function () {
+            BgrPic = {
+                UpdatePreview: function (obj) {
+                    // if IE < 10 doesn't support FileReader
+                    if (!window.FileReader) {
+                        // don't know how to proceed to assign src to image tag
+                    } else {
+                        var reader = new FileReader();
+                        var target = null;
+
+                        reader.onload = function (e) {
+                            target = e.target || e.srcElement;
+
+                            $(".bgrpic").prop("src", target.result);
+                        };
+                        reader.readAsDataURL(obj.files[0]);
+                    }
+                }
+            };
+        });
+        $(function () {
+            IdCardPic = {
+                UpdatePreview: function (obj) {
+                    // if IE < 10 doesn't support FileReader
+                    if (!window.FileReader) {
+                        // don't know how to proceed to assign src to image tag
+                    } else {
+                        var reader = new FileReader();
+                        var target = null;
+
+                        reader.onload = function (e) {
+                            target = e.target || e.srcElement;
+
+                            $(".IdCardImg").prop("src", target.result);
+                        };
+                        reader.readAsDataURL(obj.files[0]);
+                    }
+                }
+            };
+        });
+        $(function () {
+            NPWPPic = {
+                UpdatePreview: function (obj) {
+                    // if IE < 10 doesn't support FileReader
+                    if (!window.FileReader) {
+                        // don't know how to proceed to assign src to image tag
+                    } else {
+                        var reader = new FileReader();
+                        var target = null;
+
+                        reader.onload = function (e) {
+                            target = e.target || e.srcElement;
+
+                            $(".NpwpImg").prop("src", target.result);
+                        };
+                        reader.readAsDataURL(obj.files[0]);
+                    }
+                }
+            };
+        });
+        $(function () {
+            AcNumPic = {
+                UpdatePreview: function (obj) {
+                    // if IE < 10 doesn't support FileReader
+                    if (!window.FileReader) {
+                        // don't know how to proceed to assign src to image tag
+                    } else {
+                        var reader = new FileReader();
+                        var target = null;
+
+                        reader.onload = function (e) {
+                            target = e.target || e.srcElement;
+
+                            $(".AcNumImg").prop("src", target.result);
+                        };
+                        reader.readAsDataURL(obj.files[0]);
+                    }
+                }
+            };
+        });
+    </script>
+}

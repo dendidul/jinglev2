@@ -1,0 +1,402 @@
+﻿
+@{
+    Layout = null;
+}
+
+@inject CookieManager.ICookie _httpCookie
+
+
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <title>Fameo Admin</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <link rel="shortcut icon" href="~/images/icons/icon-96x96.png">
+
+    <!-- ================== BEGIN BASE CSS STYLE ================== -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href="~/assets/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/ionicons/css/ionicons.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/animate/animate.min.css" rel="stylesheet" />
+    <link href="~/assets/css/apple/style.min.css" rel="stylesheet" />
+    <link href="~/assets/css/apple/style-responsive.min.css" rel="stylesheet" />
+    <link href="~/assets/css/apple/theme/default.css" rel="stylesheet" id="theme" />
+    <!-- ================== END BASE CSS STYLE ================== -->
+    <link href="~/assets/plugins/jquery-jvectormap/jquery-jvectormap.css" rel="stylesheet" />
+    <link href="~/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.css" rel="stylesheet" />
+    <link href="~/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.css" rel="stylesheet" />
+    <link href="~/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
+    <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
+    <link href="~/assets/plugins/DataTables/media/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/DataTables/extensions/Responsive/css/responsive.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+    <link href="~/assets/css/apple/jingl.css" rel="stylesheet" />
+
+    <link href="~/assets/plugins/bootstrap-eonasdan-datetimepicker/build/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+    <link href="~/assets/selectpicker/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
+    <!-- ================== END PAGE LEVEL STYLE ================== -->
+    <!-- ================== BEGIN BASE JS ================== -->
+    <script src="~/assets/plugins/pace/pace.min.js"></script>
+
+    <style>
+        .bootstrap-select {
+            padding: 0 !important;
+        }
+    </style>
+
+    <!-- ================== END BASE JS ================== -->
+
+</head>
+<body>
+    <!-- begin #page-loader -->
+    <div id="page-loader" class="fade show"><span class="spinner"></span></div>
+    <!-- end #page-loader -->
+    <!-- begin #page-container -->
+    <div id="page-container" class="page-container fade page-sidebar-fixed page-header-fixed">
+        <!-- begin #header -->
+        <div id="header" class="header navbar-default">
+            <!-- begin navbar-header -->
+            <div class="navbar-header">
+                <a href="#" class="navbar-brand"><span class="navbar-logo"> <img src="~/template/img/bgr_1.png" alt="Alternate Text" /></span> <b>Fameo</b></a>
+                <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- end navbar-header -->
+            <!-- begin header-nav -->
+            <ul class="navbar-nav navbar-right">
+                <li>
+                    <form class="navbar-form">
+                        @*<div class="form-group">
+                            <input type="text" class="form-control" placeholder="Enter keyword" />
+                            <button type="submit" class="btn btn-search"><i class="ion-ios-search"></i></button>
+                        </div>*@
+                    </form>
+                </li>
+                <li class="dropdown">
+                    @*<a href="#" data-toggle="dropdown" class="dropdown-toggle icon">
+                            <i class="ion-ios-notifications"></i>
+                            <span class="label">5</span>
+                        </a>
+                        <ul class="dropdown-menu media-list dropdown-menu-right">
+                            <li class="dropdown-header">NOTIFICATIONS (5)</li>
+                            <li class="media">
+                                <a href="javascript:;">
+                                    <div class="media-left">
+                                        <i class="fa fa-bug media-object bg-silver-darker"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="media-heading">Server Error Reports <i class="fa fa-exclamation-circle text-danger"></i></h6>
+                                        <div class="text-muted f-s-11">3 minutes ago</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="media">
+                                <a href="javascript:;">
+                                    <div class="media-left">
+                                        <img src="~/assets/img/user/user-1.jpg" class="media-object" alt="" />
+                                        <i class="fab fa-facebook-messenger text-primary media-object-icon"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="media-heading">John Smith</h6>
+                                        <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
+                                        <div class="text-muted f-s-11">25 minutes ago</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="media">
+                                <a href="javascript:;">
+                                    <div class="media-left">
+                                        <img src="~/assets/img/user/user-2.jpg" class="media-object" alt="" />
+                                        <i class="fab fa-facebook-messenger text-primary media-object-icon"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="media-heading">Olivia</h6>
+                                        <p>Quisque pulvinar tellus sit amet sem scelerisque tincidunt.</p>
+                                        <div class="text-muted f-s-11">35 minutes ago</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="media">
+                                <a href="javascript:;">
+                                    <div class="media-left">
+                                        <i class="fa fa-plus media-object bg-silver-darker"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="media-heading"> New User Registered</h6>
+                                        <div class="text-muted f-s-11">1 hour ago</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="media">
+                                <a href="javascript:;">
+                                    <div class="media-left">
+                                        <i class="fa fa-envelope media-object bg-silver-darker"></i>
+                                        <i class="fab fa-google text-warning media-object-icon f-s-14"></i>
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="media-heading"> New Email From John</h6>
+                                        <div class="text-muted f-s-11">2 hour ago</div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="dropdown-footer text-center">
+                                <a href="javascript:;">View more</a>
+                            </li>
+                        </ul>*@
+                </li>
+                <li class="dropdown navbar-user">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="/template/img/bg-invitation.png" alt="" />
+                        <span class="d-none d-md-inline"> @_httpCookie.Get("UserName")</span> <b class="caret"></b>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        @*<a href="javascript:;" class="dropdown-item">Edit Profile</a>
+                            <a href="javascript:;" class="dropdown-item"><span class="badge badge-danger pull-right">2</span> Inbox</a>
+                            <a href="javascript:;" class="dropdown-item">Calendar</a>
+                            <a href="javascript:;" class="dropdown-item">Setting</a>*@
+
+                        <a href="@Url.Action("LogOut","Accounts")" class="dropdown-item">Log Out</a>
+                    </div>
+                </li>
+            </ul>
+            <!-- end header navigation right -->
+        </div>
+        <!-- end #header -->
+        <!-- begin #sidebar -->
+        <div id="sidebar" class="sidebar">
+            <!-- begin sidebar scrollbar -->
+            <div data-scrollbar="true" data-height="100%">
+                <!-- begin sidebar user -->
+                <ul class="nav">
+                    <li class="nav-profile">
+                        <a href="javascript:;" data-toggle="nav-profile">
+                            <div class="cover with-shadow"></div>
+                            <div class="image">
+                                <img src="/template/img/bg-invitation.png" alt="" />
+                            </div>
+                            <div class="info">
+                                @*<b class="caret"></b>*@
+
+                                @_httpCookie.Get("UserName")
+
+                            </div>
+                        </a>
+                    </li>
+                    @*<li>
+                            <ul class="nav nav-profile">
+                                <li><a href="javascript:;"><i class="ion-ios-cog"></i> Settings</a></li>
+                                <li><a href="javascript:;"><i class="ion-ios-share-alt"></i> Send Feedback</a></li>
+                                <li><a href="javascript:;"><i class="ion-ios-help"></i> Helps</a></li>
+                            </ul>
+                        </li>*@
+                </ul>
+                <!-- end sidebar user -->
+                <!-- begin sidebar nav -->
+                <div id="menu">
+
+
+
+                    @*@await Html.PartialAsync("../CRMMenu/SetMenu")*@
+
+                    @*@Html.RenderAction("../CRMMenu/SetMenu/")*@
+
+                    @*@Html.Partial("../CRMMenu/SetMenu/")*@
+
+                </div>
+                <!-- end sidebar nav -->
+            </div>
+            <!-- end sidebar scrollbar -->
+        </div>
+        <div class="sidebar-bg"></div>
+        <!-- end #sidebar -->
+        <!-- begin #content -->
+        <div id="content" class="content">
+
+            @RenderBody()
+
+
+        </div>
+        <!-- end panel -->
+    </div>
+    <style>
+        .loadingSign {
+            height: 100%;
+            width: 100%;
+            position: fixed;
+            background: rgba(255,255,255,0.9);
+            top: 0;
+            z-index: 999;
+        }
+
+            .loadingSign img {
+                top: 0;
+                left: 0;
+                margin: auto;
+                display: table;
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 50px;
+            }
+    </style>
+    <div class="loadingSign" style="display: none">
+        <img src="~/template/img/loadingpink.gif" alt="Alternate Text" />
+    </div>
+    <!-- end #content -->
+    <!-- begin scroll to top btn -->
+    <a href="javascript:;" class="btn btn-icon btn-circle btn-success btn-scroll-to-top fade" data-click="scroll-top"><i class="fa fa-angle-up"></i></a>
+    <!-- end scroll to top btn -->
+    <!-- end page container -->
+    <!-- ================== BEGIN BASE JS ================== -->
+    <script src="~/assets/plugins/jquery/jquery-3.3.1.min.js"></script>
+    @*<script src="~/assets/autonumeric/AutoNumeric.js"></script>*@
+    <script src="~/assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!--[if lt IE 9]>
+        <script src="~/assets/crossbrowserjs/html5shiv.js"></script>
+        <script src="~/assets/crossbrowserjs/respond.min.js"></script>
+        <script src="~/assets/crossbrowserjs/excanvas.min.js"></script>
+    <![endif]-->
+    <script src="~/assets/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/assets/plugins/js-cookie/js.cookie.js"></script>
+    <script src="~/assets/js/theme/apple.min.js"></script>
+    <script src="~/assets/js/apps.js"></script>
+    @*<script src="~/assets/js/apps.min.js"></script>*@
+    <!-- ================== BEGIN PAGE LEVEL JS ================== -->
+    <script src="~/assets/plugins/DataTables/media/js/jquery.dataTables.js"></script>
+    <script src="~/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/assets/js/demo/table-manage-responsive.demo.min.js"></script>
+    <script src="~/assets/selectpicker/bootstrap-select.min.js"></script>
+    <script src="~/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="~/assets/plugins/bootstrap-daterangepicker/moment.js"></script>
+    <script src="~/assets/plugins/bootstrap-eonasdan-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <script src="~/assets/plugins/DataTables/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/assets/plugins/DataTables/media/js/jquery.dataTables.js"></script>
+    <script src="~/assets/plugins/DataTables/media/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/assets/plugins/DataTables/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/assets/plugins/DataTables/extensions/Buttons/js/buttons.bootstrap.min.js"></script>
+    <script src="~/assets/plugins/DataTables/extensions/Buttons/js/buttons.flash.min.js"></script>
+    <script src="~/assets/plugins/DataTables/extensions/Buttons/js/jszip.min.js"></script>
+    <script src="~/assets/plugins/DataTables/extensions/Buttons/js/pdfmake.min.js"></script>
+    <script src="~/assets/plugins/DataTables/extensions/Buttons/js/vfs_fonts.min.js"></script>
+    <script src="~/assets/plugins/DataTables/extensions/Buttons/js/buttons.html5.min.js"></script>
+    <script src="~/assets/plugins/DataTables/extensions/Buttons/js/buttons.print.min.js"></script>
+    <script src="~/assets/plugins/DataTables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/template/plugins/bootstrap-sweetalert/sweetalert.min.js"></script>
+    <script src="~/assets/plugins/gritter/js/jquery.gritter.js"></script>
+    <script src="~/assets/autonumeric/AutoNumeric.js"></script>
+    <!-- ================== END PAGE LEVEL JS ================== -->
+
+
+    <script type="text/javascript">
+        function ConvertStringToDate(str) {
+            var rs = "";
+            if (str != "") {
+                var split = str.split('/');
+                rs = split[1] + '/' + split[0] + '/' + split[2]
+            }
+
+            return rs;
+        }
+        $(document).ready(function () {
+           // App.init();
+            //$('select').selectpicker();
+            $.fn.digits = function () {
+                return this.each(function () {
+                    //$(this).text().toFixed(2);
+                    var roundtwonumber = parseFloat($(this).text()).toFixed(0);
+                    $(this).text(roundtwonumber.replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+                })
+            }
+
+            openItems = new Array();
+            $('.datetimepicker').datetimepicker({
+                format: 'MM-DD-YYYY HH:mm:ss'
+                //todayHighlight: true,
+                //autoclose: true
+                //dateFormat: 'd-M-yy'
+            });
+
+            $('.datepicker').datepicker({
+               // format: 'DD-MM-YYYY HH:mm:ss'
+                todayHighlight: true,
+                autoclose: true,
+               // format: 'dd/mm/yyyy'
+                //format: 'mm/dd/yyyy'
+            });
+
+
+            $("label.amountlines").digits();
+
+            $("select").selectpicker({ liveSearch: true });
+
+             var Url = "@Url.Action("SetMenu", "AdmMenu")";
+            $.ajax({
+                url: Url,
+                cache: false,
+                traditional: true,
+                type: "POST",
+                //data: JSON.stringify({ request: jsonRequest }),
+                //data: JSON.stringify({ request: jsonRequest }),
+                dataType: "html",
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                beforeSend:
+                    function () {
+                        //$("#spinner").show();
+                    },
+                success: function (data) {
+                    //$("#spinner").hide();
+                    $("#menu").html(data);
+                    //$(form).modal();
+
+
+                },
+                error: function (jqXHR, textStatus, errorMessage) {
+                    console.log(errorMessage);
+                }
+            });
+
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //$('.nav li a').click(function () {
+            //    $('li a').removeClass("active");
+            //    $(this).addClass("active");
+            //    localStorage.setItem('active', $(this).parent().index());
+            //});
+
+            //var ele = localStorage.getItem('active');
+            //$('.nav li:eq(' + ele + ')').find('a').addClass('active');
+
+            var item = localStorage.getItem("Open");
+
+            if (item > 0) {
+                $("li.has-sub").eq(item).addClass('expand').find('ul').toggle();
+
+            }
+
+        });
+    </script>
+    <!-- ================== END BASE JS ================== -->
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

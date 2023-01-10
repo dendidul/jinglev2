@@ -1,0 +1,207 @@
+﻿@model Jingl.General.Model.Admin.UserManagement.UserModel
+@{
+    ViewData["Title"] = "Billing";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*@using (Html.BeginForm("Billing", "Account", FormMethod.Post, new { Id = "formEditBilling" }))
+{*@
+<div class="box-white">
+    <form class="form-horizontal form-bordered" id="Frm_EditProfile">
+        <div id="myHeader">
+            <div class="logo-header">
+                <div class="coontainer-fluid">
+                    <div class="col-md-12">
+                        <div class="headerTop" style="height: 40px;">
+                            <div class="setting-profile" style="left: 13px;right: unset;top: 0;position: absolute;">
+                                <a href="javascript:history.back()">
+                                    <div class="icon-img">
+                                        <img src="/template/img/left-arrow.svg" style="width:25px;" alt="">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="mx-auto w-100 p-4 text-white text-center" style="padding-top: 7px !important;">
+                                <h4 style="color: #fff;font-weight: bold;">Informasi Rekening</h4>
+                            </div>
+                            @*<img src="~/template/img/Jing_e 2.png" alt="Alternate Text" />*@
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="background: #fff; ">
+            <div class="row">
+                <div class="col-12">
+                    <div class="register-content mt30 panel-body panel-form">
+                        @*<div class="nav-item justify-content-center mr-center">
+            <h4 class="nav-link -ml54 hire-label">Talentku</h4>
+        </div>*@
+                        <ul class="nav">
+                            @*<li class="nav-item text-center pull-left">
+                <a class="nav-link" href="javascript:history.back()">
+                    <div class="icon-img mb4">
+                        @*<img class="icon-menu" src="/template/img/ic-back-blue.png" alt="" />
+                    </div>
+                </a>
+            </li>*@
+                            <li class="nav-item justify-content-center mr-center">
+                                <h3 class="nav-link hire-label m-b-30">Informasi Rekening</h3>
+                            </li>
+                        </ul>
+
+
+                        <div class="form-group row">
+                            <div class="col-lg-12 col-md-12 brpilih-bank">
+                                <h5 class="hire-label">Bank</h5>
+                                @Html.DropDownListFor(model => model.Bank, ViewBag.ListBank as IEnumerable<SelectListItem>, "Pilih Bank", new { Class = "form-control ", Placeholder = "", required = "true" })
+                                @Html.HiddenFor(model => model.Id, new { Class = "form-control " })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-12 col-md-12">
+                                <h5 class="hire-label">Nomor Rekening</h5>
+                                @Html.TextBoxFor(model => model.AccountNumber, new { Class = "form-control", required = "true" })
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-lg-12 col-md-12">
+                                <h5 class="hire-label">Nama Pemilik Rekening</h5>
+                                @Html.TextBoxFor(model => model.BeneficiaryName, new { Class = "form-control", required = "true" })
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-lg-12 col-md-12">
+                                <img src="@Model.AcNumImg" class="img-fluid AcNumImg" />
+                                <br />
+                                <label>Upload Buku Rekening</label>
+                                <input type="file" id="AcNumImg" class="form-control-file" name="AcNumImg" accept=".jpg, .png,.jpeg" onchange='AcNumPic.UpdatePreview(this)' />
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="col-12">
+
+                            </div>
+                        </div>
+
+                        <div class="brbtn-rek">
+                            <a href="@Url.Action("Profile","Account")" class="btn btn-cancel w-50">Cancel</a>
+                            <button type="submit" class="btn btn-save w-50">Save</button>
+                        </div>
+
+
+                 
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+</div>
+@*}*@
+
+@section scripts
+{
+
+    <script type="text/javascript">
+        $(function () {
+            AcNumPic = {
+                UpdatePreview: function (obj) {
+                    // if IE < 10 doesn't support FileReader
+                    if (!window.FileReader) {
+                        // don't know how to proceed to assign src to image tag
+                    } else {
+                        var reader = new FileReader();
+                        var target = null;
+
+                        reader.onload = function (e) {
+                            target = e.target || e.srcElement;
+
+                            $(".AcNumImg").prop("src", target.result);
+                        };
+                        reader.readAsDataURL(obj.files[0]);
+                    }
+                }
+            };
+        });
+
+        $(document).ready(function () {
+
+             $('#Frm_EditProfile').submit(function (e) {
+                e.preventDefault();
+                var UserId = $("#UserId").val();
+                var firstName = $("#FirstName").val();
+                var lastName = $("#LastName").val();
+                var phoneNumber = $("#PhoneNumber").val();
+                var Bio = $("#Bio").val();
+                var ProfImg = $('#prof-upload').prop('files');
+             
+                var url = "@Url.Action("Billing","Account")";
+                var jsonRequest = {
+                    Id :UserId,
+                    FirstName: firstName,
+                    LastName: lastName,
+                    Bio: Bio,
+                    PhoneNumber:phoneNumber
+                };
+
+                var formData = new FormData();
+                //formData.append('model', jsonRequest);      
+
+                ////JSON obj
+                //formData.append('ProfImg', ProfImg);
+                var formData = new FormData($('#Frm_EditProfile')[0]);
+
+
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    //cache: false,
+                    //traditional: true,
+                    //dataType: 'json',
+                    dataType: 'json',
+                    contentType: false,
+                    processData: false,
+                  
+                    //data: { model: jsonRequest, ProfImg: ProfImg},
+                    data: formData,
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+                    beforeSend:
+                        function () {
+                            //$("#spinner").show();
+                        },
+                    success: function (data) {
+
+                        if (data == "OK") {
+                            $.gritter.add({
+                                title: 'Success !',
+                                text: 'Updated Successfully !'
+                            });
+                            window.location.href = "@Url.Action("Profile","Account")";
+                        }
+
+                        else {
+
+                        }
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+
+
+            });
+        });
+
+       
+        </script>
+    }

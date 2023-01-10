@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8" />
+	<title>Home Page JingL</title>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+	<meta content="" name="description" />
+	<meta content="" name="author" />
+	
+	<!-- ================== BEGIN BASE CSS STYLE ================== -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+	<link href="plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+	<link href="plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="plugins/font-awesome/css/all.min.css" rel="stylesheet" />
+	<link href="plugins/animate/animate.min.css" rel="stylesheet" />
+	<link href="css/default/style.min.css" rel="stylesheet" />
+	<link href="css/default/style-responsive.min.css" rel="stylesheet" />
+	<link href="css/apple/theme/style.min.css" rel="stylesheet" />
+	<link href="css/apple/theme/style-responsive.min.css" rel="stylesheet" />
+	<link href="css/style.css" rel="stylesheet" />
+	<link href="css/default/theme/default.css" rel="stylesheet" id="theme" />
+	<link href="css/default/theme/default.css" rel="stylesheet" id="theme" />
+	<!-- ================== END BASE CSS STYLE ================== -->
+	
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="plugins/pace/pace.min.js"></script>
+	<!-- ================== END BASE JS ================== -->
+</head>
+<body class="pace-top">
+	<!-- begin #page-loader -->
+	<div id="page-loader" class="fade show"><span class="spinner"></span></div>
+	<!-- end #page-loader -->
+	
+	<!-- begin #page-container -->
+	<div id="page-container">
+		<!-- begin #top-menu -->
+		
+		<div class="header-menu">
+			<ul class="nav justify-content-center">
+			  <li class="nav-item text-center mr20">
+			    <a class="nav-link active" href="#">
+			    	<div class="icon-img mb4">
+						<img class="icon-menu" src="img/ic-home-active.png" alt="" />
+					</div>
+					<span>Home</span> 
+			    </a>
+			  </li>
+			  <li class="nav-item text-center mr20">
+			    <a class="nav-link" href="#">
+			    	<div class="icon-img mb4">
+						<img class="icon-menu" src="img/ic-discover.png" alt="" />
+					</div>
+					<span>Discover</span> 
+				</a>
+			  </li>
+			  <li class="nav-item text-center mr20">
+			    <a class="nav-link" href="#">
+			    	<div class="icon-img mb4">
+						<img class="icon-menu" src="img/ic-activity.png" alt="" />
+					</div>
+					<span>Activity</span> 
+				</a>
+			  </li>
+			  <li class="nav-item text-center ">
+			    <a class="nav-link" href="#">
+			    	<div class="icon-img mb4">
+						<img class="icon-menu" src="img/ic-profile.png" alt="" />
+					</div>
+					<span>Profile</span> 
+				</a>
+			  </li>
+			</ul>	
+		</div>
+		<!-- end #top-menu -->
+		<!-- begin #search-bar -->
+		<div class="top-search-bar">
+			<!--<div class="row">
+				<div class="col-md-12">
+		            <div class="input-group" id="adv-search">
+		                <input type="text" class="form-control" placeholder="" />
+		                <div class="input-group-btn">
+		                    <div class="btn-group" role="group">
+		                        <div class="dropdown dropdown-lg">
+		                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><span class="caret"></span></button>
+		                            <div class="dropdown-menu dropdown-menu-right" role="menu">
+		                                <form class="form-horizontal" role="form">
+		                                  <div class="form-group">
+		                                    <label for="filter">Filter by</label>
+		                                    <select class="form-control">
+		                                        <option value="0" selected>All Snippets</option>
+		                                        <option value="1">Featured</option>
+		                                        <option value="2">Most popular</option>
+		                                        <option value="3">Top rated</option>
+		                                        <option value="4">Most commented</option>
+		                                    </select>
+		                                  </div>
+		                                  <div class="form-group">
+		                                    <label for="contain">Author</label>
+		                                    <input class="form-control" type="text" />
+		                                  </div>
+		                                  <div class="form-group">
+		                                    <label for="contain">Contains the words</label>
+		                                    <input class="form-control" type="text" />
+		                                  </div>
+		                                  <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+		                                </form>
+		                            </div>
+		                        </div>
+		                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+		                    </div>
+		                </div>
+		            </div>
+		          </div>
+		        </div>
+			</div>-->
+			  <div class="form-group brdr-blue has-search">
+			    <span class="fa fa-search form-control-feedback"></span>
+			    <input type="text" class="form-control" placeholder="Search">
+			  </div>
+		</div>
+		<!-- end #search-bar -->
+		<!-- begin #caraosel -->
+		<div id="carousel-example-2" class="carousel slide carousel-fade" data-ride="carousel">
+		  <!--Indicators-->
+		  <ol class="carousel-indicators">
+		    <li data-target="#carousel-example-2" data-slide-to="0" class="active"></li>
+		    <li data-target="#carousel-example-2" data-slide-to="1"></li>
+		    <li data-target="#carousel-example-2" data-slide-to="2"></li>
+		    <li data-target="#carousel-example-2" data-slide-to="3"></li>
+		  </ol>
+		  <!--/.Indicators-->
+		  <!--Slides-->
+		  <div class="carousel-inner-home" role="listbox">
+		    <div class="carousel-item active">
+		      <div class="view">
+		        <img class="d-block w-100" src="img/slider-home.png" alt="First slide">
+		        <div class="mask rgba-black-light"></div>
+		      </div>
+		      <div class="carousel-caption">
+		        <!--<h3 class="h3-responsive" style="color: #fff;">Light mask</h3>
+		        <p>First text</p>-->
+		      </div>
+		    </div>
+		    <div class="carousel-item">
+		      <!--Mask color-->
+		      <div class="view">
+		        <img class="d-block w-100" src="img/slider-home.png" alt="Second slide">
+		        <div class="mask rgba-black-strong"></div>
+		      </div>
+		      <div class="carousel-caption">
+		        <!--<h3 class="h3-responsive" style="color: #fff;">Strong mask</h3>
+		        <p>Secondary text</p>-->
+		      </div>
+		    </div>
+		    <div class="carousel-item">
+		      <!--Mask color-->
+		      <div class="view">
+		        <img class="d-block w-100" src="img/slider-home.png" alt="Third slide">
+		        <div class="mask rgba-black-slight"></div>
+		      </div>
+		      <div class="carousel-caption" style="color: #fff;">
+		        <!--<h3 class="h3-responsive">Slight mask</h3>
+		        <p>Third text</p>-->
+		      </div>
+		    </div>
+		    <div class="carousel-item">
+		      <!--Mask color-->
+		      <div class="view">
+		        <img class="d-block w-100" src="img/slider-home.png" alt="Forth slide">
+		        <div class="mask rgba-black-slight"></div>
+		      </div>
+		      <div class="carousel-caption" style="color: #fff;">
+		        <!--<h3 class="h3-responsive">Slight mask</h3>
+		        <p>Third text</p>-->
+		      </div>
+		    </div>
+		  </div>
+		  <!--/.Slides-->
+		  <!--Controls-->
+		  <a class="carousel-control-prev" href="#carousel-example-2" role="button" data-slide="prev">
+		    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		    <span class="sr-only">Previous</span>
+		  </a>
+		  <a class="carousel-control-next" href="#carousel-example-2" role="button" data-slide="next">
+		    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+		    <span class="sr-only">Next</span>
+		  </a>
+		  <!--/.Controls-->
+		</div>
+
+		<div class="card-content-home mt20">
+			<div class="row">
+			<div class="col-6">
+				<ul class="nav">
+				  <li class="nav-item">
+				    <a class="nav-link active fs-14" href="#">Trending</a>
+				  </li>
+				</ul>
+		    </div>
+		    <div class="col-6 nav-left">
+				<ul class="nav">
+				  <li class="nav-item">
+				    <a class="nav-link fs-14" href="#">View All</a>
+				  </li>
+				</ul>
+			</div>
+			</div>
+			<div class="row trending-card">
+				<div class="col-6">
+					<div class="card-video-home">
+					  <div class="embed-responsive embed-responsive-4by3 card-img-top">
+						  <iframe class="pb-video-frame" src="https://www.youtube.com/embed/K68UrdUOr2Y?list=RDzuAcaBkcYGE?ecver=1" frameborder="0" allowfullscreen></iframe>
+					  </div>
+					  <div class="card-body-video">
+					    <h6 class="title-video">How to Travel Safely</h6>
+					    <p class="card-text">How to Travel Safely</p>
+					  </div>
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="card-video-home">
+					  <div class="embed-responsive embed-responsive-4by3 card-img-top">
+						  <iframe class="pb-video-frame" src="https://www.youtube.com/embed/K68UrdUOr2Y?list=RDzuAcaBkcYGE?ecver=1" frameborder="0" allowfullscreen></iframe>
+					  </div>
+					  <div class="card-body-video">
+					  	<h6 class="title-video">How to Travel Safely</h6>
+					    <p class="card-text">How to Travel Safely</p>
+					  </div>
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="card-video-home">
+					  <div class="embed-responsive embed-responsive-4by3 card-img-top">
+						  <iframe class="pb-video-frame" src="https://www.youtube.com/embed/K68UrdUOr2Y?list=RDzuAcaBkcYGE?ecver=1" frameborder="0" allowfullscreen></iframe>
+					  </div>
+					  <div class="card-body-video">
+					    <h6 class="title-video">How to Travel Safely</h6>
+					    <p class="card-text">How to Travel Safely</p>
+					  </div>
+					</div>
+				</div>
+				<div class="col-6">
+					<div class="card-video-home">
+					  <div class="embed-responsive embed-responsive-4by3 card-img-top">
+						  <iframe class="pb-video-frame" src="https://www.youtube.com/embed/K68UrdUOr2Y?list=RDzuAcaBkcYGE?ecver=1" frameborder="0" allowfullscreen></iframe>
+					  </div>
+					  <div class="card-body-video">
+					    <h6 class="title-video">How to Travel Safely</h6>
+					    <p class="card-text">How to Travel Safely</p>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end page container -->
+	
+	<!-- ================== BEGIN BASE JS ================== -->
+	<script src="plugins/jquery/jquery-3.3.1.min.js"></script>
+	<script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+	<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<!--[if lt IE 9]>
+		<script src="crossbrowserjs/html5shiv.js"></script>
+		<script src="crossbrowserjs/respond.min.js"></script>
+		<script src="crossbrowserjs/excanvas.min.js"></script>
+	<![endif]-->
+	<script src="plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<script src="plugins/js-cookie/js.cookie.js"></script>
+	<script src="js/theme/default.min.js"></script>
+	<script src="js/apps.min.js"></script>
+	<!-- ================== END BASE JS ================== -->
+	
+	<script>
+		$(document).ready(function() {
+			App.init();
+		});
+	</script>
+</body>
+</html>

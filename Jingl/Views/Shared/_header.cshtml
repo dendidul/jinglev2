@@ -1,0 +1,82 @@
+﻿<div class="container-fluid" style="padding:0!important; background: #fff;">
+    <div class="row" style="padding:0!important;">
+        <div class="col-md-12">
+
+            <div class="header-menu hdr-menu  mt15">
+                <ul class="nav justify-content-center ul-header foot-icon">
+                    @*<li class="nav-item text-center logo-jingl">
+            <a class="nav-link" href="#">
+                <div class="icon-img mb4">
+                    <img id="Home" class="icon-menu" src="/template/img/ic-home-active.png" alt="" />
+                    <img src="~/template/img/Jing_e 1.png" alt="Alternate Text" class="" />
+
+                </div>
+
+            </a>
+        </li>*@
+                    <li class="nav-item text-center foot-icon-item">
+                        <a id="HomeMenu" class="nav-link" asp-controller="Home" asp-action="Index" onclick="showLoaders();">
+                            <div class="icon-img ">
+                                <img class="icon-menu" src="/template/img/homepage.svg" alt="" />
+                                @*<i class="fas fa-home"></i>*@
+                            </div>
+                            @*<span>Beranda</span>*@
+                        </a>
+                    </li>
+					
+                    @*<li class="nav-item text-center foot-icon-item">*@
+                        @*<a id="ExploreMenu" class="nav-link" asp-controller="Explore" asp-action="Explore">
+                <div class="icon-img">
+                    <i class="fas fa-search"></i>
+                </div>
+                <span>Search</span>
+            </a>*@
+                        @*<a id="ExploreMenu" class="nav-link" asp-controller="Talent" asp-action="OurTalent">
+                            <div class="icon-img">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <span>Search</span>
+                        </a>
+                    </li>*@
+                    @*<li class="nav-item text-center ">
+            <a id="WishlistMenu" class="nav-link" asp-controller="Wishlist" asp-action="Wishlist">
+                <div class="icon-img ">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <span>Favorit</span>
+            </a>
+        </li>*@
+                    @*<li class="nav-item text-center ">
+        <a id="ActivityMenu" class="nav-link active" asp-controller="Activity" asp-action="Activity">
+            <div class="icon-img ">*@
+                    @*<img class="icon-menu" src="/template/img/ic-activity.png" alt="" />*@
+                    @*<i class="fas fa-bell"> <span class="dot"></span></i>
+                    </div>
+                    <span>Aktivitas</span>
+            </a>
+        </li>*@
+                    @await Component.InvokeAsync("ActIcon")
+                    <li class="nav-item text-center foot-icon-item ">
+                        <a id="ProfileMenu" class="nav-link" asp-controller="Account" asp-action="Profile">
+                            <div class="icon-img ">
+                                @*<img class="icon-menu" src="/template/img/ic-profile.png" alt="" />*@
+								<img class="icon-menu" src="/template/img/avatar.svg" alt="" />
+                                @*<i class="fas fa-user"></i>*@
+                            </div>
+                            @*<span>Profil</span>*@
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+@section scripts {
+
+}
+
+
+
+

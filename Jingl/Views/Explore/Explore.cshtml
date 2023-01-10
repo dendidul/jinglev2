@@ -1,0 +1,329 @@
+﻿@model Jingl.General.Model.User.ViewModel.ExploreViewModel
+@{
+    ViewData["Title"] = "Explore";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int CategoryId = 0;
+}
+
+@inject CookieManager.ICookie _httpCookie
+
+@await Html.PartialAsync("~/Views/Shared/_headertop.cshtml")
+@await Html.PartialAsync("~/Views/Shared/_header.cshtml")
+
+<div class="box-white">
+    <div class="container" style="padding: 0 !important">
+        <div class="row" style="margin: 0 !important">
+            <div class="col-12" style="padding: 0 !important">
+                <div class="owl-carousel owl-kategori m-t-5 p-l-5">
+                    <div class="item">
+                        <a class="btn btn-default  btn-kategori btn-all" href="@Url.Action("OurTalent","Talent")">
+                            <span>Lihat semua Talent</span>
+                        </a>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="btn btn-default  btn-kategori ">Semua Video</a>
+                        @*<input type="hidden" value="0" class="CategoryContent"/>*@
+                        <input type="hidden" class="CategoryContent" id="CategoryContent_0" />
+                    </div>
+                    <div class="item">
+                        <a href="#" class="btn btn-default  btn-kategori ">Profil</a>
+                        <input type="hidden" class="CategoryContent" id="CategoryContent_00" value="0" />
+                    </div>
+                    @{
+                        int index = 1;
+                    }
+
+                    @foreach (var i in Model.ListCategoryModel)
+                    {
+                        <div class="item">
+                            <a href="#" class="btn btn-default  btn-kategori ">@i.CategoryNm</a>
+                            <input type="hidden" class="CategoryContent" id="CategoryContent_@index" value="@i.Id" />
+                        </div>
+                        index++;
+                    }
+
+
+                    @*<div class="item">
+            <a href="#" class="btn btn-default  btn-kategori ">Lainnya</a>
+            <input type="hidden" class="CategoryContent" id="CategoryContent_7" value="0" />
+        </div>*@
+
+
+
+
+                </div>
+            </div>
+            <div class="col-12" style="padding: 0 !important" id="ExploreContent">
+
+                @*<div id="loader">
+                        <img src="~/template/img/example_loading.gif">
+                        LOADING...
+                    </div>*@
+
+                @*<div class="scroller-status">
+                        <div class="loader-ellips infinite-scroll-request">
+                            <span class="loader-ellips__dot"></span>
+                            <span class="loader-ellips__dot"></span>
+                            <span class="loader-ellips__dot"></span>
+                            <span class="loader-ellips__dot"></span>
+                        </div>
+                        <p class="infinite-scroll-last">End of content</p>
+                        <p class="infinite-scroll-error">No more pages to load</p>
+                    </div>
+                    <p class="pagination">
+                        <a class="pagination__next" href="@Url.Action("explore","explore")">Next page</a>
+                    </p>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @*<script type="text/javascript">
+
+            var bunnyVideo = document.getElementById("videoplayerexplore");
+
+            function playPause() {
+                var el = document.getElementById("playButton");
+                if (bunnyVideo.paused) {
+                    bunnyVideo.play();
+                    el.className = "";
+                } else {
+
+                    bunnyVideo.pause();
+                    el.className = "playButton";
+                }
+            }
+
+            bunnyVideo.addEventListener("click", playPause, false);
+        </script>*@
+    <script type="text/javascript">
+        function GetVideo() {
+            $('.btn-explore').click(function (e) {
+                e.preventDefault();
+                $('#modalExplore').modal('show');
+                var div_id = $(this).parent().find('.LinkVideo').attr('id');
+                var div_profil = $(this).parent().find('.PhotoVideo').attr('id');
+                var div_name = $(this).parent().find('.CustomerName').attr('id');
+                var div_FileVideoid = $(this).parent().find('.FileVideoId').attr('id');
+                var div_ViewCountid = $(this).parent().find('.ViewCount').attr('id');
+                var div_Talentid = $(this).parent().find('.TalentId').attr('id');
+
+                var ViewCount = $("#" + div_ViewCountid + "").val();
+                var TalentId = $("#" + div_Talentid + "").val();
+
+                var $sources = $('#videoplayerexplore');
+                var $profil = $('#modalImg');
+
+                var sourcess = $("#" + div_id + "").val();
+                var profiless = $("#" + div_profil + "").val();
+                var namess = $("#" + div_name + "").val();
+                var VideoId = $("#" + div_FileVideoid + "").val();
+
+                var jsonRequest = {
+                    UserId: 0,
+                    FileId: VideoId
+                };
+
+                var UrlInsert = "@Url.Action("InputFileWatched", "Files")";
+
+                $.ajax({
+                    url: UrlInsert,
+                    //cache: false,
+                    //traditional: true,
+                    type: "POST",
+                    //data: JSON.stringify({ request: jsonRequest }),
+                    data: { model: jsonRequest },
+                    //dataType: "json",
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+                    beforeSend: function () {
+                        //$("#spinner").show();
+                        $(".loadingSign").show();
+                    },
+                    complete: function () {
+                        $(".loadingSign").hide();
+                    },
+                    success: function (data) {
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+
+
+                $sources[0].src = sourcess;
+
+                $profil[0].src = profiless;
+
+                //$name[0] = namess;
+                $("#views").text(ViewCount);
+                $("#modalName").text(namess);
+                if (TalentId != 0) {
+                    $("#TalentLink").attr('href', '../Talent/TalentDetail?TalentId=' + TalentId);
+
+                }
+               
+                $sources[0].play()              
+
+                $(".modalClose").click(function (e) {
+                    $sources[0].pause();
+                })
+
+
+                $(".modal").on("shown.bs.modal", function () { // any time a modal is shown
+                    var urlReplace = "#" + $(this).attr('id'); // make the hash the id of the modal shown
+                    history.pushState(null, null, urlReplace); // push state that hash into the url
+                });
+
+                // If a pushstate has previously happened and the back button is clicked, hide any modals.
+                $(window).on('popstate', function () {
+                    $(".modal").modal('hide');
+                    $sources[0].pause();
+                });
+
+
+            });
+        }
+        $(document).ready(function () {
+
+
+            var url = "@Url.Action("ExploreContent","Explore")";
+
+
+            $.ajax({
+                url: url,
+                cache: false,
+                traditional: true,
+                type: "POST",
+                //data: JSON.stringify({ request: jsonRequest }),
+                data: JSON.stringify({ CategoryId: null }),
+                dataType: "html",
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                beforeSend: function () {
+                    //$("#spinner").show();
+                    $(".loadingSign").show();
+                },
+                complete: function () {
+                    $(".loadingSign").hide();
+                },
+                success: function (data) {
+                    $("#ExploreContent").html(data);
+                    GetVideo();
+
+
+                },
+                error: function (jqXHR, textStatus, errorMessage) {
+                    console.log(errorMessage);
+                }
+            });
+
+
+            $('.btn-kategori').click(function (e) {
+                $(".btn-kategori.active").removeClass("active");
+                // adding classname 'active' to current click li
+                $(this).addClass("active");
+                @*var url = "@Url.Action("ExploreContent","Explore")";*@
+                var div_IdCategory = $(this).parent().find('.CategoryContent').attr('id');
+                var IdCategory = $("#" + div_IdCategory + "").val();
+                $.ajax({
+                    url: url,
+                    type: "POST",
+                    data: { CategoryId: IdCategory },
+                    dataType: "html",
+                    beforeSend: function () {
+                        $(".loadingSign").show();
+                    },
+                    complete: function () {
+                        $(".loadingSign").hide();
+                    },
+                    success: function (data) {
+
+                        $("#ExploreContent").html(data);
+                        GetVideo();
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+            });
+
+            $('.owl-kategori').owlCarousel({
+                stagePadding: 50,
+                center: false,
+                loop: false,
+                margin: 5,
+                dots: false,
+                nav: false,
+                items: 2,
+                autoWidth: true,
+                responsive: {
+                    0: {
+                        items: 4
+                    }
+                }
+
+            })
+
+            //$(".explore-img").slice(0, 2).show();
+            //$(window).scroll(function () {
+            //    if ($(window).scrollTop() > 1000) {
+            //        //$("#loaded_after_scrolling").fadeIn();
+            //        $(".explore-img:hidden").slice(0, 5).fadeIn();
+
+            //    }
+            //});
+
+
+        })
+    </script>
+
+
+    @*<script>
+                    //$(function () {
+                    //    $('.lazy').lazy({
+                    //        placeholder: "data:image/gif;base64,R0lGODlhEALAPQAPzl5uLr9Nrl8e7..."
+                    //    });
+                    //});
+        </script>*@
+
+
+    @*<script type="text/javascript">
+            var $grid = $('.explore');
+
+            var itemClasses = [
+               'explore-img'
+            ]
+
+            $grid.infiniteScroll({
+                 options
+                path: 'page{{#}}',
+                append: '.explore-img',
+                status: '.scroller-status',
+                scrollThreshold: 50,
+                hideNav: '.pagination',
+            });
+
+            $grid.on('scrollThreshold.infiniteScroll', function () {
+                var pageItemClasses = itemClasses.splice(0, 5);
+                if (!pageItemClasses.length) {
+                    return;
+                }
+                var itemsHTML = pageItemClasses.map(function (itemClass) {
+                    return '<div class="' + itemClass + '"></div>';
+                });
+                var $items = $(itemsHTML.join(''));
+                 add $items to masonry
+                $items.imagesLoaded(function () {
+                    $grid.append($items);
+                    $grid.masonry('appended', $items);
+                });
+            })
+        </script>*@
+}

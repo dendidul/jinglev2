@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+  <g id="play" transform="translate(102)">
+    <g id="Group_138" data-name="Group 138" transform="translate(-102 0)">
+      <path id="Path_112" data-name="Path 112" d="M15,0A15,15,0,1,1,0,15,15,15,0,0,1,15,0Z" fill="rgba(29,27,27,0.98)"/>
+      <path id="Path_107" data-name="Path 107" d="M188.754,130.906l-19.068-11.475v15.3l10.024,6.321A15.034,15.034,0,0,0,188.754,130.906Z" transform="translate(-159.246 -112.083)" fill="rgba(15,14,14,0.98)"/>
+      <path id="Path_108" data-name="Path 108" d="M182.361,127.083l-12.675,7.652v-15.3Z" transform="translate(-159.246 -112.083)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

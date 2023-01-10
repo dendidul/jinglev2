@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "welcome";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="splash-screen animated fadeInDown" id="loader">
+    <!-- begin brand -->
+    <!-- end brand -->
+    <!-- begin login-content -->
+    <div class="splash-content">
+        <div>
+            <img src="~/template/img/bgr_logo.png" class="mx-auto d-block img-logo">
+        </div>
+    </div>
+    @*<div id="confetti"></div>*@
+    <!-- end login-content -->
+</div>
+
+@section scripts{
+
+    <script type="text/javascript">
+        function RedirectToIndex() {
+            window.location.href = "@Url.Action("index","Home")";
+        }
+
+        $(document).ready(function () {
+
+            setTimeout(RedirectToIndex, 1000);
+
+        });
+    </script>
+}

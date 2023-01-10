@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Jingl.General.Model.Admin.Master.TalentModel> 
+
+@{
+    ViewData["Title"] = "BestTalent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="myHeader">
+    <div class="logo-header">
+        <div class="coontainer-fluid">
+            <div class="col-md-12">
+                <ul class="nav">
+                    <li class="nav-item text-center pull-left">
+                        <a class="nav-link" href="javascript:history.back()">
+                            <div class="icon-img">
+                                <img src="/template/img/ic-back-white.png" style="width:42%;margin-left:-25%;margin-top:-8%" alt="" />
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item justify-content-center mr-center">
+                        <img src="~/template/img/Jing_e 1.png" style="margin-left:-84%" alt="Alternate Text" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box-whites" style="background: #fff" >
+    
+   
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="header-menu p-t-20">
+                    <ul class="nav">
+
+                        <li class="nav-item justify-content-center mr-center">
+                            <h5 class="nav-link"><b>Talent Terbaik Minggu Ini</b></h5>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <img class="img-fluid" src="/template/img/best_talent.png" alt="Responsive image">
+            </div>
+
+            @{
+                foreach (var i in Model)
+                {
+           
+                <div class="col-12 pt-2 ml-3">
+                    <div class="box-besttalent">
+                        <a href="@Url.Action("TalentDetail","Talent",new {TalentId= i.Id })">
+                            @*<img src="~/template/img/majestic.jpeg" alt="Responsive image" class=" ic-best-talent">*@
+                            <img src="@i.LinkImg" alt="Responsive image" class=" ic-best-talent" style="border-radius:8px">
+
+                        </a>
+                        @*<h3>@i.TalentNm</h3>*@
+                        <span class="mywave ml-2" style="font-size:30px;">@i.TalentNm</span>
+
+                    </div>
+                </div>
+               
+                }
+            }
+
+            @*<div class="col-12">
+                <div class="box-besttalent">
+                    <img src="~/template/img/majestic.jpeg" alt="Responsive image" class=" ic-best-talent">
+                    <h3>Greggy Swara</h3>
+                </div>
+
+            </div>
+            <div class="col-12">
+                <div class="box-besttalent">
+                    <img src="~/template/img/majestic.jpeg" alt="Responsive image" class=" ic-best-talent">
+                    <h3>Tjeuw</h3>
+                </div>
+
+            </div>
+            <div class="col-12">
+                <div class="box-besttalent">
+                    <img src="~/template/img/majestic.jpeg" alt="Responsive image" class=" ic-best-talent">
+                    <h3>Yenni</h3>
+                </div>
+
+            </div>
+            <div class="col-12">
+                <div class="box-besttalent">
+                    <img src="~/template/img/majestic.jpeg" alt="Responsive image" class=" ic-best-talent">
+                    <h3>Robert</h3>
+                </div>
+
+            </div>*@
+        </div>
+       
+       
+    </div>
+</div>
+      

@@ -1,0 +1,153 @@
+﻿@model Jingl.General.Model.Admin.Transaction.RefundModel
+@{
+    ViewData["Title"] = "BillingUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("", "", FormMethod.Post, new { Id = "formRefund" }))
+{
+    <div class="box-white">
+        <div id="myHeader">
+            <div class="logo-header">
+                <div class="coontainer-fluid">
+                    <div class="col-md-12">
+                        
+                            <div class="headerTop" style="height: 40px;">
+                                <div class="setting-profile" style="left: 13px;right: unset;top: 0;position: absolute;">
+                                    <a href="/Account/Profile">
+                                        <div class="icon-img">
+                                            <img src="/template/img/left-arrow.svg" style="width:25px;" alt="">
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="mx-auto w-100 p-4 text-white text-center" style="padding-top: 7px !important;">
+                                    <h4 style="color: #fff;font-weight: bold;">Refund</h4>
+                                </div>
+                            </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="container" style=" background: #fff; ">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="register-content mt30 panel-body panel-form">
+
+                            <ul class="nav">
+
+                                <li class="nav-item justify-content-center mr-center">
+                                    <h3 class="nav-link hire-label m-b-30">Form Refund</h3>
+                                </li>
+                            </ul>
+                            <div class="form-group row">
+                                <div class="col-lg-12 col-md-12">
+                                    <h5 class="hire-label">Order No</h5>
+                                    @Html.DisplayFor(model => model.OrderNo, new { Class = "form-control" })
+                                    @Html.HiddenFor(model => model.UserId, new { Class = "form-control" })
+                                    @Html.HiddenFor(model => model.OrderNo, new { Class = "form-control" })
+                                    @Html.HiddenFor(model => model.CustomerName, new { Class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-12 col-md-12">
+                                    <h5 class="hire-label">UserName</h5>
+                                    @Html.DisplayFor(model => model.CustomerName, new { Class = "form-control" })
+
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-12 col-md-12">
+                                    <h5 class="hire-label">Jumlah Refund</h5>
+                                    IDR <label class="amountlines">@Model.Amount </label>
+                                    @Html.HiddenFor(model => model.Amount, new { Class = "form-control" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <div class="col-lg-12 col-md-12">
+                                    <h5 class="hire-label">Bank</h5>
+                                    @Html.DropDownListFor(model => model.BankName, ViewBag.ListBank as IEnumerable<SelectListItem>, "Pilih Bank", new { Class = "form-control", Placeholder = "", required = "true" })
+                                    @Html.HiddenFor(model => model.Id, new { Class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-lg-12 col-md-12">
+                                    <h5 class="hire-label">Nomor Rekening</h5>
+                                    @Html.TextBoxFor(model => model.AccountNumber, new { Class = "form-control", required = "true" })
+                                </div>
+                            </div>
+                            <div class="form-group row m-b-35">
+                                <div class="col-lg-12 col-md-12">
+                                    <h5 class="hire-label">Nama Pemilik Rekening</h5>
+                                    @Html.TextBoxFor(model => model.BeneficiaryName, new { Class = "form-control", required = "true" })
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+
+                                <button type="submit" class="btn btn-blue brbtn-fix">Proses Refund</button>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+            $(document).ready(function () {
+                App.init();
+                $('#formRefund').submit(function (e) {
+                    e.preventDefault();
+                    var formData = new FormData();
+
+                    var formData = new FormData($('#formRefund')[0]);
+                    var url = "@Url.Action("RequestRefund","Account")";
+
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+
+                        dataType: 'json',
+                        contentType: false,
+                        processData: false,
+
+
+                        data: formData,
+
+                        beforeSend: function () {
+                            $(".loadingSign").show();
+                        },
+                        complete: function () {
+                            $(".loadingSign").hide();
+                        },
+                    success: function (data) {
+                        if (data == "OK") {
+                            swal({
+                                title: "Success",
+                                text: "Refund berhasil diajukan",
+                                icon: "success",
+                            }).then(function () {
+                                window.location.href = "@Url.Action("OnBoarding", "Account")";
+                            })
+                        }
+                        else {
+                            window.location.reload();
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -1,0 +1,219 @@
+﻿@model Jingl.General.Model.Admin.UserManagement.UserModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout_Adm.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "AdmUser", FormMethod.Post, new { Id = "formEditUser" }))
+{
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+            </div>
+            <h4 class="panel-title">Edit User</h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>User Code</label>
+                        @Html.TextBoxFor(model => model.UserCode, new { Class = "form-control" ,ReadOnly = true})
+                    </div>
+                </div>
+                <div class="col-4">
+                    <label>First Name</label>
+                    @Html.TextBoxFor(model => model.FirstName, new { Class = "form-control", required = "true" })
+                    @Html.HiddenFor(model => model.Id, new { Class = "form-control" })
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        @Html.TextBoxFor(model => model.LastName, new { Class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label>User Name</label>
+                    @Html.TextBoxFor(model => model.UserName, new { Class = "form-control", required = "true" })
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Password </label>
+                        @Html.TextBoxFor(model => model.Password, new { Class = "form-control", required = "true" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label>Birthdate </label>
+                    @Html.TextBoxFor(model => model.BirthDate, new { Class = "form-control datepicker", required = "true" })
+                </div>
+                <div class="col-6" style="display:none">
+                    <label>Bio </label>
+                    @Html.TextAreaFor(model => model.Bio, new { Class = "form-control" })
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label>Gender</label>
+                    @Html.DropDownListFor(model => model.Gender, ViewBag.ListGender as IEnumerable<SelectListItem>, "Pilih Gender", new { Class = "form-control", Placeholder = ""})
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>Country </label>
+                        @Html.DropDownListFor(model => model.Country, ViewBag.ListCountry as IEnumerable<SelectListItem>, "Pilih Country", new { Class = "form-control", Placeholder = "" })
+                    </div>
+                </div>
+                <div class="col-4">
+                    <label>Region</label>
+                    @Html.DropDownListFor(model => model.Region, ViewBag.ListRegion as IEnumerable<SelectListItem>, "Pilih Region", new { Class = "form-control", Placeholder = ""})
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label>Phone Number</label>
+                    @Html.TextBoxFor(model => model.PhoneNumber, new { Class = "form-control" })
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Email </label>
+                        @Html.TextBoxFor(model => model.Email, new { Class = "form-control", required = "true" })
+                    </div>
+                </div>
+            </div>
+           
+                <div class="row">
+                    <div class="col-4">
+                        <label>Bank</label>
+                        @*@Html.TextBoxFor(model => model.Profesion, new { Class = "form-control", required = "true" })*@
+                        @Html.DropDownListFor(model => model.Bank, ViewBag.ListBank as IEnumerable<SelectListItem>, "Pilih Bank", new { Class = "form-control", Placeholder = "" })
+                    </div>
+                    <div class="col-4">
+                        <label>Rekening Number</label>
+                        @Html.TextBoxFor(model => model.AccountNumber, new { Class = "form-control" })
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Beneficiary Name </label>
+                            @Html.TextBoxFor(model => model.BeneficiaryName, new { Class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+        
+
+            <div class="row">
+                <div class="col-6">
+                    <label>Role</label>
+                    @Html.DropDownListFor(model => model.RoleId, ViewBag.ListRole as IEnumerable<SelectListItem>, "Pilih Role", new { Class = "form-control", Placeholder = "", required = "true" })
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Status </label>
+                        @Html.DropDownListFor(model => model.IsActive, ViewBag.ListStatus as IEnumerable<SelectListItem>, "Pilih Status", new { Class = "form-control", Placeholder = "", required = "true" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    @*<button type="button" class="btn btn-info" id="RegisterTalent">Register as Talent</button>*@
+                    <a href="@Url.Action("Index","AdmUser")" class="btn btn-warning">Back To List</a>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+}
+
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            App.init();
+
+            $('#RegisterTalent').click(function (e) {
+                e.preventDefault();
+                var Id = $("#Id").val();
+                var firstName = $("#FirstName").val();
+                var lastName = $("#LastName").val();
+                var UserName = $("#UserName").val();
+                var email = $("#Email").val();
+                var password = $("#Password").val();
+                var country = $("#Country").val();
+                var region = $("#Region").val();
+                var birthDate = $("#BirthDate").val();
+                var gender = $("#Gender").val();
+                var phoneNumber = $("#PhoneNumber").val();
+                var isValidUsername = $("#isValidUsername").val();
+                var isValidEmail = $("#isValidEmail").val();
+                var url = "@Url.Action("SignUpPost", "Account")";
+                var jsonRequest = {     
+                    Id: Id,
+                    FirstName: firstName,
+                    LastName: lastName,
+                    Email: email,
+                    Password: password,
+                    Country: country,
+                    Region: region,
+                    BirthDate: birthDate,
+                    Gender: gender,
+                    PhoneNumber: phoneNumber,
+                    UserName: UserName
+                };
+
+                
+                    $.ajax({
+                    url: "@Url.Action("RegiterUserAsTalent", "AdmUser")",
+                    //cache: false,
+                    //traditional: true,
+                    type: "POST",
+                    data: { model: jsonRequest},
+                    //contentType: "application/json; charset=utf-8",
+                    //async: false,
+                    beforeSend:
+                        function () {
+                            //$("#spinner").show();
+                        },
+                    success: function (data) {
+
+                         window.location.href = "@Url.Action("Index","AdmUser")";
+
+                        @*if (data == "OK") {
+                            window.location.href = "@Url.Action("Otp","Account")";
+                        }
+
+                        else {
+
+                        }*@
+
+
+
+                    },
+                    error: function (jqXHR, textStatus, errorMessage) {
+                        console.log(errorMessage);
+                    }
+                });
+               
+
+             
+
+
+            });
+        });
+
+
+        //});
+    </script>
+}

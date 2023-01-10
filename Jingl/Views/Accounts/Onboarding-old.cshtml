@@ -1,0 +1,138 @@
+﻿@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@using Jingl.Web.Services
+
+@{
+    Layout = "~/Views/Shared/_Temp_Layout.cshtml";
+    ViewData["Title"] = "Onboarding";
+}
+@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> SignInManager
+<!-- button back -->
+<div class="box-white">
+    
+    <div class="back-btn">
+        @*<a asp-controller="Jingl" asp-action="Index">
+                <img class="icon-menu mt-3 ml-3" src="~/template/img/ic-back-active.png" alt="" />
+            </a>*@
+    </div>
+
+    <!-- begin login -->
+    <div class="col-12 card-carousel">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" src="/template/img/banner-1.png" alt="First slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="/template/img/banner-2.png" alt="Second slide">
+                </div>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="/template/img/banner-3.png" alt="Third slide">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-content">
+        <div class="title-login">
+            <h4 class="fw-400 mb10">Hai Kawans !</h4>
+            <h5 class="fw-400"> <a class="btn btn-primary" href="@Url.Action("Login","Account")">Login</a> Jika sudah memiliki akun </h5>
+            <h5 class="fw-400">atau via </h5>
+        </div>
+        <div class="row text-center ic-login-content">
+            <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" style="display: table; text-align: center;margin: auto;" }">
+                <div class="form-row">
+                    @*<div class="col-6 text-center">
+                            <li>
+                                <a href="#"><img class="size-ic-sosmed" src="/template/img/ic-fb.png" alt="" /></a>
+                                <h5 class="mt5 fw-400 black-clr">
+                                    Facebook
+                                </h5>
+                            </li>
+                        </div>*@
+                    @*<div class="col-4">
+                            <li>
+                                <a href="#"><img class="size-ic-sosmed" src="/template/img/ic-ig.png" alt="" /></a>
+                                <h5 class="mt5 fw-400 black-clr">
+                                    Instagram
+                                </h5>
+                            </li>
+                        </div>*@
+                    @*<div class="col-6">
+                            <li>
+                                <a href="#"><img class="size-ic-sosmed" src="/template/img/ic-gmail.png" alt="" /></a>
+                                <h5 class="mt5 fw-400 black-clr">
+                                    Gmail
+                                </h5>
+                            </li>
+                        </div>*@
+                    @{
+                        var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+                        if (loginProviders.Count == 0)
+                        {
+                            <div>
+                                <p>
+                                    There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                    for details on setting up this ASP.NET application to support logging in via external services.
+                                </p>
+                            </div>
+                        }
+                        else
+                        {
+                            @*<div class="row text-center ic-login-content">*@
+
+
+                            @foreach (var provider in loginProviders)
+                            {
+                                if (provider.Name == "Google")
+                                {
+                                    <div class="col">
+                                        <li>
+                                            <a href="@Url.Action("ExternalLogin","Account",new { returnUrl = "" , provider= "Google"  })"><img class="size-ic-sosmed" src="/template/img/ic-gmail.png" alt="" /></a>
+                                            <h5 class="mt5 fw-400 black-clr">
+                                                Gmail
+                                            </h5>
+                                        </li>
+                                    </div>
+                                }
+                                else if (provider.Name == "Facebook")
+                                {
+                                    <div class="col">
+                                        <li>
+                                            <a href="@Url.Action("ExternalLogin","Account",new { returnUrl = "" , provider= "Facebook"  })"><img class="size-ic-sosmed" src="/template/img/ic-fb.png" alt="" /></a>
+                                            <h5 class="mt5 fw-400 black-clr">
+                                                Facebook
+                                            </h5>
+                                        </li>
+                                    </div>
+                                }
+                                @*else
+                                    {
+                                        <button type="submit" class="btn btn-default" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.Name</button>
+                                    }*@
+
+                            }
+
+
+                            @*</div>*@
+                        }
+                    }
+                </div>
+            </form>
+
+            @*</div>*@
+            <div class="signup-content text-center">
+                <a asp-controller="Account" asp-action="Signup" class="black-clr">Belum memiliki Akun? <b> Daftar disini</b></a>
+            </div>
+        </div>
+    </div>
+
+    @section scripts
+        {
+      
+    }
+
+
+

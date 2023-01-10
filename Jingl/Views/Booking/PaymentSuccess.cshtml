@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewData["Title"] = "PaymentSuccess";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="box-success">
+    <div class="box-content">
+        <img src="~/template/img/checked.svg" alt="Alternate Text" />
+        <h3 class="mt30" style="color:white">Proses Booking Sukses</h3>
+        @*<img class="w-100 logo-s" src="~/template/img/Jing_e 1.png" alt="Alternate Text" style="filter: opacity(10%);" />*@
+        @*<h2 class="mt30">IDR 5.000.000</h2>*@
+    </div>
+
+    <div class="brpayment-footer">
+        <a href="@Url.Action("Profile","Account")" class="btn mt20"> Done</a>
+    </div>
+</div>
+
+@section scripts
+    {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            history.pushState(null, null, location.href);
+           
+            window.onpopstate = function () {
+               
+                history.go(1);
+                //alert('ga bisa back');
+                $.gritter.add({
+                    title: 'Warning !',
+                    text: 'Please Click Done Button !'
+                });
+            };
+
+        });
+    </script>
+}
+
+

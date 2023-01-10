@@ -1,0 +1,159 @@
+﻿@model IEnumerable<Jingl.General.Model.Admin.Master.VoucherModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout_Adm.cshtml";
+}
+
+<div class="panel panel-inverse">
+    <div class="panel-heading">
+        <div class="panel-heading-btn">
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+            <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+        </div>
+        <h4 class="panel-title">Voucher</h4>
+    </div>
+    <div class="panel-body">
+        <p>
+            <a class="btn btn-pink" asp-action="Create">Create New</a>
+        </p>
+        <table class="table table-striped table-bordered" id="data-table-buttons" style="width:100%">
+            <thead>
+                <tr>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.VoucherCd)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VoucherNm)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VoucherDesc)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsActive)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Amount)
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VoucherCd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VoucherNm)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VoucherDesc)
+                    </td>
+                    <td>
+                        @*@Html.CheckBoxFor(modelItem => item._IsActive, new { @readonly= "readonly" })*@
+                        @{
+                            if (item.IsActive == 1)
+                            {
+                                @:<label>Yes</label>
+                            }
+                            else
+                            {
+                                @:<label>No</label>
+                            }
+                        }
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.Amount)*@
+                        @{
+                            <label class="amountlines">@Html.DisplayFor(modelItem => item.Amount)</label>
+                        }
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "AdmVoucher", new { id = item.Id }, new { @class = "btn btn-success m-b-5" })
+                        @Html.ActionLink("Details", "Details", "AdmVoucher", new { id = item.Id }, new { @class = "btn btn-warning m-b-5" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger m-b-5" })
+
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            App.init();
+            var handleDataTableButtons = function () {
+                "use strict";
+
+                if ($('#data-table-buttons').length !== 0) {
+
+
+                    $('#data-table-buttons thead tr').clone(true).appendTo('#data-table-buttons thead');
+                    $('#data-table-buttons thead tr:eq(1) th').each(function (i) {
+                        var title = $(this).text();
+                        $(this).html('<input type="text" style="width:80px" placeholder="Search ' + title + '" />');
+
+                        $('input', this).on('keyup change', function () {
+                            if (table.column(i).search() !== this.value) {
+                                table
+                                    .column(i)
+                                    .search(this.value)
+                                    .draw();
+                            }
+                        });
+                    });
+
+
+                    var table = $('#data-table-buttons').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [
+
+                            { extend: 'csv', className: 'btn-sm' },
+                            { extend: 'excel', className: 'btn-sm' }
+
+
+                        ],
+                        //responsive: true,
+                        "scrollY": "500px",
+                        "scrollX": true,
+                        // "scrollCollapse": true,
+                        // "paging": false,
+                        orderCellsTop: true
+                        //fixedHeader: true
+                    });
+
+
+                    //var table = $('#example').DataTable({
+                    //    orderCellsTop: true,
+                    //    fixedHeader: true
+                    //});
+
+
+                }
+            };
+
+            var TableManageButtons = function () {
+                "use strict";
+                return {
+                    //main function
+                    init: function () {
+                        handleDataTableButtons();
+                    }
+                };
+            }();
+
+            TableManageButtons.init();
+        });
+    </script>
+}

@@ -1,0 +1,127 @@
+﻿@model Jingl.General.Model.Admin.Master.AgencyModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout_Adm.cshtml";
+}
+
+@using (Html.BeginForm("Edit", "AgnAgency", FormMethod.Post, new { Id = "formCreateAgency" }))
+{
+
+    <div class="panel panel-inverse">
+        <div class="panel-heading">
+            <div class="panel-heading-btn">
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i class="fa fa-expand"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-success" data-click="panel-reload"><i class="fa fa-redo"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning" data-click="panel-collapse"><i class="fa fa-minus"></i></a>
+                <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-danger" data-click="panel-remove"><i class="fa fa-times"></i></a>
+            </div>
+            <h4 class="panel-title">Edit Agency</h4>
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-6">
+                    <label>Agency Name</label>
+                    @Html.HiddenFor(model => model.Id, new { Class = "form-control"})
+                    @Html.TextBoxFor(model => model.AgencyNm, new { Class = "form-control", required = "true" })
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>PIC Name </label>
+                        @Html.TextBoxFor(model => model.PICNm, new { Class = "form-control", required = "true" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Description</label>
+                        @Html.TextAreaFor(model => model.Description, new { Class = "form-control", rows = "7" })
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>UserId</label>
+                        @Html.DropDownListFor(model => model.UserId, ViewBag.UserAgentList as IEnumerable<SelectListItem>, "Pilih User", new { Class = "form-control", Placeholder = "", required = "true" })
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label>Telp </label>
+                    @Html.TextBoxFor(model => model.Telp, new { Class = "form-control", required = "true" })
+                </div>
+                <div class="col-6">
+                    <label>Email </label>
+                    @Html.TextBoxFor(model => model.Email, new { Class = "form-control", required = "true" })
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label>Bank</label>
+                    @*@Html.TextBoxFor(model => model.Profesion, new { Class = "form-control", required = "true" })*@
+                    @Html.DropDownListFor(model => model.BankNm, ViewBag.ListBank as IEnumerable<SelectListItem>, "Pilih Bank", new { Class = "form-control", Placeholder = "" })
+                </div>
+                <div class="col-4">
+                    <label>Rekening Number</label>
+                    @Html.TextBoxFor(model => model.AccountNo, new { Class = "form-control" })
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>Beneficiary Name </label>
+                        @Html.TextBoxFor(model => model.BeneficiaryNm, new { Class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <label>NPWP Name</label>
+                    @Html.TextBoxFor(model => model.NPWPNm, new { Class = "form-control" })
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>NPWP No </label>
+                        @Html.TextBoxFor(model => model.NPWPNo, new { Class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label>NPWP Address </label>
+                        @Html.TextAreaFor(model => model.NPWPAddress, new { Class = "form-control", rows = "7" })
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-6">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <a href="@Url.Action("Index","AgnAgency")" class="btn btn-warning">Cancel</a>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+}
+
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            App.init();
+
+        });
+    </script>
+}
